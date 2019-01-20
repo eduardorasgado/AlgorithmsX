@@ -8,7 +8,7 @@ void merge(int*, int&, int&, int&);
 int main(){
     int A[] = {5,2,4,7,1,3,2,6};
 
-    //int A[] = {9,8,7,6,5,4,3,2,1};
+    //int A[] = {9,8,7,6,5,4,3,2,1,0};
     int *p_A = &A[0];
     int size = sizeof(A)/ sizeof(*A);
     print(p_A, size);

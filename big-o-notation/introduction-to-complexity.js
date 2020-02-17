@@ -89,14 +89,14 @@ console.log("print all pairs algorithm");
 
 function complexNSquare(n) {
     var total = 0;
-    // O(n^2)
+    // O(4*n^2)
     for (let i = 0; i <= n; i++) {
         for (let j = 0; j <= n; j++) {
-            total += (i * j) / 2; // O(n) + 2
+            total += (i * j) / 2; // O(4)
         }
     }
 
-    // O(5n + 1)
+    // O(n + 2)
     for (let i = 0; i <= n; i++) {
         total += 1
     }
@@ -104,7 +104,7 @@ function complexNSquare(n) {
     console.log(total)
 }
 
-complexNSquare(100000);
+// complexNSquare(100000);
 
 
 /***
@@ -114,7 +114,44 @@ complexNSquare(100000);
  *
  *  2. Variable assignment is contant, e.g.  x = 5; y = n * 3;    -> O(3)
  *
- *  Accesing elements in an array(by index)
+ *  3. Accesing elements in an array(by index)
  *  or object(by key) is constant    e.g. x = arr[5];             -> 0(2)
  *                                   e.g. port = connection.port; -> O(2)
+ *
+ *  4. In a loop, the complexity is the length
+ *      of the loop time the complexity of
+ *      whatever happens inside of the loop
+ *                       e.g. Arr.map(e -> e.map(a-> something))  -> 0(n * n) = O(n^2)
+ *
+ *
+ */
+
+// Printing at least five numbers from 1 to n
+function logAtLeast5(n) {
+    /**
+     * O(n)
+     */
+    for (let i = 1; i <= Math.max(5,  n); i++) {
+        console.log(i)
+    }
+}
+
+// printing just the first five numbers from 1 to n
+function logAtMost5(n) {
+    /**
+     * O(5) = O(1)
+     */
+    for (let i = 1; i <= Math.min(5, n); i++) {
+        console.log(i)
+    }
+}
+
+logAtLeast5(3)
+console.log("------------------")
+logAtMost5(4)
+
+/**
+ *  So next is the order of Big O time complexity
+ *
+ *  O(1) < O(log n) < O(n) < O(n log n) < O(n^2)
  */

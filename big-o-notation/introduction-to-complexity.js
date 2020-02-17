@@ -72,6 +72,24 @@ console.log("print all pairs algorithm");
 
 
 /**
+ *  TIME AND SPACE COMPLEXITY
+ *
+ *  Time:
+ *      Operations
+ *      Comparison
+ *      Loop stuff
+ *      Pointer references
+ *      Function cals to outside
+ *
+ *  Space:
+ *      Variables
+ *      Data structurres
+ *      Allocations
+ *      Function call
+ *
+ */
+
+/**
  *  INTRODUCTION TO TIME COMPLEXITY
  *
  *  O(2n) = O(n)
@@ -83,6 +101,8 @@ console.log("print all pairs algorithm");
  *  O(1000n + 50) = O(n)
  *
  *  O(n^2 + 5n + 2) = O(n^2)
+ *
+ *  O(log n) -> we generally see this time comp. when we are applying divide and conquer algorithms
  *
  */
 
@@ -151,6 +171,8 @@ console.log("------------------")
 logAtMost5(4)
 
 /**
+ *
+ * TIME COMPLEXITY
  *  So next is the order of Big O time complexity
  *
  *  O(1) < O(log n) < O(n) < O(n log n) < O(n^2)
@@ -210,3 +232,119 @@ function subtotals(array) {
 }
 
 // END OF THE EXAM
+
+/*
+*  SPACE COMPLEXITY
+*    Space complexity will sometimes be [determined by the language] and how this handles all the allocations
+*   function calls and so on.
+* */
+
+
+// O(n) + 3 , if we didnt have x allocation inside the loop we could get O(1) space complexity
+// function and array takes memory
+function onlyElementsAtEvenIndex(array) {
+    // allocation
+    var newArray = Array(Math.ceil(array.length / 2));
+    for (let i = 0; i < array.length; i++) {
+        // allocation
+        var x = array[i]
+    }
+    return newArray;
+}
+
+/**
+ *  SPACE COMPLEXITY IN JS: Rules of Thumb
+ *
+ *  Most primitive(booleans, numbers, undefined, null) are constant space
+ *
+ *  String require O(n) space (where n is the string length)
+ *
+ *  Reference types are generally O(n), where n is the length(for arrays) or the numner of keys(for objects)
+* */
+
+// O(1)
+function sum(arr) {
+    // another number
+    let total = 0;
+    // another number :i
+    for (let i = 0; i < arr.length; i++) {
+        total += arr[i]
+    }
+    return total;
+}
+
+
+//
+function double(arr) {
+    // creating a new array
+    let newArr = [];
+    for (let i = 0; i < arr.length; i++) {
+        // // O(n) <- array is growing in memory
+        newArr.push(2 * arr[i])
+    }
+    return newArr;
+}
+
+/*
+* SPACE COMPLEXITY EXAM
+* */
+
+// o(1)
+function logUpTo(n) {
+    // Every time is created a new i and last is lost
+    // O(1)
+    for (var i = 1; i <= n; i++) {
+        console.log(i);
+    }
+}
+
+// O(1)
+function logAtMost10(n) {
+    // space for i every time it is created O(1)
+    for (var i = 1; i <= Math.min(n, 10); i++) {
+        console.log(i);
+    }
+}
+
+// O(1)
+function logAtMost10(n) {
+    // space for i every time it is created till we get up to ten
+    // O(1)
+    for (var i = 1; i <= Math.min(n, 10); i++) {
+        console.log(i);
+    }
+}
+
+
+// O(n)
+function onlyElementsAtEvenIndex(array) {
+    // O(1)
+    var newArray = Array(Math.ceil(array.length / 2));
+    for (var i = 0; i < array.length; i++) {
+        if (i % 2 === 0) {
+            // array is growing up and js is allocating new space in memory
+            // O(n)
+            newArray[i / 2] = array[i];
+        }
+    }
+    return newArray;
+}
+
+
+// O(n) because in for loop i we are getting i, j loops but O(n) + O(n), c
+// corresponding subtotal creation and subtotalArray growing up in memory allocation
+function subtotals(array) {
+    // O(n)
+    var subtotalArray = Array(array.length);
+    // O(n)
+    for (var i = 0; i < array.length; i++) {
+        var subtotal = 0;
+        for (var j = 0; j <= i; j++) {
+            subtotal += array[j];
+        }
+        // here array is growing in length and using more and more memory allocation
+        // O(n)
+        subtotalArray[i] = subtotal;
+    }
+    return subtotalArray;
+}

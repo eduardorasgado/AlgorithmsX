@@ -348,3 +348,27 @@ function subtotals(array) {
     }
     return subtotalArray;
 }
+
+/*
+*
+*    LOGARITHMS
+*
+* What is a logarithm:
+*   A logarithm is actually the inverse of the exponential, it means
+*
+*       log 2 (8) = 3;  inverse will be 2^3 = 8
+*
+*       log2(value) = exponent -> 2^exponent = value
+*
+*   A logarithm graph curve is then inverse to exponential.
+*       log === log2
+*
+*   IMPORTANT:
+*
+*   - Certain searching algorithms have logarithmic time complexity
+*
+*   - Efficient sorting algorithms involve logarithms.
+*
+*   - Recursion sometimes involves logarithmic space complexity
+*
+* */

@@ -68,5 +68,38 @@ console.log(`Time elapsed algorithm 2: ${t2a2 - t1a2} / 1000 seconds`)
 console.log("up and down algorithm");
 // upAndDown(100000)
 console.log("print all pairs algorithm");
-printAllPairs(100)
+// printAllPairs(100)
 
+
+/**
+ *  INTRODUCTION TO TIME COMPLEXITY
+ *
+ *  O(2n) = O(n)
+ *
+ *  O(500) = O(1)
+ *
+ *  O(n + 10) = O(n)
+ *
+ *  O(n^2 + 5n + 2) = O(n^2)
+ *
+ */
+
+
+function complexNSquare(n) {
+    var total = 0;
+    // O(n^2)
+    for (let i = 0; i <= n; i++) {
+        for (let j = 0; j <= n; j++) {
+            total += (i * j) / 2; // O(n) + 2
+        }
+    }
+
+    // O(5n + 1)
+    for (let i = 0; i <= n; i++) {
+        total += 1
+    }
+
+    console.log(total)
+}
+
+complexNSquare(100000);

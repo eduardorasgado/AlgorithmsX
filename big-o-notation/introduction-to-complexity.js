@@ -155,3 +155,58 @@ logAtMost5(4)
  *
  *  O(1) < O(log n) < O(n) < O(n log n) < O(n^2)
  */
+
+
+/**
+ * Determine the time complexity for the following function
+ * */
+
+function logUpTo(n) {
+    // O(n)
+    for (var i = 1; i <= n; i++) {
+        console.log(i);
+    }
+}
+
+function logAtMost10(n) {
+    // O(1)
+    for (var i = 1; i <= Math.min(n, 10); i++) {
+        console.log(i);
+    }
+}
+
+function logAtLeast10(n) {
+    // O(n)
+    for (var i = 1; i <= Math.max(n, 10); i++) {
+        console.log(i);
+    }
+}
+
+
+function onlyElementsAtEvenIndex(array) {
+    // 3
+    var newArray = Array(Math.ceil(array.length / 2));
+    // O(n + 4)
+    for (var i = 0; i < array.length; i++) {
+        if (i % 2 === 0) {
+            newArray[i / 2] = array[i];
+        }
+    }
+    return newArray;
+}
+
+function subtotals(array) {
+    // 2
+    var subtotalArray = Array(array.length);
+    // O(n* n) = O(n^2 + 5) = O(n^2)
+    for (var i = 0; i < array.length; i++) {
+        var subtotal = 0;
+        for (var j = 0; j <= i; j++) {
+            subtotal += array[j];
+        }
+        subtotalArray[i] = subtotal;
+    }
+    return subtotalArray;
+}
+
+// END OF THE EXAM

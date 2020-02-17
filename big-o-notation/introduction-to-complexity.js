@@ -80,6 +80,8 @@ console.log("print all pairs algorithm");
  *
  *  O(n + 10) = O(n)
  *
+ *  O(1000n + 50) = O(n)
+ *
  *  O(n^2 + 5n + 2) = O(n^2)
  *
  */
@@ -103,3 +105,16 @@ function complexNSquare(n) {
 }
 
 complexNSquare(100000);
+
+
+/***
+ *  BIG O SHORTHANDS
+ *
+ *  1. Arithmetic operations are constant, e.g. n * 5 / 2 * n;    -> O(3)
+ *
+ *  2. Variable assignment is contant, e.g.  x = 5; y = n * 3;    -> O(3)
+ *
+ *  Accesing elements in an array(by index)
+ *  or object(by key) is constant    e.g. x = arr[5];             -> 0(2)
+ *                                   e.g. port = connection.port; -> O(2)
+ */

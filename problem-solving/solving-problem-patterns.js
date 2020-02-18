@@ -111,32 +111,30 @@ console.log("-----------------------");
 function anagramDiscover(str1, str2) {
     // get all the frecuencies from both strings
     if(str1.length != str2.length) return false;
-    let counter1 = freqCounterAnagram(str1);
-    let counter2 = freqCounterAnagram(str2);
+    let counter = {}
+    // creating a letter frecuency dictionary for string 1
+    for(let element of str1) counter[element] = (++counter[element] || 0) + 1;
 
     // compare if element in counter exists in counter2
-    for(let key in counter1) {
+    for(let key of str2) {
         // checking if element in str1 exists in str2
-        if(!(key in counter2)) return false;
-        // checking if element is repeated same amount of times
-        if(counter1[key] != counter2[key]) return false;
+        if(!(counter[key])) return false;
+        // if element in str1 exists then it decreases the freq in counter
+        // to verify freqs in str2 and str1 are the same
+        counter[key] --;
+
     }
     // if list1 has same letters in same frecuency, no matter order the we return true
     return true;
 }
 
-function freqCounterAnagram(list, counter = {}) {
-    for(let element of list) {
-        counter[element] = (++counter[element] || 0) + 1;
-    }
-    return counter;
-}
 
 console.log(anagramDiscover('', '')); // true
 console.log(anagramDiscover('aaz', 'zza')); // false
 console.log(anagramDiscover('anagram', 'nagaram')); // true
 console.log(anagramDiscover('rat', 'car')); // false
 console.log(anagramDiscover('awesome', 'awesom')); // false
+console.log(anagramDiscover('awesomee', 'awesome')); // false
 console.log(anagramDiscover('qwerty', 'qeywrt')); // true
 console.log(anagramDiscover('texttwisttime', 'timetwisttext')); // true
 

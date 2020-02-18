@@ -146,26 +146,38 @@ console.log(countLetters(1));
 /**
  *    PROBLEM SOLVING STRATEGIES
  *
- *      5. Look back and refactor
+ *      5. Look back and REFACTOR
  *
  *          Refactoring questions
+ *              Can you check the result?
+ *              Can you derive the result differently?
+ *              Can you understand it at a glance?
+ *              Can you use the result or method for some other problem?
+ *              Can you improve the peformance of your solution?
+ *              Can you think of other ways to refactor?
+ *              How have other people solved this problem?
+ *
  * */
 
 function charCount(str) {
     // make object to return at end
-    let result = {}
+    let result = {};
+
     // loop over string, for each character...
-    for (let i = 0; i < str.length; i++) {
-        let char = str[i].toLowerCase();
+    for (let c of str) {
+        const char = c.toLowerCase();
         // if the char is a number/letter AND a key in object, add one to count
-        if(char.match(/^[0-9a-zA-Z]+$/)){
-            if(result[char] > 0) {
-                result[char]++;
-                // if the char is a number/letter AND not object, add it to the object and set value to 1
-            } else result[char] = 1;
-        }
+        // if the char is a number/letter AND not object, add it to the object and set value to 1
+        // if character is something else (space, period, etc.) dont do anything
+        (char.charCodeAt(0) > 96 && char.charCodeAt(0) < 123) && (result[char] = ++result[char] || 1);
     }
-    // if character is something else (space, period, etc.) dont do anything
     // return object at end
     return result;
 }
+
+console.log("-------------");
+console.log(charCount("Your PIN code is: 1234"));
+console.log("-------------");
+console.log(charCount("Can the outputs be determined from the inputs? In other words, did I have " +
+    "*enough information to solve the problem? (You may not be able to answer this question until you set " +
+    "about solving the problem. That's okay; it's still worth considering the question at this early stage."));

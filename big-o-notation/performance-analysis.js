@@ -43,4 +43,18 @@ let instructor = {
  *      shift() and unshift() insert and remove from the beggining of an array
  *
  *      so... push, pop cost less than shift and unshift
+ *
+ *      BIG O OF ARRAY OPERATIONS
+ *
+ *          push    - O(1)
+ *          pop     - O(1)
+ *          shift   - O(n)
+ *          unshift - O(n)
+ *          concat  - O(n)
+ *          slice   - O(n)
+ *          splice  - O(n)
+ *          sort    - O(n* logn)
+ *          for/each/map/filter/reduce/etc - O(n)
  * */
+
+

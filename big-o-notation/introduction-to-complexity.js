@@ -335,11 +335,12 @@ function onlyElementsAtEvenIndex(array) {
 // corresponding subtotal creation and subtotalArray growing up in memory allocation
 function subtotals(array) {
     // O(n)
+    var j;
     var subtotalArray = Array(array.length);
     // O(n)
-    for (var i = 0; i < array.length; i++) {
-        var subtotal = 0;
-        for (var j = 0; j <= i; j++) {
+    for (let i = 0; i < array.length; i++) {
+        let subtotal = 0;
+        for (j = 0; j <= i; j++) {
             subtotal += array[j];
         }
         // here array is growing in length and using more and more memory allocation

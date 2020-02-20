@@ -33,7 +33,9 @@
 
 // O(n^2)
 function maxSubarraySumNaive(arr, n) {
-    let max = null;
+    if(arr.length === 0 ) return null;
+    if(arr.length < n ) return null;
+    let max = -Infinity;
     for (let i = 0; i < arr.length; i++) {
         let sum = 0;
         for(let j = i; j < i+n; j++){
@@ -48,4 +50,5 @@ console.log(maxSubarraySumNaive([1,2,5,2,8,1,5],2)); // 10
 console.log(maxSubarraySumNaive([1,2,5,2,8,1,5],4)); // 17
 console.log(maxSubarraySumNaive([4,2,1,6], 1)); // 6
 console.log(maxSubarraySumNaive([], 4)); // null
+console.log(maxSubarraySumNaive([1,1], 2)); // 2
 console.log("------------------")

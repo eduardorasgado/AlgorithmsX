@@ -81,7 +81,7 @@ console.log(sumsZeroMP([0,1,2,3,4]));
  *  }
  * */
 
-function countUniqueValues(arr) {
+function countUniqueValuesNaive(arr) {
     let min = 0;
     let counter = 0;
     if(arr.length > 0) {
@@ -99,6 +99,36 @@ function countUniqueValues(arr) {
 
     return counter;
 }
+console.log(countUniqueValuesNaive([]));
+console.log(countUniqueValuesNaive([0,0,0,0,0,0,0]));
+console.log(countUniqueValuesNaive([-1, -2, -3,-4,-5,-5,0]));
+console.log(countUniqueValuesNaive([1,2,3,4,4,4,7,7,12,12,13]));
+
+// Solution using multiple pointers pattern
+// Time complexity: O(n), space complexity: O(n)
+function countUniqueValues(arr) {
+    // this variable will alter the values inside the array
+    let left = 0;
+    // this variable will iterate over all the elements to be compared to left
+    let right = 1;
+    if(arr.length !== 0){
+        while(right < arr.length){
+            // compare if values are different then we add one to left
+            // and set that arr position the arr right value to be able
+            // to compare if next array position value is different than
+            // past value.
+            if (arr[left] != arr[right]) {++left; arr[left] = arr[right];}
+            ++right;
+        }
+        console.log(arr)
+        return left+1;
+    } else {
+        return 0;
+    }
+
+}
+
+console.log("---------------")
 console.log(countUniqueValues([]));
 console.log(countUniqueValues([0,0,0,0,0,0,0]));
 console.log(countUniqueValues([-1, -2, -3,-4,-5,-5,0]));

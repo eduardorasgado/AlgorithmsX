@@ -31,7 +31,7 @@
  *          return max
  * */
 
-// O(n^2)
+// Time complexity: O(n^2), Space complexity: O(n)
 function maxSubarraySumNaive(arr, n) {
     if(arr.length === 0 ) return null;
     if(arr.length < n ) return null;
@@ -52,3 +52,42 @@ console.log(maxSubarraySumNaive([4,2,1,6], 1)); // 6
 console.log(maxSubarraySumNaive([], 4)); // null
 console.log(maxSubarraySumNaive([1,1], 2)); // 2
 console.log("------------------")
+
+
+/**
+ *      Sliding window solution to maxSubarraySum problem
+ *
+ *          Solve/simplify
+ * */
+// get the first sum_subarr_size numbers from the array, set to maxsum
+// set maxSum value to tempSum
+// iterate over the array from sum_subarr_size position to the end of the array
+//      substract the end of the subarr and add actual value to the end of the subarr, set this value to tempsum
+//      compare if tempsum is greater than maxSum, if it is then, change its value to maxSum
+// return maxSum
+
+// time complexity: O(n), space complexity: O(1)
+function maxSubarraySum(arr, sum_subarr_size) {
+    if(arr.length == 0) return null;
+    if(sum_subarr_size > arr.length) return null;
+    let maxSum = 0;
+    for (let i = 0; i < sum_subarr_size; i++) {
+        maxSum += arr[i];
+    }
+    let tempSum = maxSum;
+    // O(n)
+    for (let i = sum_subarr_size; i < arr.length; i++) {
+        tempSum = tempSum - arr[i - sum_subarr_size] + arr[i];
+        if(tempSum > maxSum) maxSum = tempSum;
+    }
+
+    return maxSum;
+}
+
+console.log(maxSubarraySum([1,2,5,2,8,1,5],2)); // 10
+console.log(maxSubarraySum([1,2,5,2,8,1,5],4)); // 17
+console.log(maxSubarraySum([4,2,1,6], 1)); // 6
+console.log(maxSubarraySum([], 4)); // null
+console.log(maxSubarraySum([1,1], 2)); // 2
+console.log("------------------")
+

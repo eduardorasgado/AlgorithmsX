@@ -50,3 +50,56 @@ console.log("----------------")
 console.log(sumsZeroMP([-3,-2,-1,0,1,2,3]));
 console.log(sumsZeroMP([-4,-3,-2,-1,0,1,2,5]));
 console.log(sumsZeroMP([0,1,2,3,4]));
+
+
+/**
+ * Understanding the problem
+ * implementing a function which accepts a sorted array, and counts the unique values in the array
+ * Explanation: count the unique values inside the array
+ * input: a sorted array
+ * output: integer, represents the unique values inside the input array
+ *
+ * concrete cases:
+ *  ([]) -> 0
+ *  ([0,0,0,0,0,0,0]) -> 1
+ *  ([1,1,1,1,1,1,1]) -> 1
+ *  ([1,2,3,4,5,6,7,8]) -> 8
+ *  ([-1, -2, -3,-4,-5,-5,0]) -> 6
+ *
+ *  naive solution:
+ *  countUniqueValues(arr) {
+ *      -create a min variable to zero
+ *      -create a counter value to zero
+ *      -go a for loop over the array
+ *          -initialize the min variable to first element in list
+ *          -for every element same to min do nothing,
+ *          -if an element is different than min then
+ *              -set min that element value
+ *              -counter increments by 1
+ *
+ *
+ *  }
+ * */
+
+function countUniqueValues(arr) {
+    let min = 0;
+    let counter = 0;
+    if(arr.length > 0) {
+        for(let i = 0; i < arr.length; i++) {
+            if(i == 0) {
+                min = arr[i];
+                ++counter;
+            }
+            if(arr[i] != min) {
+                ++counter;
+                min = arr[i]
+            }
+        }
+    }
+
+    return counter;
+}
+console.log(countUniqueValues([]));
+console.log(countUniqueValues([0,0,0,0,0,0,0]));
+console.log(countUniqueValues([-1, -2, -3,-4,-5,-5,0]));
+console.log(countUniqueValues([1,2,3,4,4,4,7,7,12,12,13]));

@@ -12,6 +12,7 @@
  *          https://en.wikipedia.org/wiki/Binary_search_algorithm
  * */
 
+// O(n)
 function binarySeach(arr, target) {
     if(arr.length < 1) return -1;
     let left = 0;

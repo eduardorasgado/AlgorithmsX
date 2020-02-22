@@ -139,3 +139,45 @@ console.log(anagramDiscover('qwerty', 'qeywrt')); // true
 console.log(anagramDiscover('texttwisttime', 'timetwisttext')); // true
 
 
+// Solve the next problem:
+// write a function called sameFrequency. Given two positive integers, find out
+// if the two numbers have the same frequency  of digits
+// Solution have to be Time: O(n)
+/**
+ *
+ * Naive solution
+ * 1. Define a dictionary called counter
+ * 1.1. Convert both values to strings
+ * 2. Iterate over the elements in one of the numbers
+ *  2.1. Whenever we see a new element, create an attribute in counter, initialize
+ *      it to 1
+ *  2.2. Whenever we see a repeated element, increase to one.
+ * 3. iterate over the elements if value 2(string)
+ *      if we see element we should see the frequency by removing in one the element
+ *
+ *
+ * */
+function sameFrequency(val1, val2) {
+    let str1 = val1.toString();
+    let str2 = val2.toString();
+    let counter = {};
+    // Time complexity: O(n), space complexity O(n)
+    for(let element of str1) {
+        counter[element] = (counter[element] | 0) + 1;
+    }
+
+    let lookup = '';
+    // Time complexity: O(n), space complexity: O(n)
+    for (let i = 0; i < str2.length; i++) {
+         lookup = str2[i];
+        if(counter[lookup]) counter[lookup]--;
+        else return false;
+    }
+    return true;
+}
+
+console.log("--+++++++++++++++--")
+console.log(sameFrequency(182, 281)); // true
+console.log(sameFrequency(34, 14)); // false
+console.log(sameFrequency(3589578, 5879385)); // true
+console.log(sameFrequency(22, 222)); //false

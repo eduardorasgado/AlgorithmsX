@@ -134,3 +134,36 @@ console.log(countUniqueValues([0,0,0,0,0,0,0]));
 console.log(countUniqueValues([-1, -2, -3,-4,-5,-5,0]));
 console.log(countUniqueValues([1,2,3,4,4,4,7,7,12,12,13]));
 
+/**
+ *
+ *  FREQUENCY COUNTER/ MULTIPLE POINTERS - areThereDuplicates
+ *
+ *  Implement a function called, areThereDuplicates which accepts a variable number
+ *  of arguments, and checks whether are any duplicates amount the arguments passed in.
+ *  You can solve this using the freq counter pattern or the multiple pointers pattern
+ *
+ *
+ *  solution:
+ *      define two pointers, left and right, 0 and 1, left will be indicator to unique values in args
+ *      iterate over the arguments,
+ *          compare if arguments[left] is different to args[right],
+ *              if true then add one to left and assign args[right] as new val
+ *      return if arguments.length is different to left
+ * */
+
+function areThereDuplicates() {
+    let left = 0;
+    for (let i = 1; i < arguments.length; i++) {
+        if(arguments[left] != arguments[i]) {++left; arguments[left] = arguments[i]}
+    }
+    console.log(left, arguments)
+    return arguments.length != left+1;
+}
+
+console.log("------------------------------")
+// concrete examples
+console.log(areThereDuplicates(1,2,3))
+console.log(areThereDuplicates(1,2,2))
+console.log(areThereDuplicates(1,2,3, 4, 4, 5, 6, 6, 7, 7, 7, 8))
+console.log(areThereDuplicates('a','b','c','c', 'd'))
+console.log(areThereDuplicates('a','b','c','a'))

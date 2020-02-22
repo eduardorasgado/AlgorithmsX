@@ -151,13 +151,18 @@ console.log(countUniqueValues([1,2,3,4,4,4,7,7,12,12,13]));
  *      return if arguments.length is different to left
  * */
 
+// Time Complexity:
 function areThereDuplicates() {
-    let left = 0;
-    for (let i = 1; i < arguments.length; i++) {
-        if(arguments[left] != arguments[i]) {++left; arguments[left] = arguments[i]}
+    let counter = {}
+    // Time Complexity: O(n), space complexity: O(n)
+    for (let i = 0; i < arguments.length; i++) {
+        counter[arguments[i]] = ++counter[arguments[i]] || 1
     }
-    console.log(left, arguments)
-    return arguments.length != left+1;
+    //Time complexity: O(n), space coplexity: O(1)
+    for (let element in counter) {
+        if (counter[element] > 1) return true;
+    }
+    return false;
 }
 
 console.log("------------------------------")
@@ -166,4 +171,5 @@ console.log(areThereDuplicates(1,2,3))
 console.log(areThereDuplicates(1,2,2))
 console.log(areThereDuplicates(1,2,3, 4, 4, 5, 6, 6, 7, 7, 7, 8))
 console.log(areThereDuplicates('a','b','c','c', 'd'))
+console.log(areThereDuplicates('A','B','C','D', 'E'))
 console.log(areThereDuplicates('a','b','c','a'))

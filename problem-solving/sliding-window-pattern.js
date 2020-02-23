@@ -189,27 +189,22 @@ console.log(maxSubarraySumExam([2,3],3)); // null
  *
  *  target: 39
  *  minimum til moment: 3
- *
- *            i        j
+ *          i     j
  *  1 4 16 22 5 7 8 9 10
  *
  * */
 
 // Time complexity: O(n^2), space complexity: O(1)
-function minSubArrayLen(list, target) {
+function minSubArrayLenNaive(list, target) {
     let minimumSumLen = list.length;
     for (let i = 0; i < list.length; i++) {
         if(list[i] >= target) return 1;
         let tempSum = list[i];
         for (let j = i+1; j < list.length; j++) {
             tempSum += list[j]
-            if(tempSum >= target) {
-                //console.log("analysis: i", i,"j: ", j, "tempsum: ",tempSum)
-                if(j - i + 1 < minimumSumLen) {
-                    minimumSumLen = j - i + 1
-                    break;
-                }
-
+            if(tempSum >= target && j - i + 1 < minimumSumLen) {
+                minimumSumLen = j - i + 1
+                break;
             }
         }
     }
@@ -218,10 +213,56 @@ function minSubArrayLen(list, target) {
 
 console.log("--------------------------------------------")
 // concrete examples:
+console.log(minSubArrayLenNaive([2,3,1,2,4,3],7)); // 2
+console.log(minSubArrayLenNaive([2,1,6,5,4],9)); // 2
+console.log(minSubArrayLenNaive([3,1,7,11,2,9,8,21,62,33,19],52)); // 1
+console.log(minSubArrayLenNaive([1,4,16,22,5,7,8,9,10], 39)); // 3
+console.log(minSubArrayLenNaive([1,4,16,22,5,7,8,9,10],55)); // 5
+console.log(minSubArrayLenNaive([4,3,3,8,1,2,3],11)); // 2
+console.log(minSubArrayLenNaive([1,4,16,22,5,7,8,9,10],95)); // 0
+
+
+/**
+ * Solution by applying sliding window
+ *
+ *  target: 39
+ *  minimum til moment: 3
+ *      i   j
+ *  1 4 16 22 5 7 8 9 10
+ *
+ * */
+
+// Time Complexity O(n), Space Complexity: O(1)
+function minSubArrayLen(list, target) {
+    let minimumSumLen = list.length
+    let actualSum = 0;
+    let i = 0;
+    let j = 1;
+    actualSum = list[i] + list[j]
+    while(i < list.length) {
+        // console.log(`i:${i}, j:${j}, diff:${j - i + 1}, actualSum: ${actualSum}, minimumLen: ${minimumSumLen}`)
+        if(list[i] >= target) return 1;
+        if(actualSum >= target) {
+            (j - i + 1 < minimumSumLen) && (minimumSumLen = j - i + 1)
+            actualSum = actualSum - list[i]
+            ++i;
+        }
+        else {
+            // j will never be greater than list length, in else we prove j < list.length-1
+            (j == list.length-1) && (actualSum -= list[i], ++i) || (++j, actualSum += list[j])
+        }
+    }
+    return (minimumSumLen == list.length) ? 0 : minimumSumLen;
+}
+
+console.log("--------------------------------------------")
+// concrete examples:
 console.log(minSubArrayLen([2,3,1,2,4,3],7)); // 2
+console.log(minSubArrayLen([2,3,1,2,4,11],11)); // 1
 console.log(minSubArrayLen([2,1,6,5,4],9)); // 2
 console.log(minSubArrayLen([3,1,7,11,2,9,8,21,62,33,19],52)); // 1
 console.log(minSubArrayLen([1,4,16,22,5,7,8,9,10], 39)); // 3
+console.log(minSubArrayLen([1,4,16,22,5,7,8,9,10], 10)); // 1
 console.log(minSubArrayLen([1,4,16,22,5,7,8,9,10],55)); // 5
 console.log(minSubArrayLen([4,3,3,8,1,2,3],11)); // 2
 console.log(minSubArrayLen([1,4,16,22,5,7,8,9,10],95)); // 0

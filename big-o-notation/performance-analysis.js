@@ -55,6 +55,13 @@ let instructor = {
  *          splice  - O(n)
  *          sort    - O(n* logn)
  *          for/each/map/filter/reduce/etc - O(n)
+ *
+ *   OPTIMIZATION
+ *
+ *   Optimization can be present in different ways:
+ *
+ *   Time decrease / space increase   <- real choise, we cannot buy time, we can buy space
+ *   Time increase / space decrease
  * */
 
 

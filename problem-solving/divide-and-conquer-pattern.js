@@ -5,7 +5,17 @@
  *
  *      This pattern can trmendously decrease time complexity
  *
+ *      O(n^2) algorithms(Naive):
+ *          Bubble sort
+ *          Selection sort
+ *          Insertions sort
  *
+ *      O(n * log n):
+ *          Merge sort
+ *          Quick sort
+ *
+ *      O(n):
+ *          Binary search
  *
  *      BINARY SEARCH
  *          This algorithm is applied to sorted arrays

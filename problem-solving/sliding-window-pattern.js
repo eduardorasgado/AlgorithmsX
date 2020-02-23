@@ -146,3 +146,82 @@ console.log(maxSubarraySumExam([1,4,2,10,23,3,1,0,20], 4)); // 39
 console.log(maxSubarraySumExam([-3, 4, 0, -2, 6, -1],2)); // 5
 console.log(maxSubarraySumExam([3,-2,7,-4,1,-1,4,-2,1],2)); // 5
 console.log(maxSubarraySumExam([2,3],3)); // null
+
+/**
+ *  SLIDING WINDOW EXAM: minSubArrayLen
+ *
+ *  Wite a function called minSubArray which accespts two paramenters - an array
+ *  of positive integers and a positive integer.
+ *  This function should return the minimal length of a contiguous subaray of
+ *  which the sum is greater than or equal to the integer passed to the
+ *  function. If there isn't one, return 0 instead.
+ *
+ *  own words:
+ *      given a list and a target number, we should get the minimum length of possible
+ *      subarrays that sum up the target or even greater than the target. subarray
+ *      should be in consecutive position
+ *
+ *  Notes:
+ *      Array is not sorted.
+ *      we will analize a sublist inside the list, every element in sublist is contiguous
+ *      Consider can be 4 cases to return:
+ *          if elements sum up to target
+ *          if elements sum up to greater than target
+ *          if first element is greater than target then store in possible
+ *          if first element is same to target then return 1
+ *
+ *  naive solution:
+ *  - create a minimumSum variable, set to zero
+ *  - create two variables, i and j, set them to 0 and 1
+ *  - iterate over the array, while i is smaller than arr.length
+ *      - if arr[i] equals to target, return 1
+ *      - if arr[i] is greater than target then return 1
+ *      -iterate over the array from i position to j
+ *          -sum every element in that range in array
+ *          -if sum is equal or greater to target,
+ *              -if minimumSum > 0 and (j - i) < minimumSum
+ *                -then set minimumSum value j - i
+ *                -break
+ *          -j increments
+ *  - return minimumSum
+ *
+ *
+ *
+ *  target: 39
+ *  minimum til moment: 3
+ *
+ *            i        j
+ *  1 4 16 22 5 7 8 9 10
+ *
+ * */
+
+// Time complexity: O(n^2), space complexity: O(1)
+function minSubArrayLen(list, target) {
+    let minimumSumLen = list.length;
+    for (let i = 0; i < list.length; i++) {
+        if(list[i] >= target) return 1;
+        let tempSum = list[i];
+        for (let j = i+1; j < list.length; j++) {
+            tempSum += list[j]
+            if(tempSum >= target) {
+                //console.log("analysis: i", i,"j: ", j, "tempsum: ",tempSum)
+                if(j - i + 1 < minimumSumLen) {
+                    minimumSumLen = j - i + 1
+                    break;
+                }
+
+            }
+        }
+    }
+    return (minimumSumLen == list.length) ? 0 : minimumSumLen;
+}
+
+console.log("--------------------------------------------")
+// concrete examples:
+console.log(minSubArrayLen([2,3,1,2,4,3],7)); // 2
+console.log(minSubArrayLen([2,1,6,5,4],9)); // 2
+console.log(minSubArrayLen([3,1,7,11,2,9,8,21,62,33,19],52)); // 1
+console.log(minSubArrayLen([1,4,16,22,5,7,8,9,10], 39)); // 3
+console.log(minSubArrayLen([1,4,16,22,5,7,8,9,10],55)); // 5
+console.log(minSubArrayLen([4,3,3,8,1,2,3],11)); // 2
+console.log(minSubArrayLen([1,4,16,22,5,7,8,9,10],95)); // 0

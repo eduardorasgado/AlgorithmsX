@@ -91,3 +91,58 @@ console.log(maxSubarraySum([], 4)); // null
 console.log(maxSubarraySum([1,1], 2)); // 2
 console.log("------------------")
 
+
+/**
+ * Sliding window exam: maxSubarraySum
+ *
+ *  Given an array of integers and a number, write a function called maxSubarraySum,
+ *  which finds the maximum sum of a subarray with the length of the number passed to
+ *  the function.
+ *
+ *  Note that a subarray must consist of consecutive elements form the original array.
+ *
+ *  Own words:
+ *  search for a consecutive n numbers that sums up the max value of all of possible groups. Retreive the sum
+ *
+ *  Constraints:
+ *      Time complexity: O(n), Space Complexity: O(1)
+ *
+ *  Concrete example
+ *  [100, 200, 300] is a sub array of the original array [100,200,300,400], but [100, 300] is not
+ *
+ *  Solution:
+ *      define a variable to add the maxSum
+ *      take the first n elements in array from 0 to n and sum up it all, save it into maxSum
+ *      create a tempSum and assign maxSum value
+ *      iterate over the elements of array
+ *          sum the next value and decrease last value to tempsum, assign to tempSum
+ *          compare if tempSum is greater than maxSum, if it is then set tempSum value to maxSum
+ *      return maxSum
+ * */
+
+// Time Complexity: O(n), space complexity: O(1)
+function maxSubarraySumExam(list, subArraySize) {
+    if(list.length < 1) return null;
+    if(list.length < subArraySize) return null
+    let maxSum = 0;
+    //TC: O(n), SC: O(1)
+    for (let i = 0; i < subArraySize; i++) {
+        maxSum += list[i];
+    }
+
+    let tempSum = maxSum;
+    // TC: O(n), SC: O(1)
+    for (let i = subArraySize; i < list.length; i++) {
+        tempSum = tempSum - list[i - subArraySize] + list[i];
+        if(tempSum > maxSum) maxSum = tempSum;
+    }
+    return maxSum;
+}
+
+console.log("===================")
+// Concrete examples:
+console.log(maxSubarraySumExam([100, 200, 300, 400],2)); //700
+console.log(maxSubarraySumExam([1,4,2,10,23,3,1,0,20], 4)); // 39
+console.log(maxSubarraySumExam([-3, 4, 0, -2, 6, -1],2)); // 5
+console.log(maxSubarraySumExam([3,-2,7,-4,1,-1,4,-2,1],2)); // 5
+console.log(maxSubarraySumExam([2,3],3)); // null

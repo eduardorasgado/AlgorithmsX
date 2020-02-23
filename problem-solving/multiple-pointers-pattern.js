@@ -280,18 +280,14 @@ function isSubsequenceNaive(str1, str2) {
 
 /**
  * Optimal Solution
- *  i. create a orderList empty list
  *  ii. set two pointers, target(t), searcher(s), set them to 0 and 0
  *  iii. iterate over the string 2,
- *      1. if target is less to string 1 length
+ *      1. if target is less to string 1
  *          1.1. compare if string2 in searcher position is same to str1 in target position
  *              -if true then
- *                  - string2 in t position will take the value of string2 in s position, t increments
- *                    and s will be stored in orderList
- *  iv. compare if str1 is equal to str2 from 0 index to target position
- *      compare if orderList is sorted from min to max, return true if so
+ *                  - t increments
+ *  iv. compare if str1 length is equal to target
  *
- *  orderList = []
  *  t 0
  *  s 0
  *    say helyo wlrldo
@@ -299,16 +295,17 @@ function isSubsequenceNaive(str1, str2) {
  *    0
  *    hello
  * */
+// Time Complexity: O(max(N, M))
 function isSubsequence(str1, str2) {
-    if(str1.length < 1) return false;
+    if(str1.length < 1) return true;
     let target = 0;
     let searcher = 0;
+    // Time complexity: O(n), space complexity: O(1)
     while(searcher < str2.length && target < str1.length) {
         (str2[searcher] == str1[target]) && ++target;
         ++searcher;
     }
     return (target == str1.length )
-
 }
 
 console.log('======================')

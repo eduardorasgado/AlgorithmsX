@@ -248,7 +248,8 @@ function minSubArrayLen(list, target) {
             ++i;
         }
         else {
-            // j will never be greater than list length, in else we prove j < list.length-1
+            // j will never be greater than list length, after && logic means the way we finish the loop
+            // , in else we prove j < list.length-1
             (j == list.length-1) && (actualSum -= list[i], ++i) || (++j, actualSum += list[j])
         }
     }
@@ -266,3 +267,78 @@ console.log(minSubArrayLen([1,4,16,22,5,7,8,9,10], 10)); // 1
 console.log(minSubArrayLen([1,4,16,22,5,7,8,9,10],55)); // 5
 console.log(minSubArrayLen([4,3,3,8,1,2,3],11)); // 2
 console.log(minSubArrayLen([1,4,16,22,5,7,8,9,10],95)); // 0
+
+
+/**
+ * Sliding window EXAM: findLongestSubstring
+ *
+ * Write a function called findLongestSubstring, which accepts a string and returns
+ * the length of the longest substring with all distinct characters.
+ *
+ * Own words:
+ * Extract the longest substring within a given string which contains all its characters
+ * different of each other
+ *
+ * Constraints:
+ *  Time complexity: O(n)
+ *
+ *
+ *  Naive solution:
+ *      define a longest variable set to 0
+ *      define a left variable set to 0
+ *      while(true)
+ *      iterate from 1 to str length, index j
+ *          iterate from left to j, index i
+ *              if i - j is greater than longest then set i - j to longest
+ *              if str in j position is equal to str in i position then break and set left to i
+ *
+ *
+ * Concrete example:
+ *  actualSubSet = [l o n g] // this is a js set
+ *  longest = 7
+ *                   left,j      i
+ *                    9         14
+ *  t h i s i s h o w w e d o i t
+ *
+ *  t h e c a t i n t h e h a t
+ *    .           . = 7
+ *
+ *  is actualSubSet.length == j,
+ *      if false i go over every element until it gets list[i] == list[j]
+ * */
+
+// Time Complexity: O(n^2),space complexity: O(1)
+function findLongestSubstringNaive(str) {
+    if(str.length < 1) return 0;
+    let longest = 1
+    let left = 0;
+    let isRepeated = false;
+    for (let i = 1; i < str.length; i++) {
+        isRepeated = false
+        for (let j = left; j < i; j++) {
+             // console.log(`i:${i}, j: ${j}, longest: ${longest}`);
+            if(str[i] == str[j]) {
+                left = j+1;
+                isRepeated = true
+                break;
+            }
+        }
+        if(!isRepeated) {
+            if(i - left + 1 > longest) longest = i - left + 1;
+        }
+    }
+    return longest;
+}
+
+console.log("************************")
+// Concrete examples:
+console.log(findLongestSubstringNaive('')); // 0
+console.log(findLongestSubstringNaive('rithmschol')); // 7
+console.log(findLongestSubstringNaive('thisisawesome')); // 6
+console.log(findLongestSubstringNaive('thecatinthehat')); // 7
+console.log(findLongestSubstringNaive('bbbbbbbbbbbbbbbbbbbbc')); // 2
+console.log(findLongestSubstringNaive('bbbbbbbbbbbbbbbbbbbb')); // 1
+console.log(findLongestSubstringNaive('longestsubstring')); // 8
+console.log(findLongestSubstringNaive('thisishowwedoit')); // 6
+
+

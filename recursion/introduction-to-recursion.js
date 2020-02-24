@@ -87,5 +87,15 @@ function countDown(number) {
     if(number != 0) countDown(number - 1);
 }
 
+function countDownClassroom(number) {
+    if(number <= 0){
+        console.log(number);
+        return;
+    }
+    console.log(number);
+    countDownClassroom(number - 1)
+}
+
 console.log("--------------------")
 console.log(countDown(5));
+console.log(countDownClassroom(5));

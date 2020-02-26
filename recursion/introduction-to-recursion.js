@@ -190,6 +190,20 @@ console.log(collectOddValues([1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]));
 /**
  * Pure recursion
  *
+ *  A way to avoid using helper recursion pattern
+ *  Sometimes it is better to use helper recursion for readability
+ *
+ *  Tips for pure recursion:
+ *      - For arrays, use methods like slice, the spread operator, and concat
+ *          that make copies of arrays so you do not mutate them
+ *
+ *      - Remember that strings are inmutable so you will need to use methods
+ *          like slice, substr, or substring to make copies of strings
+ *
+ *      - To make copies of objects use Object.assign, or the spread operator
+ *
+ * Example
+ *
  * [ 1 2 3 4 5]
  *
  * returned [1].concat([3].concat([5].concat([]))) -> [1 3 5]
@@ -197,7 +211,7 @@ console.log(collectOddValues([1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]));
  * */
 
 function collectOddValuesPure(arr) {
-    let newArr = [];
+    let newArr = Array();
     if(arr.length === 0) return newArr;
     if(arr[0] % 2 !== 0) newArr.push(arr[0]);
 
@@ -209,8 +223,9 @@ function collectOddValuesPure(arr) {
 function collectOddValuesPureV2(arr, odds = []) {
     if(arr[0] % 2 !== 0) odds.push(arr[0]);
     if (arr.length === 1) return odds;
-    // passing the first element
-    return collectOddValuesPureV2(arr.slice(1), odds)
+    // passing the rest of the elements but the first
+    [a, ...rest] = arr
+    return collectOddValuesPureV2(rest, odds)
 }
 
 console.log('-------------')

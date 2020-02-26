@@ -138,3 +138,53 @@ console.log(isEven(13));
 console.log(isEven(18));
 console.log(isEven(99));
 console.log(isEven(84));
+
+
+/**
+ *
+ *      HELPER METHOD RECURSION PATTERN
+ *
+ *          We have two functions, nested
+ *
+ * The next is the structure, this pattern follows
+ * */
+
+function outer(input) {
+    var outerScopedVar = [];
+    function helper(helperInput) {
+        helper(helperInput--);
+    }
+
+    helper(input);
+
+    return outerScopedVar;
+}
+
+/**
+ * EXAMPLE: Collecting all odd values within an array
+ * */
+
+function collectOddValues(arr) {
+    // empty array, this will be filled with odd values
+    let result = [];
+
+    // will add odd values to result array, every time it slice input from zero position
+    function helper(input) {
+        if(input.length === 0) {
+            return;
+        }
+
+        if(input[0] % 2 !== 0) {
+            result.push(input[0]);
+        }
+        helper(input.slice(1))
+    }
+
+    helper(arr);
+    return result
+}
+
+console.log('-------------')
+console.log(collectOddValues([1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]))
+
+

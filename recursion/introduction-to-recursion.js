@@ -177,14 +177,44 @@ function collectOddValues(arr) {
         if(input[0] % 2 !== 0) {
             result.push(input[0]);
         }
-        helper(input.slice(1))
+        helper(input.slice(1));
     }
 
     helper(arr);
-    return result
+    return result;
+}
+
+console.log('-------------');
+console.log(collectOddValues([1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]));
+
+/**
+ * Pure recursion
+ *
+ * [ 1 2 3 4 5]
+ *
+ * returned [1].concat([3].concat([5].concat([]))) -> [1 3 5]
+ *
+ * */
+
+function collectOddValuesPure(arr) {
+    let newArr = [];
+    if(arr.length === 0) return newArr;
+    if(arr[0] % 2 !== 0) newArr.push(arr[0]);
+
+    newArr = newArr.concat(collectOddValuesPure(arr.slice(1)));
+    return newArr;
+}
+
+// own implementation
+function collectOddValuesPureV2(arr, odds = []) {
+    if(arr[0] % 2 !== 0) odds.push(arr[0]);
+    if (arr.length === 1) return odds;
+    // passing the first element
+    return collectOddValuesPureV2(arr.slice(1), odds)
 }
 
 console.log('-------------')
-console.log(collectOddValues([1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]))
+console.log(collectOddValuesPure([1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]));
+console.log('odds',collectOddValuesPureV2([1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]));
 
 

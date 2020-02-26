@@ -120,3 +120,21 @@ console.log(factorialOf(5));
 console.log(factorialOf(2));
 console.log(factorialOf(6));
 console.log(factorialOf(7));
+
+
+/**
+ * 5 - 3 - 1
+ *
+ * */
+
+function isEven(num) {
+    if (num == 0) return true
+    if(num == 1) return false
+    return isEven(num - 2);
+}
+
+console.log("=========================")
+console.log(isEven(13));
+console.log(isEven(18));
+console.log(isEven(99));
+console.log(isEven(84));

@@ -99,3 +99,24 @@ function countDownClassroom(number) {
 console.log("--------------------")
 console.log(countDown(5));
 console.log(countDownClassroom(5));
+
+
+// Refactoring my bad recursive function into this one
+function sumRange(num) {
+    if(num === 1) return 1;
+    return num + sumRange(num - 1);
+}
+
+console.log("--------------------");
+console.log(sumRange(5));
+
+function factorialOf(num) {
+    if(num == 1) return 1;
+    return num * factorialOf(num - 1);
+}
+
+console.log("--------------------");
+console.log(factorialOf(5));
+console.log(factorialOf(2));
+console.log(factorialOf(6));
+console.log(factorialOf(7));

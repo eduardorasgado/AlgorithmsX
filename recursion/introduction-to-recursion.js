@@ -256,6 +256,7 @@ function power(base, exponent) {
     return base * (power(base, exponent-1));
 }
 
+console.log('..........................')
 console.log(power(2, 0)) // 1
 console.log(power(2, 2)) // 4
 console.log(power(2, 4)) // 16
@@ -268,6 +269,13 @@ console.log(power(-2, 2)) // 4
  *      integers bellow it.
  * */
 
-function factorial() {
-
+function factorial(number) {
+    if(number === 0) return 1;
+    return number * factorial(number - 1);
 }
+
+console.log('..........................')
+console.log(factorial(1)); // 1
+console.log(factorial(2)); // 2
+console.log(factorial(4)); // 24
+console.log(factorial(7)); // 5040

@@ -233,3 +233,41 @@ console.log(collectOddValuesPure([1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]));
 console.log('odds',collectOddValuesPureV2([1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]));
 
 
+/**
+ *      RECURSION EXAM
+ * */
+
+/**
+ *      write a function called power which accepts a base and an exponent. The
+ *      function should return the power of the base to the exponent.
+ *      The function should mimic the functionality of Math.pow, do not worry
+ *      about negative bases and exponents
+ *
+ *
+ *      Concrete problem
+ *      power(2, 2)
+ *      2  1  0
+ *      2*(2*(1))
+ * */
+
+// 0(2^n)
+function power(base, exponent) {
+    if(exponent === 0) return 1;
+    return base * (power(base, exponent-1));
+}
+
+console.log(power(2, 0)) // 1
+console.log(power(2, 2)) // 4
+console.log(power(2, 4)) // 16
+console.log(power(-2, 2)) // 4
+
+
+/**
+ *      Write a function factorial which accepts a number and returns the factorial
+ *      of that number. A factorial is the product of an integer and allthe
+ *      integers bellow it.
+ * */
+
+function factorial() {
+
+}

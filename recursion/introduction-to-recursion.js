@@ -282,7 +282,7 @@ console.log(factorial(7)); // 5040
 
 
 /**
- *      Write a function called productIfArray, which takes in an array of numbers
+ *      Write a function called productOfArray, which takes in an array of numbers
  *      and returns the product of them all
  * */
 
@@ -294,4 +294,19 @@ function productOfArray(arr) {
 console.log('..........................')
 console.log(productOfArray([1,2,3]));
 console.log(productOfArray([1,2,3, 10]));
+
+/**
+ *      Write a function called recursiveRange which accepts a number and adds
+ *      up all the numbers from 0 to the number passsed to the function
+ * */
+
+function recursiveRange(number) {
+    if(number === 0) return 0
+    return number + recursiveRange(number-1);
+}
+
+console.log('..........................')
+console.log(recursiveRange(6)); // 21
+console.log(recursiveRange(10)); // 55
+
 

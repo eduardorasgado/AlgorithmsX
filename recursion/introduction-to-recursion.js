@@ -316,12 +316,13 @@ console.log(recursiveRange(10)); // 55
  *      is the sequence of whole numbers 1,1,2,3,5,8... which starts with 1 and 1
  *      and where every number thereafter is equal to the sum of the previous two
  *      numbers
+ *
+ *
+ *      O(2^n)
  * */
 
-function fib(number, tillHere = 1, lastNumbers = [1,1] ) {
-    if(tillHere === 2 || tillHere === 1) {
-        return fib(number, tillHere + 1);
-    }
+function fib(number, tillHere = 1, lastNumbers = [1,1]) {
+    if(tillHere === 2 || tillHere === 1) return fib(number, tillHere + 1);
 
     else if(tillHere > 2 && tillHere < number) {
         let ln1 = lastNumbers[0];
@@ -329,13 +330,36 @@ function fib(number, tillHere = 1, lastNumbers = [1,1] ) {
         let lastTwo = [ln2, ln1 + ln2];
         return fib(number, tillHere + 1, lastTwo);
     }
-    else {
-        return lastNumbers[0] + lastNumbers[1];
-    }
+    return lastNumbers[0] + lastNumbers[1];
+
+}
+
+/**
+ * example 1:
+ *                     4
+ *         fib(3)           +              fib(2)
+ *     fib(2) +  fib(1)                      1
+ *      1           1
+ *
+ *      r=3
+ *
+ * example 2:
+ *                           6
+ *           fib(5) 5       +            fib(4)
+ *    fib(4)    +    fib(3)               3
+ *    3                2
+ *
+ *   r=8
+ * */
+function fibClass(n) {
+    if(n <= 2) return 1;
+    return fib(n-1) + fib(n-2);
+
 }
 
 console.log('..........................')
 console.log(fib(4)); // 3
+console.log(fib(6)); // 3
 console.log(fib(10)); // 55
 console.log(fib(28)); // 317811
 console.log(fib(35)); // 9227465

@@ -53,3 +53,32 @@ console.log(isPalindrome('amanaplanacanalpandemonium')); // false
 console.log(isPalindrome('anitalavalatina')); // true
 console.log(isPalindrome('awesome')); // false
 console.log(isPalindrome('tacocat')); // true
+
+
+/**
+ *  EXAM: SOME RECURSIVE
+ *
+ *          Write a recursive function called someRecursive which accepts an array
+ *          and a callback. The function returns true if a single value in the
+ *          array returns true when passed to the callback. Otherwise returns false
+ * */
+
+// concrete callback
+const isOdd = val => val % 2 !== 0;
+
+function someRecursive(arr, callback){
+    if(arr.length < 1) return false;
+    return Boolean(Number(
+        callback(arr[0]) + someRecursive(arr.slice(1), callback)
+    ));
+}
+
+console.log('====================')
+// concrete cases
+console.log(someRecursive([1,2,3,4], isOdd)); // true
+console.log(someRecursive([4,6,8,9], isOdd)); // true
+console.log(someRecursive([4,6,8], isOdd)); // false
+console.log(someRecursive([4,5,8], val => val > 10)); // false
+console.log(someRecursive([4,15,8], val => val > 10)); // true
+
+

@@ -310,3 +310,32 @@ console.log(recursiveRange(6)); // 21
 console.log(recursiveRange(10)); // 55
 
 
+/**
+ *      Write a recursive function called fib which accepts a number and returns the
+ *      nth number in the fibonacci sequence. Recall that the Fibinacci sequence
+ *      is the sequence of whole numbers 1,1,2,3,5,8... which starts with 1 and 1
+ *      and where every number thereafter is equal to the sum of the previous two
+ *      numbers
+ * */
+
+function fib(number, tillHere = 1, lastNumbers = [1,1] ) {
+    if(tillHere === 2 || tillHere === 1) {
+        return fib(number, tillHere + 1);
+    }
+
+    else if(tillHere > 2 && tillHere < number) {
+        let ln1 = lastNumbers[0];
+        let ln2 = lastNumbers[1];
+        let lastTwo = [ln2, ln1 + ln2];
+        return fib(number, tillHere + 1, lastTwo);
+    }
+    else {
+        return lastNumbers[0] + lastNumbers[1];
+    }
+}
+
+console.log('..........................')
+console.log(fib(4)); // 3
+console.log(fib(10)); // 55
+console.log(fib(28)); // 317811
+console.log(fib(35)); // 9227465

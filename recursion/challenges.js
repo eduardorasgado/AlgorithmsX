@@ -227,7 +227,7 @@ let obj = {
 // O(n * 2^n)
 function stringifyNumbers(object) {
     if(Array.isArray(object)){
-        // in case we have a array and not an object
+        // in case we have a array and not an object, even if we have nested arrays
         if(object.length === 0) return [];
         let possibleNum = object[0];
         return [stringifyNumbers(possibleNum)].concat(stringifyNumbers(object.slice(1)))
@@ -246,11 +246,13 @@ function stringifyNumbers(object) {
     }
     // base case, transforming numbers into strings, all over the object
     else if(typeof object === 'number') return object.toString();
-    else return object.toString();
+    else return object;
 }
 
 console.log('---------')
 console.log(stringifyNumbers(obj));
+console.log('**')
+console.log(stringifyNumbers(obj).data.val2[4]);
 
 /*
 {

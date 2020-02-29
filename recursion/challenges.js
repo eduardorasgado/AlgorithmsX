@@ -44,7 +44,7 @@ function isPalindrome(word) {
         word[0] == word[word.length-1]) * isPalindrome(word.slice(1, word.length-1)
     ))
 }
-console.log('====================')
+console.log('============ispalindrome========')
 // Concrete cases
 console.log(isPalindrome('foobar')); // false
 console.log(isPalindrome('amanaplanacanalpanama')); // true
@@ -53,6 +53,8 @@ console.log(isPalindrome('amanaplanacanalpandemonium')); // false
 console.log(isPalindrome('anitalavalatina')); // true
 console.log(isPalindrome('awesome')); // false
 console.log(isPalindrome('tacocat')); // true
+console.log(isPalindrome('at')); // false
+console.log(isPalindrome('aa')); // true
 
 
 /**
@@ -122,3 +124,18 @@ console.log(flatten([1,[2,[3,4,5],[6,7]]])); // [1,2,3,4,5]
 console.log(flatten([[1],[[[2]]],[[[[3]]]]])); // [1,2,3]
 
 
+/**
+ * EXAM: CAPITALIZE FIRST
+ *
+ *      Write a recursive function called capitalizeFirst. Given an array of
+ *      strings, capitalize the first letter of each string in the array
+ * */
+
+function capitalizeFirst(stringsArr) {
+    if(stringsArr.length === 0) return [];
+    let cap = stringsArr[0][0].toUpperCase() + stringsArr[0].slice(1);
+    return [cap].concat(capitalizeFirst(stringsArr.slice(1)));
+}
+
+console.log("------------")
+console.log(capitalizeFirst(['car', 'taco', 'banana']));

@@ -81,4 +81,44 @@ console.log(someRecursive([4,6,8], isOdd)); // false
 console.log(someRecursive([4,5,8], val => val > 10)); // false
 console.log(someRecursive([4,15,8], val => val > 10)); // true
 
+/**
+ *      EXAM: FLATTEN
+ *              Write a recursive function called flatten which accepts an array
+ *              of arrays and returns a new array with all values flattened.
+ *
+ *              Concrete example:
+ *
+ *                  [1,2,3,[4,5]]
+ *
+ *                  [1,2,3].concat(flatten([4,5]))
+ *
+ *                  [1]+[2]+[3]+flatten([4,5])+[]
+ *                                 [4]+[5]+[]
+ *
+ *                  [1,[2,[3,4],[[5, 6]]]]
+ *
+ *                  [1]+flatten([2,[3,4],[5,6]])
+ *                           [2]+flatten([3,4]) + flatten([5,6])
+ *                                  [3]+[4]     + [5] + [6]
+ *                   [1,2,3,4,5,6]
+ * */
+
+function flattenNotRefactored(list) {
+    if(list.length == 0) return [];
+    let element = list[0]
+    if(typeof element == 'object') return flatten(list[0]).concat(flatten(list.slice(1)));
+    return [element].concat(flatten(list.slice(1)));
+}
+
+function flatten(list) {
+    if(list.length == 0) return [];
+    let element = (typeof list[0] == 'object') ? flatten(list[0]) : [list[0]];
+    return element.concat(flatten(list.slice(1)));
+}
+
+console.log("---------------")
+console.log(flatten([1,2,3,[4,5],[6,7]])); // [1,2,3,4,5]
+console.log(flatten([1,[2,[3,4,5],[6,7]]])); // [1,2,3,4,5]
+console.log(flatten([[1],[[[2]]],[[[[3]]]]])); // [1,2,3]
+
 

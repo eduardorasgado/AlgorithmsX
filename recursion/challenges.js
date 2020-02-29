@@ -198,3 +198,70 @@ function capitalizeWords(words) {
 console.log("******************")
 let words = ['i', 'am', 'learning', 'recursion'];
 console.log(capitalizeWords(words)); // ['I', 'AM', 'LEARNING', 'RECURSION']
+
+
+/**
+ *      EXAM: STRINGIFY NUMBERS
+ *
+ *          Write a function called stringifyNumbers which takes in an object and
+ *          finds all of the values which are numbers and convers them to
+ *          strings. Recursion would be a great way to solve this.
+ *
+ * */
+
+
+let obj = {
+    num: 1,
+    test: [],
+    data: {
+        val0: 'asdio',
+        val: 4,
+        val2: [1,2,3, 'a', [5,6,7]],
+        info: {
+            isRight: true,
+            random: 66
+        }
+    }
+}
+
+// O(n * 2^n)
+function stringifyNumbers(object) {
+    if(Array.isArray(object)){
+        // in case we have a array and not an object
+        if(object.length === 0) return [];
+        let possibleNum = object[0];
+        return [stringifyNumbers(possibleNum)].concat(stringifyNumbers(object.slice(1)))
+    }
+    else if(typeof  object === 'object' && !Array.isArray(object)){
+        // in case we have an object as object parameter, {}
+        let newObj = {};
+        let newProp = 0;
+        for(let key in object) {
+            if(typeof object[key] === 'object') newProp = stringifyNumbers(object[key]);
+            else if(typeof object[key] === 'number') newProp = object[key].toString();
+            else newProp = object[key];
+            newObj[key] = newProp;
+        }
+        return newObj;
+    }
+    // base case, transforming numbers into strings, all over the object
+    else if(typeof object === 'number') return object.toString();
+    else return object.toString();
+}
+
+console.log('---------')
+console.log(stringifyNumbers(obj));
+
+/*
+{
+    num: "1",
+    test: [],
+    data: {
+        val: "4",
+        info: {
+            isRight: true,
+            random: "66"
+        }
+    }
+}
+*/

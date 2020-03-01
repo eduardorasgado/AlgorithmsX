@@ -33,25 +33,25 @@ function searchElement(list, target) {
     return -1;
 }
 
-console.log(searchElement(names, 'Tyler'));
-console.log(searchElement(states, 'Iowa'));
-console.log(searchElement(names, 'Tonie'))
-console.log(names.includes('Tyler'))
-console.log(searchElement(sortedNums, 72845))
+//console.log(searchElement(names, 'Tyler'));
+//console.log(searchElement(states, 'Iowa'));
+//console.log(searchElement(names, 'Tonie'))
+//console.log(names.includes('Tyler'))
+//console.log(searchElement(sortedNums, 72845))
 
 /**
  *  Binary Search
  *
- *      Works only with sorted arrays
+ *      Works only on sorted arrays
  * */
 
 
 function binarySearch(list, target) {
     let left = 0;
     let right = list.length - 1;
-    while(left < right) {
-        let mid = Math.floor(right + left / 2);
-        if(target > list[mid]) left = mid + 1;
+    while(left <= right) {
+        let mid = Math.floor((right + left) / 2);
+        if(target > list[mid]) left = mid + 1
         else if(target < list[mid]) right = mid - 1;
         else return mid // list[mid] === target
     }
@@ -59,4 +59,5 @@ function binarySearch(list, target) {
 }
 
 // 72845
-console.log(binarySearch(sortedNums, 72845))
+console.log(binarySearch(sortedNums, 72845));
+console.log(binarySearch(names, 'Kalani'));

@@ -1,5 +1,9 @@
-const states = require('./states-of-america');
+const america = require('./states-of-america');
+const nameData = require('./names');
 
-console.log(states);
+//console.log(america.states);
+//console.log(nameData.names);
+
+
 
 

@@ -1,4 +1,4 @@
-let all = ["Alaska",
+exports.states = ["Alaska",
     "Alabama",
     "Arkansas",
     "American Samoa",
@@ -54,4 +54,4 @@ let all = ["Alaska",
     "West Virginia",
     "Wyoming"];
 
-exports.states;
+

@@ -43,9 +43,11 @@ function searchElement(list, target) {
  *  Binary Search
  *
  *      Works only on sorted arrays
+ *      It is part of divide and conquer paradigm solitions out there
  * */
 
 
+// Time complexity, best: O(1), average: O(log n), worst: O(log n)
 function binarySearch(list, target) {
     let left = 0;
     let right = list.length - 1;
@@ -60,4 +62,40 @@ function binarySearch(list, target) {
 
 // 72845
 console.log(binarySearch(sortedNums, 72845));
+console.log(binarySearch(sortedNums, 98975));
 console.log(binarySearch(names, 'Kalani'));
+
+/**
+ *      BINARY SEARCH TIME COMPLEXITY
+ *
+ * How to get the worst time complexity of binary search
+ *
+ * imagine we have this arrray:
+ *
+ *      [2, 4, 5, 9, 11, 14, 15, 19, 21, 25, 28, 30, 50, 52, 60]
+ *
+ * then, we want to search for the 13 value, which is not within the list
+ *
+ * lets start the search: 13 (i= index)
+ *
+ *          [2, 4, 5, 9, 11, 14, 15, 19, 21, 25, 28, 30, 50, 52, 60]  <-- 1
+ *              mid: i8 = 19
+ *
+ *          [2, 4, 5, 9, 11, 14, 15]           <-- 2
+ *              mid: 7 + 0 / 2 = floor(i3.5) = 9
+ *
+ *          [11, 14, 15]                        <-- 3
+ *              mid: 6 + 4 / 2 = i5 = 14
+ *
+ *          [11]                               <-- 4
+ *              mid = l = r = -1, 13 didnt find
+ *
+ * It took 4 steps to get the result in a 16 elements array
+ *
+ *      log 16 = 4;   <-- O(log n)
+ *      2^4 = 16
+ *
+ * In this case we got 4 steps for 16 elements, if we want to add another step
+ * we will need to double the number of elements.
+ * log 32 = 5
+ * */

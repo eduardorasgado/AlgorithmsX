@@ -267,3 +267,38 @@ console.log(stringifyNumbers(obj).data.val2[4]);
     }
 }
 */
+
+/**
+ *      EXAM: COLLECT  STRINGS
+ *
+ *          Write a function called collectStrings which accepts an object and returns
+ *          an array of all the values in the object that have a typeof
+ *          string
+ * */
+const objCollect = {
+    stuff: "foo",
+    data: {
+        val: {
+            thing: {
+                info: "bar",
+                moreInfo: {
+                    evenMoreInfo: {
+                        weMadeIt: "baz"
+                    }
+                }
+            }
+        }
+    }
+}
+
+function collectStrings(object) {
+    let strings = [];
+    for (let key in object) {
+        if(typeof object[key] === 'object') strings = strings.concat(collectStrings(object[key]));
+        if(typeof object[key] === 'string') strings.push(object[key]);
+    }
+    return strings;
+}
+
+console.log('---------');
+console.log(collectStrings(objCollect)); // ["foo", "bar", "baz"])

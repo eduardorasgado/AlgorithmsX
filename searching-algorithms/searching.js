@@ -120,6 +120,7 @@ function naiveStringSearch(string, substring) {
     // string
     let matches = 0;
     let matchLetter = 0;
+    // O(n * m) n and m are length of the string and substring respectively
     for(let i = 0; i < string.length; i++) {
         matchLetter = (string[i] == substring[matchLetter]) ? ++matchLetter : 0;
         if(matchLetter == substring.length) ++matches, matchLetter = 0;
@@ -133,3 +134,67 @@ console.log(naiveStringSearch('loop over the longer string with the boys', 'the'
 console.log(naiveStringSearch('loop over the longer account low longer with the boys', 'longer'));
 console.log(naiveStringSearch('wowbmz3ng', 'omg'));
 console.log(naiveStringSearch('my house is blue and yours is red', 'and'));
+
+/**
+ *  KMP ALGORITHM
+ *
+ *      Knuth Morris Pratt Pattern Searching algorithm uses degenerating property
+ *      of the pattern and improves the worst case complexity to O(n)
+ *
+ *      Degenerating property, means pattern having same sub-patterns appearing
+ *      more than once in the pattern, are considered
+ *
+ *      To Find the occurrences of a word W within a main text T.
+ *
+ *      1. preprocess the pattern
+ *
+ *                  i m
+ *          pat = [ A B X A B ]
+ *
+ *
+ *          [ 0 0 0 0 0]
+ *
+ *          lps = // create a longest proper prefix which is also suffix
+ *          lps is know as aux array too
+ *
+ *
+ *                m i
+ *          pat = a c a b a c a c d
+ *
+ *          lps = 0 0 0 0 0 0 0
+ * */
+
+function getLPS(pattern) {
+    let lps = [0] // 0 for the first pos, since one len string has no prefix or suffix
+
+    let i = 1;
+    let m = 0; // this var will help to get the index of first mismatch
+    while(i < pattern.length) {
+        // if prefix = suffix till m-1
+        if(pattern[i] == pattern[m]) {
+            m += 1;
+            lps.push(m);
+            i += 1;
+        }
+        // when there is a mismach we will check the index of previous possible
+        // prefix, note; this does not increment i
+        // TODO: Test how this helps to get a prefix = suffix after a mismatch
+        else if(pattern[i] !== pattern[m] && m != 0) m = lps[m - 1];
+        else {
+            // if m = 0 then it has to move to next position
+            lps.push(0)
+            i += 1;
+        }
+    }
+    return lps;
+}
+
+function kmp(word, pattern){
+    // preprocessing the pattern
+    let lps = getLPS(pattern);
+    return lps;
+}
+
+console.log("-----------");
+console.log(kmp("acfacabacabacacdk", "acabacacd"));
+console.log(kmp("acfacebacebacacdk", "acebacecd"));

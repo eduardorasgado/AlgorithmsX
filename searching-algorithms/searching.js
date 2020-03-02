@@ -121,17 +121,8 @@ function naiveStringSearch(string, substring) {
     let matches = 0;
     let matchLetter = 0;
     for(let i = 0; i < string.length; i++) {
-        if(string[i] == substring[matchLetter]) {
-            console.log('substring: '+substring[matchLetter]);
-            ++matchLetter;
-        }
-        else matchLetter = 0;
-
-        if(matchLetter == substring.length) {
-            console.log(string[i])
-            ++matches;
-            matchLetter = 0;
-        }
+        matchLetter = (string[i] == substring[matchLetter]) ? ++matchLetter : 0;
+        if(matchLetter == substring.length) ++matches, matchLetter = 0;
     }
     return matches
 }
@@ -141,3 +132,4 @@ console.log(naiveStringSearch('wowomgzomg', 'omg'));
 console.log(naiveStringSearch('loop over the longer string with the boys', 'the'));
 console.log(naiveStringSearch('loop over the longer account low longer with the boys', 'longer'));
 console.log(naiveStringSearch('wowbmz3ng', 'omg'));
+console.log(naiveStringSearch('my house is blue and yours is red', 'and'));

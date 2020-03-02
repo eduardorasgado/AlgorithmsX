@@ -61,6 +61,7 @@ function binarySearch(list, target) {
 }
 
 // 72845
+console.log("=======================");
 console.log(binarySearch(sortedNums, 72845));
 console.log(binarySearch(sortedNums, 98975));
 console.log(binarySearch(names, 'Kalani'));
@@ -99,3 +100,44 @@ console.log(binarySearch(names, 'Kalani'));
  * we will need to double the number of elements.
  * log 32 = 5
  * */
+
+/**
+ *      NAIVE STRING SEARCH ALGORITHM
+ *
+ *      Find how many times a substring matches inside a string
+ *
+ *      concrete case:
+ *
+ *          w o w o m g z o m g
+ *                        i
+ *
+ *          o m g
+ *          j
+ * */
+
+function naiveStringSearch(string, substring) {
+    // this variable will store how many times substring is repeated within
+    // string
+    let matches = 0;
+    let matchLetter = 0;
+    for(let i = 0; i < string.length; i++) {
+        if(string[i] == substring[matchLetter]) {
+            console.log('substring: '+substring[matchLetter]);
+            ++matchLetter;
+        }
+        else matchLetter = 0;
+
+        if(matchLetter == substring.length) {
+            console.log(string[i])
+            ++matches;
+            matchLetter = 0;
+        }
+    }
+    return matches
+}
+
+console.log("=======================");
+console.log(naiveStringSearch('wowomgzomg', 'omg'));
+console.log(naiveStringSearch('loop over the longer string with the boys', 'the'));
+console.log(naiveStringSearch('loop over the longer account low longer with the boys', 'longer'));
+console.log(naiveStringSearch('wowbmz3ng', 'omg'));

@@ -206,11 +206,24 @@ function getLPS(pattern) {
 function kmp(word, pattern){
     // preprocessing the pattern
     let lps = getLPS(pattern);
-
-    let i = 0; // actual iteration over word
+    let matchCounter = 0;
+    let i = 0; // actual iteration over word in base position
     let j = 0; // actual iteration over word plus pattern and pattern itself
     while(i + j < word.length) {
-        word[i+j] == pattern[j]
+        // detecting if there is a mismatch
+        if(word[i+j] == pattern[j]) {
+            ++j;
+            // a pattern mismatch was found
+            if(j >= pattern.length){
+                ++matchCounter;
+                j = lps[pattern.length-1]+1;
+                i += 0;
+            }
+        } else {
+            // if there is a mismatch
+            i += lps[j-1]
+        }
+
     }
 
     return lps;

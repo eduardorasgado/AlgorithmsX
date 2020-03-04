@@ -162,6 +162,20 @@ console.log(naiveStringSearch('my house is blue and yours is red', 'and'));
  *          pat = a c a b a c a c d
  *
  *          lps = 0 0 0 0 0 0 0
+ *
+ *     2. look for the pattern in the string, we will use the lps created above
+ *
+ *     iterate over the first n elements in the pattern from index 0 to n in
+ *     the string
+ *     if there is a mismatch we will take the m_index in which this mismatch was located
+ *     take the element in lps in position m_index minus 1 and we will go forward from the
+ *     mismatch location as if the location of ths mismatch is 0 position
+ *     if no mismatch was found we will
+ *      add one to match counter
+ *      go forward in n places, n will be in lps last element and movement will go
+ *      from 0 position in actual comparison window
+ *      if we reach last element in window with las element in string, we stop.
+ *
  * */
 
 function getLPS(pattern) {
@@ -182,7 +196,7 @@ function getLPS(pattern) {
         else if(pattern[i] !== pattern[m] && m != 0) m = lps[m - 1];
         else {
             // if m = 0 then it has to move to next position
-            lps.push(0)
+            lps.push(0);
             i += 1;
         }
     }
@@ -192,6 +206,13 @@ function getLPS(pattern) {
 function kmp(word, pattern){
     // preprocessing the pattern
     let lps = getLPS(pattern);
+
+    let i = 0; // actual iteration over word
+    let j = 0; // actual iteration over word plus pattern and pattern itself
+    while(i + j < word.length) {
+        word[i+j] == pattern[j]
+    }
+
     return lps;
 }
 

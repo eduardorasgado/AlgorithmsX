@@ -227,49 +227,41 @@ function getLPS(pattern) {
 function kmp(word, pattern){
     // preprocessing the pattern
     let lps = getLPS(pattern);
-    console.log(lps);
+    //console.log(lps);
     let matchCounter = 0;
     let i = 0; // actual iteration over word in base position
     let j = 0; // actual iteration over word plus pattern and pattern itself
     while(i + j < word.length) {
-        console.log('indexes: ', i+j,j)
         // detecting if there is a mismatch
         // i3 + j2 = i5
-        if(word[i + j] == pattern[j]) {
-            console.log(word[i+j], pattern[j])
-            ++j;
-
-            // a pattern mismatch was found
-            if(j >= pattern.length){
-                ++matchCounter;
-                i += j; // from mismatch position
-                j = lps[pattern.length-1];
-                console.log('j ',j)
-            }
-        } else {
-            // if there is a mismatch
-            // we found two mismatch situations: when lps in j position is 0
-            // and when it is not zero
-            let jForward = lps[j-1];
-            console.log('jf: ', jForward);
-            if(jForward == 0){
-                // go forward from next to mismatch in string and  0 position in pattern
-                i = i + j + 1;
-                j = 0;
-            } else {
-                // go forward aligning from mismatch in string and j position in pattern
-                i = i + j - jForward;
-                j = jForward;
+        // detecting if a pattern mismatch was found
+        if(word[i + j] == pattern[j]) ++j, (j >= pattern.length) && ++matchCounter;
+        else {
+            // when we have a mismatch but comparing first element in string
+            // with first element in pattern
+            // or first element in pattern and next in i position in text
+            if(j === 0) i++; // console.log("falsy", word[i + j])
+            else {
+                // if there is a mismatch
+                // we found two mismatch situations: when lps in j position is 0
+                // and when it is not zero
+                let jForward = lps[j-1];
+                // ? go forward from next to mismatch (m + 1) in string and  0 position in pattern
+                // : go forward aligning from mismatch in string and j position in pattern
+                (jForward == 0) ?
+                    (i = i + j + 1, j = 0 ):
+                    (i = i + j - jForward, j = jForward)
             }
         }
     }
-
     return matchCounter;
 }
 
 console.log("------kmp-----");
-console.log(kmp("acfacabacabacacdk", "acabacacd"));
+console.log(kmp("acfacabacabacacdkacfacabacabacacdk", "acabacacd")); // 1
 console.log("----");
-// console.log(kmp("acfacebacebacacdk", "acebacecd"));
-// console.log(kmp("ABC ABCDAB ABCDABCDABDE", "ABCDABD"));
-console.log(kmp("ABC ABCDAB ABCDABCDABDE", "ABC"));
+console.log(kmp("acfacebacebacacdk", "acebacecd")); // 0
+console.log(kmp("ABC ABCDAB ABCDABCDABDE", "ABCDABD")); // 1
+console.log(kmp("ABC ABCDAB ABCDABCDABDE", "ABC")); // 4
+console.log(kmp("elementalmetal", 'tal')); // 2
+console.log(kmp("aantimatteraan", "aan")); // 2

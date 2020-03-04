@@ -192,7 +192,6 @@ function getLPS(pattern) {
         }
         // when there is a mismach we will check the index of previous possible
         // prefix, note; this does not increment i
-        // TODO: Test how this helps to get a prefix = suffix after a mismatch
         else if(pattern[i] !== pattern[m] && m != 0) m = lps[m - 1];
         else {
             // if m = 0 then it has to move to next position

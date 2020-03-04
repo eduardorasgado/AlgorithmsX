@@ -215,16 +215,8 @@ function getLPS(pattern) {
  *      0 1 2 3 4 5 6 7 8
  *      a c a b a c a c d
  *
- *      i = 0
- *      j = 0
- *      m = 1
- *
- *      e l e m e n t a l m e t a l
- *
- *      t a l
- *
  * */
-function kmp(word, pattern){
+function kmpv2(word, pattern){
     // preprocessing the pattern
     let lps = getLPS(pattern);
     //console.log(lps);
@@ -257,6 +249,25 @@ function kmp(word, pattern){
     return matchCounter;
 }
 
+// https://medium.com/@giri_sh/string-matching-kmp-algorithm-27c182efa387
+function kmp(T, W) {
+    let aux = getLPS(W);
+    let i = 0;
+    let j = 0;
+    let matchCounter = 0;
+
+    while(j < T.length){
+        if(W[i] != T[j]) {
+            if (i == 0) j += 1;
+            else i = aux[i-1];
+        } else {
+            i += 1;
+            j += 1;
+            if(i == W.length) ++matchCounter, i = aux[i-1];
+        }
+    }
+    return matchCounter;
+}
 console.log("------kmp-----");
 console.log(kmp("acfacabacabacacdkacfacabacabacacdk", "acabacacd")); // 1
 console.log("----");

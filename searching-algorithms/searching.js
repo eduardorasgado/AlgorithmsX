@@ -161,7 +161,7 @@ console.log(naiveStringSearch('my house is blue and yours is red', 'and'));
  *                m i
  *          pat = a c a b a c a c d
  *
- *          lps = 0 0 0 0 0 0 0
+ *          lps = 0 0 1 2 3 2 0
  *
  *     2. look for the pattern in the string, we will use the lps created above
  *
@@ -203,32 +203,73 @@ function getLPS(pattern) {
     return lps;
 }
 
+/**
+ * concrete case:
+ *            0 1 2 3 4 5 6 7 8
+ *      lps = 0 0 1 0 1 2 3 2 0
+ *      j = 2
+ *                           .
+ *      0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16
+ *      a c f a c a b a c a b  a  c  a  c  d  k
+ *                    .
+ *      0 1 2 3 4 5 6 7 8
+ *      a c a b a c a c d
+ *
+ *      i = 0
+ *      j = 0
+ *      m = 1
+ *
+ *      e l e m e n t a l m e t a l
+ *
+ *      t a l
+ *
+ * */
 function kmp(word, pattern){
     // preprocessing the pattern
     let lps = getLPS(pattern);
+    console.log(lps);
     let matchCounter = 0;
     let i = 0; // actual iteration over word in base position
     let j = 0; // actual iteration over word plus pattern and pattern itself
     while(i + j < word.length) {
+        console.log('indexes: ', i+j,j)
         // detecting if there is a mismatch
-        if(word[i+j] == pattern[j]) {
+        // i3 + j2 = i5
+        if(word[i + j] == pattern[j]) {
+            console.log(word[i+j], pattern[j])
             ++j;
+
             // a pattern mismatch was found
             if(j >= pattern.length){
                 ++matchCounter;
-                j = lps[pattern.length-1]+1;
-                i += 0;
+                i += j; // from mismatch position
+                j = lps[pattern.length-1];
+                console.log('j ',j)
             }
         } else {
             // if there is a mismatch
-            i += lps[j-1]
+            // we found two mismatch situations: when lps in j position is 0
+            // and when it is not zero
+            let jForward = lps[j-1];
+            console.log('jf: ', jForward);
+            if(jForward == 0){
+                // go forward from next to mismatch in string and  0 position in pattern
+                i = i + j + 1;
+                j = 0;
+            } else {
+                // go forward aligning from mismatch in string and j position in pattern
+                i = i + j - jForward;
+                j = jForward;
+            }
         }
-
     }
 
-    return lps;
+    return matchCounter;
 }
 
-console.log("-----------");
+console.log("------kmp-----");
 console.log(kmp("acfacabacabacacdk", "acabacacd"));
-console.log(kmp("acfacebacebacacdk", "acebacecd"));
+console.log("----");
+// console.log(kmp("acfacebacebacacdk", "acebacecd"));
+// console.log(kmp("ABC ABCDAB ABCDABCDABDE", "ABCDABD"));
+console.log(kmp("ABC ABCDAB ABCDABCDABDE", "ABC"));

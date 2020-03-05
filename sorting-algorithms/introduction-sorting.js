@@ -4,7 +4,9 @@ let unsortedNums = numbers.unsortedNumbers;
  *      SORTING ALGORITHMS
  *
  *
- *      A naive sort:
+ *  We implement a not optimized bubble sort
+ *
+ *      A naive bubble sort:
  *      5, 3, 7, 2, 9, 1, 6, 4, 10, 8
  *
  *      1, 2, 3, 4, 5, 6, 7, 8, 9, 10
@@ -13,6 +15,7 @@ let unsortedNums = numbers.unsortedNumbers;
  *
  * */
 
+// not optimized bubble sort
 function naiveSorting(unsortedList) {
     for (let i = 0; i < unsortedList.length; i++) {
         for (let j = i+1; j < unsortedList.length; j++) {

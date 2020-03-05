@@ -5,24 +5,21 @@ let unsortedNums = numbers.unsortedNumbers;
  *
  *
  *      A naive sort:
- *
  *      5, 3, 7, 2, 9, 1, 6, 4, 10, 8
- *      i  j
- *      5
+ *
+ *      1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+ *                              i   j
+ *
  *
  * */
 
 function naiveSorting(unsortedList) {
     for (let i = 0; i < unsortedList.length; i++) {
-        let min = unsortedList[i];
         for (let j = i+1; j < unsortedList.length; j++) {
-            if(unsortedList[j] <= min){
-                min = unsortedList[j];
-                if(unsortedList[i] > unsortedList[j]){ // swapping the nums
-                    unsortedList[i] += unsortedList[j];
-                    unsortedList[j] = unsortedList[i]-unsortedList[j];
-                    unsortedList[i] -= unsortedList[j]
-                }
+            if(unsortedList[i] > unsortedList[j]){ // swapping the nums
+                unsortedList[i] += unsortedList[j];
+                unsortedList[j] = unsortedList[i]-unsortedList[j];
+                unsortedList[i] -= unsortedList[j]
             }
         }
     }
@@ -31,7 +28,8 @@ function naiveSorting(unsortedList) {
 
 console.log(naiveSorting([5, 3, 7, 2, 9, 1, 6, 4, 10, 8]));
 console.log(naiveSorting(unsortedNums));
-console.log(naiveSorting(['Steele', 'Colt', 'Data Structures', 'Algorithms', 'Eduardo', 'Programmer']));
+console.log(`Naive sorting does not orders strings: 
+    ${naiveSorting(['Steele', 'Colt', 'Data Structures', 'Algorithms', 'Eduardo', 'Programmer'])}`);
 
 /**
  *      BUILD IN SORT METHOD IN JAVASCRIPT
@@ -57,5 +55,9 @@ function numberCompare(num1, num2) {
     // and will return false.
     return num1 - num2;
 }
+function numberCompareInverted(num1, num2) {
+    return num2 - num1;
+}
 
-console.log(`This is not sorted by builtin: ${[5, 3, 7, 2, 9, 1, 6, 4, 10, 8].sort(numberCompare)}`);
+console.log([5, 3, 7, 2, 9, 1, 6, 4, 10, 8].sort(numberCompare));
+console.log([5, 3, 7, 2, 9, 1, 6, 4, 10, 8].sort(numberCompareInverted));

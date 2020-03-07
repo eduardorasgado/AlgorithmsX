@@ -31,10 +31,23 @@ function insertionSortv2(list) {
 }
 
 // swapping j and j-1 until list[j] > list[j-1]
-function insertionSort(list) {
+function insertionSortv3(list) {
     for (let i = 1; i < list.length; i++)
-        for (let j = i; j > 0 ; j--)
-            (list[j] < list[j-1]) && ([list[j], list[j-1]] = [list[j-1], list[j]]);
+        for (let j = i; j > 0 && list[j] < list[j-1]; j--)
+            [list[j], list[j-1]] = [list[j-1], list[j]]
+    return list;
+}
+
+// assigning j index value to j+1 until we get proper j position for current value
+function insertionSort(list) {
+    for (let i = 1; i < list.length; i++) {
+        let currentValue = list[i];
+        let j;
+        for (j = i - 1; j >= 0 && list[j] > currentValue ; j--) {
+            list[j+1] = list[j];
+        }
+        list[j+1] = currentValue;
+    }
     return list;
 }
 

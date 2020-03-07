@@ -8,7 +8,7 @@ const numbers = require('./unsortedNumbers');
 let unsortedNums = numbers.unsortedNumbers;
 
 // Time complexity: O(n^2)
-function insertionSort(list) {
+function insertionSortv2(list) {
     for (let i = 1; i < list.length; i++) {
         let pos = 0;
         // looking for new position for list[i], in left ordered window
@@ -30,5 +30,14 @@ function insertionSort(list) {
     return list;
 }
 
+// swapping j and j-1 until list[j] > list[j-1]
+function insertionSort(list) {
+    for (let i = 1; i < list.length; i++)
+        for (let j = i; j > 0 ; j--)
+            (list[j] < list[j-1]) && ([list[j], list[j-1]] = [list[j-1], list[j]]);
+    return list;
+}
+
 console.log(insertionSort(unsortedNums));
-console.log(insertionSort([5, 3, 7, 2, 9, 1, 6, 4, 10, 8]));
+console.log(insertionSort([5, 3, 7, 2, 9, 1, 6, 4, 9, 10, 8]));
+console.log(insertionSort([5, 3, 4, 1, 2]));

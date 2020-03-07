@@ -4,6 +4,9 @@ const numbers = require('./unsortedNumbers');
  *
  *          Builds up the sort by gradually creating a larger left half which
  *          is always sorted
+ *
+ *          Time complexity, best: O(n) avg, worst: O(n^2) cuadratic
+ *          Space complexity: O(1)
  * */
 let unsortedNums = numbers.unsortedNumbers;
 

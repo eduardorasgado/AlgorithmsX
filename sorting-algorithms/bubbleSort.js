@@ -7,13 +7,16 @@ let unsorted = numbers.unsortedNumbers;
  *
  *          register if in any j iteration code did not swap any time, process will
  *          stop, because this means that array is already sorted at that part of process
+ *
+ *          Space complexity
+ *              O(1)
  * */
 
 // usual bubble sort implementation
 function bubbleSortNotOptimized(list) {
     for (let i = list.length - 1; i > 0; --i) {
         for (let j = 0; j < i; j++) {
-            (list[j] > list[j+1]) && ([list[j], list[j+1]] = [list[j+1], list[j]], swap = true);
+            (list[j] > list[j+1]) && ([list[j], list[j+1]] = [list[j+1], list[j]]);
         }
     }
     return list;

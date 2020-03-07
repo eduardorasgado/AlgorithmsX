@@ -9,7 +9,10 @@ const numbers = require('./unsortedNumbers');
  *          Time Complexity
  *
  *              Better than bubble sort
- *              Still best: O(n), avg and worst: O(n^2)
+ *              best: O(n^2), avg and worst: O(n^2)
+ *
+ *          Space complexity
+ *              O(1)
  * */
 let unsortedNums = numbers.unsortedNumbers;
 

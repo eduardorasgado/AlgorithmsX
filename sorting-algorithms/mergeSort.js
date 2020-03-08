@@ -2,7 +2,11 @@
  *      MERGE SORT ALGORITHM
  *
  *              - It is a combination of two things - merging and sorting
+ *
  *              - Exploits the fact that arrays of 0 or 1 elements are always sorted.
+ *
+ *              - Works by decomposing an array into smaller arrays of 0 or 1 elements,
+ *                  then building up a newly sorted array
  * */
 
 function merge(left, right) {
@@ -18,7 +22,10 @@ function merge(left, right) {
     }
     // adding left elements from both lists to new list
     // those elements were'nt added. note that i and j do not restart to 0
-    // example: from example above we finished with: newList[ 1, 2, 3, 5, 7, 9 ]
+    // one of the indexes results in same to length it means every element in that list
+    // were inserted in newList, so while in this list will not be performed.
+    // example: from example above we finished with: newList[ 1, 2, 3, 5, 7, 9 ],
+    // right list in index 2 which is 9, was left and it is included now.
     while(i < left.length) newList.push(left[i]), ++i;
     while (j < right.length) newList.push(right[j]), ++j;
     return newList;
@@ -41,10 +48,10 @@ function mergeSort(array) {
     else return array
 }
 
-//let data = Array.apply(null, {length: 100000}).map(Function.call, Math.random)
+let data = Array.apply(null, {length: 100000}).map(Function.call, Math.random)
 console.log('data ready, go...')
 //console.log(bubbleSort(data))
-//console.log(mergeSort(data));
+console.log(mergeSort(data));
 console.log(mergeSort([5, 3, 7, 2, 9, 1, 6, 4, 9, 10, 8]));
 //console.log(mergeSort([5, 3, 4, 1, 2]));
 

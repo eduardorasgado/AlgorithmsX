@@ -38,6 +38,17 @@
  *              arrays until you are back at the full length of the array
  *              - Once the array has been merged back together, return the merged(and sorted)
  *              array.
+ *
+ *      Time and Space Complexity
+ *
+ *              Time Complexity:
+ *                  Best: O(n*log n), Average: O(n*log n) Worst: O(n*log n)
+ *              Space complexity: O(n)
+ *
+ *              Unerstanding Time Complexity:
+ *
+ *              O(log n): Recursivity or decompositions
+ *              O(n): Comparisons per decomposition
  * */
 
 // time and space: O(n + m)

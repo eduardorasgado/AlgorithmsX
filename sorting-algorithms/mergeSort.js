@@ -29,6 +29,15 @@
  *                  and move on to the next value in the second array
  *                  iii. Once we exhaust one array, push in all remaining values from
  *                  the other array
+ *
+ *      MERGE SORT ALGORITHM PSEUDOCODE
+ *
+ *              - Break up the attay into halves until you have arrays that are empty or have
+ *              one element.
+ *              - Once you have smaller sorted arrays, merge those arrays with other sorted
+ *              arrays until you are back at the full length of the array
+ *              - Once the array has been merged back together, return the merged(and sorted)
+ *              array.
  * */
 
 // time and space: O(n + m)
@@ -58,14 +67,9 @@ function mergeSort(array) {
     let len = array.length;
     if(len > 1) {
         let mid = Math.ceil(len / 2);
-
-        let first = array.slice(0, mid);
-        let last = array.slice(mid, len);
-
-        let m1 = mergeSort(first);
-        let m2 = mergeSort(last);
-
-        return merge(m1, m2);
+        return merge(  //
+            mergeSort(array.slice(0, mid)), // first and left mid half
+            mergeSort(array.slice(mid)));   // second and right mid half
     }
     // returning array of one element within, e.g. [4]
     else return array

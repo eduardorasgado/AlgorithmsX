@@ -60,49 +60,45 @@ function quickSortCustom(list) {
 
 // --------------------------
 
-function helperPivot(list, pivot){
-    console.log('before partition: ',list, 'pivot', pivot)
+function swap(list, i, j) {
+    list[j] += list[i];
+    list[i] = list[j] - list[i];
+    list[j] -= list[i];
+    return list;
+}
+function helperPivot(list){
+    let pivot = 0;
     // rearranging
     let i = 1; // iterating over all the elements within the list
     let j = 1; // swapping one step after the pivot
     while(i < list.length){
-        // TODO: Check what is going on with dupplicate entries.
         if(list[i] < list[pivot]){
-            if(i != j){
-                list[j] += list[i];
-                list[i] = list[j] - list[i];
-                list[j] -= list[i];
-            }
-            j++;
+            if(i != j) swap(list, i, j);
+            ++j;
         }
-
-        i++;
+        ++i;
     }
     // now, swapping the pivot with last element less than pivot
-    if(list[pivot] != list[j-1]){
-        list[0] += list[j-1];
-        list[j-1] = list[0] - list[j-1];
-        list[0] -= list[j-1];
-    }
-
-    console.log('after partition: ',list)
-
+    // pivot should not be the element to swap at the same time
+    if(list[pivot] != list[j-1]) swap(list, 0, j-1)
     return [j-1, list]
 }
 
-function quickSort(list, pivot = 0){
+function quickSort(list){
     if(list.length <= 1) return list;
-    [pivot, list] = helperPivot(list, pivot);
+    let pivot;
+    [pivot, list] = helperPivot(list);
     let left = list.slice(0, pivot);
-    let right = list.slice(pivot+1);
-    console.log(list[pivot])
-    return quickSort(left, 0).concat(list[pivot]).concat(quickSort(right), 0);
+    let right = list.slice(pivot + 1);
+    return quickSort(left)
+                        .concat(list[pivot])
+                        .concat(quickSort(right));
 }
 
 let data = Array.apply(null, {length: 100000}).map(Function.call, Math.random);
 console.log('data ready, go...');
 //console.log(bubbleSort(data))
-//console.log(quickSort(data));
-//console.log(quickSort([5, 3, 7, 2, 9, 1, 6, 6, 4, 9, 10, 8]));
-console.log(quickSort([5, 3, 7, 2, 9, 1, 6, 4, 10, 8]));
-//console.log(quickSort([5, 3, 4, 1, 2, 6, 10, 3]));
+console.log(quickSort(data));
+console.log(quickSort([5, 3, 7, 2, 9, 1, 6, 6, 4, 9, 10, 8]));
+//console.log(quickSort([5, 3, 7, 2, 9, 1, 6, 4, 10, 8]));
+console.log(quickSort([5, 3, 4, 1, 2, 6, 10, 3]));

@@ -48,6 +48,10 @@
  *          QUICKSORT PSEUDOCODE
  *
  *              - Call the pivot helper on the array
+ *              - When the helper returns to you the updated pivot index, recursively
+ *                  call the pivot helper on the subarray to the left of that index,
+ *                  and the subarray to the right of that index.
+ *              - Your base case occurs when you consider a subarray with less than 2 elements
  *
  *      First I present my own quick sort implementation.
  * */
@@ -118,36 +122,38 @@ function quickSortCustom2(list){
 }
 
 /**
- *  QUICK SORT FINAL IMPLEMENTATION
+ *              === QUICK SORT FINAL IMPLEMENTATION ===
  *
  *      Final algorithm implementation. Optimized. Without creating new lists
  *      using array.slice. and without concatenating different lists.
  * */
 
 // we create no extra list to store sorted array, we sort the same array we receive
+// algorithm explanation in helperPivotCustom2 function
 function helperPivot(list, start = 0, listLen = list.length){
     let [pivot, pivotIndex, i] = [list[start], start, start + 1];
     while(i < listLen)
         (list[i] < pivot) && // avoid swap same element in array
-        (++pivotIndex, (i != pivotIndex) && swap(list, i, pivotIndex)), ++i;
+        (++pivotIndex, (i != pivotIndex) && swap(list, i, pivotIndex)),
+        ++i;
     (pivot != list[pivotIndex]) && swap(list, start, pivotIndex)
     return pivotIndex
 }
 
 // now we do not slice and create any new list. We apply the actions in same list.
-// TODO: New algorithm reach maximum callstack in large arrays
 function quickSort(list, start = 0, end = list.length){
-    if(start == end) return list;
-    let pivotIndex = helperPivot(list, start, end);
-    quickSort(list, start, pivotIndex);
-    quickSort(list, pivotIndex+1)
+    if(start < end-1) {
+        let pivotIndex = helperPivot(list, start, end);
+        quickSort(list, start, pivotIndex); // left but with no pivot
+        quickSort(list, pivotIndex+1, end) // right with no pivot
+    }
     return list;
 }
 
 let data = Array.apply(null, {length: 100000}).map(Function.call, Math.random);
 console.log('data ready, go...');
 //console.log(bubbleSort(data))
-//console.log(quickSort(data));
+console.log(quickSort(data));
 console.log(quickSort([5, 3, 7, 2, 9, 1, 6, 6, 4, 9, 10, 8]));
 //console.log(quickSort([5, 3, 7, 2, 9, 1, 6, 4, 10, 8]));
 console.log(quickSort([5, 3, 4, 1, 2, 6, 10, 3]));

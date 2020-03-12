@@ -53,7 +53,30 @@
  *                  and the subarray to the right of that index.
  *              - Your base case occurs when you consider a subarray with less than 2 elements
  *
+ *
+ *         BIG O OF QUICK SORT
+ *
+ *          Time Complexity: Best: O(n * log n), Average: O(n* logn), Worst: O(n^2)
+ *
+ *              Explanation
+ *                  O(log n): Decompositions
+ *
+ *                  O(n): Comparisons per decomposition
+ *
+ *                  O(n^2): In case we have a fully sorted array.
+ *                          O(n) decompositions, because every time in recursion is
+ *                          a pivot in same place, start of the array(cuz list is
+ *                          already sorted).
+ *                          0(n) comparisons per decomposition
+ *                          then we have O(n*n)
+ *
+ *          Space Complexity: O(log n)
+ *
+ *              Explanation: memory space per decomposition in call stack
+ *
+ *
  *      First I present my own quick sort implementation.
+ *      At the end I present the former quicksort algorithm implementation.
  * */
 
 // partition function will reorder the list based on the pivot difference

@@ -39,6 +39,11 @@
  *              - Grab the pivot from the start of the array.
  *              - Store the current pivot index in a variable(this will keep track)
  *                  of where the pivot should end up.
+ *              - Loop through the array from the start until the end.
+ *                  - If the pivot is greater than the current element, increment
+ *                  the pivot index variable and then swap the current element with
+ *                  the element at the pivot index
+ *              - Swap the starting element(i.e. the pivot) with the pivot index
  *
  *      First I present my own quick sort implementation.
  * */
@@ -77,20 +82,20 @@ function swap(list, i, j) {
 }
 function helperPivot(list){
     // i,iterating over all the elements within the list
-    // j, swapping one step after the pivot
-    let [pivot, i, j] = [0, 1, 1];
+    // pivotIndex, swapping one step after the pivot, it is called pivot index.
+    let [pivot, i, pivotIndex, listLen] = [list[0], 1, 1, list.length];
     // rearranging
-    while(i < list.length){
-        if(list[i] < list[pivot]){
-            if(i != j) swap(list, i, j);
-            ++j;
+    while(i < listLen){
+        if(list[i] < pivot){
+            if(i != pivotIndex) swap(list, i, pivotIndex);
+            ++pivotIndex;
         }
         ++i;
     }
     // now, swapping the pivot with last element less than pivot
     // pivot should not be the element to swap at the same time
-    if(list[pivot] != list[j-1]) swap(list, 0, j-1)
-    return [j-1, list]
+    if(pivot != list[pivotIndex-1]) swap(list, 0, pivotIndex-1)
+    return [pivotIndex-1, list]
 }
 
 function quickSort(list){

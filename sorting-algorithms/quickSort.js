@@ -45,6 +45,10 @@
  *                  the element at the pivot index
  *              - Swap the starting element(i.e. the pivot) with the pivot index
  *
+ *          QUICKSORT PSEUDOCODE
+ *
+ *              - Call the pivot helper on the array
+ *
  *      First I present my own quick sort implementation.
  * */
 
@@ -66,53 +70,84 @@ function partitionCustom(list, pivot) {
 function quickSortCustom(list) {
     if(list.length > 1) {
         let pivot = list.length - 1;
-        let [left, right, pivotList] = partition(list, pivot)
-        return quickSort(left).concat(pivotList).concat(quickSort(right));
+        let [left, right, pivotList] = partitionCustom(list, pivot)
+        return quickSortCustom(left).concat(pivotList).concat(quickSortCustom(right));
     }
     return list;
 }
 
-// --------------------------
+/**
+ *  QUICK SORT CUSTOM IMPLEMENTATION.
+ *      No array extra variable creating into helper pivot custom function 2.
+ * */
 
+/**
 function swap(list, i, j) {
     list[j] += list[i];
     list[i] = list[j] - list[i];
-    list[j] -= list[i];
-    return list;
+    list[j] -= list[i]
 }
-function helperPivot(list){
+ **/
+
+const swap = (list, i, j) => ([list[i], list[j]] = [list[j], list[i]]);
+
+function helperPivotCustom2(list, start = 0, listLen = list.length){
     // i,iterating over all the elements within the list
-    // pivotIndex, swapping one step after the pivot, it is called pivot index.
-    let [pivot, i, pivotIndex, listLen] = [list[0], 1, 1, list.length];
+    // pivotIndex, swapping one step after the pivot, it is called pivot index
+    // or swap index.
+    let [pivot, pivotIndex, i] = [list[start], start, start + 1];
     // rearranging
-    while(i < listLen){
-        if(list[i] < pivot){
-            if(i != pivotIndex) swap(list, i, pivotIndex);
-            ++pivotIndex;
-        }
-        ++i;
-    }
+    while(i < listLen)
+        (list[i] < pivot) && // avoid swap same element in array
+        (++pivotIndex, (i != pivotIndex) && swap(list, i, pivotIndex)), ++i;
     // now, swapping the pivot with last element less than pivot
     // pivot should not be the element to swap at the same time
-    if(pivot != list[pivotIndex-1]) swap(list, 0, pivotIndex-1)
-    return [pivotIndex-1, list]
+    (pivot != list[pivotIndex]) && swap(list, start, pivotIndex)
+    return [pivotIndex, list];
 }
 
-function quickSort(list){
+function quickSortCustom2(list){
     if(list.length <= 1) return list;
     let pivot;
-    [pivot, list] = helperPivot(list);
+    [pivot, list] = helperPivotCustom2(list);
     let left = list.slice(0, pivot);
     let right = list.slice(pivot + 1);
     return quickSort(left)
-                        .concat(list[pivot])
-                        .concat(quickSort(right));
+        .concat(list[pivot])
+        .concat(quickSort(right));
+}
+
+/**
+ *  QUICK SORT FINAL IMPLEMENTATION
+ *
+ *      Final algorithm implementation. Optimized. Without creating new lists
+ *      using array.slice. and without concatenating different lists.
+ * */
+
+// we create no extra list to store sorted array, we sort the same array we receive
+function helperPivot(list, start = 0, listLen = list.length){
+    let [pivot, pivotIndex, i] = [list[start], start, start + 1];
+    while(i < listLen)
+        (list[i] < pivot) && // avoid swap same element in array
+        (++pivotIndex, (i != pivotIndex) && swap(list, i, pivotIndex)), ++i;
+    (pivot != list[pivotIndex]) && swap(list, start, pivotIndex)
+    return pivotIndex
+}
+
+// now we do not slice and create any new list. We apply the actions in same list.
+// TODO: New algorithm reach maximum callstack in large arrays
+function quickSort(list, start = 0, end = list.length){
+    if(start == end) return list;
+    let pivotIndex = helperPivot(list, start, end);
+    quickSort(list, start, pivotIndex);
+    quickSort(list, pivotIndex+1)
+    return list;
 }
 
 let data = Array.apply(null, {length: 100000}).map(Function.call, Math.random);
 console.log('data ready, go...');
 //console.log(bubbleSort(data))
-console.log(quickSort(data));
+//console.log(quickSort(data));
 console.log(quickSort([5, 3, 7, 2, 9, 1, 6, 6, 4, 9, 10, 8]));
 //console.log(quickSort([5, 3, 7, 2, 9, 1, 6, 4, 10, 8]));
 console.log(quickSort([5, 3, 4, 1, 2, 6, 10, 3]));

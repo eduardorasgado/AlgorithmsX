@@ -27,6 +27,16 @@ const numbers = require("./unsortedNumbers");
  *          mostDigits(nums) - given an array of numbers, returns the number of
  *              digits in the largets numbers in the list
  *
+ *      RADIX SORT PSEUDOCODE
+ *
+ *          Define a function that accepts list of numbers.
+ *          Figure out how many digits the largest number has.
+ *          Loop from k = 0 up to the largest numeber of digits
+ *          For each iteration of the loop:
+ *              Create buckets for each digit, 0 to 9
+ *              Place each number in the corresponding bucket based on its
+ *              k-th digit
+ *
  *
  *      My own first implementation of radix sort comes first:
  * */
@@ -54,36 +64,35 @@ function mostSignificantDigit(list) {
     return maxNum;
 }
 
-function bucket(list, digitPlace) {
-    let i = 0;
-    let actualStringLen = 0;
-    let actualElementNth = 0;
+function bucket(list, actualDigitLocation) {
+    let [i,actualElementNth] = [0, 0];
     // to accumulate all the elements
     let bucket = [...Array(10)].map(e => Array(0));
     while (i< list.length){
-        actualStringLen = getDigitsWithin(list[i]);
-        if(actualStringLen - 1 < digitPlace){
-            // locate all numbers with a length bellow the digit place in the beggining of the list
-            bucket[0].push(list[i]);
-        }
-        else {
-            actualElementNth = getDigit(list[i], digitPlace)
-            bucket[actualElementNth].push(list[i]);
-        }
+        actualElementNth = getDigit(list[i], actualDigitLocation)
+        bucket[actualElementNth].push(list[i]);
         ++i;
     }
     return bucket.flat(1);
 }
 
-function radixSort(list, actualStringLen = 0, actualDigitLocation = 0) {
+function radixSortRecursiveSolution(list, MSDigit = 0,
+                                    actualDigitLocation = 0) {
     // digit place go from 0 up to the list max element length
     if(actualDigitLocation == 0)
-        actualStringLen = mostSignificantDigit(list);
-    if(actualDigitLocation == actualStringLen) return list;
-    return radixSort(bucket(list, actualDigitLocation),
-                actualStringLen, ++actualDigitLocation);
+        MSDigit = mostSignificantDigit(list);
+    if(actualDigitLocation == MSDigit) return list;
+    return radixSortRecursiveSolution(bucket(list, actualDigitLocation),
+                MSDigit, ++actualDigitLocation);
 }
 
+function radixSort(list) {
+    let mostSDigit = mostSignificantDigit(list);
+    for (let i = 0; i < mostSDigit; i++) {
+        list = bucket(list, i);
+    }
+    return list;
+}
 
 let unsortedNums = numbers.unsortedNumbers;
 console.log(radixSort([170, 45, 75, 90, 802, 24, 2, 66]));

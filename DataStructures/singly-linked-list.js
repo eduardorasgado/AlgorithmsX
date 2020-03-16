@@ -30,13 +30,22 @@
  * */
 
 class Node {
+
     constructor(val) {
         this.val = val;
         this.next = null;
     }
+
+    // setters and getters
+    getValue() {return this.val};
+    setValue(newVal) {this.val = newVal}
+    getNext() {return this.next;}
+    setNext(next) {this.next = next;}
+    toString(){console.log(this);}
 }
 
-class SinglyLinkedList{
+class SinglyLinkedList {
+
     constructor() {
         this.head = null;
         this.tail = null;
@@ -45,4 +54,15 @@ class SinglyLinkedList{
     push(number) {
         let node = new Node(number);
     }
+
+    // settters and getters
+    getHead(){return this.head}
+    setHead(newHead){this.head = newHead}
+    getTail(){return this.tail}
+    setTail(newTail){this.tail = newTail}
 }
+
+let first = new Node(1);
+first.setNext(new Node(2))
+first.getNext().setNext(new Node(3))
+first.toString()

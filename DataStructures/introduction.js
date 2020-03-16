@@ -58,6 +58,8 @@
  * */
 
 class Point {
+    static newOrigin = new Point(10, 10);
+
     constructor(x, y, name = '') {
         this.x = x;
         this.y = y;
@@ -66,8 +68,8 @@ class Point {
 
     // class method
     static distance(a, b){
-        const dx = a.x - b.x;
-        const dy = a.y - b.y;
+        const dx = (this.newOrigin.x + a.x) - (this.newOrigin.x + b.x);
+        const dy = (this.newOrigin.y +a.y) - (this.newOrigin.y +b.y);
         const sum = (dx * dx) + (dy * dy);
         const hyp = Math.sqrt(sum)
         return hyp;
@@ -77,9 +79,19 @@ class Point {
     setPointName(name) {
         this.name = name;
     }
+
+    static originX(){
+        return this.newOrigin.x;
+    }
+
+    static  originY(){
+        return this.newOrigin.y;
+    }
 }
 
 p1 = new Point(5, 5);
 p2 = new Point(10, 10);
 
 console.log(Point.distance(p1, p2));
+console.log(Point.originX());
+console.log(p1.name);

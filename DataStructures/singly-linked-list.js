@@ -30,7 +30,8 @@
  * */
 
 class Node {
-    constructor() {
+    constructor(val) {
+        this.val = val;
         this.next = null;
     }
 }
@@ -39,5 +40,9 @@ class SinglyLinkedList{
     constructor() {
         this.head = null;
         this.tail = null;
+    }
+
+    push(number) {
+        let node = new Node(number);
     }
 }

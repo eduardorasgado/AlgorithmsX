@@ -29,16 +29,37 @@ const numbers = require("./unsortedNumbers");
  *
  *      RADIX SORT PSEUDOCODE
  *
- *          Define a function that accepts list of numbers.
- *          Figure out how many digits the largest number has.
- *          Loop from k = 0 up to the largest numeber of digits
- *          For each iteration of the loop:
- *              Create buckets for each digit, 0 to 9
- *              Place each number in the corresponding bucket based on its
- *              k-th digit
+ *          - Define a function that accepts list of numbers.
+ *          - Figure out how many digits the largest number has.
+ *          - Loop from k = 0 up to the largest numeber of digits
+ *          - For each iteration of the loop:
+ *              * Create buckets for each digit, 0 to 9
+ *              * Place each number in the corresponding bucket based on its
+ *                  k-th digit
+ *          - Replace our existing array with values in our buckets, starting
+ *              with 0 and going up to 9
+ *          - Return list at the end.
+ *
+ *      RADIX SORT BIG O
+ *
+ *          Time Complexity:
+ *
+ *              Best: O(n*k)
+ *              Average: O(n*k)
+ *              Worst: O(n*k)
+ *
+ *                  where
+ *                      n - length of the array
+ *                      k - number of digits(average)
+ *
+ *          but there is a controvertial problem with radix sort avg time compl.
+ *          because in certain cases it can be n log n. Check it out on wikipedia.
+ *
+ *          Space Complexity:
+ *
+ *              O(n+k)
  *
  *
- *      My own first implementation of radix sort comes first:
  * */
 
 // return the length of digit
@@ -65,15 +86,17 @@ function mostSignificantDigit(list) {
 }
 
 function bucket(list, actualDigitLocation) {
-    let [i,actualElementNth] = [0, 0];
+    let [i,actualNthDigit] = [0, 0];
     // to accumulate all the elements
-    let bucket = [...Array(10)].map(e => Array(0));
+    //let buckets = [...Array(10)].map(e => Array(0));
+    let buckets = Array.from({length: 10}, () => []);
     while (i< list.length){
-        actualElementNth = getDigit(list[i], actualDigitLocation)
-        bucket[actualElementNth].push(list[i]);
+        actualNthDigit = getDigit(list[i], actualDigitLocation)
+        buckets[actualNthDigit].push(list[i]);
         ++i;
     }
-    return bucket.flat(1);
+    //return buckets.flat(1);
+    return [].concat(...buckets);
 }
 
 function radixSortRecursiveSolution(list, MSDigit = 0,
@@ -86,6 +109,7 @@ function radixSortRecursiveSolution(list, MSDigit = 0,
                 MSDigit, ++actualDigitLocation);
 }
 
+// loop based radix sort
 function radixSort(list) {
     let mostSDigit = mostSignificantDigit(list);
     for (let i = 0; i < mostSDigit; i++) {

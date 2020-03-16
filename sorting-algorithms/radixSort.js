@@ -32,6 +32,7 @@ const numbers = require("./unsortedNumbers");
  * */
 
 // return the length of digit
+// digitCount
 function getDigitsWithin(element) {
     // https://stackoverflow.com/questions/14879691/get-number-of-digits-with-javascript/28203456#28203456
     return Math.max(Math.floor(Math.log10(Math.abs(element))), 0) + 1;
@@ -74,13 +75,13 @@ function bucket(list, digitPlace) {
     return bucket.flat(1);
 }
 
-function radixSort(list, actualStringLen = 0, digitPlace = 0) {
+function radixSort(list, actualStringLen = 0, actualDigitLocation = 0) {
     // digit place go from 0 up to the list max element length
-    // TODO: GET A WAY TO COMPUTE ACTUALSTRINGLEN FROM MAX, OR ALTERNATIVE BASE CASE
-    if(digitPlace == 0) actualStringLen = mostSignificantDigit(list) +1;
-    console.log(digitPlace)
-    if(digitPlace + 1 == actualStringLen) return list;
-    return radixSort(bucket(list, digitPlace), actualStringLen, ++digitPlace);
+    if(actualDigitLocation == 0)
+        actualStringLen = mostSignificantDigit(list);
+    if(actualDigitLocation == actualStringLen) return list;
+    return radixSort(bucket(list, actualDigitLocation),
+                actualStringLen, ++actualDigitLocation);
 }
 
 

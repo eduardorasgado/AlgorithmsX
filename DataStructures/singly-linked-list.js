@@ -57,14 +57,14 @@ class SinglyLinkedList {
     /**
      * Adding a new node at the end of the linked list
      *
-     * This function should accept a value
-     * Create a new node using the value passed to the function
-     * If there is no head property on the list, set the head and tail to be the
-     * newly created node
-     * Otherwise set the next property on the tail to be the new node and set the
-     * tail property o the list to be the newly created node.
-     * Increment the length by one.
-     * Return the linked list
+     *  This function should accept a value
+     *  Create a new node using the value passed to the function
+     *  If there is no head property on the list, set the head and tail to be the
+     *  newly created node
+     *  Otherwise set the next property on the tail to be the new node and set the
+     *  tail property o the list to be the newly created node.
+     *  Increment the length by one.
+     *  Return the linked list
      * */
     push(value) {
         let node = new Node(value);
@@ -89,18 +89,28 @@ class SinglyLinkedList {
 
     /**
      * Removing a node from the end of the linked List
+     *
+     *  If there are no nodes in the list, return undefined.
+     *  Loop through the list until reach the tail.
+     *  Set the next property of the 2nd to last node to be null
+     *  Set the tail to be the 2nd to last node
+     *  Decrement the length of the list by one
+     *  Return the linked list
      */
     pop(){
+        if(!this.length) return undefined;
         // remove only if list length is greater than 1
         if(this.length > 1) {
-            let newTail = null;
-            let itemToRemove = this.head;
-            while(itemToRemove.getNext() != null){
+            let newTail = this.head;
+            let itemToRemove = this.head.getNext(); // current item
+            while(itemToRemove.getNext()){
                 newTail = itemToRemove;
                 itemToRemove = itemToRemove.getNext();
             }
+            // this affects to head and tail at the same time cuz newTail is a
+            // pointer to (last item in head) - 1
+            newTail.setNext(null);
             this.tail = newTail;
-            this.tail.setNext(null);
         }else {
             // removing the last element, when list has only one item
             this.tail = this.head = null;
@@ -140,6 +150,7 @@ l1.pop().toString();
 l1.pop().toString();
 l1.pop().toString();
 l1.pop().toString();
+console.log(l1.pop()); // cannot pop when length is equal to 0
 console.log("--------PUSHING------------");
 
 [1, 10, 100].map((n) => {

@@ -147,18 +147,28 @@ class SinglyLinkedList {
 
     /**
      * Adding a new node to the beggining of the linked list
+     *
+     *  This function should accept a value.
+     *  Create a new node using the value passed to the function.
+     *  If there is no head property on the list, set the head and tail to be the
+     *      newly created node.
+     *  Otherwise se the newly created node's next property to be the current head
+     *      property on the list.
+     *  Set the head property on the list to be that newly created node.
+     *  Increment the length of the list by 1
+     *  Return the linked list
      */
     unshift(value) {
-        //
         let node = new Node(value);
-        // pointing to n1 node
-        let actualHead = this.head;
-        node.setNext(actualHead);
-        // pointing to n0 node
-        this.head = node;
-
-        // returning node without n0
-        return actualHead;
+        if(!this.head) this.head = this.tail = node; // no elements within list
+        else {
+            // n0.next = n1
+            node.setNext(this.head);
+            // pointing to n0 node
+            this.head = node;
+        }
+        ++this.length;
+        return this;
     }
 
     // settters and getters
@@ -206,11 +216,10 @@ l1.shift();
 l1.toString();
 l1.shift();
 l1.toString();
-//l1.shift().toString();
+l1.shift().toString();
 //console.log(l1.shift()); // cannot remove if exists no elements within the list
 
 console.log("--------UNSHIFTING------------");
 l1.unshift(900).toString();
-l1.toString();
 l1.unshift(500).toString();
-l1.toString();
+l1.unshift(321).toString();

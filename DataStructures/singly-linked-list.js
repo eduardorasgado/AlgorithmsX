@@ -91,8 +91,8 @@ class SinglyLinkedList {
      * Removing a node from the end of the linked List
      */
     pop(){
-        // remove only if list length is greater than 0
-        if(this.length > 0) {
+        // remove only if list length is greater than 1
+        if(this.length > 1) {
             let newTail = null;
             let itemToRemove = this.head;
             while(itemToRemove.getNext() != null){
@@ -100,12 +100,13 @@ class SinglyLinkedList {
                 itemToRemove = itemToRemove.getNext();
             }
             this.tail = newTail;
-            // at the moment to remove an element within a 1 item list
-            (newTail != null) && this.tail.setNext(null);
-            (newTail == null) && (this.head = null);
-            --this.length;
-            return this;
+            this.tail.setNext(null);
+        }else {
+            // removing the last element, when list has only one item
+            this.tail = this.head = null;
         }
+        --this.length;
+        return this;
     }
 
     // settters and getters
@@ -132,13 +133,14 @@ let l1 = new SinglyLinkedList();
     l1.push(n)
 });
 l1.toString()
-console.log("--------------------");
+console.log("---------POPPING-----------");
 
-l1.pop();
-l1.pop();
-l1.pop();
-l1.pop();
 l1.pop().toString();
+l1.pop().toString();
+l1.pop().toString();
+l1.pop().toString();
+l1.pop().toString();
+console.log("--------PUSHING------------");
 
 [1, 10, 100].map((n) => {
     l1.push(n)

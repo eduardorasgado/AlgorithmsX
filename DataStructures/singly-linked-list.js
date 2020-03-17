@@ -150,6 +150,15 @@ class SinglyLinkedList {
      */
     unshift(value) {
         //
+        let node = new Node(value);
+        // pointing to n1 node
+        let actualHead = this.head;
+        node.setNext(actualHead);
+        // pointing to n0 node
+        this.head = node;
+
+        // returning node without n0
+        return actualHead;
     }
 
     // settters and getters
@@ -173,7 +182,7 @@ class SinglyLinkedList {
 let l1 = new SinglyLinkedList();
 
 [1, 10, 100, 1000, 2000].map((n) => {
-    l1.push(n)
+    l1.push(n);
 });
 l1.toString()
 console.log("---------POPPING-----------");
@@ -187,13 +196,21 @@ console.log(l1.pop()); // cannot pop when length is equal to 0
 console.log("--------PUSHING------------");
 
 [1, 10, 100, 200, 1000].map((n) => {
-    l1.push(n)
+    l1.push(n);
 });
 l1.toString();
 console.log("--------SHIFTING------------");
 l1.shift().toString();
 l1.shift().toString();
-l1.shift().toString();
-l1.shift().toString();
-l1.shift().toString();
-console.log(l1.shift());
+l1.shift();
+l1.toString();
+l1.shift();
+l1.toString();
+//l1.shift().toString();
+//console.log(l1.shift()); // cannot remove if exists no elements within the list
+
+console.log("--------UNSHIFTING------------");
+l1.unshift(900).toString();
+l1.toString();
+l1.unshift(500).toString();
+l1.toString();

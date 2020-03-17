@@ -98,11 +98,12 @@ class SinglyLinkedList {
      *  Return the linked list
      */
     pop(){
+        // remove nothing if no elements within the list
         if(!this.length) return undefined;
         // remove only if list length is greater than 1
         if(this.length > 1) {
-            let newTail = this.head;
-            let itemToRemove = this.head.getNext(); // current item
+            let itemToRemove = this.head; // current item
+            let newTail = itemToRemove;
             while(itemToRemove.getNext()){
                 newTail = itemToRemove;
                 itemToRemove = itemToRemove.getNext();
@@ -115,6 +116,28 @@ class SinglyLinkedList {
             // removing the last element, when list has only one item
             this.tail = this.head = null;
         }
+        --this.length;
+        return this;
+    }
+
+    /**
+     * Removing  a new node from the beginning of the linked list
+     *
+     *  If there are no nodes, return undefined
+     *  Store the current head property in a variable
+     *  Set the head property to e the current head's next property
+     *  Decrement the length by one
+     *  Return the value of the node removed
+     */
+    shift() {
+        // cannot shift an empty list
+        if(!this.head) return undefined;
+        // in case we have one element within the list we should set tail to be null too
+        if(this.length == 1) this.tail = null;
+
+        this.lastHead = this.head
+        this.head = this.head.getNext();
+
         --this.length;
         return this;
     }
@@ -153,7 +176,14 @@ l1.pop().toString();
 console.log(l1.pop()); // cannot pop when length is equal to 0
 console.log("--------PUSHING------------");
 
-[1, 10, 100].map((n) => {
+[1, 10, 100, 200, 1000].map((n) => {
     l1.push(n)
 });
 l1.toString();
+console.log("--------SHIFTING------------");
+l1.shift();
+l1.shift().toString();
+l1.shift().toString();
+l1.shift().toString();
+l1.shift().toString();
+console.log(l1.shift());

@@ -135,11 +135,21 @@ class SinglyLinkedList {
         // in case we have one element within the list we should set tail to be null too
         if(this.length == 1) this.tail = null;
 
-        this.lastHead = this.head
-        this.head = this.head.getNext();
+        // current head is a pointer to the node n1
+        let currentHead = this.head
+        // this head is a pointer to the next node n2
+        this.head = currentHead.getNext();
 
         --this.length;
-        return this;
+        // returning last state of head, including n1
+        return currentHead;
+    }
+
+    /**
+     * Adding a new node to the beggining of the linked list
+     */
+    unshift(value) {
+        //
     }
 
     // settters and getters
@@ -181,7 +191,7 @@ console.log("--------PUSHING------------");
 });
 l1.toString();
 console.log("--------SHIFTING------------");
-l1.shift();
+l1.shift().toString();
 l1.shift().toString();
 l1.shift().toString();
 l1.shift().toString();

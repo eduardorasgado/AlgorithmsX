@@ -174,19 +174,31 @@ class SinglyLinkedList {
     /**
      * Retreiving a node by its position in the linked list
      *
+     *  This function should accept an index
+     *  If the index is less than zero or greater than or equal to the length of
+     *      the list, return null
+     *  Loop through the list until you reach the index and return the node at
+     *      that specific index.
+     *
      * @param position
      * @returns {Node}
      */
     get(index) {
-        if(index <= this.length-1){
-            let actualNode = this.head;
-            for (let i = 0; i < index; i++) {
-                actualNode = actualNode.getNext();
-            }
-            return actualNode;
+        if(index >=0 && index <= this.length-1){
+            let currentNode = this.head;
+            for (let i = 0; i < index; i++)
+                currentNode = currentNode.getNext();
+            return currentNode;
         }
         // if no elements within list or index refers to over sizze list length
-        return undefined
+        return null;
+    }
+
+    /**
+     * Changing the value of a node based on it's position in the linked list
+     */
+    set(index, value) {
+        //
     }
 
     // settters and getters
@@ -246,6 +258,7 @@ l1.toString();
 console.log("-------GETTING-------------");
 l1.get(0).toString();
 l1.get(1).toString();
+console.log(l1.get(-1));
 l1.get(2).toString();
 console.log(l1.get(3));
 // removing every element within the linked list

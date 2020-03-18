@@ -171,6 +171,24 @@ class SinglyLinkedList {
         return this;
     }
 
+    /**
+     * Retreiving a node by its position in the linked list
+     *
+     * @param position
+     * @returns {Node}
+     */
+    get(index) {
+        if(index <= this.length-1){
+            let actualNode = this.head;
+            for (let i = 0; i < index; i++) {
+                actualNode = actualNode.getNext();
+            }
+            return actualNode;
+        }
+        // if no elements within list or index refers to over sizze list length
+        return undefined
+    }
+
     // settters and getters
     getHead(){return this.head;}
     setHead(newHead){this.head = newHead;}
@@ -217,9 +235,24 @@ l1.toString();
 l1.shift();
 l1.toString();
 l1.shift().toString();
-//console.log(l1.shift()); // cannot remove if exists no elements within the list
+l1.toString();
+console.log(l1.shift()); // cannot remove if exists no elements within the list
 
 console.log("--------UNSHIFTING------------");
 l1.unshift(900).toString();
 l1.unshift(500).toString();
 l1.unshift(321).toString();
+l1.toString();
+console.log("-------GETTING-------------");
+l1.get(0).toString();
+l1.get(1).toString();
+l1.get(2).toString();
+console.log(l1.get(3));
+// removing every element within the linked list
+l1.shift();
+l1.shift();
+l1.shift();
+l1.toString();
+// trying to get from an empty list
+console.log(l1.get(0));
+

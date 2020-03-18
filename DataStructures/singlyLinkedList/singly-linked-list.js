@@ -196,15 +196,22 @@ class SinglyLinkedList {
 
     /**
      * Changing the value of a node based on it's position in the linked list
+     *
+     *  This function should accept a value and an index
+     *  Use your get function to find the specific node
+     *  If the node is not found return false
+     *  If the node is found, set the value of that node to be the value
+     *      passed to the function and return true.
+     *
+     * @param index
+     * @param value
+     * @returns {boolean}
      */
     set(index, value) {
-        if(index < 0 || index >= this.length) return null;
-        let currentNode = this.head;
-        for (let i = 0; i < index; i++) {
-            currentNode = currentNode.getNext();
-        }
+        let currentNode = this.get(index);
+        if(!currentNode) return false;
         currentNode.setValue(value);
-        return currentNode;
+        return true;
     }
 
     // settters and getters

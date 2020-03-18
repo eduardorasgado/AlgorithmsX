@@ -198,7 +198,13 @@ class SinglyLinkedList {
      * Changing the value of a node based on it's position in the linked list
      */
     set(index, value) {
-        //
+        if(index < 0 || index >= this.length) return null;
+        let currentNode = this.head;
+        for (let i = 0; i < index; i++) {
+            currentNode = currentNode.getNext();
+        }
+        currentNode.setValue(value);
+        return currentNode;
     }
 
     // settters and getters

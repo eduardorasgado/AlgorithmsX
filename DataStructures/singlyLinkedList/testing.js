@@ -63,6 +63,10 @@ console.log("-------SETTING-------------");
 });
 console.log("before..");
 l1.toString();
+//--------
 l1.set(2, 123);
+console.log(l1.set(5, 4000)); // cannot set
+l1.set(4, 2100);
+//--------
 console.log("after...");
 l1.toString();

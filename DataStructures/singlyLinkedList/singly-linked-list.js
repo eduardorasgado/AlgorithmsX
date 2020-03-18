@@ -1,4 +1,4 @@
-const Utils = require('./logUtils');
+const Utils = require('../logUtils');
 /**
  *      SINGLY LINKED LISTS
  *
@@ -212,60 +212,5 @@ class SinglyLinkedList {
     }
 }
 
-// Understanding how Node class helps to create a singly linked list
-// let first = new Node(1);
-// first.setNext(new Node(2))
-// first.getNext().setNext(new Node(3))
-// first.toString()
-// console.log("--------");
 
-let l1 = new SinglyLinkedList();
-
-[1, 10, 100, 1000, 2000].map((n) => {
-    l1.push(n);
-});
-l1.toString()
-console.log("---------POPPING-----------");
-
-l1.pop().toString();
-l1.pop().toString();
-l1.pop().toString();
-l1.pop().toString();
-l1.pop().toString();
-console.log(l1.pop()); // cannot pop when length is equal to 0
-console.log("--------PUSHING------------");
-
-[1, 10, 100, 200, 1000].map((n) => {
-    l1.push(n);
-});
-l1.toString();
-console.log("--------SHIFTING------------");
-l1.shift().toString();
-l1.shift().toString();
-l1.shift();
-l1.toString();
-l1.shift();
-l1.toString();
-l1.shift().toString();
-l1.toString();
-console.log(l1.shift()); // cannot remove if exists no elements within the list
-
-console.log("--------UNSHIFTING------------");
-l1.unshift(900).toString();
-l1.unshift(500).toString();
-l1.unshift(321).toString();
-l1.toString();
-console.log("-------GETTING-------------");
-l1.get(0).toString();
-l1.get(1).toString();
-console.log(l1.get(-1));
-l1.get(2).toString();
-console.log(l1.get(3));
-// removing every element within the linked list
-l1.shift();
-l1.shift();
-l1.shift();
-l1.toString();
-// trying to get from an empty list
-console.log(l1.get(0));
-
+exports.SinglyLinkedList = SinglyLinkedList;

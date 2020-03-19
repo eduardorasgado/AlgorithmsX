@@ -87,3 +87,5 @@ l1.toString();
 console.log(l1.remove(2));
 console.log(l1.remove(l1.length-1));
 l1.toString();
+console.log("-------REVERSING-------------");
+l1.reverse().toString()

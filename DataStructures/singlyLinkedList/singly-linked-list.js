@@ -247,7 +247,7 @@ class SinglyLinkedList {
     }
 
     /**
-     * Removing a node from the linked list at a specific position
+     * * Removing a node from the linked list at a specific position
      *
      *  If the index is less than zero or greater than the length, return
      *      undefined
@@ -259,7 +259,7 @@ class SinglyLinkedList {
      *  Return the value of the node removed.
      *
      * @param index
-     * @returns {null}
+     * @returns {string|undefined}
      */
     remove(index) {
         if(index < 0 || index >= this.length) return undefined;
@@ -277,6 +277,22 @@ class SinglyLinkedList {
             --this.length;
             return nodeToRemove.getValue();
         }
+    }
+
+    /**
+     * Reversing the linked list in place.
+     *
+     * @returns {SinglyLinkedList}
+     */
+    reverse() {
+        let reversed = new SinglyLinkedList();
+        let currentNode = this.head;
+
+        for (let i = 0; i < this.length; i++) {
+            reversed.unshift(currentNode.getValue());
+            currentNode = currentNode.getNext();
+        }
+        return reversed;
     }
 
     // settters and getters

@@ -232,7 +232,7 @@ class SinglyLinkedList {
      */
     insert(index, value) {
         if(index < 0 || index > this.length) return false;
-        else if(index == 0) this.unshift(value);
+        else if(index == 0) return this.unshift(value);
         else if(index == this.length) this.push(value);
         else {
             let newNode = new Node(value);
@@ -244,6 +244,30 @@ class SinglyLinkedList {
             ++this.length;
         }
         return true;
+    }
+
+    /**
+     * Removing a node from the linked list at a specific position
+     *
+     * @param index
+     * @returns {null}
+     */
+    remove(index) {
+        if(index < 0 || index >= this.length) return undefined;
+        else if(index == 0) return this.shift().getValue();
+        else if(index == this.length - 1) {
+            let lastNode = this.getTail().getValue();
+            this.pop();
+            return lastNode;
+        }
+        else {
+            let currentNode = this.get(index-1);
+            let nodeToRemove = currentNode.getNext();
+            let postRemovedNode = nodeToRemove.getNext();
+            currentNode.setNext(postRemovedNode);
+            --this.length;
+            return nodeToRemove.getValue();
+        }
     }
 
     // settters and getters

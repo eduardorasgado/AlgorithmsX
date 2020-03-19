@@ -81,3 +81,9 @@ l1.toString();
 console.log('actual length is: ',l1.length);
 console.log(l1.insert(l1.length-1, 2455)); // appending at the last index
 l1.toString();
+console.log("-------REMOVING-------------");
+console.log(l1.remove(0));
+l1.toString();
+console.log(l1.remove(2));
+console.log(l1.remove(l1.length-1));
+l1.toString();

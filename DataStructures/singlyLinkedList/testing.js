@@ -70,3 +70,13 @@ console.log(l1.set(4, 2100));;
 //--------
 console.log("after...");
 l1.toString();
+console.log("-------INSERTING-------------");
+l1.toString();
+console.log(l1.insert(0, 0.5)); // appending at the beggining
+l1.toString();
+console.log(l1.insert(-1, 0));
+console.log(l1.insert(6, 2500));
+console.log(l1.insert(3, 110));
+l1.toString();
+console.log(l1.insert(6, 2455)); // appending at the end
+l1.toString();

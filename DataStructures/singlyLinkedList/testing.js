@@ -75,8 +75,9 @@ l1.toString();
 console.log(l1.insert(0, 0.5)); // appending at the beggining
 l1.toString();
 console.log(l1.insert(-1, 0));
-console.log(l1.insert(6, 2500));
+console.log(l1.insert(l1.length, 2500)); // appending at the end of the list
 console.log(l1.insert(3, 110));
 l1.toString();
-console.log(l1.insert(6, 2455)); // appending at the end
+console.log('actual length is: ',l1.length);
+console.log(l1.insert(l1.length-1, 2455)); // appending at the last index
 l1.toString();

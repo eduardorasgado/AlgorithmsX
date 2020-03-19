@@ -222,8 +222,10 @@ class SinglyLinkedList {
      * @returns {boolean}
      */
     insert(index, value) {
-        if(index < 0 || index >= this.length) return false;
-        if(index > 0){
+        if(index < 0 || index > this.length) return false;
+        else if(index == 0) this.unshift(value);
+        else if(index == this.length) this.push(value);
+        else {
             let newNode = new Node(value);
             // insert in any place from 1 up to this.length-1
             let currentNode = this.get(index-1);
@@ -231,9 +233,6 @@ class SinglyLinkedList {
             currentNode.setNext(newNode);
             newNode.setNext(postNode);
             ++this.length;
-        }else {
-            // insert at the beggining of the list
-            this.unshift(value)
         }
         return true;
     }

@@ -223,22 +223,18 @@ class SinglyLinkedList {
      */
     insert(index, value) {
         if(index < 0 || index >= this.length) return false;
-        let newNode = new Node(value);
-        let currentNode = this.head;
         if(index > 0){
+            let newNode = new Node(value);
             // insert in any place from 1 up to this.length-1
-            for (let i = 0; i < index-1; i++) {
-                currentNode = currentNode.getNext();
-            }
+            let currentNode = this.get(index-1);
             let postNode = currentNode.getNext();
             currentNode.setNext(newNode);
             newNode.setNext(postNode);
+            ++this.length;
         }else {
             // insert at the beggining of the list
-            newNode.setNext(currentNode);
-            this.head = newNode;
+            this.unshift(value)
         }
-        ++this.length;
         return true;
     }
 

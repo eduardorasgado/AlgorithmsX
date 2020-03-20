@@ -33,4 +33,8 @@ console.log("shifting");
 console.log(l1.shift());
 l1.shift().toString();
 l1.shift().toString();
+l1.shift().toString();
+l1.shift().toString();
+l1.shift().toString();
+l1.shift().toString();
 l1.toString()

@@ -285,14 +285,13 @@ class SinglyLinkedList {
      * @returns {SinglyLinkedList}
      */
     reverse() {
-        let reversed = new SinglyLinkedList();
-        let currentNode = this.head;
-
-        for (let i = 0; i < this.length; i++) {
-            reversed.unshift(currentNode.getValue());
-            currentNode = currentNode.getNext();
+        let i = 0;
+        while(i < this.length){
+            this.insert(i, this.get(this.length-1).getValue());
+            this.pop();
+            ++i;
         }
-        return reversed;
+        return this;
     }
 
     // settters and getters

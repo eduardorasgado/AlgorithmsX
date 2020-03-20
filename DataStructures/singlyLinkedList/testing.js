@@ -93,7 +93,7 @@ unsortedNums.map((num) => {
     l1.push(num);
 })
 console.log(l1);
-console.log(l1.length);
 console.log("reversing");
 l1.reverse();
+//l1.toString();
 console.log(l1);

@@ -28,6 +28,25 @@ const Utils = require('../logUtils');
  *              Indexed in order!
  *              Insertion and deletion can be expensive
  *              Can quickly be accesed at a specific index
+ *
+ *      BIG O OF SIGLY LINKED LISTS
+ *
+ *          Insertion - O(1)
+ *
+ *          Removal - It depends ... O(1) or O(n)
+ *
+ *          Searching - O(n)
+ *
+ *          Access - O(n)
+ *
+ *      RECAP
+ *          Singly linked lists are an excellent alternative to arrays when insertion
+ *          and deletion at the beginning are fequently required.
+ *
+ *          Arrays contain a built in index whereas liked lists do not.
+ *
+ *          The idea of a list data structure that consists of nodes is the fundation
+ *          for other data structures like Stacks and Queues.
  * */
 
 class Node {

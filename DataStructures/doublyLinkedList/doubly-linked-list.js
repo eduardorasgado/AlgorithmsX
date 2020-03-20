@@ -27,6 +27,7 @@ const utils = require('../logUtils')
  *          sll = one direction pointer
  *          dll = both/ two direction pointers
  *
+ * @class
  * */
 
 class Node {
@@ -50,6 +51,10 @@ class Node {
 
 }
 
+/**
+ * Creates a Doubly Linked List object
+ * @class
+ */
 class DoublyLinkedList {
     constructor() {
         // pointers to nodes
@@ -70,6 +75,7 @@ class DoublyLinkedList {
     }
 
     /**
+     * @description
      * Adding a node to the end of the doubly linked list
      *
      *  Create a new node with the value passed to the function
@@ -98,21 +104,30 @@ class DoublyLinkedList {
     }
 
     /**
-     * Removing a node from the end of the doubly linked list
+     *  @description
+     *  Removing a node from the end of the doubly linked list
      *
-     * @returns {DoublyLinkedList}
+     *  If there is no head, return undefined.
+     *  Store the current tail in a variable to return later.
+     *  If the length is 1, set the head and tail to be null.
+     *  Update the tail to be the previous node.
+     *  Set the newTail's next to null
+     *  Decrement the length
+     *  Return the value removed
+     *
+     * @returns {null|undefined}
      */
     pop() {
         if(!this.length) return undefined;
+        let oldTail = this.tail;
         if(this.length > 1) {
-            let oldPreTail = this.tail.getPrev();
-            oldPreTail.setNext(null);
-            this.tail = oldPreTail;
+            this.tail = oldTail.getPrev();
+            this.tail.setNext(null);
         } else {
             this.head = this.tail = null;
         }
         --this.length;
-        return this;
+        return oldTail;
     }
 }
 

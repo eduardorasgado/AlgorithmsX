@@ -18,6 +18,7 @@ l1.toString();
 console.log("=========POPPING===========");
 l1.pop().toString();
 console.log(l1.pop());
+console.log(l1);
 console.log(l1.pop());;
 l1.pop();
 console.log(l1);

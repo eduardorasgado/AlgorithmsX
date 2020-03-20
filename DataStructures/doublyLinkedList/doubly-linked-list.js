@@ -96,6 +96,24 @@ class DoublyLinkedList {
         ++this.length;
         return this;
     }
+
+    /**
+     * Removing a node from the end of the doubly linked list
+     *
+     * @returns {DoublyLinkedList}
+     */
+    pop() {
+        if(!this.length) return undefined;
+        if(this.length > 1) {
+            let oldPreTail = this.tail.getPrev();
+            oldPreTail.setNext(null);
+            this.tail = oldPreTail;
+        } else {
+            this.head = this.tail = null;
+        }
+        --this.length;
+        return this;
+    }
 }
 
 exports.DoublyLinkedList = DoublyLinkedList;

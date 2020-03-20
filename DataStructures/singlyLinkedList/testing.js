@@ -97,3 +97,7 @@ console.log("reversing");
 l1.reverse();
 //l1.toString();
 console.log(l1);
+l2 = new SinglyLinkedList();
+l2.push(1);
+l2.reverse();
+l2.toString();

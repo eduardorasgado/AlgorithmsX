@@ -286,21 +286,18 @@ class SinglyLinkedList {
      */
     reverse() {
         let tempNode = this.head.getNext()
-        let lastTail = this.tail
         this.tail = this.head;
         this.tail.setNext(null)
-        let lastElement = this.tail;
-        this.head = lastTail;
+        let oldHead = this.tail;
 
-        for (let i = 0; i < this.length-2; i++) {
+        for (let i = 0; i < this.length-1; i++) {
             let node = new Node(tempNode.getValue());
             node.setNext(this.tail)
             this.tail = node;
             tempNode = tempNode.getNext();
         }
-        this.head.setNext(this.tail)
-        this.tail = lastElement;
-        //this.tail = tempNode;
+        this.head = this.tail
+        this.tail = oldHead;
         return this;
     }
 

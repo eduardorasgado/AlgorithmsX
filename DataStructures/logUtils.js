@@ -7,7 +7,7 @@ const util = require('util');
  */
 const inspectObject = (object) => {
     console.log(util.inspect(object,
-        {showHidden: false, depth: null}));
+        {showHidden: false, depth: null, colors: true}));
 }
 
 exports.inspectObject = inspectObject;

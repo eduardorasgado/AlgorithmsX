@@ -38,3 +38,13 @@ l1.shift().toString();
 l1.shift().toString();
 l1.shift().toString();
 l1.toString()
+
+console.log("=========UNSHIFTING===========");
+//[100, 200].map((n) =>{
+//    l1.push(n);
+//})
+console.log(l1);
+console.log(l1.unshift(50));
+console.log(l1.unshift(20));
+console.log(l1.unshift(10));
+l1.toString();

@@ -153,6 +153,25 @@ class DoublyLinkedList {
         return lastHead;
     }
 
+    /**
+     * @description
+     * Adding a node to the beginning of the list
+     *
+     * @param value - whaterver the user wants to append to list
+     * @returns {DoublyLinkedList}
+     */
+    unshift(value) {
+        let newNode = new Node(value);
+        if(!this.head) this.head = this.tail = newNode;
+        else {
+            this.head.setPrev(newNode)
+            newNode.setNext(this.head);
+            this.head = newNode;
+        }
+        ++this.length;
+        return this;
+    }
+
     // GETTERS AND SETTERS
     getHead() {return this.head;}
     setHead(head) {this.head = head;}

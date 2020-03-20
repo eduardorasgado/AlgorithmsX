@@ -149,7 +149,7 @@ class SinglyLinkedList {
      *  Decrement the length by one
      *  Return the value of the node removed.
      *
-     * @returns {null|undefined}
+     * @returns {Node|undefined}
      */
     shift() {
         // cannot shift an empty list

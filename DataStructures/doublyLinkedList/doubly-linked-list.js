@@ -1,4 +1,4 @@
-const utils = require('../logUtils')
+const Utils = require('../logUtils')
 /**
  *      DOUBLY LINKED LISTS
  *
@@ -46,7 +46,7 @@ class Node {
     setPrev(prev) {this.prev = prev;}
 
     toString() {
-        console.log(utils.inspectObject(this))
+        Utils.inspectObject(this);
     }
 
 }
@@ -61,17 +61,6 @@ class DoublyLinkedList {
         this.head = null;
         this.tail = null;
         this.length = 0;
-    }
-
-    // GETTERS AND SETTERS
-    getHead() {return this.head;}
-    setHead(head) {this.head = head;}
-    getTail() {return this.tail;}
-    setTail(tail) {this.tail = tail;}
-    getLength() {return this.length;}
-
-    toString() {
-        console.log(utils.inspectObject(this))
     }
 
     /**
@@ -130,6 +119,35 @@ class DoublyLinkedList {
         }
         --this.length;
         return oldTail;
+    }
+
+    /**
+     * * @description
+     * Removing a node from the beginning of the list.
+     *
+     * @returns {Node|undefined}
+     */
+    shift() {
+        let lastHead = this.head;
+        if(!this.head) return undefined;
+
+        this.head = lastHead.getNext();
+        this.head.setPrev(null);
+
+        lastHead.setNext(null);
+        --this.length;
+        return lastHead;
+    }
+
+    // GETTERS AND SETTERS
+    getHead() {return this.head;}
+    setHead(head) {this.head = head;}
+    getTail() {return this.tail;}
+    setTail(tail) {this.tail = tail;}
+    getLength() {return this.length;}
+
+    toString() {
+        Utils.inspectObject(this);
     }
 }
 

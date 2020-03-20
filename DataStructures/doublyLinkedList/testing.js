@@ -8,7 +8,7 @@ let numbers = require('../unsortedNumbers');
 //node.toString();
 
 let l1 = new DoublyLinkedList();
-
+console.log("===DOUBLY LINKED LISTS===")
 console.log("=========PUSHING===========");
 [1, 10, 100, 1000].map((n) =>{
     l1.push(n);
@@ -23,3 +23,14 @@ console.log(l1.pop());;
 l1.pop();
 console.log(l1);
 console.log(l1.pop());
+
+console.log("=========SHIFTING===========");
+[1, 2, 3, 4, 10, 100, 200].map((n) =>{
+    l1.push(n);
+})
+l1.toString();
+console.log("shifting");
+console.log(l1.shift());
+l1.shift().toString();
+l1.shift().toString();
+l1.toString()

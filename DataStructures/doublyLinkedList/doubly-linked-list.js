@@ -52,6 +52,7 @@ class Node {
 
 class DoublyLinkedList {
     constructor() {
+        // pointers to nodes
         this.head = null;
         this.tail = null;
         this.length = 0;
@@ -71,17 +72,26 @@ class DoublyLinkedList {
     /**
      * Adding a node to the end of the doubly linked list
      *
+     *  Create a new node with the value passed to the function
+     *  If the head property is null set the head and tail to be the newly created
+     *      node
+     *  If not, set the next property on the tail to be that node.
+     *  Set the previous property on the newly created node to be the tail
+     *  Set the tail to be the newly created node.
+     *  Increment the length
+     *  Return the doubly linked list.
+     *
      * @param value
      * @returns {DoublyLinkedList}
      */
     push(value) {
-        let node = new Node(value);
-        if(!this.length) this.head = this.tail = node;
+        let newNode = new Node(value);
+        if(!this.length) this.head = this.tail = newNode;
         else {
-            let lastNode = this.tail;
-            this.tail = node;
-            this.tail.setPrev(lastNode);
-            lastNode.setNext(this.tail);
+            let oldlastNode = this.tail;
+            newNode.setPrev(oldlastNode)
+            this.tail = newNode;
+            oldlastNode.setNext(this.tail);
         }
         ++this.length;
         return this;

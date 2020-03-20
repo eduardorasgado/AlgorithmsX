@@ -1,5 +1,5 @@
 const { SinglyLinkedList } = require('./singly-linked-list');
-let numbers = require('./unsortedNumbers');
+let numbers = require('../unsortedNumbers');
 let unsortedNums = numbers.unsortedNumbers;
 // Understanding how Node class helps to create a singly linked list
 // let first = new Node(1);

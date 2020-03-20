@@ -81,9 +81,9 @@ class DoublyLinkedList {
      *  Create a new node with the value passed to the function
      *  If the head property is null set the head and tail to be the newly created
      *      node
-     *  If not, set the next property on the tail to be that node.
+     *  If not, set the next property on the tail to be that node
      *  Set the previous property on the newly created node to be the tail
-     *  Set the tail to be the newly created node.
+     *  Set the tail to be the newly created node
      *  Increment the length
      *  Return the doubly linked list.
      *
@@ -107,13 +107,13 @@ class DoublyLinkedList {
      *  @description
      *  Removing a node from the end of the doubly linked list
      *
-     *  If there is no head, return undefined.
-     *  Store the current tail in a variable to return later.
-     *  If the length is 1, set the head and tail to be null.
-     *  Update the tail to be the previous node.
+     *  If there is no head, return undefined
+     *  Store the current tail in a variable to return later
+     *  If the length is 1, set the head and tail to be null
+     *  Update the tail to be the previous node
      *  Set the newTail's next to null
      *  Decrement the length
-     *  Return the value removed
+     *  Return the value removed.
      *
      * @returns {null|undefined}
      */
@@ -123,6 +123,8 @@ class DoublyLinkedList {
         if(this.length > 1) {
             this.tail = oldTail.getPrev();
             this.tail.setNext(null);
+            // Every linked node to oldTail must disappear.
+            oldTail.setPrev(null);
         } else {
             this.head = this.tail = null;
         }

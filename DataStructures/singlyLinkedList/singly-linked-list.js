@@ -140,13 +140,16 @@ class SinglyLinkedList {
     }
 
     /**
+     * @description
      * Removing  a new node from the beginning of the linked list
      *
      *  If there are no nodes, return undefined
      *  Store the current head property in a variable
      *  Set the head property to e the current head's next property
      *  Decrement the length by one
-     *  Return the value of the node removed
+     *  Return the value of the node removed.
+     *
+     * @returns {null|undefined}
      */
     shift() {
         // cannot shift an empty list
@@ -165,17 +168,21 @@ class SinglyLinkedList {
     }
 
     /**
+     * @description
      * Adding a new node to the beggining of the linked list
      *
-     *  This function should accept a value.
-     *  Create a new node using the value passed to the function.
+     *  This function should accept a value
+     *  Create a new node using the value passed to the function
      *  If there is no head property on the list, set the head and tail to be the
-     *      newly created node.
+     *      newly created node
      *  Otherwise se the newly created node's next property to be the current head
-     *      property on the list.
-     *  Set the head property on the list to be that newly created node.
+     *      property on the list
+     *  Set the head property on the list to be that newly created node
      *  Increment the length of the list by 1
-     *  Return the linked list
+     *  Return the linked list.
+     *
+     * @param value
+     * @returns {SinglyLinkedList}
      */
     unshift(value) {
         let node = new Node(value);
@@ -191,6 +198,7 @@ class SinglyLinkedList {
     }
 
     /**
+     * @description
      * Retreiving a node by its position in the linked list
      *
      *  This function should accept an index
@@ -214,6 +222,7 @@ class SinglyLinkedList {
     }
 
     /**
+     * @description
      * Changing the value of a node based on it's position in the linked list
      *
      *  This function should accept a value and an index
@@ -234,6 +243,7 @@ class SinglyLinkedList {
     }
 
     /**
+     * @description
      * Adding a node to the linked list at a specific location
      *
      *  If the index is less than zero or greater than the length, return false
@@ -243,7 +253,7 @@ class SinglyLinkedList {
      *  Set the next property on that node to be the new node
      *  Set the next property on the new node to be the previous next
      *  Increment the length
-     *  Return true
+     *  Return true.
      *
      * @param index
      * @param value
@@ -266,6 +276,7 @@ class SinglyLinkedList {
     }
 
     /**
+     * @description
      * * Removing a node from the linked list at a specific position
      *
      *  If the index is less than zero or greater than the length, return
@@ -299,7 +310,8 @@ class SinglyLinkedList {
     }
 
     /**
-     * Reversing the linked list in place.
+     * @description
+     * Reversing the linked list in place
      *
      *  Swap the head and tail
      *  Create a variable called next

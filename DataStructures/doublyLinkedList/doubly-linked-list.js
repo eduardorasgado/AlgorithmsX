@@ -253,6 +253,18 @@ class DoublyLinkedList {
      * @description
      * Adding a node in a doubly linked list by a certain position
      *
+     *  If the index is less than zero or greater than or rquial to the length
+     *      return false
+     *  If the index is 0, unshift
+     *  If the index is the same as the length, push
+     *  Use th eget method to access the index - 1
+     *  Set the next and prev properties on the correct nodes to linked everything
+     *      together
+     *  Set the next and prev propeertties on the correct nodes to link everything
+     *      together
+     *  Increment the length
+     *  Return true.
+     *
      * @param index
      * @param value
      * @returns {boolean}
@@ -264,6 +276,14 @@ class DoublyLinkedList {
         else {
             // adding a node between 1 and length - 1
             let newNode = new Node(value);
+
+            // course solution
+            // let nodeBeforeIndex = this.get(index-1);
+            // newNode.setPrev(nodeBeforeIndex);
+            // newNode.setNext(nodeBeforeIndex.getNext());
+            // nodeBeforeIndex.getNext().setPrev(newNode);
+            // nodeBeforeIndex.setNext(newNode);
+
             let lastNode = this.get(index);
             // updating newNode next and prev
             newNode.setPrev(lastNode.getPrev());
@@ -272,6 +292,7 @@ class DoublyLinkedList {
             lastNode.getPrev().setNext(newNode)
             // update last node at index position's prev as new node
             lastNode.setPrev(newNode)
+
             ++this.length;
         }
         return true;

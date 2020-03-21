@@ -44,7 +44,17 @@ console.log("=========UNSHIFTING===========");
 //    l1.push(n);
 //})
 console.log(l1);
+console.log(l1.unshift(100));
 console.log(l1.unshift(50));
 console.log(l1.unshift(20));
 console.log(l1.unshift(10));
 l1.toString();
+
+console.log("=========GETTING===========");
+//numbers.unsortedNumbers.map((n) => l1.push(n));
+[300,400,500,600,700,800,900,1000].map((n) => l1.push(n));
+console.log(l1);
+l1.get(5).toString();
+l1.get(10).toString();
+//l1.get(9999).toString();
+console.log(l1.get(12000))

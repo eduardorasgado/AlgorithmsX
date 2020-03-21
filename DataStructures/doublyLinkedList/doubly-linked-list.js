@@ -183,6 +183,43 @@ class DoublyLinkedList {
         return this;
     }
 
+    /**
+     * @description
+     * Accessing a node in a list by its position
+     *
+     * @param index
+     * @returns {Node|null}
+     */
+    get(index) {
+        if(this.head && index < this.length) {
+            // search into two halves
+            let half = Math.floor(this.length / 2);
+            let currentNode;
+            if(index < half){
+                // looking for from beggining
+                let i = 0
+                currentNode = this.head;
+
+                while (i < index) {
+                    currentNode = currentNode.getNext();
+                    ++i;
+                }
+            } else {
+                // looking for from end
+                let i = this.length - 1
+                currentNode = this.tail;
+                while (i > index) {
+                    currentNode = currentNode.getPrev();
+                    --i;
+                }
+            }
+            currentNode.setPrev(null);
+            currentNode.setNext(null);
+            return currentNode;
+        }
+        return null;
+    }
+
     // GETTERS AND SETTERS
     getHead() {return this.head;}
     setHead(head) {this.head = head;}

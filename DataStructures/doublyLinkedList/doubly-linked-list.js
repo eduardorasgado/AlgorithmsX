@@ -187,6 +187,14 @@ class DoublyLinkedList {
      * @description
      * Accessing a node in a list by its position
      *
+     *  If the index is less than 0 or greater or equial to the length, return null
+     *  If the index is less than or equal to half the length of the list
+     *      Loop through the list starting from the head and loop towards the middle
+     *      Return the noce once it is found
+     *  If the index is greater than half the length of the list
+     *      Loop through the list starting from the tail and loop towards the middle
+     *      Return the node once it is found.
+     *
      * @param index
      * @returns {Node|null}
      */
@@ -195,9 +203,10 @@ class DoublyLinkedList {
             // search into two halves
             let half = Math.floor(this.length / 2);
             let currentNode;
+            let i;
             if(index < half){
                 // looking for from beggining
-                let i = 0
+                i = 0
                 currentNode = this.head;
 
                 while (i < index) {
@@ -206,7 +215,7 @@ class DoublyLinkedList {
                 }
             } else {
                 // looking for from end
-                let i = this.length - 1
+                i = this.length - 1
                 currentNode = this.tail;
                 while (i > index) {
                     currentNode = currentNode.getPrev();

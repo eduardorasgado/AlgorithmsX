@@ -58,3 +58,6 @@ l1.get(5).toString();
 l1.get(10).toString();
 //l1.get(9999).toString();
 console.log(l1.get(12000))
+let l2 = new DoublyLinkedList();
+console.log(l2.get(0));
+console.log(l2.get(-1));

@@ -166,7 +166,7 @@ class DoublyLinkedList {
      *      Set the next property on the new node to be the head property
      *      Update the head to be the new node
      *  Increment the length
-     *  Return the list
+     *  Return the list.
      *
      * @param value - whaterver the user wants to append to list
      * @returns {DoublyLinkedList}
@@ -199,7 +199,7 @@ class DoublyLinkedList {
      * @returns {Node|null}
      */
     get(index) {
-        if(this.head && index < this.length) {
+        if(this.head && index > 0 && index < this.length) {
             // search into two halves
             let half = Math.floor(this.length / 2);
             let currentNode;
@@ -222,11 +222,31 @@ class DoublyLinkedList {
                     --i;
                 }
             }
-            currentNode.setPrev(null);
-            currentNode.setNext(null);
             return currentNode;
         }
         return null;
+    }
+
+    /**
+     * @description
+     * Replacing the value of a node to the in a doubly linked list
+     *
+     *  Create a variable which is the result of the get method at the index passed
+     *  to the function
+     *      If the get method returns a valud node, se the value of that node to
+     *      be the value passed to the function
+     *      Return true
+     *  Otherwise, return false.
+     *
+     * @param index
+     * @param value
+     * @returns {boolean}
+     */
+    set(index, value) {
+        let node = this.get(index);
+        if(!node) return false;
+        node.setValue(value);
+        return true;
     }
 
     // GETTERS AND SETTERS

@@ -54,10 +54,15 @@ console.log("=========GETTING===========");
 //numbers.unsortedNumbers.map((n) => l1.push(n));
 [300,400,500,600,700,800,900,1000].map((n) => l1.push(n));
 console.log(l1);
-l1.get(5).toString();
-l1.get(10).toString();
+console.log(l1.get(5));
+console.log(l1.get(10));
 //l1.get(9999).toString();
 console.log(l1.get(12000))
 let l2 = new DoublyLinkedList();
 console.log(l2.get(0));
-console.log(l2.get(-1));
+console.log(l1.get(-1));
+console.log("=========SETTING===========");
+l1.set(11, 1234);
+l1.set(5, 450)
+l1.toString();
+console.log(l1.set(-1, 12));

@@ -249,6 +249,34 @@ class DoublyLinkedList {
         return true;
     }
 
+    /**
+     * @description
+     * Adding a node in a doubly linked list by a certain position
+     *
+     * @param index
+     * @param value
+     * @returns {boolean}
+     */
+    insert(index, value) {
+        if(index < 0 || index > this.length) return false;
+        else if(index === this.length) this.push(value);
+        else if(index === 0) this.unshift(value);
+        else {
+            // adding a node between 1 and length - 1
+            let newNode = new Node(value);
+            let lastNode = this.get(index);
+            // updating newNode next and prev
+            newNode.setPrev(lastNode.getPrev());
+            newNode.setNext(lastNode);
+            // updating last node at index - 1 position's next as new node
+            lastNode.getPrev().setNext(newNode)
+            // update last node at index position's prev as new node
+            lastNode.setPrev(newNode)
+            ++this.length;
+        }
+        return true;
+    }
+
     // GETTERS AND SETTERS
     getHead() {return this.head;}
     setHead(head) {this.head = head;}

@@ -66,3 +66,11 @@ l1.set(11, 1234);
 l1.set(5, 450)
 l1.toString();
 console.log(l1.set(-1, 12));
+
+console.log("=========INSERTING===========");
+l1.insert(0, 5);
+l1.insert(l1.length, 1300);
+l1.insert(4, 85);
+l1.insert(10, 666);
+l1.insert(15, 1299);
+l1.toString();

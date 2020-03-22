@@ -27,6 +27,29 @@ const Utils = require('../logUtils')
  *          sll = one direction pointer
  *          dll = both/ two direction pointers
  *
+ *      BIG O OF DOUBLY LINKED LIST
+ *
+ *          Insertion - O(1)
+ *
+ *          Removal - O(1)
+ *
+ *          Searching - O(n)
+ *
+ *          Access - O(n)
+ *
+ *          Technically searching is O(n/2), but that's still O(n)
+ *
+ *      RECAP
+ *
+ *          Doubly linked lists are almost identical to singly linked lists,
+ *          except there is an additional pointer to previous nodes.
+ *
+ *          Better than singly linked lists for finding nodes and can be done in
+ *          half the time.
+ *
+ *          However, they do take up more memory considering the extra pointer.
+ *
+ *
  * @class
  * */
 
@@ -208,7 +231,6 @@ class DoublyLinkedList {
                 // looking for from beggining
                 i = 0
                 currentNode = this.head;
-
                 while (i < index) {
                     currentNode = currentNode.getNext();
                     ++i;
@@ -302,6 +324,16 @@ class DoublyLinkedList {
      * @description
      * Removing a node in a list by a certain position
      *
+     *  If the index is less than zero or greeater than or equal to the length
+     *      return undefined
+     *  If the index is 0, shift
+     *  If the index is the same as the length, pop
+     *  Use the get method to retrieve the item to be removed
+     *  Update the next and prev properties to remove the found node from the list
+     *  Set next and prev to null on the found node
+     *  Decrement the length
+     *  Return the removed node.
+     *
      * @param index
      * @returns {Node|undefined} the node removed
      */
@@ -311,16 +343,15 @@ class DoublyLinkedList {
         else if(index === this.length - 1) return this.pop();
         else {
             // removing an element between 1 and length -1
-            let beforeNode = this.get(index-1);
-            let nodeToRemove = beforeNode.getNext()
-            nodeToRemove.getNext().setPrev(beforeNode);
-            beforeNode.setNext(nodeToRemove.getNext());
+            let node = this.get(index); // node to remove
+            node.getPrev().setNext(node.getNext());
+            node.getNext().setPrev(node.getPrev());
 
             // any pointers within deleted node should dissapear
-            nodeToRemove.setNext(null)
-            nodeToRemove.setPrev(null)
+            node.setNext(null)
+            node.setPrev(null)
             --this.length;
-            return nodeToRemove;
+            return node;
         }
     }
 

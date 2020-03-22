@@ -80,4 +80,5 @@ l1.remove(0).toString();
 console.log(l1.remove(l1.length));
 console.log(l1.remove(l1.length - 1));
 console.log(l1.remove(5));
+console.log(l1.remove(8));
 l1.toString();

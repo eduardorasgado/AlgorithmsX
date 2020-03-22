@@ -222,6 +222,7 @@ class DoublyLinkedList {
      * @returns {Node|null}
      */
     get(index) {
+        if(typeof index !== 'number') return null;
         if(this.head && index > 0 && index < this.length) {
             // search into two halves
             let half = Math.floor(this.length / 2);
@@ -265,6 +266,7 @@ class DoublyLinkedList {
      * @returns {boolean}
      */
     set(index, value) {
+        if(typeof index !== 'number') return false;
         let node = this.get(index);
         if(!node) return false;
         node.setValue(value);
@@ -292,6 +294,7 @@ class DoublyLinkedList {
      * @returns {boolean}
      */
     insert(index, value) {
+        if(typeof index !== 'number') return false;
         if(index < 0 || index > this.length) return false;
         else if(index === this.length) this.push(value);
         else if(index === 0) this.unshift(value);
@@ -338,7 +341,7 @@ class DoublyLinkedList {
      * @returns {Node|undefined} the node removed
      */
     remove(index) {
-        if(index == undefined) return undefined
+        if(typeof index !== 'number') return false;
         if(!this.head || index < 0 || index >= this.length) return undefined;
         else if(index === 0) return this.shift();
         else if(index === this.length - 1) return this.pop();

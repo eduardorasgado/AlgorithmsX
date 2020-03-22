@@ -298,6 +298,32 @@ class DoublyLinkedList {
         return true;
     }
 
+    /**
+     * @description
+     * Removing a node in a list by a certain position
+     *
+     * @param index
+     * @returns {Node|undefined} the node removed
+     */
+    remove(index) {
+        if(!this.head || index < 0 || index >= this.length) return undefined;
+        else if(index === 0) return this.shift();
+        else if(index === this.length - 1) return this.pop();
+        else {
+            // removing an element between 1 and length -1
+            let beforeNode = this.get(index-1);
+            let nodeToRemove = beforeNode.getNext()
+            nodeToRemove.getNext().setPrev(beforeNode);
+            beforeNode.setNext(nodeToRemove.getNext());
+
+            // any pointers within deleted node should dissapear
+            nodeToRemove.setNext(null)
+            nodeToRemove.setPrev(null)
+            --this.length;
+            return nodeToRemove;
+        }
+    }
+
     // GETTERS AND SETTERS
     getHead() {return this.head;}
     setHead(head) {this.head = head;}

@@ -74,3 +74,10 @@ l1.insert(4, 85);
 l1.insert(10, 666);
 l1.insert(l1.length - 1, 1299);
 l1.toString();
+
+console.log("=========REMOVING===========");
+l1.remove(0).toString();
+console.log(l1.remove(l1.length));
+console.log(l1.remove(l1.length - 1));
+console.log(l1.remove(5));
+l1.toString();

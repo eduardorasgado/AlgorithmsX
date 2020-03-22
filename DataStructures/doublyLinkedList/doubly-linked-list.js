@@ -359,6 +359,36 @@ class DoublyLinkedList {
         }
     }
 
+    /**
+     * Reversing every element within the list
+     *
+     *  head points to tail
+     *  tail points to head
+     *  create two variables next and prev temporaries
+     *  for every node within the list, starting from tail
+     *      invert the current node prev and next, prev is next, next is prev
+     *          using the two vaiables created before
+     *      current node should be the old next
+     * return the doubly linked list.
+     *
+     * @returns {DoublyLinkedList}
+     */
+    reverse() {
+        let currentNode = this.head
+        this.head = this.tail
+        this.tail = currentNode;
+        let tempNext = null;
+        let tempPrev = null;
+        for (let i = 0; i < this.length; i++) {
+            tempNext = currentNode.getNext();
+            tempPrev = currentNode.getPrev();
+            currentNode.setPrev(tempNext);
+            currentNode.setNext(tempPrev);
+            currentNode = tempNext;
+        }
+        return this;
+    }
+
     // GETTERS AND SETTERS
     getHead() {return this.head;}
     setHead(head) {this.head = head;}

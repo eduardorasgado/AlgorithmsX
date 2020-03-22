@@ -338,6 +338,7 @@ class DoublyLinkedList {
      * @returns {Node|undefined} the node removed
      */
     remove(index) {
+        if(index == undefined) return undefined
         if(!this.head || index < 0 || index >= this.length) return undefined;
         else if(index === 0) return this.shift();
         else if(index === this.length - 1) return this.pop();

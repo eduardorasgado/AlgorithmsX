@@ -32,6 +32,20 @@ class DoublyLinkedList {
         return this;
     }
 
+    pop() {
+        if(!this.head) return undefined;
+        let lastTail = this.tail;
+        if(this.length > 1) {
+            lastTail.prev.next = null;
+            this.tail = lastTail.prev;
+            lastTail.prev = null;
+        } else {
+            this.head = this.tail = null;
+        }
+        --this.length;
+        return lastTail;
+    }
+
     unshift(value) {
         let node = new Node(value);
         if(!this.head) this.head = this.tail = node;
@@ -85,6 +99,22 @@ class DoublyLinkedList {
         return true;
     }
 
+    remove(index){
+        if(index == undefined) return undefined
+        if(!this.head) return undefined;
+        if(index < 0 || index >= this.length) return undefined;
+        if(index == 0) return this.shift();
+        if(index == this.length - 1) return this.pop();
+
+        let nodeToRemove = this.get(index);
+        nodeToRemove.prev.next = nodeToRemove.next;
+        nodeToRemove.next.prev = nodeToRemove.prev;
+        nodeToRemove.prev = nodeToRemove.next = null;
+
+        --this.length;
+        return nodeToRemove;
+    }
+
 }
 
 let node = new Node(3);
@@ -104,6 +134,10 @@ l1.unshift(0)
 inspectObject(l1);
 inspectObject(l1.get(4));
 l1.set(4, 444)
+l1.remove(4);
+l1.remove(0);
+l1.remove(l1.length - 1);
 inspectObject(l1);
+console.log(l1.remove(undefined));
 
 

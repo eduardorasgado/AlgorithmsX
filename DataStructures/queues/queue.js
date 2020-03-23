@@ -44,11 +44,11 @@ class Queue {
     /**
      * @description
      * Insert an element to the queue at the end
-     *  Push method is the same implemented on singly linked list
+     *  Enqueue method is push method on singly linked list
      * @param value
      * @returns {Queue}
      */
-    push(value) {
+    enqueue(value) {
         let node = new Node(value);
         if(!this.size) this.first = this.last = node;
         else {
@@ -61,8 +61,17 @@ class Queue {
 
     /**
      * Remove an element withing the list at the beginning
+     *  Dequeue method is shift method in singly linked list
+     * @returns {Node|undefined}
      */
-    pop() {
+    dequeue() {
+        if(!this.size) return null;
+        if(this.size === 1) this.last = null;
+        let oldFirst = this.first;
+        this.first = this.first.getNext();
+        oldFirst.setNext(null);
+        --this.size;
+        return oldFirst;
     }
 
     toString(){utils.inspectObject(this)}

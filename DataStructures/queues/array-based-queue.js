@@ -1,9 +1,9 @@
 console.log("---------array based queue implementation---------");
 /**
  * The problem with both implementations is:
- *  v1 - pop method take O(n) time compl. since shift operation reindex every element
+ *  v1 - dequeue method take O(n) time compl. since shift operation reindex every element
  *          within the queue
- *  v2 - push method take O(n) time compl. since unshift operation reindex every
+ *  v2 - enqueue method take O(n) time compl. since unshift operation reindex every
  *          element within the queue
  */
 

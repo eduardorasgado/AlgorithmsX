@@ -164,6 +164,7 @@ class SinglyLinkedList {
 
         --this.length;
         // returning last state of head, including n1
+        currentHead.setNext(null);
         return currentHead;
     }
 

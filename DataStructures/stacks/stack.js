@@ -38,6 +38,24 @@ const Utils  = require("../logUtils");
  *
  *      There is more than one way to implement a stack
  *
+ *      BIG O OF STACKS
+ *
+ *          Insertion - O(1)  *
+ *          Removal   - O(1)  *
+ *          Searching - O(n)
+ *          Access    - O(n)
+ *        * points the operations are most important in stacks
+ *
+ *      RECAP
+ *          Stacks are a LIFO data structure where the last value is always the
+ *          first one out.
+ *
+ *          Stacks are used to handle function invocations(the call stack), for
+ *          operations kile undo/redo, and for routing(remember pages you have
+ *          visited and go back/forward) and much more!.
+ *          They are not built in data structure in javascript, but are relatively
+ *          simple to implement.
+ *
  * */
 
 class Node {
@@ -46,8 +64,8 @@ class Node {
         this.next = null;
     }
 
-    getValue() {return this.val};
-    setValue(newVal) {this.val = newVal}
+    getValue() {return this.value};
+    setValue(newVal) {this.value = newVal}
     getNext() {return this.next;}
     setNext(next) {this.next = next;}
     toString(){Utils.inspectObject(this)}
@@ -89,16 +107,16 @@ class Stack {
      * Based on singly linked list shift method.
      * Removing at the beginning of the stack
      *
-     * @returns {null|undefined}
+     * @returns {string|null}
      */
     pop() {
-        if(!this.first) return undefined;
+        if(!this.first) return null;
         if(this.size === 1) this.last = null;
         let currentHead = this.first
         this.first = currentHead.getNext();
 
         --this.size;
-        return currentHead;
+        return currentHead.getValue();
     }
 
     toString(){

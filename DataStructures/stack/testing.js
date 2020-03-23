@@ -21,4 +21,11 @@ console.log(stack.shift());
 console.log(stack);
 
 console.log('-----linked list implementation of stack-------')
-
+let s1 = new Stack();
+s1.push('create new file');
+s1.push('resize file');
+s1.push('cloned out wrinkle');
+s1.toString();
+s1.pop();
+//s1.pop();
+s1.toString();

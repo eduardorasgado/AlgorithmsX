@@ -1,3 +1,4 @@
+const Utils  = require("../logUtils");
 /**
  *  STACKS
  *
@@ -44,6 +45,12 @@ class Node {
         this.value = value;
         this.next = null;
     }
+
+    getValue() {return this.val};
+    setValue(newVal) {this.val = newVal}
+    getNext() {return this.next;}
+    setNext(next) {this.next = next;}
+    toString(){Utils.inspectObject(this)}
 }
 
 /**
@@ -58,15 +65,16 @@ class Stack {
     }
 
     /**
-     * Add a value to the top of the stack
-     * pushing at the beggining of the list(unshift in a singly linked list)
+     * * Add a value to the top of the stack
+     * pushing at the beggining of the stack(unshift in a singly linked list)
+     *
      * @param value
+     * @returns {Stack}
      */
     push(value) {
         let node = new Node(value);
         if(!this.first) this.first = this.last = node; // no elements within list
         else {
-            // n0.next = n1
             let currentFirst = this.first;
             this.first = node;
             node.setNext(currentFirst);
@@ -76,10 +84,25 @@ class Stack {
     }
 
     /**
-     * removing at the beginning of the list
+     * Removing at the beginning of the list
+     *
+     * Based on singly linked list shift method.
+     * Removing at the beginning of the stack
+     *
+     * @returns {null|undefined}
      */
     pop() {
+        if(!this.first) return undefined;
+        if(this.size === 1) this.last = null;
+        let currentHead = this.first
+        this.first = currentHead.getNext();
 
+        --this.size;
+        return currentHead;
+    }
+
+    toString(){
+        Utils.inspectObject(this);
     }
 }
 

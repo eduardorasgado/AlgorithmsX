@@ -19,6 +19,25 @@ const utils = require("../logUtils")
  *
  *          Enqueue - insert element within an array
  *          Dequeue - remove element within an array
+ *
+ *          BIG O OF QUEUES
+ *
+ *              Insertion - O(1)  *
+ *              Removal   - O(1)  *
+ *              Searching - O(n)
+ *              Access    - O(n)
+ *
+ *           * The reason you choose queues.
+ *
+ *          RECAP
+ *
+ *              Queues are a FIFO data structure, all elements are first in first
+ *              out
+ *
+ *              Queues are useful for processing task and are foundational for
+ *              more complex data structures.
+ *
+ *              Insertion and removal can be done in O(1)
  * */
 
 class Node {
@@ -46,7 +65,7 @@ class Queue {
      * Insert an element to the queue at the end
      *  Enqueue method is push method on singly linked list
      * @param value
-     * @returns {Queue}
+     * @returns {number}
      */
     enqueue(value) {
         let node = new Node(value);
@@ -55,8 +74,7 @@ class Queue {
             this.last.setNext(node);
             this.last = node;
         }
-        ++this.size;
-        return this;
+        return ++this.size;
     }
 
     /**
@@ -71,7 +89,7 @@ class Queue {
         this.first = this.first.getNext();
         oldFirst.setNext(null);
         --this.size;
-        return oldFirst;
+        return oldFirst.getValue();
     }
 
     toString(){utils.inspectObject(this)}

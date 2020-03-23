@@ -19,3 +19,6 @@ console.log(stack);
 console.log(stack.shift());
 console.log(stack.shift());
 console.log(stack);
+
+console.log('-----linked list implementation of stack-------')
+

@@ -39,12 +39,47 @@
  *
  * */
 
+class Node {
+    constructor(value) {
+        this.value = value;
+        this.next = null;
+    }
+}
+
 /**
  * Stack implementation using a linked list
  * @class
  */
 class Stack {
     constructor() {
+        this.first = null;
+        this.last = null;
+        this.size = 0;
+    }
+
+    /**
+     * Add a value to the top of the stack
+     * pushing at the beggining of the list(unshift in a singly linked list)
+     * @param value
+     */
+    push(value) {
+        let node = new Node(value);
+        if(!this.first) this.first = this.last = node; // no elements within list
+        else {
+            // n0.next = n1
+            let currentFirst = this.first;
+            this.first = node;
+            node.setNext(currentFirst);
+        }
+        ++this.size;
+        return this;
+    }
+
+    /**
+     * removing at the beginning of the list
+     */
+    pop() {
+
     }
 }
 

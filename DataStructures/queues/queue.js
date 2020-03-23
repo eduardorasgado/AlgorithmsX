@@ -40,4 +40,32 @@ class Queue {
         this.last = null;
         this.size = 0;
     }
+
+    /**
+     * @description
+     * Insert an element to the queue at the end
+     *  Push method is the same implemented on singly linked list
+     * @param value
+     * @returns {Queue}
+     */
+    push(value) {
+        let node = new Node(value);
+        if(!this.size) this.first = this.last = node;
+        else {
+            this.last.setNext(node);
+            this.last = node;
+        }
+        ++this.size;
+        return this;
+    }
+
+    /**
+     * Remove an element withing the list at the beginning
+     */
+    pop() {
+    }
+
+    toString(){utils.inspectObject(this)}
 }
+
+exports.Queue = Queue;

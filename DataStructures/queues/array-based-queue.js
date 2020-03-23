@@ -1,4 +1,12 @@
 console.log("---------array based queue implementation---------");
+/**
+ * The problem with both implementations is:
+ *  v1 - pop method take O(n) time compl. since shift operation reindex every element
+ *          within the queue
+ *  v2 - push method take O(n) time compl. since unshift operation reindex every
+ *          element within the queue
+ */
+
 // using push and shift
 let arrayBasedQueueV1 = [];
 arrayBasedQueueV1.push("FIRST");

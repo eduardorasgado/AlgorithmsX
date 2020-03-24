@@ -22,76 +22,50 @@ class BinarySearchTree {
     }
 
     /**
-     * Main inserting function, get the conditions to call the 'inserting' method.
-     * related to the other nodes
-     * @param value
-     * @returns {boolean}
-     */
-    insert(value){
-        let newNode = new Node(value);
-        if(!this.root) this.root = newNode;
-        else {
-            let node = this.root;
-            node = this.locatePreNode(newNode, node);
-            // cannot insert duplicates
-            if(!node) return false;
-        }
-        return true;
-    }
-
-    /**
+     * @description
      * Inserting an element within the tree, the position is actually sorted
-     * @param newNode
-     * @param node
-     * @returns {null|*}
+     *
+     *  Create a new node
+     *  Starting at the root
+     *      Check if there is a root, if not, the root now becomes that new node
+     *      If there is a root, check if the value of the new node is greater than
+     *          or less than the value of the root
+     *      If it is greater
+     *          Check to see if there is a node to the right
+     *              If there is , move to that node and repeat theres steps
+     *              If there is not, add that node as the right property
+     *      If it less
+     *          Check to see if there is a node to the left
+     *              If there is, move to that node and repeat these steps
+     *              If there is not, add that node as the left property
+     *
+     * @param value
+     * @returns {null|BinarySearchTree}
      */
-    locatePreNode(newNode, node) {
-        // duplicated element is not inserted.
-        if(node.getValue() === newNode.getValue()) return null;
-        else if(newNode.getValue() < node.getValue()) {
-            if(node.getLeft() != null)
-                return this.locatePreNode(newNode, node.getLeft());
-            // inserting the node
-            node.setLeft(newNode);
-            node = node.getLeft();
-        }
-        else if(newNode.getValue() > node.getValue()) {
-            if(node.getRight() != null)
-                return this.locatePreNode(newNode, node.getRight());
-            // inserting the node
-            node.setRight(newNode);
-            node =node.getRight();
-        }
-        return node;
-    }
-
-    insertV2(value) {
+    insert(value) {
+        let node = new Node(value);
         if(!this.root) {
-            this.root = new Node(value);
-            return this.root;
+            this.root = node;
+            return this;
         }else {
-            let newRoot = this.root
-            if(value > this.root.getValue()) {
-                if(this.root.getRight() != null) {
-                    this.root = this.root.getRight();
-                } else {
-                    this.root.setRight(new Node(value));
-                    return this.root.getRight();
-                }
+            // avoiding affect this.root
+            let currentNode = this.root
+            while(true){
+                if(value > currentNode.getValue()) {
+                    if(currentNode.getRight() === null) {
+                        currentNode.setRight(node);
+                        return this;
+                    }
+                    currentNode = currentNode.getRight();
 
-            } else if(value < this.root.getValue()){
-                if(this.root.getLeft() != null) {
-                    this.root = this.root.getLeft();
-                } else {
-                    this.root.setLeft(new Node(value));
-                    return this.root.getLeft();
-                }
-            } else {
-                return null;
+                } else if(value < currentNode.getValue()){
+                    if(currentNode.getLeft() === null) {
+                        currentNode.setLeft(node);
+                        return this;
+                    }
+                    currentNode = currentNode.getLeft();
+                } else return undefined;
             }
-            value = this.insertV2(value)
-            this.root = newRoot;
-            return value;
         }
     }
 

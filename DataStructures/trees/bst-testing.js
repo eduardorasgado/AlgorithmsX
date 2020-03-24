@@ -11,7 +11,7 @@ let bst = new BinarySearchTree();
 let nums = [20, 22, 10, 3, 4, 15, 21, 29, 25, 33, 1, 32, 5, 6, 9, 7, 4, 15];
 //let nums = [10, 15, 6, 20, 3, 8, 15, 10];
 nums.map((n) => {
-    console.log(bst.insertV2(n));
+    console.log(bst.insert(n));
 
 })
 bst.toString();

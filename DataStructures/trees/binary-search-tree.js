@@ -32,7 +32,7 @@ class BinarySearchTree {
         if(!this.root) this.root = newNode;
         else {
             let node = this.root;
-            node = this.inserting(newNode, node);
+            node = this.locatePreNode(newNode, node);
             // cannot insert duplicates
             if(!node) return false;
         }
@@ -45,21 +45,54 @@ class BinarySearchTree {
      * @param node
      * @returns {null|*}
      */
-    inserting(newNode, node) {
+    locatePreNode(newNode, node) {
+        // duplicated element is not inserted.
         if(node.getValue() === newNode.getValue()) return null;
         else if(newNode.getValue() < node.getValue()) {
             if(node.getLeft() != null)
-                return this.inserting(newNode, node.getLeft());
+                return this.locatePreNode(newNode, node.getLeft());
+            // inserting the node
             node.setLeft(newNode);
             node = node.getLeft();
         }
         else if(newNode.getValue() > node.getValue()) {
             if(node.getRight() != null)
-                return this.inserting(newNode, node.getRight());
+                return this.locatePreNode(newNode, node.getRight());
+            // inserting the node
             node.setRight(newNode);
             node =node.getRight();
         }
         return node;
+    }
+
+    insertV2(value) {
+        if(!this.root) {
+            this.root = new Node(value);
+            return this.root;
+        }else {
+            let newRoot = this.root
+            if(value > this.root.getValue()) {
+                if(this.root.getRight() != null) {
+                    this.root = this.root.getRight();
+                } else {
+                    this.root.setRight(new Node(value));
+                    return this.root.getRight();
+                }
+
+            } else if(value < this.root.getValue()){
+                if(this.root.getLeft() != null) {
+                    this.root = this.root.getLeft();
+                } else {
+                    this.root.setLeft(new Node(value));
+                    return this.root.getLeft();
+                }
+            } else {
+                return null;
+            }
+            value = this.insertV2(value)
+            this.root = newRoot;
+            return value;
+        }
     }
 
     getroot() {return this.root;}

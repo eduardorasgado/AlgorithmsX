@@ -15,3 +15,5 @@ nums.map((n) => {
 
 })
 bst.toString();
+bst.search(4).toString();
+console.log(bst.search(124));

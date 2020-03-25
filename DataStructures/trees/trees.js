@@ -115,48 +115,5 @@
  *              - Space partition trees
  *              - Application-specific trees
  *
- *          BINARY SEARCH TREES
- *
- *              Each node can have at most two children at the bianry part,
- *              that means 0, 1 or 2 children for parent.
- *
- *              There is an ordered pattern in the whole tree
- *
- *              For example:
- *
- *                 _____10_____
- *                 |          |
- *              ___6__       15
- *              |    |        |
- *              3    8        20
- *
- *          HOW BINARY SEARCH TREE WORK
- *
- *              Every parent node has at most two children
- *
- *              Every node to the left of a parent node is always less than the
- *              parent
- *
- *              Every node to the right of a parent node is always greater than
- *              the parent
- *
- *              Next is not a binary search tree:
- *
- *                 _____10_____
- *                 |          |
- *              ___8__        25
- *              |    |        |
- *              3    6        20
- *
- *              because it is unordered.
- *
- *              Next is neither a BST:
- *                 _______10_________
- *                 |      |         |
- *              ___8__    4        15
- *              |    |             |
- *              2    1            37
- *
- *              because it has three children  in the first row
  *
  * */

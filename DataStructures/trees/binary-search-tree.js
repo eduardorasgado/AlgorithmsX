@@ -95,19 +95,21 @@ class BinarySearchTree {
      */
     search(value) {
         if(!this.root) return null;
+        return this.getCertainNode(value);
+    }
+
+    getCertainNode(value) {
         let currentNode = this.root;
-        while(true) {
-            if(value > currentNode.getValue()) {
-                if(currentNode.getRight() == null) return null;
+        while(currentNode) {
+            if(value > currentNode.getValue())
                 currentNode = currentNode.getRight();
-            }
-            else if(value < currentNode.getValue()) {
-                if(currentNode.getLeft() == null) return null;
+
+            else if(value < currentNode.getValue())
                 currentNode = currentNode.getLeft();
-            } else {
-                return currentNode;
-            }
+
+            else return currentNode;
         }
+        return null;
     }
 
     getroot() {return this.root;}

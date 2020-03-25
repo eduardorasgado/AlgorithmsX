@@ -98,6 +98,11 @@ class BinarySearchTree {
         return this.getCertainNode(value);
     }
 
+    contains(value) {
+        if(!this.root) return false;
+        else return !!this.getCertainNode(value);
+    }
+
     getCertainNode(value) {
         let currentNode = this.root;
         while(currentNode) {

@@ -17,3 +17,6 @@ nums.map((n) => {
 bst.toString();
 bst.search(4).toString();
 console.log(bst.search(124));
+console.log(bst.contains(29));
+console.log(bst.contains(33));
+console.log(bst.contains(111));

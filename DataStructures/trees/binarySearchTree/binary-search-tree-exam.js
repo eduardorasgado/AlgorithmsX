@@ -26,6 +26,7 @@ class BinarySearchTree {
     // appending or inserting an element within the tree
     // this operation involves ordered elements from left to right
     insert(value) {
+        if(value == undefined) return undefined;
         let newNode = new Node(value);
         if(!this.root) {
             this.root = newNode;
@@ -53,8 +54,22 @@ class BinarySearchTree {
         }
     }
 
+    // search a certain element and return the node.
     search(value) {
-        //
+        if(value == undefined) return null;
+        if(!this.root) return null;
+        let currentNode = this.root;
+        while(currentNode) {
+            if(value > currentNode.getValue()) {
+                currentNode = currentNode.getRight();
+            }
+            else if(value < currentNode.getValue()) {
+                currentNode = currentNode.getLeft();
+            } else {
+                return currentNode;
+            }
+        }
+        return null;
     }
 
     contains(value) {
@@ -72,4 +87,10 @@ nums.map((n) => {
     console.log(bst.insert(n));
 
 })
+//bst = new BinarySearchTree();
 bst.toString();
+console.log("===searching===");
+bst.search(6).toString();
+bst.search(15).toString();
+bst.search(10).toString();
+console.log(bst.search(11));

@@ -87,10 +87,16 @@ class BSTree extends BinarySearchTree {
         while(queue.getLength()) {
             let dequeued = queue.dequeue();
             visited.push(dequeued.getValue());
-            if(dequeued.getLeft())
-                queue.enqueue(dequeued.getLeft())
-            if(dequeued.getRight())
-                queue.enqueue(dequeued.getRight());
+            for(let child in dequeued){
+                // for every child within current dequeued BST node, but value prop.
+                // this mean we can use BFS method in every node existing
+                // comparison with value is for every non child prop within the node constructor
+                if(dequeued.hasOwnProperty(child) && child !== "value") {
+                    // left should be before right in BST node constructor to add
+                    // values into our tree in left to right order.
+                    queue.enqueue(dequeued[child])
+                }
+            }
         }
         return visited
     }

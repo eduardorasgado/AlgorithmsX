@@ -72,8 +72,8 @@ const Utils = require("../log-utils");
 class Node {
     constructor(value) {
         this.value = value;
-        this.right = null;
         this.left = null;
+        this.right = null;
     }
     getValue() {return this.value;}
     setValue(value) {this.value = value;}

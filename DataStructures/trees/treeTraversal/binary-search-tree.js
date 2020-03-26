@@ -5,8 +5,8 @@ const Utilities = require("../log-utils");
 class Node {
     constructor(value) {
         this.value = value;
-        this.right = null;
         this.left = null;
+        this.right = null;
     }
 
     getValue() { return this.value; }

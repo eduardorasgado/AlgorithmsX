@@ -1,4 +1,4 @@
-const Utils = require("./log-utils");
+const Utils = require("../log-utils");
 /**
  *          BINARY SEARCH TREES
  *

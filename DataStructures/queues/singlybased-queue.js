@@ -41,9 +41,10 @@ class Queue {
     }
 
     // removing the first element was inserted into the queue
-    // using the unshift method of a singly linked list
+    // using the shift method of a singly linked list
     dequeue() {
         if(!this.head) return undefined;
+        if(this.head === this.tail) this.tail = null;
         let dequeued = this.head;
         this.head = this.head.getNext()
         dequeued.setNext(null);
@@ -71,4 +72,5 @@ q1.toString();
 console.log(q1.dequeue());
 q1.toString();
 console.log(q1.dequeue());
+q1.toString();
 

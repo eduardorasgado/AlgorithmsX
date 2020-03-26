@@ -37,7 +37,13 @@ class Stack {
 
     // push method is based on shift method of singly linked list
     pop() {
-        //
+        if(!this.head) return undefined;
+        if(this.length === 1) this.tail = null;
+        let popped = this.head;
+        this.head = this.head.getNext();
+        popped.setNext(null);
+        --this.length;
+        return popped;
     }
 
     toString() { Utilities.inspectObject(this) }
@@ -51,3 +57,13 @@ console.log(s1.push("SECOND"));
 console.log(s1.push("THIRD"));
 console.log(s1.push("FOURTH"));
 s1.toString();
+console.log("----popping----");
+s1.pop().toString();
+s1.toString()
+console.log(s1.pop());
+s1.toString()
+console.log(s1.pop());
+s1.toString()
+console.log(s1.pop());
+s1.toString();
+console.log(s1.pop());

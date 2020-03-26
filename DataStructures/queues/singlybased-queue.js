@@ -28,7 +28,7 @@ class Queue {
 
     // inserting element into the queue
     // using singly linked list push method
-    unqueue(value) {
+    enqueue(value) {
         if(value == undefined) return this;
         let newNode = new Node(value);
         if(!this.head) this.head = this.tail = newNode;
@@ -57,11 +57,11 @@ class Queue {
 
 let q1 = new Queue();
 console.log("===unqueue===");
-q1.unqueue("FIRST");
+q1.enqueue("FIRST");
 q1.toString();
-q1.unqueue("SECOND");
+q1.enqueue("SECOND");
 q1.toString();
-q1.unqueue("THIRD");
+q1.enqueue("THIRD");
 q1.toString();
 console.log("===dequeue===");
 

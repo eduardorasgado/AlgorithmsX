@@ -1,7 +1,8 @@
 const Utils = require("../logUtils");
 
 // implementing a queue using singly linked list
-// queues are LIFO structures
+// queues are FIFO structures
+// FIRST INPUT FIRST OUTPUT
 
 // singly node
 class Node {

@@ -40,15 +40,34 @@ class Queue {
     }
 
     // removing the first element was inserted into the queue
+    // using the unshift method of a singly linked list
     dequeue() {
-
+        if(!this.head) return undefined;
+        let dequeued = this.head;
+        this.head = this.head.getNext()
+        dequeued.setNext(null);
+        --this.length;
+        return dequeued.getValue();
     }
 
     toString() { Utils.inspectObject(this) }
 }
 
 let q1 = new Queue();
-q1.unqueue("FIRST")
-q1.unqueue("SECOND")
-q1.unqueue("THIRD")
+console.log("===unqueue===");
+q1.unqueue("FIRST");
 q1.toString();
+q1.unqueue("SECOND");
+q1.toString();
+q1.unqueue("THIRD");
+q1.toString();
+console.log("===dequeue===");
+
+console.log(q1.dequeue());
+q1.toString();
+console.log(q1.dequeue());
+q1.toString();
+console.log(q1.dequeue());
+q1.toString();
+console.log(q1.dequeue());
+

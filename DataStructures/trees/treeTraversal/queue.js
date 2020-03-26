@@ -1,4 +1,4 @@
-const Utils = require("../logUtils");
+const Utils = require("../log-utils");
 
 // implementing a queue using singly linked list
 // queues are FIFO structures

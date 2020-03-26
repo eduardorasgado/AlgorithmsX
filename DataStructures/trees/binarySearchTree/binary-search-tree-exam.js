@@ -58,6 +58,17 @@ class BinarySearchTree {
     search(value) {
         if(value == undefined) return null;
         if(!this.root) return null;
+        return this.getNode(value);
+
+    }
+
+    contains(value) {
+        if(value == undefined) return false;
+        if(!this.root) return false;
+        return !!this.getNode(value);
+    }
+
+    getNode(value) {
         let currentNode = this.root;
         while(currentNode) {
             if(value > currentNode.getValue()) {
@@ -72,17 +83,14 @@ class BinarySearchTree {
         return null;
     }
 
-    contains(value) {
-        //
-    }
-
     toString() {
         Utilities.inspectObject(this);
     }
 }
 
 let bst = new BinarySearchTree();
-let nums = [10, 15, 6, 20, 3, 8, 15, 10];
+//let nums = [10, 15, 6, 20, 3, 8, 15, 10];
+let nums = [20, 22, 10, 3, 4, 15, 21, 29, 25, 33, 1, 32, 5, 6, 9, 7, 4, 15];
 nums.map((n) => {
     console.log(bst.insert(n));
 
@@ -90,7 +98,14 @@ nums.map((n) => {
 //bst = new BinarySearchTree();
 bst.toString();
 console.log("===searching===");
-bst.search(6).toString();
-bst.search(15).toString();
-bst.search(10).toString();
+console.log(bst.search(6));
+console.log(bst.search(15));
+console.log(bst.search(10));
 console.log(bst.search(11));
+console.log("===contains===");
+console.log(bst.contains(29));
+console.log(bst.contains(32));
+console.log(bst.contains(9));
+console.log(bst.contains(3));
+console.log(bst.contains(124));
+console.log(bst.contains(0));

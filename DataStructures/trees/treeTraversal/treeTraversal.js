@@ -64,22 +64,36 @@ class BSTree extends BinarySearchTree {
 
 
     /**
-     * BREADTH FIRST SEACH PSEUDOCODE
+     * BREADTH FIRST SEACH
+     *
+     *  Traversing the whole tree one time per node bur in level order:
+     *     ->      ____10______
+     *     ->  __ 6__    ->    15__
+     *     -> 3 ->   8   ->       20
      *
      *  Create a queue and a variable to store the values of nodes visited.
      *  Place the root node in the queue
      *  Loop as long as there is anything in the queue
      *      - Dequeue a node from the queue and push the value of the node into the
      *        variable that stores the nodes
-     *        If there is a left property on the node dequeued - add it to the queue
-     *        If there is a right property on the node dequeued - add it to the queue
+     *      - If there is a left property on the node dequeued - add it to the queue
+     *      - If there is a right property on the node dequeued - add it to the queue
      *  Return the variable that stores the values
      * */
-    BreadthFirstSearch() {
-        //
+    breadthFirstSearch() {
+        let visited = [];
+        let queue = new Queue();
+        queue.enqueue(this.root);
+        while(queue.getLength()) {
+            let dequeued = queue.dequeue();
+            visited.push(dequeued.getValue());
+            if(dequeued.getLeft())
+                queue.enqueue(dequeued.getLeft())
+            if(dequeued.getRight())
+                queue.enqueue(dequeued.getRight());
+        }
+        return visited
     }
-
-
 }
 
 exports.BSTree = BSTree;

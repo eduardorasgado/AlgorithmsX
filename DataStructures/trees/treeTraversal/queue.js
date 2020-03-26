@@ -28,7 +28,7 @@ class Queue {
 
     // inserting element into the queue
     // using singly linked list push method
-    unqueue(value) {
+    enqueue(value) {
         if(value == undefined) return this;
         let newNode = new Node(value);
         if(!this.head) this.head = this.tail = newNode;
@@ -52,6 +52,7 @@ class Queue {
         return dequeued.getValue();
     }
 
+    getLength() {return this.length;}
     toString() { Utils.inspectObject(this) }
 }
 

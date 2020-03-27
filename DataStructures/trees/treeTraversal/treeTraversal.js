@@ -64,7 +64,7 @@ class BSTree extends BinarySearchTree {
 
 
     /**
-     * BREADTH FIRST SEACH
+     * * BREADTH FIRST SEACH
      *
      *  Traversing the whole tree one time per node bur in level order:
      *     ->      ____10______
@@ -79,7 +79,9 @@ class BSTree extends BinarySearchTree {
      *      - If there is a left property on the node dequeued - add it to the queue
      *      - If there is a right property on the node dequeued - add it to the queue
      *  Return the variable that stores the values
-     * */
+     *
+     * @returns {[]}
+     */
     breadthFirstSearch() {
         let visited = [];
         let queue = new Queue();
@@ -92,13 +94,43 @@ class BSTree extends BinarySearchTree {
                 // this mean we can use BFS method in every node existing
                 // comparison with value is for every non child prop within the node constructor
                 if(dequeued.hasOwnProperty(child) && child !== "value") {
-                    // left should be before right in BST node constructor to add
-                    // values into our tree in left to right order.
                     queue.enqueue(dequeued[child])
                 }
             }
         }
         return visited
+    }
+
+    bfsExam() {
+        let visited = [];
+        let queue = new Queue();
+        let currentNode = this.root;
+        queue.enqueue(currentNode);
+        let dequeued;
+        while(queue.getLength()){
+            dequeued = queue.dequeue();
+            visited.push(dequeued.getValue());
+            if(dequeued.getLeft())
+                queue.enqueue(dequeued.getLeft());
+            if(dequeued.getRight())
+                queue.enqueue(dequeued.getRight());
+        }
+        return visited;
+    }
+
+    /**
+     *      DEPTH FIRST SEARCH - Pre Order
+     *
+     *          ____10______
+     *      __ 6__          15__
+     *     3      8            20
+     *
+     *     preOrder = [10, 6, 3, 8, 15, 20]
+     *
+     * @param value
+     */
+    deepFirstSeachPreOrder() {
+        //
     }
 }
 

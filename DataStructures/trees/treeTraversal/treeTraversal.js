@@ -129,8 +129,21 @@ class BSTree extends BinarySearchTree {
      *
      * @param value
      */
-    deepFirstSeachPreOrder() {
-        //
+    deepFirstSeachPreOrder(visited = []) {
+        let currentRoot = this.root;
+
+        visited.push(currentRoot.getValue());
+        if(currentRoot.getLeft()) {
+            this.root = currentRoot.getLeft();
+            return visited.concat(this.deepFirstSeachPreOrder());
+        }
+        if(currentRoot.getRight()) {
+            this.root = currentRoot.getRight();
+            return visited.concat(this.deepFirstSeachPreOrder());
+        }
+        // here we will do the recursion
+        this.root = currentRoot;
+        return visited;
     }
 }
 

@@ -64,13 +64,14 @@ class BSTree extends BinarySearchTree {
 
 
     /**
-     * * BREADTH FIRST SEACH
+     * BREADTH FIRST SEACH
      *
      *  Traversing the whole tree one time per node bur in level order:
      *     ->      ____10______
      *     ->  __ 6__    ->    15__
      *     -> 3 ->   8   ->       20
      *
+     * STEPS
      *  Create a queue and a variable to store the values of nodes visited.
      *  Place the root node in the queue
      *  Loop as long as there is anything in the queue
@@ -119,7 +120,7 @@ class BSTree extends BinarySearchTree {
     }
 
     /**
-     *      DEPTH FIRST SEARCH - Pre Order
+     *      DEPTH FIRST SEARCH - PRE ORDER
      *
      *          ____10______
      *      __ 6__          15__
@@ -127,23 +128,34 @@ class BSTree extends BinarySearchTree {
      *
      *     preOrder = [10, 6, 3, 8, 15, 20]
      *
-     * @param value
+     * STEPS
+     *  Create a variable to store the values of nodes visited
+     *  Store the root of the bst in a variable called current
+     *  Write a helper function which accepts a node
+     *      - Push the value of the node to the variable that stores the values
+     *      - If the node has a left property, call the helper function with the
+     *        left property on the node
+     *      - If the node has a right property, call the helper function with the
+     *        right property on the node
+     *  Invoke the helper function with the current variable
+     *  Return the array of values
+     *
+     * @returns {[]}
      */
     deepFirstSeachPreOrder() {
         let visited = []
-        // current root will store the base root for every child and
+        // current root will store the base root for every child, to be reassigned later
         let currentRoot = this.root;
         visited.push(currentRoot.getValue());
         if(currentRoot.getLeft()) {
             this.root = currentRoot.getLeft();
             visited = visited.concat(this.deepFirstSeachPreOrder());
         }
-        //console.log("post",currentRoot)
         if(currentRoot.getRight()) {
             this.root = currentRoot.getRight();
             visited = visited.concat(this.deepFirstSeachPreOrder());
         }
-        this.root = currentRoot;
+        this.root = currentRoot; // root reasignation to recover the original root in recursion backwards
         // if no left and right, means current was a leaf
         return visited;
     }

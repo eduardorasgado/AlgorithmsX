@@ -147,13 +147,14 @@ class BSTree extends BinarySearchTree {
         // current root will store the base root for every child, to be reassigned later
         let currentRoot = this.root;
         visited.push(currentRoot.getValue());
-        if(currentRoot.getLeft()) {
-            this.root = currentRoot.getLeft();
-            visited = visited.concat(this.deepFirstSeachPreOrder());
-        }
-        if(currentRoot.getRight()) {
-            this.root = currentRoot.getRight();
-            visited = visited.concat(this.deepFirstSeachPreOrder());
+        let child;
+        for(child in currentRoot) {
+            if(currentRoot.hasOwnProperty(child) && child !== "value") {
+                if(currentRoot[child]){
+                    this.root = currentRoot[child];
+                    visited = visited.concat(this.deepFirstSeachPreOrder());
+                }
+            }
         }
         this.root = currentRoot; // root reasignation to recover the original root in recursion backwards
         // if no left and right, means current was a leaf
@@ -165,15 +166,19 @@ class BSTree extends BinarySearchTree {
         let visited = [];
         function traverse(node) {
             visited.push(node.getValue());
-            if(node.getLeft()) traverse(node.getLeft());
-            if(node.getRight()) traverse(node.getRight());
+            // pre order can be applied to any kind of tree
+            for(let prop in node) {
+                if(node.hasOwnProperty(prop) && prop !== 'value') {
+                    if(node[prop]) traverse(node[prop])
+                }
+            }
         }
         traverse(this.root);
         return visited;
     }
 
     /**
-     *      DEEP FIRST SEARCH - POST ORDER
+     * *      DEEP FIRST SEARCH - POST ORDER
      *
      *          ____10______
      *      __ 6__          15__
@@ -181,6 +186,19 @@ class BSTree extends BinarySearchTree {
      *
      *     postOrder = [3, 8, 6, 20, 15, 10]
      *
+     * STEPS
+     *  Create a variable to store the values of nodes visited
+     *  Store the root of the bst in a variable called current
+     *  Write a helper function which accepts a node
+     *      - Push the value of the node to the variable that stores the values
+     *      - If the node has a left property, call the helper function with the
+     *        left property on the node
+     *      - If the node has a right property, call the helper function with the
+     *        right property on the node
+     *  Invoke the helper function with the current variable
+     *  Return the array of values
+     *
+     * @returns {[]}
      */
     deepFirstSearchPostOrder() {
         let visited = [];

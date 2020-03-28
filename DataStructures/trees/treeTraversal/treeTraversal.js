@@ -159,6 +159,18 @@ class BSTree extends BinarySearchTree {
         // if no left and right, means current was a leaf
         return visited;
     }
+
+    // other way to do this dfs preorder method
+    dfsPreOrder() {
+        let visited = [];
+        function traverse(node) {
+            visited.push(node.getValue());
+            if(node.getLeft()) traverse(node.left);
+            if(node.getRight()) traverse(node.right)
+        }
+        traverse(this.root)
+        return visited;
+    }
 }
 
 exports.BSTree = BSTree;

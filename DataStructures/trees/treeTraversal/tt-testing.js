@@ -10,4 +10,5 @@ bst.toString();
 console.log("---------BREADTH FIRST SEARCH------");
 console.log("---------PRE ORDER------");
 console.log(bst.deepFirstSeachPreOrder());
+console.log(bst.dfsPreOrder());
 

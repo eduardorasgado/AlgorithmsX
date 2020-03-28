@@ -111,10 +111,11 @@ class BSTree extends BinarySearchTree {
         while(queue.getLength()){
             dequeued = queue.dequeue();
             visited.push(dequeued.getValue());
-            if(dequeued.getLeft())
-                queue.enqueue(dequeued.getLeft());
-            if(dequeued.getRight())
-                queue.enqueue(dequeued.getRight());
+            let child;
+            for(child in dequeued)
+                if(dequeued.hasOwnProperty(child) && child !== 'value')
+                    if(dequeued[child])
+                        queue.enqueue(dequeued[child])
         }
         return visited;
     }
@@ -148,6 +149,7 @@ class BSTree extends BinarySearchTree {
         let currentRoot = this.root;
         visited.push(currentRoot.getValue());
         let child;
+        // pre order for every children node has
         for(child in currentRoot) {
             if(currentRoot.hasOwnProperty(child) && child !== "value") {
                 if(currentRoot[child]){
@@ -167,7 +169,8 @@ class BSTree extends BinarySearchTree {
         function traverse(node) {
             visited.push(node.getValue());
             // pre order can be applied to any kind of tree
-            for(let prop in node) {
+            let prop;
+            for(prop in node) {
                 if(node.hasOwnProperty(prop) && prop !== 'value') {
                     if(node[prop]) traverse(node[prop])
                 }
@@ -203,8 +206,12 @@ class BSTree extends BinarySearchTree {
     deepFirstSearchPostOrder() {
         let visited = [];
         function traverse(node) {
-            if(node.getLeft()) traverse(node.getLeft());
-            if(node.getRight()) traverse(node.getRight());
+            let prop;
+            for(prop in node) {
+                if(node.hasOwnProperty(prop) && prop !== 'value') {
+                    if(node[prop]) traverse(node[prop])
+                }
+            }
             visited.push(node.getValue());
         }
         traverse(this.root);

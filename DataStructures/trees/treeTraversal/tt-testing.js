@@ -8,6 +8,9 @@ nums.map((n) => {
 })
 bst.toString();
 console.log("---------BREADTH FIRST SEARCH------");
+console.log(bst.breadthFirstSearch());
+console.log(bst.bfsExam());
+console.log("---------DEEP FIRST SEARCH------");
 console.log("---------PRE ORDER------");
 console.log(bst.deepFirstSeachPreOrder());
 console.log(bst.dfsPreOrder());

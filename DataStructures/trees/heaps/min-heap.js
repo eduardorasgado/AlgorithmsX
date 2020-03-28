@@ -11,43 +11,46 @@
  *
  */
 class MinHeap {
-    constructor(capacity) {
+    constructor() {
         this.size = 0;
         this.items = [];
     }
 
     getLeftChildIndex(parentIndex) {
-        //
+        return (parentIndex * 2) + 1;
     }
     getRightChildIndex(parentIndex) {
-        //
+        return (parentIndex * 2) + 2;
     }
     getParentIndex(childIndex) {
-        //
+        return Math.floor((childIndex - 1) / 2);
     }
 
     hasLeftChild(parentIndex) {
-        //
+        return this.getLeftChildIndex(parentIndex) < this.size;
     }
 
     hasRightChild(parentIndex) {
-        //
+        return this.getRightChildIndex(parentIndex) < this.size;
     }
 
     hasParent(childIndex) {
-        //
+        return this.getParentIndex(childIndex) >= 0;
     }
 
     getLeftChild(parentIndex) {
-        //
+        if(!this.hasLeftChild(parentIndex)) return null;
+        return this.items[this.getLeftChildIndex(parentIndex)];
     }
 
     getRightChild(parentIndex) {
-        //
+        if(!this.hasRightChild(parentIndex)) return null;
+        return this.items[this.getRightChildIndex(parentIndex)];
     }
 
     getParent(childIndex) {
-        //
+        if(!this.hasParent(childIndex)) return null;
+        return this.items[this.getParentIndex(childIndex)];
     }
 
     // helper function to swapping the elements in bubbling methods.
@@ -80,3 +83,7 @@ class MinHeap {
         //
     }
 }
+
+let mh = new MinHeap();
+mh.items = [13, 16, 31, 41, 51, 100, 41];
+console.log(mh.getParent(6));

@@ -165,10 +165,31 @@ class BSTree extends BinarySearchTree {
         let visited = [];
         function traverse(node) {
             visited.push(node.getValue());
-            if(node.getLeft()) traverse(node.left);
-            if(node.getRight()) traverse(node.right)
+            if(node.getLeft()) traverse(node.getLeft());
+            if(node.getRight()) traverse(node.getRight());
         }
-        traverse(this.root)
+        traverse(this.root);
+        return visited;
+    }
+
+    /**
+     *      DEEP FIRST SEARCH - POST ORDER
+     *
+     *          ____10______
+     *      __ 6__          15__
+     *     3      8            20
+     *
+     *     postOrder = [3, 8, 6, 20, 15, 10]
+     *
+     */
+    deepFirstSearchPostOrder() {
+        let visited = [];
+        function traverse(node) {
+            if(node.getLeft()) traverse(node.getLeft());
+            if(node.getRight()) traverse(node.getRight());
+            visited.push(node.getValue());
+        }
+        traverse(this.root);
         return visited;
     }
 }

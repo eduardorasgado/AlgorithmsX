@@ -217,6 +217,36 @@ class BSTree extends BinarySearchTree {
         traverse(this.root);
         return visited;
     }
+
+
+    /**
+     *      DEEP FIRST SEARCH TREE - IN ORDER
+     *      In case of binary search trees (BST),
+     *      Inorder traversal gives nodes in non-decreasing order
+     *
+     *          ____10______
+     *      __ 6__          15__
+     *     3      8            20
+     *
+     *     inOrder = [3, 6, 8, 10, 15, 20]
+     *
+     * @returns {[]}
+     */
+    deepFirstSearchInOrder() {
+        let visited = [];
+        function travese(node){
+            // it is not like the other methods because it is just for Binary Search Trees
+            // left
+            if(node.getLeft())
+                travese(node.getLeft())
+            visited.push(node.getValue());
+            // right
+            if(node.getRight())
+                travese(node.getRight())
+        }
+        travese(this.root)
+        return visited;
+    }
 }
 
 exports.BSTree = BSTree;

@@ -16,3 +16,5 @@ console.log(bst.deepFirstSeachPreOrder());
 console.log(bst.dfsPreOrder());
 console.log("---------POST ORDER------");
 console.log(bst.deepFirstSearchPostOrder());
+console.log("---------IN ORDER------");
+console.log(bst.deepFirstSearchInOrder());

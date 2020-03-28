@@ -1,3 +1,4 @@
+const { inspectObject } = require('../log-utils');
 /**
  *      MIN HEAPS
  *          A min heap is a binary Heap but with a certain order in its elements.
@@ -8,6 +9,13 @@
  *              - Arr[(i -1) / 2] returns its parent node.
  *              - Arr[(2 * i) + 1] returns its left child node.
  *              - Arr[(2 * i) + 2] returns its right child node.
+ *
+ *          A Min-Heap is a complete binary tree in which the value in each internal
+ *          node is smaller than or equal to the values in the children of that node.
+ *
+ *          Mapping the elements of a heap into an array is trivial: if a node is
+ *          stored a index k, then its left child is stored at index 2k + 1 and
+ *          its right child at index 2k + 2.
  *
  */
 class MinHeap {
@@ -72,12 +80,20 @@ class MinHeap {
 
     // inserting a new element
     insert(value) {
-        //
+        this.items[this.size] = value;
+        this.heapifyUp()
+        ++this.size;
     }
 
     // bubbling from deeper level to root
     heapifyUp() {
-        //
+        let currentIndex = this.size
+        while(this.hasParent(currentIndex)) {
+            if(this.items[currentIndex] < this.items[this.getParentIndex(currentIndex)]) {
+                this.swap(currentIndex, this.getParentIndex(currentIndex));
+            }
+            currentIndex = this.getParentIndex(currentIndex);
+        }
     }
 
     // bubbling from the root element to the deeper level

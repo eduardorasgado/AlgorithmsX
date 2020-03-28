@@ -54,8 +54,10 @@ class MinHeap {
     }
 
     // helper function to swapping the elements in bubbling methods.
-    swap() {
-        //
+    swap(firstIndex, secondIndex) {
+        this.items[firstIndex] += this.items[secondIndex];
+        this.items[secondIndex] = this.items[firstIndex] - this.items[secondIndex];
+        this.items[firstIndex] -= this.items[secondIndex];
     }
 
     // removing the minimum element
@@ -69,7 +71,7 @@ class MinHeap {
     }
 
     // inserting a new element
-    insert() {
+    insert(value) {
         //
     }
 
@@ -85,5 +87,22 @@ class MinHeap {
 }
 
 let mh = new MinHeap();
-mh.items = [13, 16, 31, 41, 51, 100, 41];
-console.log(mh.getParent(6));
+// mh.items = [13, 16, 31, 41, 51, 100, 41];
+// mh.size = 7;
+// // get elements testing
+// console.log(mh.getParent(6));
+// console.log('hijo derecho ', mh.getRightChild(1));
+// console.log('hijo izquierdo ', mh.getLeftChild(1));
+// console.log('hijo derecho 2 ', mh.getRightChild(2));
+// console.log('hijo izquierdo 2 ', mh.getLeftChild(2));
+// // swap testing
+// console.log(mh.items[0], mh.items[1]);
+// mh.swap(0, 1)
+// console.log(mh.items[0], mh.items[1]);
+
+let itemsToInsert = [13, 16, 31, 41, 51, 100, 41];
+
+itemsToInsert.map((element) => {
+    mh.insert(element);
+})
+console.log(mh.items);

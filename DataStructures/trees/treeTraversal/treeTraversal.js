@@ -50,10 +50,33 @@ const { BinarySearchTree } = require("./binary-search-tree")
  *              after returncopy in the recursive procedure. This means that the parent
  *              cannot be finished before all children are finished.
  *
+ *          BFS VS DFS WHEN TO USE THEM?
  *
- *           BREADTH FIRST SEARCH
- *              Searching at the same level at a time
+ *              It depends.
  *
+ *              BREADTH FIRST SEARCH
+ *              json is a good way to apply
+ *
+ *              DEEP FIRST SEARCH
+ *              in order is commonly used in BST's
+ *                  We can use this because we get all nodes in the tree in their
+ *                  underlying order
+ *              Pre order, can be used to "export" a tree strructure so that is
+ *                  easyly reconstructed or copied.
+ *
+ *          RECAP
+ *
+ *              Trees are non linear data structures that contain a root and child
+ *              nodes
+ *
+ *              Binary trees can have values of any type, but at most two children
+ *              for each parent
+ *
+ *              Binary Search Trees are a more specific version of binary trees
+ *              where every node to the left of a parent is less than it's value and
+ *              every node to the right is greater.
+ *
+ *              We can search through Trees using BFS and DFS
  *
  * */
 
@@ -229,6 +252,18 @@ class BSTree extends BinarySearchTree {
      *     3      8            20
      *
      *     inOrder = [3, 6, 8, 10, 15, 20]
+     *
+     * STEPS
+     *  Create a variable to store the values of nodes visited
+     *  Store the root of the bst in a variable called current
+     *  Write a helper function which accepts a node
+     *      - If the node has a left property, call the helper function with the
+     *        left property on the node
+     *        - Push the value of the node to the variable that stores the values
+     *      - If the node has a right property, call the helper function with the
+     *        right property on the node
+     *  Invoke the helper function with the current variable
+     *  Return the array of values
      *
      * @returns {[]}
      */

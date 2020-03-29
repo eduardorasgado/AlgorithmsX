@@ -56,6 +56,32 @@ class MaxHeap {
         if(!this.hasParent(childIndex)) return null;
         return this.items[this.getParentIndex(childIndex)];
     }
+
+    swap(firstIndex, secondIndex) {
+        [ this.items[firstIndex], this.items[secondIndex] ] =
+            [ this.items[secondIndex], this.items[firstIndex] ]
+    }
+
+    peek() {
+        if(!this.size) return null;
+        return this.items[0];
+    }
+
+    poll() {
+        // heapify Down
+    }
+
+    insert(value) {
+        // heapify up
+    }
+
+    heapifyUp() {
+        //
+    }
+
+    heapifyDown() {
+        //
+    }
 }
 
 let heap = new MaxHeap();
@@ -69,3 +95,7 @@ console.log("hijo derecho ",heap.getRightChild(2));
 console.log("hijo izquierdo ",heap.getLeftChild(2));
 console.log("hijo derecho ",heap.getRightChild(1));
 console.log("hijo izquierdo ",heap.getLeftChild(1));
+console.log(heap.peek());
+console.log(heap.items[0], heap.items[1]);
+heap.swap(0, 1);
+console.log(heap.items[0], heap.items[1]);

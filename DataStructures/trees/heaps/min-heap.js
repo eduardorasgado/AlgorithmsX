@@ -1,6 +1,7 @@
 const { inspectObject } = require('../log-utils');
 /**
- *      MIN HEAPS
+ *      MIN HEAPS OR MIN BINARY HEAP
+ *
  *          A min heap is a binary Heap but with a certain order in its elements.
  *          Typically represented as an array,
  *

@@ -105,7 +105,7 @@ class MinHeap {
     heapifyUp() {
         let currentIndex = this.size - 1;
         while(this.hasParent(currentIndex) &&
-        this.items[currentIndex] < this.items[this.getParentIndex(currentIndex)]) {
+        this.items[currentIndex] < this.getParent(currentIndex)) {
             this.swap(currentIndex, this.getParentIndex(currentIndex));
             currentIndex = this.getParentIndex(currentIndex);
         }
@@ -118,7 +118,7 @@ class MinHeap {
         while(this.hasLeftChild(currentIndex)) {
             smallerChildIndex = this.getLeftChildIndex(currentIndex);
             if(this.hasRightChild(currentIndex) &&
-                this.getRightChild(currentIndex) > this.getLeftChild(currentIndex)) {
+                this.getRightChild(currentIndex) < this.getLeftChild(currentIndex)) {
                 smallerChildIndex = this.getRightChildIndex(currentIndex);
             }
             if(this.items[currentIndex] > this.items[smallerChildIndex])

@@ -19,6 +19,7 @@ const { inspectObject } = require('../log-utils');
  *
  */
 class MinHeap {
+
     constructor() {
         this.size = 0;
         this.items = [];
@@ -61,7 +62,12 @@ class MinHeap {
         return this.items[this.getParentIndex(childIndex)];
     }
 
-    // helper function to swapping the elements in bubbling methods.
+    /**
+     * helper function to swapping the elements in bubbling methods.
+     *
+     * @param firstIndex
+     * @param secondIndex
+     */
     swap(firstIndex, secondIndex) {
         this.items[firstIndex] += this.items[secondIndex];
         this.items[secondIndex] = this.items[firstIndex] - this.items[secondIndex];
@@ -78,7 +84,11 @@ class MinHeap {
         return this.items[0];
     }
 
-    // removing the minimum element
+    /**
+     * removing the minimum element
+     *
+     * @returns {null|*}
+     */
     poll() {
         if(!this.size) return null;
         let item = this.items[0];
@@ -101,7 +111,9 @@ class MinHeap {
         return this;
     }
 
-    // bubbling from deeper level to root
+    /**
+     * bubbling from deeper level to root
+     */
     heapifyUp() {
         let currentIndex = this.size - 1;
         while(this.hasParent(currentIndex) &&
@@ -111,7 +123,9 @@ class MinHeap {
         }
     }
 
-    // bubbling from the root element to the deeper level
+    /**
+     * bubbling from the root element to the deeper level
+     */
     heapifyDown() {
         let currentIndex = 0;
         let smallerChildIndex;

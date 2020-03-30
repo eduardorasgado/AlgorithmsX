@@ -166,6 +166,7 @@ class MaxBinaryHeap {
     extractMax() {
         const max = this.values[0];
         const end = this.values.pop();
+        if(this.values.length === 0) return undefined; // to avoid max reassignment
         this.values[0] = end;
         this.sinkDown();
         return max;
@@ -177,8 +178,27 @@ class MaxBinaryHeap {
     sinkDown() {
         let currentIndex = 0;
         const length = this.values.length;
-        const element = this.values[0];
-
+        const element = this.values[currentIndex];
+        while(true) {
+            let leftChildIndex = (2 * currentIndex) + 1;
+            let rightChildIndex = (2 * currentIndex) + 2;
+            let leftChild, rightChild;
+            let swap = null;
+            if(leftChildIndex < length) {
+                leftChild = this.values[leftChildIndex];
+                if(leftChild > element) swap = leftChildIndex
+            }
+            if(rightChildIndex < length) {
+                rightChild = this.values[rightChildIndex];
+                if((!swap && rightChild > element)
+                || (swap && rightChild > leftChild))
+                    swap = rightChildIndex;
+            }
+            if(!swap) break;
+            this.values[currentIndex] = this.values[swap];
+            this.values[swap] = element;
+            currentIndex = swap;
+        }
     }
 
     /**

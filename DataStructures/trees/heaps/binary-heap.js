@@ -139,19 +139,39 @@ class MaxBinaryHeap {
     /**
      * Prints the tree out in a non array form, but a tree.
      */
-    toString() {
+    show() {
         let x = -1; // to be sure (x + 1) * 2 will return 0 at the first iteration
-        let row = [];
+        let row = "";
+        let valuesLen = this.values.length;
         this.values.forEach((value, index) => {
-            row.push(`${value} `);
+            if(index% 2 !== 0 || index === 0) row += "["
+            row += `${value} `;
+            if(index% 2 === 0) row += "]"
             // ensure that index is part of the serie: 0, 2, 6, 14, 30... 2(x(t-1) + 1)
-            if(index === ((x + 1) * 2)){
-                console.log(`${row}`)
+            // to print a tree row in new line
+            if(index === ((x + 1) * 2) || index === valuesLen - 1){
+                if(index % 2 !== 0) row += "]"; // if bottom row length is not even
+                let lastRowLen = row.length;
+                console.log(
+                    this.gettingSpacesToShow(valuesLen, lastRowLen) + row)
                 x = index;
-                row = [];
+                row = "";
             }
         })
-        console.log(`${row}`)
+    }
+
+    /**
+     * show helper, set a certain amount of spaces to show all the nodes symmetrically
+     * @param valuesLen
+     * @param lastRowLen
+     * @returns {string}
+     */
+    gettingSpacesToShow(valuesLen, lastRowLen) {
+        let spaces = "";
+        for(let i = 0; i < (valuesLen - Math.floor(lastRowLen / 2)); i++) {
+            spaces += " ";
+        }
+        return spaces;
     }
 
 }

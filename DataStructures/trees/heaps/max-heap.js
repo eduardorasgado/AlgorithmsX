@@ -68,34 +68,60 @@ class MaxHeap {
     }
 
     poll() {
-        // heapify Down
+        let item = this.items[0];
+        this.items[0] = this.items[this.size - 1];
+        --this.size;
+        this.items.pop();
+        this.heapifyDown();
+        return item;
     }
 
     insert(value) {
+        this.items[this.size] = value;
+        ++this.size;
         // heapify up
+        this.heapifyUp();
     }
 
     heapifyUp() {
-        //
+        let currentIndex = this.size - 1;
+        while(this.hasParent(currentIndex) &&
+            this.items[currentIndex] > this.getParent(currentIndex)) {
+            this.swap(currentIndex, this.getParentIndex(currentIndex));
+            currentIndex = this.getParentIndex(currentIndex)
+        }
     }
 
     heapifyDown() {
-        //
+        let currentIndex = 0;
+        let greatestChildIndex;
+        while(this.hasLeftChild(currentIndex)) {
+            greatestChildIndex = this.getLeftChildIndex(currentIndex);
+            if(this.hasRightChild(currentIndex) &&
+                this.getRightChild(currentIndex) > this.getLeftChild(currentIndex))
+                greatestChildIndex = this.getRightChildIndex(currentIndex);
+
+            if(this.items[currentIndex] < this.items[greatestChildIndex])
+                this.swap(currentIndex, greatestChildIndex);
+            else break;
+            currentIndex = greatestChildIndex;
+        }
     }
 }
 
 let heap = new MaxHeap();
 //heap.items = [40, 100, 40, 10, 15, 50, 50];
-heap.items = [100, 40, 50, 10, 15, 50, 40];
-heap.size = 7;
-console.log(heap.getParent(2));
-console.log(heap.getParent(4));
-console.log(heap.getParent(5));
-console.log("hijo derecho ",heap.getRightChild(2));
-console.log("hijo izquierdo ",heap.getLeftChild(2));
-console.log("hijo derecho ",heap.getRightChild(1));
-console.log("hijo izquierdo ",heap.getLeftChild(1));
+let items = [100, 40, 50, 10, 15, 50, 40];
+items.map((n) => {
+    heap.insert(n);
+});
+console.log(heap.items);
 console.log(heap.peek());
-console.log(heap.items[0], heap.items[1]);
-heap.swap(0, 1);
-console.log(heap.items[0], heap.items[1]);
+heap.poll();
+console.log(heap.items);
+heap.poll();
+console.log(heap.items);
+heap.poll();
+console.log(heap.items);
+heap.poll();
+console.log(heap.items);

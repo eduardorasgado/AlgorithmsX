@@ -72,10 +72,12 @@ class MaxHeap {
     }
 
     /**
-     * Removing max element within the tree
-     * @returns {*}
+     * * Removing max element within the tree
+     *
+     * @returns {undefined|*}
      */
     poll() {
+        if(this.size === 0) return undefined
         let item = this.items[0];
         this.items[0] = this.items[this.size - 1];
         --this.size;
@@ -133,6 +135,44 @@ class MaxHeap {
             currentIndex = greatestChildIndex;
         }
     }
+
+    /**
+     * Prints the tree out in a non array form, but a tree.
+     */
+    show() {
+        let x = -1; // to be sure (x + 1) * 2 will return 0 at the first iteration
+        let row = "";
+        let valuesLen = this.size;
+        this.items.forEach((value, index) => {
+            if(index% 2 !== 0 || index === 0) row += "["
+            row += `${value} `;
+            if(index% 2 === 0) row += "]"
+            // ensure that index is part of the serie: 0, 2, 6, 14, 30... 2(x(t-1) + 1)
+            // to print a tree row in new line
+            if(index === ((x + 1) * 2) || index === valuesLen - 1){
+                if(index % 2 !== 0) row += "]"; // if bottom row length is not even
+                let lastRowLen = row.length;
+                console.log(
+                    this.gettingSpacesToShow(valuesLen, lastRowLen) + row)
+                x = index;
+                row = "";
+            }
+        })
+    }
+
+    /**
+     * show helper, set a certain amount of spaces to show all the nodes symmetrically
+     * @param valuesLen
+     * @param lastRowLen
+     * @returns {string}
+     */
+    gettingSpacesToShow(valuesLen, lastRowLen) {
+        let spaces = "";
+        for(let i = 0; i < (valuesLen - Math.floor(lastRowLen / 2)); i++) {
+            spaces += " ";
+        }
+        return spaces;
+    }
 }
 
 let heap = new MaxHeap();
@@ -141,7 +181,7 @@ let items = [100, 40, 50, 10, 15, 50, 40];
 items.map((n) => {
     heap.insert(n);
 });
-console.log(heap.items);
+heap.show();
 console.log(heap.peek());
 heap.poll();
 console.log(heap.items);
@@ -158,4 +198,14 @@ heap.insert(33);
 heap.insert(1);
 heap.insert(22);
 heap.insert(99);
-console.log(heap.items);
+heap.show();
+let heapLen = heap.size
+for (let i = 0; i < heapLen; i++) {
+    console.log(heap.poll());
+    heap.show();
+    console.log(" ");
+
+}
+console.log(heap.poll());
+console.log(heap.poll());
+heap.show();

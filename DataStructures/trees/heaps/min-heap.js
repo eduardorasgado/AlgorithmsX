@@ -91,7 +91,7 @@ class MinHeap {
      * @returns {null|*}
      */
     poll() {
-        if(!this.size) return null;
+        if(!this.size) return undefined;
         let item = this.items[0];
         this.items[0] = this.items[this.size - 1];
         --this.size;

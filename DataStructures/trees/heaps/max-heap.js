@@ -62,11 +62,19 @@ class MaxHeap {
             [ this.items[secondIndex], this.items[firstIndex] ]
     }
 
+    /**
+     * Getting max element within the tree
+     * @returns {null|*}
+     */
     peek() {
         if(!this.size) return null;
         return this.items[0];
     }
 
+    /**
+     * Removing max element within the tree
+     * @returns {*}
+     */
     poll() {
         let item = this.items[0];
         this.items[0] = this.items[this.size - 1];
@@ -76,15 +84,26 @@ class MaxHeap {
         return item;
     }
 
+    /**
+     * Inserting a new node in the correct place
+     * @param value
+     * @returns {MaxHeap}
+     */
     insert(value) {
         this.items[this.size] = value;
         ++this.size;
         // heapify up
-        this.heapifyUp();
+        this.heapifyUp()
+        return this;
     }
 
+    /**
+     * bubbling the element in last position from the bottom to the first row
+     * while current element is greater than its parent.
+     */
     heapifyUp() {
         let currentIndex = this.size - 1;
+        // looping while there is a parent and parent is smaller than child
         while(this.hasParent(currentIndex) &&
             this.items[currentIndex] > this.getParent(currentIndex)) {
             this.swap(currentIndex, this.getParentIndex(currentIndex));
@@ -92,15 +111,22 @@ class MaxHeap {
         }
     }
 
+    /**
+     * bubbling the element from first row(max position) to botton row while
+     * current index element is smaller than  its greatest child.
+     */
     heapifyDown() {
         let currentIndex = 0;
         let greatestChildIndex;
         while(this.hasLeftChild(currentIndex)) {
+            // this variable will be the index of the greatest value between left
+            // and right children
             greatestChildIndex = this.getLeftChildIndex(currentIndex);
             if(this.hasRightChild(currentIndex) &&
                 this.getRightChild(currentIndex) > this.getLeftChild(currentIndex))
                 greatestChildIndex = this.getRightChildIndex(currentIndex);
 
+            // if parent is smaller than child then they will be swapped otherwise stop loop
             if(this.items[currentIndex] < this.items[greatestChildIndex])
                 this.swap(currentIndex, greatestChildIndex);
             else break;
@@ -124,4 +150,12 @@ console.log(heap.items);
 heap.poll();
 console.log(heap.items);
 heap.poll();
+console.log(heap.items);
+
+heap.insert(100);
+heap.insert(20);
+heap.insert(33);
+heap.insert(1);
+heap.insert(22);
+heap.insert(99);
 console.log(heap.items);

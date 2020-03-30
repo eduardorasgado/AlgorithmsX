@@ -117,6 +117,7 @@ class MinHeap {
      */
     heapifyUp() {
         let currentIndex = this.size - 1;
+        // looping and swapping elements while parent is greater than child.
         while(this.hasParent(currentIndex) &&
         this.items[currentIndex] < this.getParent(currentIndex)) {
             this.swap(currentIndex, this.getParentIndex(currentIndex));
@@ -131,11 +132,14 @@ class MinHeap {
         let currentIndex = 0;
         let smallerChildIndex;
         while(this.hasLeftChild(currentIndex)) {
+            // this variable is the index of the smaller element between the left
+            // and right children.
             smallerChildIndex = this.getLeftChildIndex(currentIndex);
             if(this.hasRightChild(currentIndex) &&
                 this.getRightChild(currentIndex) < this.getLeftChild(currentIndex)) {
                 smallerChildIndex = this.getRightChildIndex(currentIndex);
             }
+            // if parent is greater than children then values will be swapped otherwise stop looping
             if(this.items[currentIndex] > this.items[smallerChildIndex])
                 this.swap(currentIndex, smallerChildIndex);
             else break;

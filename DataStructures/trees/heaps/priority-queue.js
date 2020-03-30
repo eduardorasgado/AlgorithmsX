@@ -38,6 +38,42 @@ const { MinHeap } = require("./min-heap");
  *              Best first search Algorithms
  *              ROAM triangualtion algorithm
  *              Prim's algorithm for minimum spanning tree
+ *
+ *          WHEN AND WHERE IS A PQ USED
+ *
+ *              Used in certain implementations of dijkstra's Shortest path algorithm
+ *
+ *              Anytime you need the dynamically fetch the 'next best' or
+ *              'next worst' element.
+ *
+ *              Used in Huffman Coding (which is often used for lossless data
+ *              compression).
+ *
+ *              Best First Search(BFS) algorithms such as A* use PQs to contimuously
+ *              grab the next most promising node
+ *
+ *              Used by Minimum Spanning Tree(MST) algorithms.
+ *
+ *              They are important for graph theory
+ *
+ *          BIG O OF PRIORITY QUEUES
+ *
+ *              Binary Heap construction - O(n)
+ *              Polling      - O(log n)
+ *              Peeking      - O(1)
+ *              Adding       - O(log n)
+ *
+ *              Other methods:
+ *
+ *              Naive Removing              - O(n)
+ *              Advanced removing with
+ *              help from a hash table      - O(log n)
+ *              Naive contains              - O(n)
+ *              Contains chech wit
+ *              help of a hash table        - O(1)
+ *
+ *              Using a hash tableto help optimize these operations does take up
+ *              linear space and also adds some overhead to the binary heap implementation.
  * */
 
 class MinPriorityQueue {

@@ -1,6 +1,44 @@
 /**
  *          HEAPS
  *
+ *              Heaps can have more than one child nodes up to n, but
+ *              we can implement a binary heap where it has two nodes per parent
+ *
+ *              This is a valid Heap:
+ *
+ *                                   _________ 0
+ *                                   |     |   |
+ *                            _______1     1   1
+ *                            |      |     |
+ *                            2      2     2
+ *                            |
+ *                            3
+ *              because it satisfies the heap invariant, Heaps like these are often
+ *              seen in binomial heaps. But it is not a
+ *
+ *              Here we have a Heap variant, it might look weird but even tho it is
+ *              a heap:
+ *
+ *                             _____0
+ *                            |    |
+ *                       _____2     3   __6
+ *                      |           |  |  |
+ *                ______5     ______6__|  |   __7______
+ *               |      |    |      |     |  |  |     |
+ *               6     11    7      6     7__|  8     9
+ *
+ *               again, it is not a valid binary heap, but a heap.
+ *
+ *               Next is not a valid heap:
+ *
+ *                             _____8_______
+ *                            |            |
+ *                       _____6_          _6______
+ *                      |       \____ ___/       |
+ *                      2            4           2
+ *               Because this structure is not a tree, it contains a cycle,
+ *               Heaps must be trees.
+ *
  *          BINARY HEAPS
  *
  *              OBJECTIVES

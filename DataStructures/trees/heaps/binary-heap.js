@@ -136,6 +136,24 @@ class MaxBinaryHeap {
         }
     }
 
+    /**
+     * Prints the tree out in a non array form, but a tree.
+     */
+    toString() {
+        let x = -1; // to be sure (x + 1) * 2 will return 0 at the first iteration
+        let row = [];
+        this.values.forEach((value, index) => {
+            row.push(`${value} `);
+            // ensure that index is part of the serie: 0, 2, 6, 14, 30... 2(x(t-1) + 1)
+            if(index === ((x + 1) * 2)){
+                console.log(`${row}`)
+                x = index;
+                row = [];
+            }
+        })
+        console.log(`${row}`)
+    }
+
 }
 
 exports.MaxBinaryHeap = MaxBinaryHeap;

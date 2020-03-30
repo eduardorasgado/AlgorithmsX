@@ -164,11 +164,21 @@ class MaxBinaryHeap {
      *      Return the old root.
      */
     extractMax() {
-        //
+        const max = this.values[0];
+        const end = this.values.pop();
+        this.values[0] = end;
+        this.sinkDown();
+        return max;
     }
 
+    /**
+     * @see extractMax
+     */
     sinkDown() {
-        //
+        let currentIndex = 0;
+        const length = this.values.length;
+        const element = this.values[0];
+
     }
 
     /**

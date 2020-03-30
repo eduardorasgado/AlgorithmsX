@@ -2,6 +2,8 @@ const { MinHeap } = require("./min-heap");
 /**
  *      PRIORITY QUEUES
  *
+ *          WHAT ARE PQs?
+ *
  *          A priority queue is an abstract data type which is like a regular queue
  *          or stack data structure, but where additionally each element has a
  *          "priority" associated with it. In a priority queue, an element with a
@@ -26,11 +28,37 @@ const { MinHeap } = require("./min-heap");
  *          inserted into the PQ must be able to be ordered in some way either from
  *          least to greatest or greatest to least. This is so that we are able to
  *          assign relative priorities to each element.
+ *
+ *          APPLICATIONS
+ *
+ *              Bandwidth management
+ *              Discrete event simulation
+ *              Dijakstra's algothm
+ *              Huffman coding
+ *              Best first search Algorithms
+ *              ROAM triangualtion algorithm
+ *              Prim's algorithm for minimum spanning tree
  * */
 
 class MinPriorityQueue {
     constructor() {
         this.items = new MinHeap();
+    }
+
+    add(value) {
+        return this.items.insert(value);
+    }
+
+    poll() {
+        return this.items.poll();
+    }
+
+    show() {
+        this.items.show();
+    }
+
+    size() {
+        return this.items.size;
     }
 }
 

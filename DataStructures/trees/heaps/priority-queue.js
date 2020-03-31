@@ -119,6 +119,15 @@ class MinHeap {
         if(!this.hasRightChild(parentIndex)) return null;
         return this.items[this.getRightChildIndex(parentIndex)];
     }
+    getParent(childIndex) {
+        if(!this.hasParent(childIndex)) return null;
+        return this.items[this.getParentIndex(childIndex)];
+    }
+
+    swap(firstIndex, secondIndex) {
+        [ this.items[firstIndex], this.items[secondIndex] ] =
+            [ this.items[secondIndex], this.items[firstIndex] ];
+    }
 
     peek() {
         if(!this.size) return null;
@@ -129,8 +138,55 @@ class MinHeap {
         // sink down
     }
 
+    /**
+     * Inserting a new node and ordering into the heap.
+     * @param node
+     */
     insert(node) {
+        this.items.push(node);
+        ++this.size;
+        // bubble up
+        this.bubbleUp();
+        return this;
+    }
 
+    /**
+     * bubbling up based on priority property of a node
+     */
+    bubbleUp() {
+        let currentIndex = this.size - 1;
+        while(this.hasParent(currentIndex) &&
+            this.getParent(currentIndex).priority > this.items[currentIndex].priority) {
+            this.swap(currentIndex, this.getParentIndex(currentIndex));
+            currentIndex = this.getParentIndex(currentIndex);
+        }
+    }
+
+    show() {
+        let x = -1; // to be sure (x + 1) * 2 will return 0 at the first iteration
+        let row = "";
+        let valuesLen = this.size;
+        this.items.forEach((node, index) => {
+            if(index% 2 !== 0 || index === 0) row += "[";
+            row += `${node.value}(${node.priority}) `;
+            if(index% 2 === 0) row += "]"
+            if(index === ((x + 1) * 2) || index === valuesLen - 1){
+                if(index % 2 !== 0) row += "]"; // if bottom row length is not even
+                let lastRowLen = row.length;
+                console.log(
+                    this.gettingSpacesToShow(valuesLen, lastRowLen) + row)
+                x = index;
+                row = "";
+            }
+        })
+    }
+
+    gettingSpacesToShow(valuesLen, lastRowLen) {
+        let spaces = "";
+        for(let i = 0; i < (valuesLen - Math.floor(lastRowLen / 4)); i++) {
+            spaces += " ";
+        }
+        return spaces;
     }
 }
 

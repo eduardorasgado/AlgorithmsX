@@ -125,6 +125,27 @@
  *                 For any child node at index n...
  *                      Its parent is at index floor((n-1) / 2)
  *
+ *              BIG O OF BINARY HEAPS
+ *
+ *                  Insertion - Best: O(log n) and also avg and worst case
+ *                      because it is a completely filled tree, see BST insertion.
+ *
+ *                  Removal   - Best: O(log n) and also avg and worst case
+ *
+ *                  Search    - On(n)
+ *                      Binary Heaps are not made to be searcheable. So a search
+ *                      will go over the whole unordered list Binary heaps use to
+ *                      store the tree data in a linear fashion.
+ *              RECAP
+ *
+ *                  Binary Heaps are very useful data structures for sorting, and
+ *                  implementing other data structures like priority queues
+ *
+ *                  Binary Heaps are either MaxBinaryHeaps or MinBinaryHeaps with
+ *                  parents either being smaller or larger than their children.
+ *
+ *                  With just a litthe bit if math, we can represent heaps using arrays.
+ *
  * */
 
 // the classroom max binary heap implementation

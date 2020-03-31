@@ -75,6 +75,10 @@
  *              Using a hash tableto help optimize these operations does take up
  *              linear space and also adds some overhead to the binary heap implementation.
  * */
+
+/**
+ * Object to store value and priority in a node of the PQ.
+ */
 class Node {
     constructor(value, priority) {
         this.value = value;
@@ -87,7 +91,12 @@ class Node {
     setPriority(priority) { this.priority = priority; }
 }
 
-class MinHeap {
+/**
+ * To implement a Min Priority queue we should use Min Heap as a base structure
+ * and only requires a few changes like the use of a Node object to store value
+ * and priority.
+ */
+class MinPriorityQueue {
     constructor() {
         this.items = []; // can we use a singly linked list?
         this.size = 0;
@@ -134,7 +143,11 @@ class MinHeap {
         return this.items[0];
     }
 
-    extractMin() {
+    /**
+     * Removing the min priority element within the PQ, it is the first row indeed.
+     * @returns {undefined|*}
+     */
+    dequeue() {
         if(!this.size) return undefined;
         let itemExtracted = this.items[0];
         this.items[0] = this.items[this.size - 1];
@@ -149,8 +162,9 @@ class MinHeap {
      * Inserting a new node and ordering into the heap.
      * @param node
      */
-    insert(node) {
-        this.items.push(node);
+    enqueue(value, priority) {
+        let newNode = new Node(value, priority);
+        this.items.push(newNode);
         ++this.size;
         // bubble up
         this.bubbleUp();
@@ -169,6 +183,10 @@ class MinHeap {
         }
     }
 
+    /**
+     * the difference here between a PQ and a binary heap is that we compare the
+     * priority property from nodes.
+     */
     sinkDown() {
         let currentIndex = 0;
         let smallestChildIndex;
@@ -186,6 +204,10 @@ class MinHeap {
             else break;
             currentIndex = smallestChildIndex;
         }
+    }
+
+    getSize() {
+        return this.size;
     }
 
     show() {
@@ -213,30 +235,6 @@ class MinHeap {
             spaces += " ";
         }
         return spaces;
-    }
-}
-
-
-class MinPriorityQueue {
-    constructor() {
-        this.items = new MinHeap();
-    }
-
-    enqueue(value, priority) {
-        let newNode = new Node(value, priority);
-        return this.items.insert(newNode);
-    }
-
-    dequeue() {
-        return this.items.extractMin();
-    }
-
-    show() {
-        this.items.show();
-    }
-
-    size() {
-        return this.items.size;
     }
 }
 

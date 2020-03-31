@@ -3,24 +3,24 @@ const { MinPriorityQueue } = require("./priority-queue");
 let minpq = new MinPriorityQueue();
 
 let items = [14, 4, 8, 1, 3, 22]
-items.map((n) => {minpq.add(n);})
+items.map((n) => {minpq.enqueue(n);})
 minpq.show();
-console.log(minpq.poll());;
+console.log(minpq.dequeue());;
 minpq.show();
-minpq.add(2);
+minpq.enqueue(2);
 minpq.show();
-console.log(minpq.poll());
-minpq.add(4);
+console.log(minpq.dequeue());
+minpq.enqueue(4);
 minpq.show();
-console.log(minpq.poll());
-minpq.add(5);
-minpq.add(9)
+console.log(minpq.dequeue());
+minpq.enqueue(5);
+minpq.enqueue(9)
 minpq.show();
 console.log('size is ',minpq.size());
 let currentSize = minpq.size();
 for(let i = 0; i < currentSize; i++) {
-    console.log(minpq.poll());
+    console.log(minpq.dequeue());
 }
-console.log(minpq.poll());
+console.log(minpq.dequeue());
 minpq.show();
 

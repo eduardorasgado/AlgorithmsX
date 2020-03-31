@@ -1,4 +1,4 @@
-const { MinHeap } = require("./min-heap");
+//const { MinHeap } = require("./min-heap");
 /**
  *      PRIORITY QUEUES
  *
@@ -75,18 +75,78 @@ const { MinHeap } = require("./min-heap");
  *              Using a hash tableto help optimize these operations does take up
  *              linear space and also adds some overhead to the binary heap implementation.
  * */
+class Node {
+    constructor(value, priority) {
+        this.value = value;
+        this.priority = priority;
+    }
+
+    getValue() { return this.value; }
+    setValue(value) { this.value = value; }
+    getPriority() { return this.priority; }
+    setPriority(priority) { this.priority = priority; }
+}
+
+class MinHeap {
+    constructor() {
+        this.items = [];
+        this.size = 0;
+    }
+
+    getLeftChildIndex(parentIndex) {
+        return (parentIndex * 2) + 1;
+    }
+    getRightChildIndex(parentIndex) {
+        return (parentIndex * 2) + 2;
+    }
+    getParentIndex(childIndex) {
+        return Math.floor((childIndex - 1) / 2);
+    }
+    hasLeftChild(parentIndex) {
+        return this.getLeftChildIndex(parentIndex) < this.size;
+    }
+    hasRightChild(parentIndex) {
+        return this.getRightChildIndex(parentIndex) < this.size;
+    }
+    hasParent(childIndex) {
+        return this.getParentIndex(childIndex) >= 0;
+    }
+    getLeftChild(parentIndex) {
+        if(!this.hasLeftChild(parentIndex)) return null;
+        return this.items[this.getLeftChildIndex(parentIndex)];
+    }
+    getRightChild(parentIndex) {
+        if(!this.hasRightChild(parentIndex)) return null;
+        return this.items[this.getRightChildIndex(parentIndex)];
+    }
+
+    peek() {
+        if(!this.size) return null;
+        return this.items[0];
+    }
+
+    extractMin() {
+        // sink down
+    }
+
+    insert(node) {
+
+    }
+}
+
 
 class MinPriorityQueue {
     constructor() {
         this.items = new MinHeap();
     }
 
-    add(value) {
-        return this.items.insert(value);
+    enqueue(value, priority) {
+        let newNode = new Node(value, priority);
+        return this.items.insert(newNode);
     }
 
-    poll() {
-        return this.items.poll();
+    dequeue() {
+        return this.items.extractMin();
     }
 
     show() {

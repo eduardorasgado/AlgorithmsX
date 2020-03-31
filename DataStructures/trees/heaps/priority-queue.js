@@ -89,7 +89,7 @@ class Node {
 
 class MinHeap {
     constructor() {
-        this.items = [];
+        this.items = []; // can we use a singly linked list?
         this.size = 0;
     }
 
@@ -135,7 +135,14 @@ class MinHeap {
     }
 
     extractMin() {
+        if(!this.size) return undefined;
+        let itemExtracted = this.items[0];
+        this.items[0] = this.items[this.size - 1];
+        this.items.pop();
+        --this.size;
         // sink down
+        this.sinkDown();
+        return itemExtracted;
     }
 
     /**
@@ -159,6 +166,25 @@ class MinHeap {
             this.getParent(currentIndex).priority > this.items[currentIndex].priority) {
             this.swap(currentIndex, this.getParentIndex(currentIndex));
             currentIndex = this.getParentIndex(currentIndex);
+        }
+    }
+
+    sinkDown() {
+        let currentIndex = 0;
+        let smallestChildIndex;
+        while(this.hasLeftChild(currentIndex)) {
+            smallestChildIndex = this.getLeftChildIndex(currentIndex);
+
+            if(this.hasRightChild(currentIndex) &&
+                (this.getRightChild(currentIndex).priority <
+                this.getLeftChild(currentIndex).priority))
+                smallestChildIndex = this.getRightChildIndex(currentIndex);
+
+            if(this.items[currentIndex].priority >
+                this.items[smallestChildIndex].priority)
+                this.swap(currentIndex, smallestChildIndex);
+            else break;
+            currentIndex = smallestChildIndex;
         }
     }
 

@@ -22,7 +22,9 @@ minpq.show();
 let currentSize = minpq.size();
 for(let i = 0; i < currentSize; i++) {
     console.log(minpq.dequeue());
+    minpq.show();
+    console.log(" ");
 }
-console.log(minpq.dequeue());
+console.log("removing from a 0 length PQ: ", minpq.dequeue());
 minpq.show();
 

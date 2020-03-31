@@ -1,7 +1,20 @@
 /**
  *      HASH TABLES
  *
+ *          OBJECTIVES
+ *
+ *              Explain what a hash table is
+ *              Define what a hashing algorithm is
+ *              Discuss what makes a good hashing algorithm
+ *              Understand how collision occur in hash table
+ *              Handle collisions using separate chining or linear probing
+ *
  *          WHAT ARE HASH TABLES
+ *
+ *              Hash tables are used to store key value pairs
+ *              They are like arrays, but the keys are not irdered.
+ *              Unilike arrays, hash tables are fast for all of the following operations:
+ *              finding values, adding new values and removing values.
  *
  *              It is a data structure that implements an associative array abstract
  *              data type (ADT), a structure that can map keys to values.
@@ -47,6 +60,12 @@
  *              Closed addressing
  *                  - Chaining
  *
+ *          WHY SHOULD I CARE
+ *
+ *              Nearly every programming language has some sort of hash table
+ *              data structure.
+ *              Because of their speed, hash tables are very commonly used!.
+ *
  *          APPLICATIONS
  *
  *              Hashing is widely used in:
@@ -54,7 +73,16 @@
  *                  compilers
  *                  caching,
  *                  password authentication
+
  *                  and more
+ *
+ *          HASH TABLES IN THE WILD
+ *
+ *              - Dictionaries in python
+ *              - Objects and Maps in Javascript - with some restrictions but are
+ *                  basically hash tables
+ *              - Maps in Java, Golang and scala
+ *              - Hashes in Ruby
  *
  *          BIG O OF HASH TABLES
  *

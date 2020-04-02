@@ -15,15 +15,25 @@ class HashTable {
 
     /**
      * Hash function, to get and set index within the key map given a string key
+     * We used a polynomial rolling hash function. More info here:
+     *  https://cp-algorithms.com/string/string-hashing.html
+     *
+     *  PRIME_FACTOR number:
+     *   english and lowercase, then PRIME_FACTOR=37
+     *   both uppercase and lowercase letters, then PRIME_FACTOR=53
+     *   accordingly to the article above
+     *
      * @param key
      * @returns {number}
      * @private
      */
     _hash(key) {
-        let total = 0;
-        let PRIME = 7;
+        let total = 0; // this will be the index
+        const PRIME_FACTOR = 37;
+        let primePowered = 1;
         for(let i = 0; i < Math.min(key.length, 100); i++) {
-            total = ((key[i].charCodeAt(0) - 96) * PRIME + total) % this.size;
+            total = (((key[i].charCodeAt(0) - 96) * primePowered) + total) % this.size;
+            primePowered *= PRIME_FACTOR;
         }
         return total;
     }
@@ -51,7 +61,6 @@ class HashTable {
     get(key) {
         let index = this._hash(key);
         let elements = this.keyMap[index];
-        if(elements.length === 1) return elements[0];
         for(let element of elements) {
             if(element[0] === key) return element;
         }

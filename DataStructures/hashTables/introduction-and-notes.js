@@ -145,6 +145,8 @@ colorsToAdd.map((color) => {
  *
  *  We set a minimun set of elements to iterate over for a fast hash function.
  *
+ *  @see HashTable._hash for more information in same folder this file is located.
+ *
  * @param key
  * @param arrayLen
  * @returns {number}

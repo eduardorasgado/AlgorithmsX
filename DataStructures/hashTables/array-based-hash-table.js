@@ -4,23 +4,14 @@
 // a function that performs this task is called a hash function.
 
 // SPOILER ALERT: It is just a naive too simple hash function. Not a well implemented one.
-const hashFuction = (color) => {
-    let colorAscii = [];
-    for (let colorElement of color) {
-        colorAscii.push(colorElement.charCodeAt(0));
+const hash = (key, capacity) => {
+    let total = 0;
+    // linear time not constant
+    for (let keyChar of key) {
+        total += keyChar.charCodeAt(0) - 96
+
     }
-
-    let sum = colorAscii.reduce((acc, ascii) => {
-        acc += ascii;
-        return acc;
-    })
-    return sum;
-}
-
-//still part of the hash function-
-const convertsToIndex = (color, capacity) => {
-    let element = hashFuction(color);
-    return element % capacity;
+    return total % capacity;
 }
 
 // verifying if element at index i contains a list of more elements due to
@@ -28,10 +19,10 @@ const convertsToIndex = (color, capacity) => {
 const hashTableGetElementByKey = (color, capacity, hashTable) => {
     // accessing throug converting the color key into a index thanks to
     // hash function
-    let elements = hashTable[convertsToIndex(color, capacity)];
+    let elements = hashTable[hash(color, capacity)];
     //due to collision avoidance handler
     let elementToReturn;
-    // linear in time
+    // linear time, not constant
     elements.forEach((element) => {
         if(element[0] == color) {
             elementToReturn = element;
@@ -55,7 +46,7 @@ let colorsHashTable = Array.from({length: 10}, () => []);
 let htlen = colorsHashTable.length;
 colorsToAdd.forEach((color) => {
     // color[0] will be the key
-    let index = convertsToIndex(color[0], htlen);
+    let index = hash(color[0], htlen);
     // appending the element within a list as Collision handler(chaining)
     colorsHashTable[index].push(color)
 })

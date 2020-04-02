@@ -111,6 +111,27 @@
  *      Deterministic (same input yields same output)
  *
  */
-function hash() {
-
+// basic hash function
+function hash(key, arrayLength) {
+    let total = 0;
+    for (let keyChar of key) {
+        let keyAscii = keyChar.charCodeAt(0) - 96
+        total = (keyAscii + total) % arrayLength;
+    }
+    return total;
 }
+
+/**
+ *  REFINING OUR HASH
+ *      Problems with our current hash fuction
+ *
+ *          Only hashes strings (we wont worry about this)
+ *          Not constant time - linear in key length
+ *          Could be a little more random.
+ * */
+let colorsToAdd = ["pink", "blue", "black",
+    "white", "red", "orange", "green", "cyan", "maroon", "grey"];
+
+colorsToAdd.map((color) => {
+    console.log(color, hash(color, colorsToAdd.length));
+})

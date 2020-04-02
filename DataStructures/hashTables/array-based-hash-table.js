@@ -3,6 +3,7 @@
 // indices
 // a function that performs this task is called a hash function.
 
+// SPOILER ALERT: It is just a naive too simple hash function. Not a well implemented one.
 const hashFuction = (color) => {
     let colorAscii = [];
     for (let colorElement of color) {
@@ -16,7 +17,7 @@ const hashFuction = (color) => {
     return sum;
 }
 
-//still part of the hash function
+//still part of the hash function-
 const convertsToIndex = (color, capacity) => {
     let element = hashFuction(color);
     return element % capacity;
@@ -45,7 +46,8 @@ let colorsToAdd = [["pink", "A fucking good color"],
     ["white", "peace and cleareness"],
     ["red", "red ranger, the leader"],
     ["orange", "It is a fruit either"],
-    ["green", "a love green pokemon"]];
+    ["green", "a lovely green pokemon"],
+    ["some fucking totally different color looong name", "a color like the others"]];
 
 
 let colorsHashTable = Array.from({length: 10}, () => []);

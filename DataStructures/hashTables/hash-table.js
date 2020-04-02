@@ -97,3 +97,20 @@
  *                  Insertion, deletion and retrieval occur in constant time.
  *
  * */
+
+/**
+ * THE HASH PART
+ *  To implement a hash table we will be using an array.
+ *  In order to look up values by key, we need a way to cnvert keys into valid array
+ *  indeces.
+ *  A function that performs this task is called a hash function
+ *
+ *  WHAT MAKES A GOOD HASH? (not a cryptographically secure one)
+ *      Fast
+ *      Does not cluster outputs at specific indeces, but distributes uniformly
+ *      Deterministic (same input yields same output)
+ *
+ */
+function hash() {
+
+}

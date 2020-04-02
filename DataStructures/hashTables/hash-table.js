@@ -10,6 +10,9 @@ class HashTable {
      */
     constructor(size = 53) {
         this.keyMap = new Array(size);
+        // Note: if there is a fixed size then we cannot include more
+        // than that amount of elements, if we try to resize it will give wrong
+        // data access with old elements.
         this.size = size;
     }
 
@@ -52,11 +55,17 @@ class HashTable {
     }
 
     /**
+     * * Accepts a key
+     * Hashes the key
+     * Retreives the key-value pair in the hash table
+     * If the key is not found, returns undefined.
+     *
      * return an element given a key
      * if there are more than one element within the map at index position, then
      * we iterate over all the elements within that list and return the correct one.
+     *
      * @param key
-     * @returns {any|undefined|*}
+     * @returns {undefined|any}
      */
     get(key) {
         let index = this._hash(key);

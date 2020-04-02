@@ -52,12 +52,8 @@ colorsToAdd.forEach((color) => {
 })
 // this is how a hash table based on chaining collision handler looks like
 console.log("color hash table is: ");
-console.log(colorsHashTable);
+//console.log(colorsHashTable);
 
 console.log("colors found are here: ");
-console.log(hashTableGetElementByKey("red", 10, colorsHashTable));
-console.log(hashTableGetElementByKey("pink", 10, colorsHashTable));
-
-
-
-
+//console.log(hashTableGetElementByKey("red", 10, colorsHashTable));
+//console.log(hashTableGetElementByKey("pink", 10, colorsHashTable));

@@ -1,5 +1,6 @@
 const { HashTable } = require("./hash-table");
 const { restaurants } = require("./restaurants");
+const { inspectObject } = require("../logUtils");
 
 let uberEats = new HashTable();
 
@@ -34,11 +35,18 @@ function populateHashTable(restaurants, ht) {
                 }
             }
         }
-        console.log(placeProps);
         // HERE WE CAN POPULATE A HASH TABLE USING KEY AND PROPS
-        //ht.set(key, placeProps);
+        // inserting elements into the hash table
+        ht.set(key, placeProps);
     })
 }
 
 console.log(restaurants.length);
 populateHashTable(restaurants, uberEats);
+inspectObject(uberEats);
+
+console.log(uberEats.get("inner"));
+console.log(uberEats.get("donnas"));
+console.log(uberEats.get("charles"));
+console.log(uberEats.get("chnorth"));
+console.log(uberEats.get("umbrellacorp")); // undefined element

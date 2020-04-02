@@ -114,6 +114,7 @@ let restaurants = [ {
     "item" : "Greektown",
     "count" : "22"
 }, {
+    "code" : "chnorth",
     "item" : "Charles North",
     "count" : "22"
 }, {

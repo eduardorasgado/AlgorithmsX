@@ -132,6 +132,30 @@ function hash(key, arrayLength) {
 let colorsToAdd = ["pink", "blue", "black",
     "white", "red", "orange", "green", "cyan", "maroon", "grey"];
 
+console.log("hash results: \n");
 colorsToAdd.map((color) => {
     console.log(color, hash(color, colorsToAdd.length));
+})
+
+/***
+ *      USE OF PRIME NUMBERS
+ *
+ *  The prime number in the hash is
+ * @param key
+ * @param arrayLen
+ * @returns {number}
+ */
+function hashRevisited(key, arrayLen) {
+    let total = 0;
+    let PRIME = 31;
+    for(let i = 0; i < Math.min(key.length, 100); i++) {
+        let keyAscii = key[i].charCodeAt(0) - 96
+        total = (keyAscii * PRIME + total) % arrayLen;
+    }
+    return total;
+}
+
+console.log("\nhash revisited results:");
+colorsToAdd.map((color) => {
+    console.log(color, hashRevisited(color, colorsToAdd.length));
 })

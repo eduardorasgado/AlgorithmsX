@@ -17,7 +17,7 @@ computerIds.map((id) => {
     network.addVertex(id);
 })
 
-// inserting edges to each vertexes
+// inserting edges to each one of the vertexes
 computerIds.map((id) => {
     let sampling = Math.floor(
         (Math.random() * 100) % network.getSize())

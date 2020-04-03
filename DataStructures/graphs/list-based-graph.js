@@ -26,21 +26,30 @@ class Graph {
 
     /**
      * adding edges to between two vertexes, avoiding to repeat insertions
-     * @param vertex1
-     * @param vertex2
+     * @param xVertex
+     * @param yVertex
      */
-    addEdge(vertex1, vertex2) {
+    addEdge(xVertex, yVertex) {
         // not inserting vertex itself
-        if(vertex1 !== vertex2) {
-            if(this.adjancencyList[vertex1] && this.adjancencyList[vertex2]) {
+        if(xVertex !== yVertex) {
+            if(this.adjancencyList[xVertex] && this.adjancencyList[yVertex]) {
                 // verifying not repeating insertions
-                if(!this.adjancencyList[vertex1].includes(vertex2) &&
-                    !this.adjancencyList[vertex2].includes(vertex1)) {
-                    this.adjancencyList[vertex1].push(vertex2);
-                    this.adjancencyList[vertex2].push(vertex1);
+                if(!this.adjacent(xVertex, yVertex)) {
+                    this.adjancencyList[xVertex].push(yVertex);
+                    this.adjancencyList[yVertex].push(xVertex);
                 }
             }
         }
+    }
+
+    /**
+     * Tests wheter there is an edge from the vertex x to the vertex y
+     * @param xVertex
+     * @param yVertex
+     * @returns {boolean}
+     */
+    adjacent(xVertex, yVertex) {
+        return this.adjancencyList[xVertex].includes(yVertex);
     }
 
     /**
@@ -51,7 +60,8 @@ class Graph {
         let size = 0;
         let vertex;
         for(vertex in this.adjancencyList) {
-            ++size;
+            if(this.adjancencyList.hasOwnProperty(vertex))
+                ++size;
         }
         return size;
     }

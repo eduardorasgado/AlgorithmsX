@@ -60,4 +60,18 @@
  *
  *          TYPES OF GRAPHS
  *
+ *              Tree - It is an undirected graph in which any two vertices are
+ *              connected by exactly one path.
+ *
+ *              Undirected graphs: bidirectional connections between nodes
+ *
+ *              Directed graphs: connection between node A and node B follows a single
+ *              direction, that means we can just either A -> B or A <- B, not both
+ *              at the same time.
+ *
+ *              Weighted graph: Every edge has a value, a cost, edge could represent a
+ *              distance and the value of the edge is that distance.
+ *
+ *              Unweighted: absence of a value associated to each edge between vertexes.
+ *
  * */

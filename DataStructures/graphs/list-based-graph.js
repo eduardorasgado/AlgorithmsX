@@ -9,7 +9,7 @@
 class Graph {
     constructor() {
         // using built in JS hash table
-        this.adjancencyList = {};
+        this.adjacencyList = {};
     }
 
     /**
@@ -20,26 +20,59 @@ class Graph {
      *  and set its value to be an empty array
      */
     addVertex(vertex) {
-        if(!this.adjancencyList[vertex])
-            this.adjancencyList[vertex] = [];
+        if(!this.adjacencyList[vertex])
+            this.adjacencyList[vertex] = [];
     }
 
     /**
      * adding edges to between two vertexes, avoiding to repeat insertions
+     * STEPS
+     *  Accepts two vertices, we can call them vertex1 and vertex2
+     *  Find in the adjacency list the key of vertex1 and push vertex2 to the array
+     *  Find in the adjacency list the key of vertex2 and push vertex1 to the array
+     *  Dont worry about handling errors/invalid vertices
      * @param xVertex
      * @param yVertex
      */
     addEdge(xVertex, yVertex) {
         // not inserting vertex itself
         if(xVertex !== yVertex) {
-            if(this.adjancencyList[xVertex] && this.adjancencyList[yVertex]) {
-                // verifying not repeating insertions
+            // valid vertexes
+            if(this.adjacencyList[xVertex] && this.adjacencyList[yVertex]) {
+                // verifying not repeating insertions(adding another edge between two vertexes)
                 if(!this.adjacent(xVertex, yVertex)) {
-                    this.adjancencyList[xVertex].push(yVertex);
-                    this.adjancencyList[yVertex].push(xVertex);
+                    this.adjacencyList[xVertex].push(yVertex);
+                    this.adjacencyList[yVertex].push(xVertex);
                 }
             }
         }
+    }
+
+    removeVertex() {
+        //
+    }
+
+    removeEdge(xVertex, yVertex) {
+        if(xVertex !== yVertex) {
+            if(this.adjacencyList[xVertex] && this.adjacencyList[yVertex]) {
+                if(this.adjacent(xVertex, yVertex)){
+                    console.log(this.adjacencyList[xVertex]
+                        .filter((edge) => edge !== yVertex));
+                    this.adjacencyList[yVertex]
+                        .filter(edge => edge !== xVertex);
+                }
+            }
+        }
+    }
+
+    /**
+     *
+     * @param vertex
+     * @returns {undefined|*}
+     */
+    getVertex(vertex) {
+        if(!this.adjacencyList[vertex]) return undefined;
+        return this.adjacencyList[vertex];
     }
 
     /**
@@ -49,7 +82,7 @@ class Graph {
      * @returns {boolean}
      */
     adjacent(xVertex, yVertex) {
-        return this.adjancencyList[xVertex].includes(yVertex);
+        return this.adjacencyList[xVertex].includes(yVertex);
     }
 
     /**
@@ -59,8 +92,8 @@ class Graph {
     getSize() {
         let size = 0;
         let vertex;
-        for(vertex in this.adjancencyList) {
-            if(this.adjancencyList.hasOwnProperty(vertex))
+        for(vertex in this.adjacencyList) {
+            if(this.adjacencyList.hasOwnProperty(vertex))
                 ++size;
         }
         return size;

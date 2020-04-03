@@ -1,32 +1,55 @@
 const { Graph } = require("./list-based-graph");
 
-let computerIds = [
-    '12.35.54.1',
-    '13.56.2.1',
-    '12.66.44.33',
-    '192.168.23.1',
-    '255.255.255.1',
-    '255.255.1.1',
-    '127.0.0.1'
+let cities = [
+    'Tokyo',
+    'Mexico City',
+    'Bogota',
+    'Madrid',
+    'San Diego',
+    'Shaghai',
+    'New York',
+    'Sao Paulo',
+    'Praga',
+    'Kiev',
+    'Moscow'
 ]
 
-let network = new Graph();
+function sampleLen(graph) {
+    return Math.floor(
+        (Math.random() * 100) % graph.getSize())
+}
+
+let worldwideFlights = new Graph();
 
 // inserting vertexes
-computerIds.map((id) => {
-    network.addVertex(id);
+cities.map((id) => {
+    worldwideFlights.addVertex(id);
 })
-
+console.log(worldwideFlights);
 // inserting edges to each one of the vertexes
-computerIds.map((id) => {
-    let sampling = Math.floor(
-        (Math.random() * 100) % network.getSize())
+cities.map((id) => {
+    let sampling = sampleLen(worldwideFlights);
 
     for (let i = 0; i < sampling; i++) {
-        let edge = Math.floor(
-            (Math.random() * 100) % network.getSize());
+        let edge = sampleLen(worldwideFlights);
         // repetitions are avoided in addEdge method
-        network.addEdge(computerIds[edge], id)
+        worldwideFlights.addEdge(cities[edge], id)
     }
 })
-console.log(network);
+console.log(worldwideFlights);
+
+console.log("\n----removing from graph----");
+function printCitiesRelated(city) {
+    let citiesWithin = worldwideFlights.getVertex(city);
+    console.log(city, citiesWithin);
+    return citiesWithin[0];
+}
+let xCity = cities[sampleLen(worldwideFlights)];
+let yCity = printCitiesRelated(xCity);
+printCitiesRelated(yCity);
+
+worldwideFlights.removeEdge(xCity, yCity);
+
+printCitiesRelated(xCity);
+printCitiesRelated(yCity);
+

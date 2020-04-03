@@ -1,5 +1,6 @@
 /**
  * Represents a key value data structure.
+ * The key for this hash table must be a string
  * @class
  */
 class HashTable {
@@ -48,10 +49,8 @@ class HashTable {
      */
     set(key, value) {
         let index = this._hash(key);
-        if(!this.keyMap[index]) this.keyMap[index] = [[key, value]];
-        else {
-            this.keyMap[index].push([key, value]);
-        }
+        if(!this.keyMap[index]) this.keyMap[index] = [];
+        this.keyMap[index].push([key, value]);
     }
 
     /**
@@ -71,9 +70,42 @@ class HashTable {
         let index = this._hash(key);
         let elements = this.keyMap[index];
         for(let element of elements) {
-            if(element[0] === key) return element;
+            // returning the props or value only, not the key
+            if(element[0] === key) return element[1];
         }
         return undefined;
+    }
+
+    /**
+     * Loops through the hash table array and returns an array of keys in the
+     * table
+     */
+    keys() {
+        let keys = [];
+        for(let elements of this.keyMap) {
+            if(elements) {
+                for(let object of elements) {
+                    keys.push(object[0]);
+                }
+            }
+        }
+        return keys;
+    }
+
+    /**
+     * Loops through the hash table array and returns an array of values in the
+     * table
+     */
+    values() {
+        let values = [];
+        for(let elements of this.keyMap) {
+            if(elements) {
+                for(let object of elements) {
+                    values.push(object[1]);
+                }
+            }
+        }
+        return values;
     }
 }
 

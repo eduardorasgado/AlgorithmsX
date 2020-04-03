@@ -50,3 +50,8 @@ console.log(uberEats.get("donnas"));
 console.log(uberEats.get("charles"));
 console.log(uberEats.get("chnorth"));
 console.log(uberEats.get("umbrellacorp")); // undefined element
+
+console.log("----getting the keys ---");
+console.log(uberEats.keys());
+console.log("----getting the values ---");
+console.log(uberEats.values());

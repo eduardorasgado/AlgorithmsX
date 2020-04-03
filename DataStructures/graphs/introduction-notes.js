@@ -74,4 +74,101 @@
  *
  *              Unweighted: absence of a value associated to each edge between vertexes.
  *
+ *          GRAPH REPRESENTATION
+ *
+ *              - Representation using an Adjancency Matrix
+ *
+ *                  Lets take the next undirected graph:
+ *
+ *                  A____B___
+ *                 /         \
+ *                F          C
+ *                 \        /
+ *                  E______D
+ *
+ *                  Adjancency Matrix is:
+ *
+ *                     A  B  C  D  E  F
+ *                  A  0  1  0  0  0  1
+ *                  B  1  0  1  0  0  0
+ *                  C  0  1  0  1  0  0
+ *                  D  0  0  1  0  1  0
+ *                  E  0  0  0  1  0  1
+ *                  F  1  0  0  0  1  0
+ *
+ *                  Storing edges between nodes
+ *                      1: edge presence
+ *                      0: edge absence
+ *
+ *              - Representation using an Adjancency List
+ *
+ *                  Let's take the next undirected graph
+ *
+ *                    __0____1_
+ *                   /         \
+ *                  5           2
+ *                   \        /
+ *                    4______3
+ *
+ *                  Then, the adjancency list is:
+ *
+ *                     [
+ *                  0    [1, 5],
+ *                  1    [0, 2],
+ *                  2    [1, 3],
+ *                  3    [2, 4],
+ *                  4    [3, 5],
+ *                  5    [0, 4]
+ *                     ]
+ *
+ *                  What if we want to store even different numbers not ordered or
+ *                  consecutives or even strings, then we can use Hash Tables
+ *
+ *                  Let's take the next undirected graph
+ *
+ *                        A________B
+ *                       /          \
+ *                      F           C
+ *                      \           /
+ *                       E_________D
+ *
+ *                   Then, the adjancency list will be the next hash table:
+ *
+ *                      [
+ *                          "A": ["B", "F"],
+ *                          "B": ["A", "C"],
+ *                          "C": ["B", "D"],
+ *                          "D": ["C", "E"],
+ *                          "E": ["F", "D"],
+ *                          "F": ["A", "E"],
+ *                      ]
+ *
+ *          ADJANCENCY LIST VS ADJANCENCY MATRIX: DIFFERENCES AND BIG O
+ *
+ *              |V| = number of vertices
+ *              |E| = number of edges
+ *
+ *              ______________________________________________________________
+ *              |   Operation    |   Adjancency list  |    Adjancency Matrix |
+ *              |________________|____________________|______________________|
+ *              |Add Vertex      |        O(1)        |        O(|V^2|)      |
+ *              |Add Edge        |        0(1)        |        O(1)          |
+ *              |Remove Vertex   |    O(|V| + |E|)    |        O(|V^2|)      |
+ *              |Remove Edge     |    O(|E|)          |        O(1)          |
+ *              |Query           |    O(|V| + |E|)    |        O(1)          |
+ *              |Storage(space)  |    O(|V| + |E|)    |        O(|V^2|)      |
+ *              |____________________________________________________________|
+ *
+ *          ADJANCENCY LIST VS ADJANCENCY MATRIX: DIFFERENCES
+ *
+ *              Lists:
+ *                [O] Can take up less space(in sparse graphs)
+ *                [O] Faster to iterate over all edges
+ *                [X] Can be slower to lookup specific edge
+ *
+ *              Matrix:
+ *                [X] Takes up more space(in sparse graphs)
+ *                [X] Slower to iterate over all edges
+ *                [0] Faster to lookup specific edge
+ *
  * */

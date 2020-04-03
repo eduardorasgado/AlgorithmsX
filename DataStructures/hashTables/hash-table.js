@@ -46,11 +46,30 @@ class HashTable {
      * Accepts a key and a value
      * Hash the key
      * Stores the key- value pair in the hash table array via separate chaining
+     * Usually we should avoid inserting repeating elements
      */
     set(key, value) {
+        // we can verify if we are using a string as key in here
         let index = this._hash(key);
+        //console.log("key:", key);
         if(!this.keyMap[index]) this.keyMap[index] = [];
-        this.keyMap[index].push([key, value]);
+        let elements = this.keyMap[index];
+        let elementsLen = elements.length;
+        //console.log(elements.length);
+        let anyChange;
+        // handling possible duplicate key, update or insert
+        if(elementsLen > 0){
+            anyChange = false;
+            for(let i = 0; i < elementsLen; i++) {
+                if(elements[i][0] === key) {
+                    this.keyMap[index][i][1] = value;
+                    anyChange = true;
+                }
+            }
+            if(!anyChange) elements.push([key, value]);
+        } else {
+            elements.push([key, value]);
+        }
     }
 
     /**
@@ -93,15 +112,19 @@ class HashTable {
     }
 
     /**
-     * Loops through the hash table array and returns an array of values in the
+     * * Loops through the hash table array and returns an array of values in the
      * table
+     * values contains unique elements.
+     *
+     * @returns {[]}
      */
     values() {
         let values = [];
         for(let elements of this.keyMap) {
             if(elements) {
                 for(let object of elements) {
-                    values.push(object[1]);
+                    if(!values.includes(object[1]))
+                        values.push(object[1]);
                 }
             }
         }

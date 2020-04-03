@@ -49,9 +49,30 @@ console.log(uberEats.get("inner"));
 console.log(uberEats.get("donnas"));
 console.log(uberEats.get("charles"));
 console.log(uberEats.get("chnorth"));
+console.log(uberEats.get("ruths"));
 console.log(uberEats.get("umbrellacorp")); // undefined element
 
 console.log("----getting the keys ---");
-console.log(uberEats.keys());
+//console.log(uberEats.keys());
 console.log("----getting the values ---");
-console.log(uberEats.values());
+//console.log(uberEats.values());
+
+console.log("--- working with simple structures ---");
+let colorsToAdd = [["pink", "A fucking good color"],
+    ["blue", "ranger blue is blue"],
+    ["black", "orange is the new black"],
+    ["white", "#FFFFF"],
+    ["red", "red ranger, the leader"],
+    ["orange", "#FFFFF"],
+    ["orange", "Also a fruit"],
+    ["green", "a lovely green pokemon"],
+    ["some fucking totally different color looong name", "a color like the others"]];
+
+//inspectObject(colorsToAdd);
+let colors = new HashTable();
+
+colorsToAdd.map((color) => {
+    colors.set(color[0], color[1]);
+})
+inspectObject(colors);
+console.log(colors.values());

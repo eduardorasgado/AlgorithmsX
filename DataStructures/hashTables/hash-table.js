@@ -51,15 +51,12 @@ class HashTable {
     set(key, value) {
         // we can verify if we are using a string as key in here
         let index = this._hash(key);
-        //console.log("key:", key);
         if(!this.keyMap[index]) this.keyMap[index] = [];
         let elements = this.keyMap[index];
         let elementsLen = elements.length;
-        //console.log(elements.length);
-        let anyChange;
         // handling possible duplicate key, update or insert
         if(elementsLen > 0){
-            anyChange = false;
+            let anyChange = false;
             for(let i = 0; i < elementsLen; i++) {
                 if(elements[i][0] === key) {
                     this.keyMap[index][i][1] = value;

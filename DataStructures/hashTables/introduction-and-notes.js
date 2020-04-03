@@ -96,6 +96,22 @@
  *              It depends, but supposing a good implementation(best case):
  *                  Insertion, deletion and retrieval occur in constant time.
  *
+ *              Average cases:
+ *
+ *                  Insert    - O(1)
+ *                  Deletion  - O(1)
+ *                  Access    - O(1)
+ *
+ *         RECAP
+ *
+ *          HT are collections of key-value pairs
+ *          HT can find values quickly given a key
+ *          HT can add new key-values quickly
+ *          HT store data in a large array, and work by hashing the keys
+ *          A good hash should be fast, distribute keys uniformly, and be
+ *            deterministic
+ *          Separate chaining and linear probing are two stratgies used to deal
+ *            with two keys that hash to the same index.
  * */
 
 /**

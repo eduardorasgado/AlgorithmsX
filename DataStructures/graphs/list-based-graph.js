@@ -48,8 +48,29 @@ class Graph {
         }
     }
 
-    removeVertex() {
-        //
+    /**
+     * Remove a vertex and neighbor connections to that vertex
+     * STEPS:
+     *  Accept a vertex to remove
+     *  Loop as long as there are any other vertices in the adjancency list for that
+     *      vertex
+     *  Inside the loop, call oremoveEdge function with the vertex weare removing
+     *      and any values in the adjacency list for that vertex
+     *  Delete the key in the adjacency list for that vertex.
+     *
+     * @param vertexToRemove
+     */
+    removeVertex(vertexToRemove) {
+        if(this.adjacencyList[vertexToRemove]) {
+            for(let vertex in this.adjacencyList) {
+                if(this.adjacencyList.hasOwnProperty(vertex)
+                    && vertex !== vertexToRemove) {
+                    console.log(vertexToRemove, vertex)
+                    this.removeEdge(vertexToRemove, vertex);
+                }
+            }
+            delete this.adjacencyList[vertexToRemove];
+        }
     }
 
     /**

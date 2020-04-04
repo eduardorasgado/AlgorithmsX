@@ -52,5 +52,6 @@ worldwideFlights.removeEdge(xCity, yCity);
 
 printCitiesRelated(xCity);
 printCitiesRelated(yCity);
-//console.log("\n---after removing--");
-//console.log(worldwideFlights);
+console.log("\n---after removing--");
+worldwideFlights.removeVertex(cities.slice(-1)[0]);
+console.log(worldwideFlights);

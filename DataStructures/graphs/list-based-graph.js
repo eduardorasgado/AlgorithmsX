@@ -52,14 +52,24 @@ class Graph {
         //
     }
 
+    /**
+     * Removing an edge between two nodes or vertexes.
+     * STEPS
+     *  should accept two vertices, we will call them vertex1 and vertex2
+     *  should reassign the key of vertex1 to be an array that does not contain vertex2
+     *  should reassign the key of vertex2 to be an array that does not contain vertex1
+     *  do not worry about handling errors/ invalid vertices
+     * @param xVertex
+     * @param yVertex
+     */
     removeEdge(xVertex, yVertex) {
         if(xVertex !== yVertex) {
             if(this.adjacencyList[xVertex] && this.adjacencyList[yVertex]) {
                 if(this.adjacent(xVertex, yVertex)){
-                    console.log(this.adjacencyList[xVertex]
-                        .filter((edge) => edge !== yVertex));
-                    this.adjacencyList[yVertex]
-                        .filter(edge => edge !== xVertex);
+                    this.adjacencyList[xVertex] = this.adjacencyList[xVertex]
+                        .filter((element) => element !== yVertex);
+                    this.adjacencyList[yVertex] = this.adjacencyList[yVertex]
+                        .filter((element) => element !== xVertex);
                 }
             }
         }

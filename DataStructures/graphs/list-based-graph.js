@@ -62,12 +62,9 @@ class Graph {
      */
     removeVertex(vertexToRemove) {
         if(this.adjacencyList[vertexToRemove]) {
-            for(let vertex in this.adjacencyList) {
-                if(this.adjacencyList.hasOwnProperty(vertex)
-                    && vertex !== vertexToRemove) {
-                    console.log(vertexToRemove, vertex)
-                    this.removeEdge(vertexToRemove, vertex);
-                }
+            let vertex
+            for(vertex of this.adjacencyList[vertexToRemove]) {
+                this.removeEdge(vertexToRemove, vertex);
             }
             delete this.adjacencyList[vertexToRemove];
         }

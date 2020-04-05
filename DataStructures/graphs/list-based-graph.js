@@ -144,7 +144,9 @@ class Graph {
      *  related to first vertex related until we reach no connections or all explored
      *  before going next relation, lets take this example:
      *
-     *  graph:                   (xn are the marked as visited at time n)
+     *  vertex to start(like a root):A
+     *
+     *  graph:               (xn are the marked as visited at time n)
      *
      *  A -> B, C, D           *  A(x0) -> B(x1), C(x2), D(x7)
      *  B -> C, E              *  B(x1) -> C(x2), E(x3)
@@ -157,20 +159,22 @@ class Graph {
      *
      *  dfsResult = [A, B, C, E, K, Z, D ]
      */
-    dephFirstSearchRecursive(vertex) {
-        if(this.adjacencyList[vertex]) {
+    dephFirstSearchRecursive(vertexToExplore) {
+        if(this.adjacencyList[vertexToExplore]) {
             let resultList = []
             let graph = this.adjacencyList;
-            function dfsRecursive(v) {
-                if(!vertex.length) return;
-                resultList.push(v);
+            let visited = {}; // using this can improve fastness more than a list
+            function dfsRecursive(vertex) {
+                //if(!vertex.length) return;
+                resultList.push(vertex);
+                visited[vertex] = true;
                 let element;
-                for(element of graph[v]) {
-                    if(!resultList.includes(element))
+                for(element of graph[vertex]) {
+                    if(!visited[element])
                         dfsRecursive(element)
                 }
             }
-            dfsRecursive(vertex);
+            dfsRecursive(vertexToExplore);
             return resultList;
         }
         return undefined;

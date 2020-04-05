@@ -11,7 +11,11 @@ let cities = [
     'Sao Paulo',
     'Praga',
     'Kiev',
-    'Moscow'
+    'Moscow',
+    'Toronto',
+    'London',
+    'Cairo',
+    'Caracas'
 ]
 
 function sampleLen(graph) {
@@ -28,7 +32,7 @@ cities.map((id) => {
 console.log(worldwideFlights);
 // inserting edges to each one of the vertexes
 cities.map((id) => {
-    let sampling = 1//sampleLen(worldwideFlights);
+    let sampling = 1 //sampleLen(worldwideFlights);
 
     for (let i = 0; i < sampling; i++) {
         let edge = sampleLen(worldwideFlights);
@@ -42,7 +46,7 @@ console.log("\n----removing from graph----");
 function printCitiesRelated(city) {
     let citiesWithin = worldwideFlights.getVertex(city);
     console.log(city, citiesWithin);
-    return citiesWithin[0];
+    if(citiesWithin.length > 0) return citiesWithin[0];
 }
 let xCity = cities[sampleLen(worldwideFlights)];
 let yCity = printCitiesRelated(xCity);

@@ -28,7 +28,7 @@ cities.map((id) => {
 console.log(worldwideFlights);
 // inserting edges to each one of the vertexes
 cities.map((id) => {
-    let sampling = sampleLen(worldwideFlights);
+    let sampling = 1//sampleLen(worldwideFlights);
 
     for (let i = 0; i < sampling; i++) {
         let edge = sampleLen(worldwideFlights);
@@ -55,3 +55,16 @@ printCitiesRelated(yCity);
 console.log("\n---after removing--");
 worldwideFlights.removeVertex(cities.slice(-2)[0]);
 console.log(worldwideFlights);
+
+/**
+ *  GRAPH TRAVERSAL
+ *
+ * */
+console.log("graph traversal==================");
+// for(let element in worldwideFlights.adjacencyList) {
+//     if(worldwideFlights.adjacencyList.hasOwnProperty(element))
+//         console.log(element);
+// }
+console.log(
+    worldwideFlights
+        .dephFirstSearchRecursive(cities[0]));

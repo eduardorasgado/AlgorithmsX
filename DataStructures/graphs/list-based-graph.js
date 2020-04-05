@@ -94,7 +94,7 @@ class Graph {
     }
 
     /**
-     *
+     * List all the neighbors from a vertex
      * @param vertex
      * @returns {undefined|*}
      */
@@ -125,6 +125,55 @@ class Graph {
                 ++size;
         }
         return size;
+    }
+
+    /**
+     *      GRAPH TRAVERSAL USES
+     *
+     *  Peer to peer networking
+     *  Web crawlers
+     *  Finding "closest" matches/ recomendations
+     *  Shortes path problems
+     *      GPS Navigation
+     *      Solving mazes
+     *      AI(shortest path to win the game)
+     *
+     *
+     *  DEPH FIRST SEARCH GRAPH TRAVERSAL
+     *  Collect all the vertexes related to vertex X, but exploring all elements
+     *  related to first vertex related until we reach no connections or all explored
+     *  before going next relation, lets take this example:
+     *
+     *  graph:                   (xn are the marked as visited at time n)
+     *
+     *  A -> B, C, D           *  A(x0) -> B(x1), C(x2), D(x7)
+     *  B -> C, E              *  B(x1) -> C(x2), E(x3)
+     *  E -> K, G, B           *  E(x3) -> K(x4), G(x5), B(x1)
+     *  C -> A, B              *  C(x2) -> A(x0), B(x1)
+     *  D -> A                 *  D(x7) -> A(x0)
+     *  K -> E                 *  K(x4) -> E(x3)
+     *  G -> E, Z              *  G(x5) -> E(x3), Z(x6)
+     *  Z -> G                 *  Z(x6) -> G(x5)
+     *
+     *  dfsResult = [A, B, C, E, K, Z, D ]
+     */
+    dephFirstSearchRecursive(vertex) {
+        if(this.adjacencyList[vertex]) {
+            let resultList = []
+            let graph = this.adjacencyList;
+            function dfsRecursive(v) {
+                if(!vertex.length) return;
+                resultList.push(v);
+                let element;
+                for(element of graph[v]) {
+                    if(!resultList.includes(element))
+                        dfsRecursive(element)
+                }
+            }
+            dfsRecursive(vertex);
+            return resultList;
+        }
+        return undefined;
     }
 }
 

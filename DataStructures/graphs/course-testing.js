@@ -20,3 +20,4 @@ g.addEdge("E","F");
 console.log(g);
 console.log(g.dephFirstSearchRecursive("A"));
 console.log(g.dephFirstSearchRecursive(""));
+console.log(g.dephFirstSearchIterative("A"));

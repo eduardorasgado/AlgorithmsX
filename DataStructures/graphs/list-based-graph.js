@@ -189,6 +189,28 @@ class Graph {
 
         return resultList;
     }
+
+    dephFirstSearchIterative(vertex) {
+        if(!this.adjacencyList[vertex]) return undefined;
+        let resultList = [];
+        let visits = [];
+        let visited = {};
+        visits.push(vertex)
+        let visitAdded;
+        while (visits.length > 0) {
+            vertex = visits.shift();
+            if(!visited[vertex]){
+                resultList.push(vertex);
+                visited[vertex] = true
+            }
+            visitAdded = []
+            for (let element of this.adjacencyList[vertex]) {
+                if (!visited[element]) visitAdded.push(element);
+            }
+            visits = visitAdded.concat(visits);
+        }
+        return resultList;
+    }
 }
 
 exports.Graph = Graph;

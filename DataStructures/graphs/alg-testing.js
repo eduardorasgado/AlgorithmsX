@@ -69,6 +69,11 @@ console.log("graph traversal==================");
 //     if(worldwideFlights.adjacencyList.hasOwnProperty(element))
 //         console.log(element);
 // }
+console.log("----recursively----");
+console.log(
+    worldwideFlights
+        .dephFirstSearchRecursive(cities[0]));
+console.log("\n----iteratively----");
 console.log(
     worldwideFlights
         .dephFirstSearchRecursive(cities[0]));

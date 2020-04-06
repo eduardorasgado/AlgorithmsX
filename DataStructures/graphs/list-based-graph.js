@@ -158,26 +158,36 @@ class Graph {
      *  Z -> G                 *  Z(x6) -> G(x5)
      *
      *  dfsResult = [A, B, C, E, K, Z, D ]
+     *
+     * STEPS:
+     *  Accept a starting node
+     *  Create a list to store the end result, to be returned at the very end
+     *  Create an object to store visited vertices
+     *  Create a helper function which accepts a vertex
+     *      The helper function should return early if the vertex is empty
+     *      The helper function should place the vertex it accespts into the visited
+     *          object and push that vertex into the result array
+     *      Loop over all of the values in the adjacenctList for that vertex
+     *      If any of those values have not been visited, recursively invoke the
+     *          helper function with that vertex
      */
     dephFirstSearchRecursive(vertexToExplore) {
-        if(this.adjacencyList[vertexToExplore]) {
-            let resultList = []
-            let graph = this.adjacencyList;
-            let visited = {}; // using this can improve fastness more than a list
-            function dfsRecursive(vertex) {
-                //if(!vertex.length) return;
-                resultList.push(vertex);
-                visited[vertex] = true;
-                let element;
-                for(element of graph[vertex]) {
-                    if(!visited[element])
-                        dfsRecursive(element)
-                }
+        if(!this.adjacencyList[vertexToExplore]) return undefined;
+        let resultList = []
+        let graph = this.adjacencyList;
+        let visited = {}; // using this can improve fastness more than a list
+        (function dfs(vertex) {
+            //if(!vertex) return null;
+            resultList.push(vertex);
+            visited[vertex] = true;
+            let element;
+            for(element of graph[vertex]) {
+                if(!visited[element])
+                    dfs(element)
             }
-            dfsRecursive(vertexToExplore);
-            return resultList;
-        }
-        return undefined;
+        })(vertexToExplore);
+
+        return resultList;
     }
 }
 

@@ -55,14 +55,31 @@ class PriorityQueue {
             [this.items[secondIndex], this.items[firstIndex]];
     }
 
+    /**
+     * return the minimum priority node within the PQ
+     * @returns {undefined|*}
+     */
     peek() {
-        //
+        if(!this.size) return undefined;
+        return this.items[0];
     }
 
     dequeue() {
-        //
+        let nodeToDelete = this.items[0];
+        this.items[0] = this.items[this.size - 1];
+        this.items.pop();
+        --this.size;
+        this.sinkDown();
+        return nodeToDelete;
     }
 
+    /**
+     * Insert a node with certain priority at last position and then
+     * it reorders until it reach a correct position given min PQ
+     * @param priority
+     * @param value
+     * @returns {PriorityQueue}
+     */
     enqueue(priority, value) {
         let node = new Node(priority, value);
         this.items[this.size] = node;
@@ -72,6 +89,10 @@ class PriorityQueue {
         //
     }
 
+    /**
+     * Reorders last element within the PQ by bubbling up or heapify up
+     * operation.
+     */
     bubbleUp() {
         let currentIndex = this.size - 1;
         while(this.hasParent(currentIndex)
@@ -82,7 +103,15 @@ class PriorityQueue {
     }
 
     sinkDown() {
-        //
+        let currentIndex = 0;
+        let smallestChildIndex;
+        while(this.hasLeftChild(currentIndex)) {
+            smallestChildIndex = this.getLeftChildIndex(currentIndex);
+            if(this.getRightChild(currentIndex).priority
+                > this.items[smallestChildIndex]) {
+                smallestChildIndex = this.getRightChildIndex(currentIndex);
+            }
+        }
     }
 
     show() {

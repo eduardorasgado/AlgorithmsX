@@ -29,3 +29,44 @@ console.log(g.depthFirstSearchIterative("E"));
 
 console.log("===== BREADTH FIRST SEARCH ====");
 console.log(g.breadthFirstSearch("A"));
+
+console.log("---------numerical testing----------");
+let numericalGraph = new Graph();
+
+let num = 0;
+let numArr = Array.from({length: 12}, ()=> {
+    return num++;
+})
+numArr.forEach((num) => {
+    numericalGraph.addVertex(num);
+})
+
+numericalGraph.addEdge(0, 1);
+numericalGraph.addEdge(0, 2);
+numericalGraph.addEdge(0, 9);
+numericalGraph.addEdge(1, 6);
+numericalGraph.addEdge(1, 3);
+numericalGraph.addEdge(1, 11);
+numericalGraph.addEdge(2, 6);
+numericalGraph.addEdge(9, 4);
+numericalGraph.addEdge(9, 8);
+numericalGraph.addEdge(11, 5);
+numericalGraph.addEdge(3, 5);
+numericalGraph.addEdge(6, 4);
+numericalGraph.addEdge(6, 5);
+numericalGraph.addEdge(4, 7);
+numericalGraph.addEdge(4, 8);
+numericalGraph.addEdge(7, 5);
+numericalGraph.addEdge(7, 10);
+numericalGraph.addEdge(8, 10);
+console.log(numericalGraph);
+
+console.log(
+    "depth first search: ",
+    numericalGraph
+        .depthFirstSearchRecursive(0));
+
+console.log(
+    "breadth first search: ",
+    numericalGraph
+        .breadthFirstSearch(0));

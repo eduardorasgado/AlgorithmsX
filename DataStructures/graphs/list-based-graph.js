@@ -190,24 +190,41 @@ class Graph {
         return resultList;
     }
 
+    /**
+     * STEPS:
+     *  Accept a starting node
+     *  Create a stack to help use keep track of vertices(use a list/array)
+     *  Create a list to store the end result, to be returned at the very end
+     *  Create an object to store visited vertices
+     *  Add the starting vertex to the stack, and mark it visited
+     *  While the stack has something in it:
+     *      pop the next vertex from the stack
+     *      if that vertex has'nt been visited yet:
+     *          mark it as visited
+     *          add it to the result list
+     *          push all of its neightbors into the stack
+     *  Return the result array
+     *
+     * @param vertex
+     * @returns {[]|undefined}
+     */
     dephFirstSearchIterative(vertex) {
         if(!this.adjacencyList[vertex]) return undefined;
         let resultList = [];
-        let visits = [];
+        let visits = [vertex]; // array as a stack using push and pop to improve performance
         let visited = {};
-        visits.push(vertex)
-        let visitAdded;
+        let currentVertex;
         while (visits.length > 0) {
-            vertex = visits.shift();
+            vertex = visits.pop();
             if(!visited[vertex]){
                 resultList.push(vertex);
                 visited[vertex] = true
+                currentVertex = this.adjacencyList[vertex];
+                for (let i = currentVertex.length - 1; i >= 0; i--) {
+                    if(!visited[currentVertex[i]])
+                        visits.push(currentVertex[i]);
+                }
             }
-            visitAdded = []
-            for (let element of this.adjacencyList[vertex]) {
-                if (!visited[element]) visitAdded.push(element);
-            }
-            visits = visitAdded.concat(visits);
         }
         return resultList;
     }

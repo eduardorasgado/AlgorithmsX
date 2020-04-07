@@ -46,7 +46,9 @@ console.log("\n----removing from graph----");
 function printCitiesRelated(city) {
     let citiesWithin = worldwideFlights.getVertex(city);
     console.log(city, citiesWithin);
-    if(citiesWithin.length > 0) return citiesWithin[0];
+    if(citiesWithin)
+        if(citiesWithin.length > 0)
+            return citiesWithin[0];
 }
 let xCity = cities[sampleLen(worldwideFlights)];
 let yCity = printCitiesRelated(xCity);
@@ -76,4 +78,4 @@ console.log(
 console.log("\n----iteratively----");
 console.log(
     worldwideFlights
-        .dephFirstSearchRecursive(cities[0]));
+        .dephFirstSearchIterative(cities[0]));

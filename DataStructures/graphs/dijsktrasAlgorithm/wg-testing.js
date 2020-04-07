@@ -46,3 +46,20 @@ cities.map((id) => {
     }
 })
 inspectObject(worldwideFlights);
+
+
+console.log("graph traversal==================");
+// for(let element in worldwideFlights.adjacencyList) {
+//     if(worldwideFlights.adjacencyList.hasOwnProperty(element))
+//         console.log(element);
+// }
+console.log("====== DEPH FIRST SEARCH =====");
+
+console.log("----recursively----");
+console.log(`FROM ${cities[0]}`,
+    worldwideFlights
+        .depthFirstSearch(cities[0]));
+
+console.log("===== BREADTH FIRST SEARCH ====");
+console.log(worldwideFlights
+    .breadthFirstSearch(cities[0]));

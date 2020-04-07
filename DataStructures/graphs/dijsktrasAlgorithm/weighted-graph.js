@@ -1,4 +1,19 @@
 /**
+ * For weighted graphs
+ */
+class Edge {
+    constructor(vertex, weight) {
+        this.toVertex = vertex;
+        this.weight = weight;
+    }
+
+    getToVertex() { return this.toVertex; }
+    setToVertex(vd) { this.toVertex = vd; }
+    getWeight() { return this.weight; }
+    setWeight(weight) { this.weight = weight; }
+}
+
+/**
  * Undirected, weighted graph
  * @class
  */
@@ -15,8 +30,10 @@ class WeightedGraph {
         if(xVertex !== yVertex) {
             if(this.adjacencyList[xVertex] && this.adjacencyList[yVertex]){
                 if(!this.adjacent(xVertex, yVertex)) {
-                    this.adjacencyList[xVertex].push([yVertex, weight]);
-                    this.adjacencyList[yVertex].push([xVertex, weight]);
+                    this.adjacencyList[xVertex]
+                        .push(new Edge(yVertex, weight));
+                    this.adjacencyList[yVertex]
+                        .push(new Edge(xVertex, weight));
                 }
             }
         }
@@ -31,7 +48,7 @@ class WeightedGraph {
         let adjacentExist = false;
         let edge;
         for(edge of this.adjacencyList[xVertex]){
-            if(edge[0] == yVertex) {
+            if(edge.getToVertex() === yVertex) {
                 adjacentExist = true;
                 break;
             }
@@ -46,6 +63,16 @@ class WeightedGraph {
             if(this.adjacencyList.hasOwnProperty(element)) ++size;
         }
         return size;
+    }
+
+    depthFirstSearch(startVertex) {
+        let resultList = [];
+        let visited = {};
+
+    }
+
+    breadthFirstSearch(startVertex) {
+        //
     }
 }
 

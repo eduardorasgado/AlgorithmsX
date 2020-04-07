@@ -15,3 +15,21 @@ pq.enqueue(5, "11TH");
 pq.enqueue(6, "12TH");
 
 pq.show();
+console.log("");
+pq.dequeue();
+pq.show();
+console.log("");
+pq.dequeue();
+pq.show();
+
+console.log("");
+pq.dequeue();
+pq.show();
+
+console.log("");
+pq.dequeue();
+pq.show();
+
+console.log("");
+pq.dequeue();
+pq.show();

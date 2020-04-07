@@ -29,10 +29,10 @@ class PriorityQueue {
         return Math.floor((childIndex - 1) / 2);
     }
     hasLeftChild(parentIndex) {
-        return this.getLeftChild(parentIndex) < this.size;
+        return this.getLeftChildIndex(parentIndex) < this.size;
     }
     hasRightChild(parentIndex) {
-        return this.getRightChild(parentIndex) < this.size;
+        return this.getRightChildIndex(parentIndex) < this.size;
     }
     hasParent(childIndex) {
         return this.getParentIndex(childIndex) >= 0;
@@ -102,15 +102,24 @@ class PriorityQueue {
         }
     }
 
+    /**
+     * Reorder the root of the heap(tree) and sends every element unordered to the
+     * bottom of the heap until parent is smaller than children
+     */
     sinkDown() {
         let currentIndex = 0;
         let smallestChildIndex;
         while(this.hasLeftChild(currentIndex)) {
             smallestChildIndex = this.getLeftChildIndex(currentIndex);
             if(this.getRightChild(currentIndex).priority
-                > this.items[smallestChildIndex]) {
+                < this.items[smallestChildIndex].priority) {
                 smallestChildIndex = this.getRightChildIndex(currentIndex);
             }
+            if(this.items[currentIndex].priority
+                > this.items[smallestChildIndex].priority)
+                this.swap(currentIndex, smallestChildIndex);
+            else break;
+            currentIndex = smallestChildIndex;
         }
     }
 

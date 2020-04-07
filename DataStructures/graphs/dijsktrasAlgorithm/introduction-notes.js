@@ -22,5 +22,14 @@
  *              science from an "art" to an academic discipline.
  *              Many of his discoveries and algorithms are still commonly used to
  *              this day.
+ *
+ *          WHY IS IT USEFUL?
+ *
+ *              - GPS- finding fastest route
+ *              - Network Routing - finds open shortest path for data
+ *              - Biology - used to model the spread of viruses among humans
+ *              - Airline tickets - finding cheapest route to your destination
+ *              - Robotics - finding best path with free space for mobile robots
+ *              - Many other uses
  * */
 

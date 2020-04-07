@@ -65,6 +65,11 @@ class WeightedGraph {
         return size;
     }
 
+    /**
+     * Add a neighbor then explore and add its neighbors before go next neighbor
+     * @param startVertex
+     * @returns {[]}
+     */
     depthFirstSearch(startVertex) {
         let resultList = [];
         let visited = {};
@@ -83,8 +88,30 @@ class WeightedGraph {
         return resultList;
     }
 
-    breadthFirstSearch(startVertex) {
-        //
+    /**
+     * Explore all the neighbors in a depth level before adding the neighbors of
+     * the current neighbors in next depth level.
+     * @param vertex
+     * @returns {[]|undefined}
+     */
+    breadthFirstSearch(vertex) {
+        if(!this.adjacencyList[vertex]) return undefined;
+        let resultsList = [];
+        let visited = {};
+        let visitQueue = [vertex]; // preferable to use a real queue here
+        while(visitQueue.length > 0) {
+            vertex = visitQueue.shift();
+            if(!visited[vertex]) {
+                resultsList.push(vertex);
+                visited[vertex] = true;
+                let neighbor;
+                this.adjacencyList[vertex].forEach((edge) => {
+                    neighbor = edge.getToVertex();
+                    if(!visited[neighbor]) visitQueue.push(neighbor);
+                })
+            }
+        }
+        return resultsList;
     }
 }
 

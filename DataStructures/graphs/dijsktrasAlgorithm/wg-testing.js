@@ -10,13 +10,13 @@ let cities = [
     'Shaghai',
     'New York',
     'Sao Paulo',
-    //'Praga',
-    //'Kiev',
-    //'Moscow',
-    //'Toronto',
-    //'London',
-    //'Cairo',
-    //'Caracas'
+    'Praga',
+    'Kiev',
+    'Moscow',
+    'Toronto',
+    'London',
+    'Cairo',
+    'Caracas'
 ]
 
 function sampleLen(graph) {

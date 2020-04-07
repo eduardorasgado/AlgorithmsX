@@ -71,11 +71,24 @@ console.log("graph traversal==================");
 //     if(worldwideFlights.adjacencyList.hasOwnProperty(element))
 //         console.log(element);
 // }
+console.log("====== DEPH FIRST SEARCH =====");
+
 console.log("----recursively----");
-console.log(
+console.log(`FROM ${cities[0]}`,
     worldwideFlights
-        .dephFirstSearchRecursive(cities[0]));
+        .depthFirstSearchRecursive(cities[0]));
+
+console.log(`FROM ${cities[2]}`,
+    worldwideFlights
+        .depthFirstSearchRecursive(cities[2]));
 console.log("\n----iteratively----");
-console.log(
+console.log(`FROM ${cities[0]}`,
     worldwideFlights
-        .dephFirstSearchIterative(cities[0]));
+        .depthFirstSearchIterative(cities[0]));
+console.log(`FROM ${cities[2]}`,
+    worldwideFlights
+        .depthFirstSearchIterative(cities[2]));
+
+console.log("===== BREADTH FIRST SEARCH ====");
+console.log(worldwideFlights
+    .breadthFirstSearch(cities[0]));

@@ -18,6 +18,14 @@ g.addEdge("D","F");
 g.addEdge("E","F");
 
 console.log(g);
-console.log(g.dephFirstSearchRecursive("A"));
-console.log(g.dephFirstSearchRecursive(""));
-console.log(g.dephFirstSearchIterative("A"));
+console.log("====== DEPH FIRST SEARCH =====");
+console.log("----recursively----");
+console.log(g.depthFirstSearchRecursive("A"));
+console.log(g.depthFirstSearchRecursive("E"));
+console.log(g.depthFirstSearchRecursive(""));
+console.log("----iteratively----");
+console.log(g.depthFirstSearchIterative("A"));
+console.log(g.depthFirstSearchIterative("E"));
+
+console.log("===== BREADTH FIRST SEARCH ====");
+console.log(g.breadthFirstSearch("A"));

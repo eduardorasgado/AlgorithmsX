@@ -171,7 +171,7 @@ class Graph {
      *      If any of those values have not been visited, recursively invoke the
      *          helper function with that vertex
      */
-    dephFirstSearchRecursive(vertexToExplore) {
+    depthFirstSearchRecursive(vertexToExplore) {
         if(!this.adjacencyList[vertexToExplore]) return undefined;
         let resultList = []
         let graph = this.adjacencyList;
@@ -208,7 +208,7 @@ class Graph {
      * @param vertex
      * @returns {[]|undefined}
      */
-    dephFirstSearchIterative(vertex) {
+    depthFirstSearchIterative(vertex) {
         if(!this.adjacencyList[vertex]) return undefined;
         let resultList = [];
         let visits = [vertex]; // array as a stack using push and pop to improve performance
@@ -218,12 +218,37 @@ class Graph {
             vertex = visits.pop();
             if(!visited[vertex]){
                 resultList.push(vertex);
-                visited[vertex] = true
+                visited[vertex] = true;
                 currentVertex = this.adjacencyList[vertex];
                 for (let i = currentVertex.length - 1; i >= 0; i--) {
                     if(!visited[currentVertex[i]])
                         visits.push(currentVertex[i]);
                 }
+            }
+        }
+        return resultList;
+    }
+
+    /**
+     * Visiting neighbors at current depth
+     * @param vertex
+     * @returns {[]|undefined}
+     */
+    breadthFirstSearch(vertex) { // this process is iterative
+        if(!this.adjacencyList[vertex]) return undefined;
+        let resultList = [];
+        // it will be much better to use a queue as visitQueue
+        let visitQueue = [vertex];
+        let visited = {};
+        while (visitQueue.length > 0) {
+            vertex = visitQueue.shift();
+            if(!visited[vertex]){
+                resultList.push(vertex);
+                visited[vertex] = true;
+                this.adjacencyList[vertex].forEach((neighbor) => {
+                    if(!visited[neighbor])
+                        visitQueue.push(neighbor);
+                })
             }
         }
         return resultList;

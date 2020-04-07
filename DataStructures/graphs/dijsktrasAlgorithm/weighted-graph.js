@@ -68,7 +68,19 @@ class WeightedGraph {
     depthFirstSearch(startVertex) {
         let resultList = [];
         let visited = {};
+        let adjacencyList = this.adjacencyList;
+        (function dfs(vertex) {
+            resultList.push(vertex)
+            visited[vertex] = true;
+            let edge;
+            let neighbor;
+            for(edge of adjacencyList[vertex]) {
+                neighbor = edge.getToVertex();
+                if(!visited[neighbor]) dfs(neighbor);
+            }
+        })(startVertex);
 
+        return resultList;
     }
 
     breadthFirstSearch(startVertex) {

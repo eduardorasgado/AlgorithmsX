@@ -34,16 +34,33 @@ class Graph extends WeightedGraph {
         visited.push(startVertex);
         let currentVertex = startVertex;
         let currentVertexNeighbors;
-        while(previous[goalVertex] !== null) {
-            currentVertexNeighbors = this.getVertex(currentVertex);
-            currentVertexNeighbors.forEach((neighbor) => {
-                if(neighbor.getWeight() < shortestDistances[neighbor.toVertex()])
-                    shortestDistances[neighbor.toVertex()] = neighbor.getWeight();
-            })
-        }
 
-        console.log(shortestDistances);
-        return previous;
+        while(previous[goalVertex] === null) {
+            currentVertexNeighbors = this.getVertex(currentVertex);
+            let currentNeighbor;
+            let currentWeight;
+            let smallestWeightVertex;
+            let smallestWeight = Infinity;
+            currentVertexNeighbors.forEach((neighbor) => {
+                currentNeighbor = neighbor.getToVertex();
+                // if current neighbor is not checked
+                if(!previous[currentNeighbor]) {
+                    currentWeight = neighbor.getWeight();
+
+                    if(currentWeight < shortestDistances[currentNeighbor])
+                        shortestDistances[currentNeighbor] = currentWeight;
+
+                    (shortestDistances[currentNeighbor] < smallestWeight)
+                    && (smallestWeightVertex = currentNeighbor);
+
+                    // assign the current neighbor to "previous" hash table
+                    previous[currentNeighbor] = currentVertex;
+                }
+            });
+
+            visited.push(currentNeighbor);
+        }
+        return visited;
     }
 
     /**

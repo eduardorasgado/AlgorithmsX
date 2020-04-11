@@ -65,6 +65,11 @@ class WeightedGraph {
         return size;
     }
 
+    getVertex(vertex) {
+        if(!this.adjacencyList[vertex]) return undefined;
+        return this.adjacencyList[vertex];
+    }
+
     /**
      * Add a neighbor then explore and add its neighbors before go next neighbor
      * @param startVertex

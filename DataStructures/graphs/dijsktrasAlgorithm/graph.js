@@ -22,9 +22,41 @@ class Graph extends WeightedGraph {
      *      4. If the new total distance to a node is less than the previous total,
      *      we store the new shorter distance for that node.
      */
-    dijkstrasShortestPath() {
-        console.log("getting the shortest path...");
+    dijkstrasShortestPath(startVertex, goalVertex) {
+        let visited = []; // visited list
+        let previous = {};
+        let shortestDistances = {}
+        let keys = Object.keys(this.adjacencyList);
+        this.createDistanceObject(shortestDistances, keys);
+        this.createPrevObject(previous, keys);
+        keys = null;
+
+        visited.push(startVertex);
+        let currentVertex = startVertex;
+        let currentVertexNeighbors;
+        while(previous[goalVertex] !== null) {
+            currentVertexNeighbors = this.getVertex(currentVertex);
+            currentVertexNeighbors.forEach((neighbor) => {
+                if(neighbor.getWeight() < shortestDistances[neighbor.toVertex()])
+                    shortestDistances[neighbor.toVertex()] = neighbor.getWeight();
+            })
+        }
+
+        console.log(shortestDistances);
+        return previous;
     }
+
+    /**
+     * This function returns an object with adjacency list keys and infiny as value
+     */
+    createDistanceObject(shortestDistances, keys) {
+        keys.forEach((value) => shortestDistances[value] = Infinity);
+    }
+
+    createPrevObject(previous, keys) {
+        keys.forEach((value) => previous[value] = null);
+    }
+
 }
 
 exports.Graph = Graph;

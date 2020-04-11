@@ -1,5 +1,5 @@
 const { WeightedGraph } = require('./weighted-graph');
-
+const { PriorityQueue } = require("./priorityQueue");
 
 class Graph extends WeightedGraph {
     constructor() {
@@ -23,44 +23,7 @@ class Graph extends WeightedGraph {
      *      we store the new shorter distance for that node.
      */
     dijkstrasShortestPath(startVertex, goalVertex) {
-        let visited = []; // visited list
-        let previous = {};
-        let shortestDistances = {}
-        let keys = Object.keys(this.adjacencyList);
-        this.createDistanceObject(shortestDistances, keys);
-        this.createPrevObject(previous, keys);
-        keys = null;
-
-        visited.push(startVertex);
-        let currentVertex = startVertex;
-        let currentVertexNeighbors;
-
-        while(previous[goalVertex] === null) {
-            currentVertexNeighbors = this.getVertex(currentVertex);
-            let currentNeighbor;
-            let currentWeight;
-            let smallestWeightVertex;
-            let smallestWeight = Infinity;
-            currentVertexNeighbors.forEach((neighbor) => {
-                currentNeighbor = neighbor.getToVertex();
-                // if current neighbor is not checked
-                if(!previous[currentNeighbor]) {
-                    currentWeight = neighbor.getWeight();
-
-                    if(currentWeight < shortestDistances[currentNeighbor])
-                        shortestDistances[currentNeighbor] = currentWeight;
-
-                    (shortestDistances[currentNeighbor] < smallestWeight)
-                    && (smallestWeightVertex = currentNeighbor);
-
-                    // assign the current neighbor to "previous" hash table
-                    previous[currentNeighbor] = currentVertex;
-                }
-            });
-
-            visited.push(currentNeighbor);
-        }
-        return visited;
+        //
     }
 
     /**

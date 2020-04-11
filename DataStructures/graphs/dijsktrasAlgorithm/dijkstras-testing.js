@@ -3,6 +3,10 @@ const { Graph } = require('./graph');
 
 
 let g = new Graph();
+let g2 = new Graph();
+
+["S", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L"]
+    .forEach(letter => g2.addVertex(letter));
 
 ["A", "B", "C", "D", "E", "F"]
     .forEach(letter => g.addVertex(letter));
@@ -18,11 +22,41 @@ let edges = [
     ["F", "E", 1]
 ];
 
+let edges2 = [
+    ['S', 'A', 7],
+    ['S', 'B', 2],
+    ['S', 'C', 3],
+    ['A', 'B', 3],
+    ['A', 'D', 4],
+    ['B', 'H', 1],
+    ['B', 'C', 12],
+    ['C', 'L', 2],
+    ['D', 'F', 5],
+    ['D', 'H', 4],
+    ['H', 'G', 2],
+    ['H', 'F', 3],
+    ['L', 'I', 4],
+    ['L', 'J', 4],
+    ['G', 'I', 10],
+    //['G', 'E', 2],
+    ['I', 'J', 6],
+    ['I', 'K', 4],
+    ['J', 'K', 4],
+    ['K', 'E', 5]
+];
+
 edges.forEach(([xVertex, yVertex, weight]) => {
     g.addEdge(xVertex, yVertex, weight);
 })
 
+edges2.forEach(([xVertex, yVertex, weight]) => {
+    g2.addEdge(xVertex, yVertex, weight);
+})
+
+inspectObject(g2);
 inspectObject(g);
 
+
 console.log("---getting the shortest path...---");
+console.log(g2.dijkstrasShortestPath("S", "E"));
 console.log(g.dijkstrasShortestPath("A", "E"));

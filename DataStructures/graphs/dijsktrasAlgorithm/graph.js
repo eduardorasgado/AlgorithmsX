@@ -21,6 +21,9 @@ class Graph extends WeightedGraph {
      *
      *      4. If the new total distance to a node is less than the previous total,
      *      we store the new shorter distance for that node.
+     *
+     *      To understand a little more this we can see the next video:
+     *              https://www.youtube.com/watch?v=5GT5hYzjNoo
      */
     dijkstrasShortestPath(startVertex, goalVertex) {
         //

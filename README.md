@@ -20,17 +20,43 @@ Enjoy it.
     Problem Solving patterns
     * Sliding window
     * Multiple Pointers
-    * Frequency Counter\
+    * Frequency Counter
     
     Search Algorithms
     * Binary Search
     * Knutt Morris Pratt Algorithm(strings)
     
-    Sorting Algorithms
+    Sorting Algorithms(Divide And Conquer)
     * Bubble Sort
     * Selection Sort
     * Insertion Sort
     * Merge Sort
     * Quick Sort
     * Radix Sort
+    
+    Shortest Path(Graphs)
+    * Dijkstra's Algorithm
+    
+- Recursion
 - Data Structures
+    * Singly Linked List
+    * Doubly Linked List
+    * Queues
+    * Stacks
+    * Trees
+        * Binary Search Tree
+        * Tree Traversal
+        * Binary Heaps(Min and Max)
+            * Priority Queues
+    * Hash Tables
+    * Graphs
+        * Unweighted, Undirected
+        * Weighted, undirected
+            * Dijkstra's Algorithm
+
+## Example
+
+Dijkstra's algorithm by hand before coding, I always undestand the problem before coding. That is where the
+difference is.
+
+![Screenshot](.gitutils/dijkstras-problem-solved.png?raw=true "Dijkstra's Algorithm")

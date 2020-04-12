@@ -89,7 +89,7 @@ class BSTree extends BinarySearchTree {
     /**
      * BREADTH FIRST SEACH
      *
-     *  Traversing the whole tree one time per node bur in level order:
+     *  Traversing the whole tree one time per node but in level order:
      *     ->      ____10______
      *     ->  __ 6__    ->    15__
      *     -> 3 ->   8   ->       20

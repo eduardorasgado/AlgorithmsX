@@ -7,6 +7,19 @@ class Graph extends WeightedGraph {
     }
 
     /**
+     * Get the optimal path from A to B by using Dijkstras algorithm all
+     * shortest path.
+     *
+     * @param startVertex
+     * @param goalVertex
+     */
+    getShortestPath(startVertex, goalVertex) {
+        let allShortestDistances = this.dijkstrasAlgorithm(startVertex);
+        // we should extract the path from start to goal from above variable
+        return allShortestDistances;
+    }
+
+    /**
      *      DIJAKSTRAS ALGORITHM
      *
      *  The Approach
@@ -25,7 +38,7 @@ class Graph extends WeightedGraph {
      *      To understand a little more this we can see the next video:
      *              https://www.youtube.com/watch?v=5GT5hYzjNoo
      */
-    dijkstrasShortestPath(startVertex, goalVertex) {
+    dijkstrasAlgorithm(startVertex) {
         //
     }
 
@@ -34,6 +47,7 @@ class Graph extends WeightedGraph {
      */
     createDistanceObject(shortestDistances, keys) {
         keys.forEach((value) => shortestDistances[value] = Infinity);
+        // TODO: first element within shortestDistance should be set to 0
     }
 
     createPrevObject(previous, keys) {

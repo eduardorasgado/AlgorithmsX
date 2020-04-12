@@ -5,11 +5,11 @@ const { Graph } = require('./graph');
 let g = new Graph();
 let g2 = new Graph();
 
-["S", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L"]
-    .forEach(letter => g2.addVertex(letter));
-
 ["A", "B", "C", "D", "E", "F"]
     .forEach(letter => g.addVertex(letter));
+
+["S", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L"]
+    .forEach(letter => g2.addVertex(letter));
 
 let edges = [
     ["A", "B", 4],
@@ -53,10 +53,9 @@ edges2.forEach(([xVertex, yVertex, weight]) => {
     g2.addEdge(xVertex, yVertex, weight);
 })
 
-inspectObject(g2);
 inspectObject(g);
-
+inspectObject(g2);
 
 console.log("---getting the shortest path...---");
-console.log(g2.dijkstrasShortestPath("S", "E"));
-console.log(g.dijkstrasShortestPath("A", "E"));
+console.log(g.getShortestPath("A", "E"));
+console.log(g2.getShortestPath("S", "E"));

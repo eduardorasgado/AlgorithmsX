@@ -53,7 +53,7 @@ edges2.forEach(([xVertex, yVertex, weight]) => {
     g2.addEdge(xVertex, yVertex, weight);
 })
 
-inspectObject(g);
+//inspectObject(g);
 inspectObject(g2);
 
 console.log("---getting the shortest path...---");

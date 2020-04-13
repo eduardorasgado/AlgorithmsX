@@ -40,45 +40,59 @@ class Graph extends WeightedGraph {
      */
     dijkstrasAlgorithm(startVertex) {
         if(!this.adjacencyList[startVertex]) return undefined;
+        // Stores all the paths for each neighbor we get for visited
+        // vertex and get the next most short distance to add to visited.
+        // Stores (current vertex, path arrival cost), do not store node that current comes from
         let accumulatedPathQueue = new PriorityQueue();
+        // Stores the new shortest distance for each node, do not store where the distance
+        // comes from.
         let shortestDistances = {};
+        // store where does the nodes comes from, store all the possible paths
+        // comes from START to all the other nodes.
+        // We have the longest but efficient shortest path in all the graph.
+        // As a result every node in the 'main shortest path pathway' has a shortest path
         let previous = {};
-        let visited = {}
+        // stores all the already visited nodes at time t.
+        // help to define when to stop the algorithm
+        let visited = { "length": 0 }
         let keys =Object.keys(this.adjacencyList);
         this.createDistanceObject(shortestDistances, keys, startVertex);
-        //this.createPrevObject(visited, keys)
         this.createPrevObject(previous, keys);
         let graphLen = keys.length;
         keys = null;
 
         // mark start as visited
         visited[startVertex] = true;
+        ++visited["length"];
         let currentVertex = startVertex;
-        //console.log(visited.length);
-
+        // finding all possible pathways
         do {
             console.log("vertex: ", currentVertex);
             for(let neighbor of this.adjacencyList[currentVertex]) {
                 if(!visited[neighbor.getToVertex()]) {
                     console.log("neighbor not visited: ", neighbor.getToVertex());
-                    // we add the neighbor weight to the accumulated or current vertext
+                    // we add the neighbor weight to the accumulated or current vertex
                     //add (the neighbor vertex, accumulated weight) to our queue
                     let accPathLen = shortestDistances[currentVertex] + neighbor.getWeight();
                     console.log(accPathLen, neighbor.getToVertex());
                     if(accPathLen < shortestDistances[neighbor.getToVertex()]) {
+                        // do not store unique items for neighbor vertexes,
+                        // but it is ignored since we are working on a priority queue
                         accumulatedPathQueue.enqueue(accPathLen, neighbor.getToVertex());
-                        console.log("queue: ", accumulatedPathQueue)
                         previous[neighbor.getToVertex()] = currentVertex;
                         shortestDistances[neighbor.getToVertex()] = accPathLen;
                     }
                 }
             }
+            console.log("queue: ", accumulatedPathQueue)
+            // there is just a problem over here, if current Ver
             currentVertex = accumulatedPathQueue.dequeue().getValue();
             visited[currentVertex] = true;
+            ++visited["length"];
             console.log("visited", visited);
-        } while(Object.keys(visited).length < graphLen);
-        // accumulatedPathQueue.size > 0
-        //Object.keys(visited).length < graphLen
+
+        } while(visited.length <= graphLen); // stops when all vertex have a shortest path
+
         return previous;
     }
 

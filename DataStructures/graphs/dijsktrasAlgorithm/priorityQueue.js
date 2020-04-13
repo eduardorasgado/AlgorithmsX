@@ -151,6 +151,10 @@ class PriorityQueue {
         }
         return spaces;
     }
+
+    getSize() {
+        return this.size;
+    }
 }
 
 exports.PriorityQueue = PriorityQueue;

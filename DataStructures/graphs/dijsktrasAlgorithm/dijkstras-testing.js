@@ -38,7 +38,7 @@ let edges2 = [
     ['L', 'I', 4],
     ['L', 'J', 4],
     ['G', 'I', 10],
-    //['G', 'E', 2],
+    ['G', 'E', 2],
     ['I', 'J', 6],
     ['I', 'K', 4],
     ['J', 'K', 4],
@@ -59,3 +59,4 @@ inspectObject(g2);
 console.log("---getting the shortest path...---");
 //console.log(g.getShortestPath("A", "E"));
 console.log(g2.getShortestPath("S", "E"));
+//console.log(g2.getShortestPath("I", "S"));

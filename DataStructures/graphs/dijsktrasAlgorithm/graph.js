@@ -48,27 +48,33 @@ class Graph extends WeightedGraph {
         this.createDistanceObject(shortestDistances, keys, startVertex);
         //this.createPrevObject(visited, keys)
         this.createPrevObject(previous, keys);
-        console.log(visited);
-        console.log(previous);
-        console.log(shortestDistances);
-        return;
+        let graphLen = keys.length;
         keys = null;
 
         // mark start as visited
         visited[startVertex] = true;
         let currentVertex = startVertex;
-        while(true) {
-            // shortestDistances.enqueue()
+        //console.log(visited.length);
 
-            for(let neighbor in currentVertex) {
-                if(currentVertex.hasOwnProperty(neighbor)){
+        do {
+            console.log(this.adjacencyList[currentVertex]);
+            for(let neighbor of this.adjacencyList[currentVertex]) {
+                if(!visited[neighbor.getToVertex()]) {
                     // we add the neighbor weight to the accumulated or current vertext
                     //add (the neighbor vertex, accumulated weight) to our queue
+                    let accPathLen = shortestDistances[currentVertex] + neighbor.getWeight();
+                    if(accPathLen < shortestDistances[neighbor.getToVertex()]) {
+                        accumulatedPathQueue.enqueue(accPathLen, neighbor.getToVertex);
+                        previous[currentVertex] = neighbor.getToVertex();
+                    }
                 }
             }
             currentVertex = accumulatedPathQueue.dequeue().getValue();
-            visited[currentVertex] = true;
-        }
+            if(visited[currentVertex]) {
+                visited[currentVertex] = true;
+            }
+        } while(accumulatedPathQueue.size > 0);
+
         return previous;
     }
 

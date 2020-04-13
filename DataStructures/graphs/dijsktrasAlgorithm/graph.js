@@ -39,15 +39,45 @@ class Graph extends WeightedGraph {
      *              https://www.youtube.com/watch?v=5GT5hYzjNoo
      */
     dijkstrasAlgorithm(startVertex) {
-        //
+        if(!this.adjacencyList[startVertex]) return undefined;
+        let accumulatedPathQueue = new PriorityQueue();
+        let shortestDistances = {};
+        let previous = {};
+        let visited = {}
+        let keys =Object.keys(this.adjacencyList);
+        this.createDistanceObject(shortestDistances, keys, startVertex);
+        //this.createPrevObject(visited, keys)
+        this.createPrevObject(previous, keys);
+        console.log(visited);
+        console.log(previous);
+        console.log(shortestDistances);
+        return;
+        keys = null;
+
+        // mark start as visited
+        visited[startVertex] = true;
+        let currentVertex = startVertex;
+        while(true) {
+            // shortestDistances.enqueue()
+
+            for(let neighbor in currentVertex) {
+                if(currentVertex.hasOwnProperty(neighbor)){
+                    // we add the neighbor weight to the accumulated or current vertext
+                    //add (the neighbor vertex, accumulated weight) to our queue
+                }
+            }
+            currentVertex = accumulatedPathQueue.dequeue().getValue();
+            visited[currentVertex] = true;
+        }
+        return previous;
     }
 
     /**
      * This function returns an object with adjacency list keys and infiny as value
      */
-    createDistanceObject(shortestDistances, keys) {
+    createDistanceObject(shortestDistances, keys, startVertex) {
         keys.forEach((value) => shortestDistances[value] = Infinity);
-        // TODO: first element within shortestDistance should be set to 0
+        shortestDistances[startVertex] = 0;
     }
 
     createPrevObject(previous, keys) {

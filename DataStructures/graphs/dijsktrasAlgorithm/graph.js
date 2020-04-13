@@ -57,26 +57,28 @@ class Graph extends WeightedGraph {
         //console.log(visited.length);
 
         do {
-            //console.log(this.adjacencyList[currentVertex]);
+            console.log("vertex: ", currentVertex);
             for(let neighbor of this.adjacencyList[currentVertex]) {
                 if(!visited[neighbor.getToVertex()]) {
+                    console.log("neighbor not visited: ", neighbor.getToVertex());
                     // we add the neighbor weight to the accumulated or current vertext
                     //add (the neighbor vertex, accumulated weight) to our queue
                     let accPathLen = shortestDistances[currentVertex] + neighbor.getWeight();
+                    console.log(accPathLen, neighbor.getToVertex());
                     if(accPathLen < shortestDistances[neighbor.getToVertex()]) {
-                        //console.log(accPathLen, neighbor.getToVertex());
                         accumulatedPathQueue.enqueue(accPathLen, neighbor.getToVertex());
-                        //console.log(accumulatedPathQueue)
-                        previous[currentVertex] = neighbor.getToVertex();
+                        console.log("queue: ", accumulatedPathQueue)
+                        previous[neighbor.getToVertex()] = currentVertex;
+                        shortestDistances[neighbor.getToVertex()] = accPathLen;
                     }
                 }
             }
             currentVertex = accumulatedPathQueue.dequeue().getValue();
-            if(visited[currentVertex]) {
-                visited[currentVertex] = true;
-            }
-        } while(accumulatedPathQueue.size > 0);
-
+            visited[currentVertex] = true;
+            console.log("visited", visited);
+        } while(Object.keys(visited).length < graphLen);
+        // accumulatedPathQueue.size > 0
+        //Object.keys(visited).length < graphLen
         return previous;
     }
 

@@ -57,5 +57,5 @@ inspectObject(g);
 inspectObject(g2);
 
 console.log("---getting the shortest path...---");
-console.log(g.getShortestPath("A", "E"));
+//console.log(g.getShortestPath("A", "E"));
 console.log(g2.getShortestPath("S", "E"));

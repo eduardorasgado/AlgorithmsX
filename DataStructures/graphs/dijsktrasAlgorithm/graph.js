@@ -6,6 +6,22 @@ class Graph extends WeightedGraph {
         super();
     }
 
+
+    /**
+     * helper to reverse an array efficiently
+     * @param path
+     */
+    reverser(path) {
+        let left = 0;
+        let right = path.length - 1;
+        let tempValue = null;
+        for(left, right; left < right; ++left, --right) {
+            tempValue = path[left];
+            path[left] = path[right];
+            path[right] = tempValue;
+        }
+    }
+
     /**
      * Get the optimal path from A to B by using Dijkstras algorithm all
      * shortest path.
@@ -16,12 +32,20 @@ class Graph extends WeightedGraph {
     getShortestPath(startVertex, goalVertex) {
         let allShortestDistances = this.dijkstrasAlgorithm(startVertex);
         console.log("all possible shortest paths: ", allShortestDistances);
-        // we should extract the path from start to goal from above variable
-        return allShortestDistances;
+
+        // extracts the requested path from all the shortest paths
+        let specificShortestPath = [goalVertex];
+        let currentNode = goalVertex;
+        while(currentNode !== startVertex) {
+            currentNode = allShortestDistances[currentNode];
+            specificShortestPath.push(currentNode);
+        }
+        this.reverser(specificShortestPath);
+        return specificShortestPath;
     }
 
     /**
-     *      DIJAKSTRAS ALGORITHM
+     *      DIJKSTRA'S ALGORITHM
      *
      *  The Approach
      *      1. Every time we look to visit a new node, we pick the node with the
@@ -55,7 +79,7 @@ class Graph extends WeightedGraph {
         let previous = {};
         // stores all the already visited nodes at time t.
         // help to define when to stop the algorithm
-        let visited = { "length": 0 }
+        let visited = { "length": 0 };
         let keys =Object.keys(this.adjacencyList);
         this.createDistanceObject(shortestDistances, keys, startVertex);
         this.createPrevObject(previous, keys);

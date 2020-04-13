@@ -58,5 +58,7 @@ inspectObject(g2);
 
 console.log("---getting the shortest path...---");
 //console.log(g.getShortestPath("A", "E"));
-console.log(g2.getShortestPath("S", "E"));
-//console.log(g2.getShortestPath("I", "S"));
+console.log("FROM S TO E: ",
+    g2.getShortestPath("S", "E"), "\n");
+console.log("FROM I TO S: ",
+    g2.getShortestPath("I", "S"));

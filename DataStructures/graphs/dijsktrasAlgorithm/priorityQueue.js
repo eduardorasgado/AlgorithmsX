@@ -96,7 +96,7 @@ class PriorityQueue {
     bubbleUp() {
         let currentIndex = this.size - 1;
         while(this.hasParent(currentIndex)
-        && this.items[currentIndex].priority < this.getParent(currentIndex).priority){
+        && this.items[currentIndex].getPriority() < this.getParent(currentIndex).getPriority()){
             this.swap(currentIndex, this.getParentIndex(currentIndex));
             currentIndex = this.getParentIndex(currentIndex);
         }
@@ -111,12 +111,14 @@ class PriorityQueue {
         let smallestChildIndex;
         while(this.hasLeftChild(currentIndex)) {
             smallestChildIndex = this.getLeftChildIndex(currentIndex);
-            if(this.getRightChild(currentIndex).priority
-                < this.items[smallestChildIndex].priority) {
-                smallestChildIndex = this.getRightChildIndex(currentIndex);
+            if(this.hasRightChild(currentIndex)) {
+                if(this.getRightChild(currentIndex).getPriority()
+                    < this.items[smallestChildIndex].getPriority()) {
+                    smallestChildIndex = this.getRightChildIndex(currentIndex);
+                }
             }
-            if(this.items[currentIndex].priority
-                > this.items[smallestChildIndex].priority)
+            if(this.items[currentIndex].getPriority()
+                > this.items[smallestChildIndex].getPriority())
                 this.swap(currentIndex, smallestChildIndex);
             else break;
             currentIndex = smallestChildIndex;

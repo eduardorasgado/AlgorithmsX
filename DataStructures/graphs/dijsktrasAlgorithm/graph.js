@@ -74,6 +74,9 @@ class Graph extends WeightedGraph {
      *      To understand a little more this we can see the next video:
      *              https://www.youtube.com/watch?v=5GT5hYzjNoo
      *
+     *     NOTE: This implementation is only valid if all nodes within the graph
+     *     are connected due to while loop depends on total graph size
+     *
      */
     dijkstrasAlgorithm(startVertex) {
         if(!this.adjacencyList[startVertex]) return undefined;
@@ -129,6 +132,7 @@ class Graph extends WeightedGraph {
             visited[currentVertex] = true;
             ++visited["length"];
 
+            // read the final NOTE in doc above before using this implementation
         } while(visited.length <= graphLen); // stops when all vertex have a shortest path
 
         return previous;
@@ -138,7 +142,7 @@ class Graph extends WeightedGraph {
      *      DIJKSTRA'S ALGORITHM SLIGHLY MODIFIED TO GET THE SHORTEST PATH
      *
      *  The official pseudocode based implementation, not mine really.
-     *  But the 'better one'
+     *  The best implementation from both this and above one.
      *
      *  Note: there are a couple of changes in algorithm than above one but it is
      *  the same algorithm and same process.
@@ -188,15 +192,18 @@ class Graph extends WeightedGraph {
             currentVertex = possiblePathsQueue.dequeue().getValue();
 
             if(currentVertex === goalVertex) break;
-            for(currentEdge of this.adjacencyList[currentVertex]) {
+            // note should be visited and should exists
+            if(currentVertex && distances[currentVertex] !== Infinity) {
+                for(currentEdge of this.adjacencyList[currentVertex]) {
 
-                neighbor = currentEdge.getToVertex();
-                accumulatedDistance = distances[currentVertex] + currentEdge.getWeight()
+                    neighbor = currentEdge.getToVertex();
+                    accumulatedDistance = distances[currentVertex] + currentEdge.getWeight()
 
-                if(accumulatedDistance < distances[neighbor]) {
-                    distances[neighbor] = accumulatedDistance;
-                    previous[neighbor] = currentVertex;
-                    possiblePathsQueue.enqueue(accumulatedDistance, neighbor);
+                    if(accumulatedDistance < distances[neighbor]) {
+                        distances[neighbor] = accumulatedDistance;
+                        previous[neighbor] = currentVertex;
+                        possiblePathsQueue.enqueue(accumulatedDistance, neighbor);
+                    }
                 }
             }
         }

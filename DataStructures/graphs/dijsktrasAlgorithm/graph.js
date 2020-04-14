@@ -140,7 +140,7 @@ class Graph extends WeightedGraph {
      *      have a priority of 0 because thats where we begin.
      *  Create another object called previous and set each key to be every vertex in
      *      the adjacency list with a value of null
-     *  Start looping as long as there is anything in the priorityqueue
+     *  Start looping as long as there is anything in the priority queue
      *      Dequeue a vertex from the priority queue
      *      if that vertex is the same as the ending vertex - we are done
      *      Otherwise loop through each value i the adjacency list at that vertex
@@ -156,8 +156,40 @@ class Graph extends WeightedGraph {
      * @returns {{}}
      */
     shortestPathDijkstras(startVertex, goalVertex) {
+        let distances = {};
         let previous = {};
 
+        let keys = Object.keys(this.adjacencyList);
+        this.createDistanceObject(distances, keys, startVertex);
+        this.createPrevObject(previous, keys);
+        let possiblePathsQueue = new PriorityQueue();
+        let distance;
+        for(distance in distances) {
+            if(distances.hasOwnProperty(distance)) {
+                possiblePathsQueue.enqueue(distances[distance], distance);
+            }
+        }
+
+        let currentVertex;
+        let currentEdge;
+        let neighbor;
+        let accumulatedDistance;
+        while(possiblePathsQueue.getSize()) {
+            currentVertex = possiblePathsQueue.dequeue().getValue();
+
+            if(currentVertex === goalVertex) break;
+            for(currentEdge of this.adjacencyList[currentVertex]) {
+
+                neighbor = currentEdge.getToVertex();
+                accumulatedDistance = distances[currentVertex] + currentEdge.getWeight()
+
+                if(accumulatedDistance < distances[neighbor]) {
+                    distances[neighbor] = accumulatedDistance;
+                    previous[neighbor] = currentVertex;
+                    possiblePathsQueue.enqueue(accumulatedDistance, neighbor);
+                }
+            }
+        }
         return previous;
     }
 

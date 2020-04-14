@@ -62,3 +62,9 @@ console.log("FROM S TO E: ",
     g2.getShortestPath("S", "E"), "\n");
 console.log("FROM I TO S: ",
     g2.getShortestPath("I", "S"));
+
+console.log("---getting the shortest path[VARIANT IMPLEMENTATION]...---");
+console.log("FROM S TO E: ",
+    g2.shortestPathDijkstras("S", "E"), "\n");
+console.log("FROM I TO S: ",
+    g2.shortestPathDijkstras("I", "S"));

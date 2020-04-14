@@ -23,16 +23,13 @@ class Graph extends WeightedGraph {
     }
 
     /**
-     * Get the optimal path from A to B by using Dijkstras algorithm all
-     * shortest path.
-     *
+     * create a list to store the path got in dijkstras algorithm from a to b
      * @param startVertex
      * @param goalVertex
+     * @param allShortestDistances
+     * @returns {[*]}
      */
-    getShortestPath(startVertex, goalVertex) {
-        let allShortestDistances = this.dijkstrasAlgorithm(startVertex);
-        console.log("all possible shortest paths: ", allShortestDistances);
-
+    extractPath(startVertex, goalVertex, allShortestDistances) {
         // extracts the requested path from all the shortest paths
         let specificShortestPath = [goalVertex];
         let currentNode = goalVertex;
@@ -45,7 +42,21 @@ class Graph extends WeightedGraph {
     }
 
     /**
-     *      DIJKSTRA'S ALGORITHM
+     * Get the optimal path from A to B by using Dijkstras algorithm all
+     * shortest path.
+     *
+     * @param startVertex
+     * @param goalVertex
+     */
+    getShortestPath(startVertex, goalVertex) {
+        let allShortestDistances = this.dijkstrasAlgorithm(startVertex);
+        console.log("all possible shortest paths: ", allShortestDistances);
+
+        return this.extractPath(startVertex, goalVertex, allShortestDistances)
+    }
+
+    /**
+     *      DIJKSTRA'S ALGORITHM(100% own implementation)
      *
      *  The Approach
      *      1. Every time we look to visit a new node, we pick the node with the
@@ -82,8 +93,7 @@ class Graph extends WeightedGraph {
         // help to define when to stop the algorithm
         let visited = { "length": 0 };
         let keys =Object.keys(this.adjacencyList);
-        this.createDistanceObject(shortestDistances, keys, startVertex);
-        this.createPrevObject(previous, keys);
+        this.fillingObjects(shortestDistances, previous, keys, startVertex);
         // how many nodes we have within the graph
         let graphLen = keys.length;
         keys = null;
@@ -127,6 +137,9 @@ class Graph extends WeightedGraph {
     /**
      *      DIJKSTRA'S ALGORITHM SLIGHLY MODIFIED TO GET THE SHORTEST PATH
      *
+     *  The official pseudocode based implementation, not mine really.
+     *  But the 'better one'
+     *
      *  Note: there are a couple of changes in algorithm than above one but it is
      *  the same algorithm and same process.
      *
@@ -160,16 +173,12 @@ class Graph extends WeightedGraph {
         let previous = {};
 
         let keys = Object.keys(this.adjacencyList);
-        this.createDistanceObject(distances, keys, startVertex);
-        this.createPrevObject(previous, keys);
-        keys = null;
         let possiblePathsQueue = new PriorityQueue();
-        let distance;
-        for(distance in distances) {
-            if(distances.hasOwnProperty(distance)) {
-                possiblePathsQueue.enqueue(distances[distance], distance);
-            }
-        }
+        // filling distances, previous and the queue
+        // 'V2' does not mean anything relevant for the algorithm
+        this.fillingObjectsV2(distances, previous, possiblePathsQueue,
+                keys, startVertex);
+        keys = null;
 
         let currentVertex;
         let currentEdge;
@@ -191,31 +200,49 @@ class Graph extends WeightedGraph {
                 }
             }
         }
-        return previous;
+
+        console.log(previous);
+        return this.extractPath(startVertex, goalVertex, previous);
     }
 
     /**
      * This function returns an object with adjacency list keys and infiny as value
      * except for startVertex, it has a value of 0.
      *
+     * Also helps to allocate all the vertexes within the graph into a hash table with
+     * vertex: null as key, value
+     *
      * @param shortestDistances
      * @param keys
      * @param startVertex
      */
-    createDistanceObject(shortestDistances, keys, startVertex) {
-        keys.forEach((value) => shortestDistances[value] = Infinity);
+    fillingObjects(shortestDistances, previous, keys, startVertex) {
+        keys.forEach((value) => {
+            shortestDistances[value] = Infinity
+            previous[value] = null
+        });
         shortestDistances[startVertex] = 0;
     }
 
     /**
-     * help to allocate all the vertexes within the graph into a hash table with
-     * vertex: null as key, value
+     * In addition to fillingObjects v1 it enqueues the possiblePathsQueue with
+     * initial shortestDistances values and keys
      *
+     * @param shortestDistances
      * @param previous
+     * @param possiblePathsQueue
      * @param keys
+     * @param startVertex
      */
-    createPrevObject(previous, keys) {
-        keys.forEach((value) => previous[value] = null);
+    fillingObjectsV2(shortestDistances, previous, possiblePathsQueue,
+                     keys, startVertex) {
+        keys.forEach((value) => {
+            shortestDistances[value] = Infinity;
+            previous[value] = null;
+            (value !== startVertex) && possiblePathsQueue.enqueue(Infinity, value);
+        });
+        shortestDistances[startVertex] = 0;
+        possiblePathsQueue.enqueue(0, startVertex);
     }
 
 }

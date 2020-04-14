@@ -162,6 +162,7 @@ class Graph extends WeightedGraph {
         let keys = Object.keys(this.adjacencyList);
         this.createDistanceObject(distances, keys, startVertex);
         this.createPrevObject(previous, keys);
+        keys = null;
         let possiblePathsQueue = new PriorityQueue();
         let distance;
         for(distance in distances) {

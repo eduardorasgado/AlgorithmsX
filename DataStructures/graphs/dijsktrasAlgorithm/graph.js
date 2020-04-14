@@ -62,6 +62,7 @@ class Graph extends WeightedGraph {
      *
      *      To understand a little more this we can see the next video:
      *              https://www.youtube.com/watch?v=5GT5hYzjNoo
+     *
      */
     dijkstrasAlgorithm(startVertex) {
         if(!this.adjacencyList[startVertex]) return undefined;
@@ -119,6 +120,43 @@ class Graph extends WeightedGraph {
             ++visited["length"];
 
         } while(visited.length <= graphLen); // stops when all vertex have a shortest path
+
+        return previous;
+    }
+
+    /**
+     *      DIJKSTRA'S ALGORITHM SLIGHLY MODIFIED TO GET THE SHORTEST PATH
+     *
+     *  Note: there are a couple of changes in algorithm than above one but it is
+     *  the same algorithm and same process.
+     *
+     *  STEPS:(for shortest path dijkstras)
+     *  Accept a starting an ending vertex
+     *  Create an object(distances) and set each key to be every vertex in the
+     *      adjacency list with value of infinity, except for the starting vertex
+     *      which should have a value of 0.
+     *  After setting a value in the distances object, add each vertex with a priority
+     *      of infinity to the priority queue, except the starting vertex, which should
+     *      have a priority of 0 because thats where we begin.
+     *  Create another object called previous and set each key to be every vertex in
+     *      the adjacency list with a value of null
+     *  Start looping as long as there is anything in the priorityqueue
+     *      Dequeue a vertex from the priority queue
+     *      if that vertex is the same as the ending vertex - we are done
+     *      Otherwise loop through each value i the adjacency list at that vertex
+     *          Calculate the distance to that vertex from the stating vertex
+     *          If the distance is less than what is currently stored in out distances
+     *          object
+     *              Update the distances object with new lower distance
+     *              Update the previous object to contain that vertex
+     *              Enqueue the vertex with the total distance from the start node
+     *
+     * @param startVertex
+     * @param goalVertex
+     * @returns {{}}
+     */
+    shortestPathDijkstras(startVertex, goalVertex) {
+        let previous = {};
 
         return previous;
     }

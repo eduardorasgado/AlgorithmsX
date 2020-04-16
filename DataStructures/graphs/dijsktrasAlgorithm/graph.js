@@ -92,27 +92,23 @@ class Graph extends WeightedGraph {
         // We have the longest but efficient shortest path in all the graph.
         // As a result every node in the 'main shortest path pathway' has a shortest path
         let previous = {};
-        // stores all the already visited nodes at time t.
-        // help to define when to stop the algorithm
-        let visited = { "length": 0 };
         let keys =Object.keys(this.adjacencyList);
-        this.fillingObjects(shortestDistances, previous, keys, startVertex);
-        // how many nodes we have within the graph
-        let graphLen = keys.length;
+        this.fillingObjects(shortestDistances, previous, nextCheaperPathQueue,
+            keys, startVertex);
         keys = null;
 
-        // mark start as visited
-        visited[startVertex] = true;
-        ++visited["length"];
-        let currentVertex = startVertex;
+        let currentVertex;
         // finding all possible pathways
-        let edge;
-        let vertexTo;
+        let edge; // includes the neighbor vertex name and the edge weight
+        let vertexTo; // neighbor
         let accumulatedPathCost;
-        do {
-            for(edge of this.adjacencyList[currentVertex]) {
-                vertexTo = edge.getToVertex();
-                if(!visited[vertexTo]) {
+        while(nextCheaperPathQueue.getSize() > 0) {
+            // peck next less expensive (vertex, path)
+            currentVertex = nextCheaperPathQueue.dequeue().getValue();
+            // vertex should be visited and should exists
+            if(currentVertex && shortestDistances[currentVertex] !== Infinity){
+                for(edge of this.adjacencyList[currentVertex]) {
+                    vertexTo = edge.getToVertex();
                     // we add the neighbor weight to the accumulated or current vertex
                     //add (the neighbor vertex, accumulated weight) to our queue
                     accumulatedPathCost =
@@ -125,16 +121,10 @@ class Graph extends WeightedGraph {
                         previous[vertexTo] = currentVertex;
                         shortestDistances[vertexTo] = accumulatedPathCost;
                     }
+
                 }
             }
-            // peck next less expensive (vertex, path)
-            currentVertex = nextCheaperPathQueue.dequeue().getValue();
-            visited[currentVertex] = true;
-            ++visited["length"];
-
-            // read the final NOTE in doc above before using this implementation
-        } while(visited.length <= graphLen); // stops when all vertex have a shortest path
-
+        }
         return previous;
     }
 
@@ -175,12 +165,11 @@ class Graph extends WeightedGraph {
     shortestPathDijkstras(startVertex, goalVertex) {
         let distances = {};
         let previous = {};
-
         let keys = Object.keys(this.adjacencyList);
         let possiblePathsQueue = new PriorityQueue();
         // filling distances, previous and the queue
         // 'V2' does not mean anything relevant for the algorithm
-        this.fillingObjectsV2(distances, previous, possiblePathsQueue,
+        this.fillingObjects(distances, previous, possiblePathsQueue,
                 keys, startVertex);
         keys = null;
 
@@ -190,9 +179,9 @@ class Graph extends WeightedGraph {
         let accumulatedDistance;
         while(possiblePathsQueue.getSize()) {
             currentVertex = possiblePathsQueue.dequeue().getValue();
-
+            // this is the slighly modification
             if(currentVertex === goalVertex) break;
-            // note should be visited and should exists
+            // node should be visited and should exists
             if(currentVertex && distances[currentVertex] !== Infinity) {
                 for(currentEdge of this.adjacencyList[currentVertex]) {
 
@@ -213,26 +202,14 @@ class Graph extends WeightedGraph {
     }
 
     /**
+     *
      * This function returns an object with adjacency list keys and infiny as value
      * except for startVertex, it has a value of 0.
      *
      * Also helps to allocate all the vertexes within the graph into a hash table with
      * vertex: null as key, value
      *
-     * @param shortestDistances
-     * @param keys
-     * @param startVertex
-     */
-    fillingObjects(shortestDistances, previous, keys, startVertex) {
-        keys.forEach((value) => {
-            shortestDistances[value] = Infinity
-            previous[value] = null
-        });
-        shortestDistances[startVertex] = 0;
-    }
-
-    /**
-     * In addition to fillingObjects v1 it enqueues the possiblePathsQueue with
+     * In addition, enqueues the possiblePathsQueue with
      * initial shortestDistances values and keys
      *
      * @param shortestDistances
@@ -241,7 +218,7 @@ class Graph extends WeightedGraph {
      * @param keys
      * @param startVertex
      */
-    fillingObjectsV2(shortestDistances, previous, possiblePathsQueue,
+    fillingObjects(shortestDistances, previous, possiblePathsQueue,
                      keys, startVertex) {
         keys.forEach((value) => {
             shortestDistances[value] = Infinity;

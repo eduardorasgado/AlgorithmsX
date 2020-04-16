@@ -40,9 +40,18 @@ function fibonacciNotRecursive(num) {
     return sum;
 }
 
-function fibonacci(num) {
-    //
+console.log(fibonacciNotRecursive(7));
+console.log(" ");
+
+/**
+ *      FIBONACCI USING DYNAMIC PROGRAMMING
+ * @param num
+ * @returns {number|*}
+ */
+function fibonacci(num = 0) {
+    if (num === 0 || num == 1) return num;
+    return fibonacci(num - 1) + fibonacci(num - 2);
 }
 
-console.log(fibonacciNotRecursive(7));
-console.log(fibonacci(7));
+
+console.log(fibonacci(5));

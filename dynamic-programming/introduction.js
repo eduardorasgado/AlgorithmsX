@@ -42,9 +42,11 @@ console.log(fibonacciNotRecursive(7));
 console.log(" ");
 
 /**
- *      FIBONACCI USING DYNAMIC PROGRAMMING
+ *      FIBONACCI USING DYNAMIC PROGRAMMING(WITHOUT MEMOIZATION)
  *          Big O of this fibonacci is pretty bad!
- *          Big O()
+ *          Big O(2^n), really mathematically correct is O(1.6^n) due to next
+ *          explanation:
+ *          https://stackoverflow.com/questions/360748/computational-complexity-of-fibonacci-sequence
  * @param num
  * @returns {number|*}
  */
@@ -130,3 +132,30 @@ console.log(fibonacciFast(1476));
  *              A problem is said to have optimal substructure if an optimal solution can
  *              be constructed from optimal solutions of its subproblems.
  * */
+
+
+/***
+ *          ENTER DYNAMIC PROGRAMMING
+ *
+ *              Using past knowledge to make solving a future problem easier
+ *
+ *          MEMOIZATION
+ *
+ *              Adding to the above deffinition of DP,
+ *              "A method for solving a complex problem by breaking it down into
+ *              a collection of simpler subproblems, solving each of those subproblems
+ *              JUST ONCE, and storing their solution."
+ */
+
+// answer memory structure
+let memoryTable = {};
+function fibonacciRethink(num = 0) {
+    if (num <= 2) return 1;
+    // if exists reassing if not exist assign next fibo callback
+    memoryTable[num-1] = memoryTable[num-1] || fibonacciRethink(num - 1);
+    memoryTable[num-2] = memoryTable[num-2] || fibonacciRethink(num - 2);
+    return memoryTable[num-1] + memoryTable[num-2];
+}
+
+console.log("-----WHAT IF WE COULD REMEMBER OLD VALUES----");
+console.log(fibonacciRethink(1476));

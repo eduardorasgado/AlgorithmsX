@@ -25,6 +25,17 @@
  *              Fibonaccin Sequence
  *                  It is an example where DP can be applicable.
  *                  Every number after the first two is the sum of the two preceding ones
+ *                  It overlaps subproblems every iteration, there are repeated branches
+ *                  example:
+ *                                                  _________________fib(5)____________________
+ *                                               fib(4)                +               _______fib(3)_______
+ *                       _______fib(3)____      +   _______fib(2)_____           ____fib(2)___  +        fib(1)
+ *                 ____fib(2)___  +     fib(1)    fib(1)     +      fib(0)     fib(1)   +   fib(0)
+ *              fib(1)   +   fib(0)
+ *
+ *                1      +     0   +      1    +     1      +         0      +   1     +    0             1   =  5
+ *
+ *                  Look at how many times fib(2) had to be calculated, it was 3 times.
  * */
 
 // 1, 1, 2, 3, 5, 8, 13, 21 ...
@@ -53,7 +64,7 @@ function fibonacci(num = 0) {
     return fibonacci(num - 1) + fibonacci(num - 2);
 }
 
-console.log(fibonacci(5));
+console.log(fibonacci(40));
 
 let fibSet = [0, 1]
 function fibonacciSet(num) {
@@ -62,6 +73,6 @@ function fibonacciSet(num) {
     fibonacciSet(num-1);
 }
 
-fibonacciSet(5);
+fibonacciSet(40);
 console.log(fibSet);
 

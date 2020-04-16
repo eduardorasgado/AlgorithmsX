@@ -27,7 +27,7 @@
  *                  Every number after the first two is the sum of the two preceding ones
  * */
 
-// 1, 1, 2, 3, 5, 8, 13 ...
+// 1, 1, 2, 3, 5, 8, 13, 21 ...
 function fibonacciNotRecursive(num) {
     let tempSum;
     let last = 0;
@@ -53,5 +53,15 @@ function fibonacci(num = 0) {
     return fibonacci(num - 1) + fibonacci(num - 2);
 }
 
-
 console.log(fibonacci(5));
+
+let fibSet = [0, 1]
+function fibonacciSet(num) {
+    if(num === 1) return fibSet.splice(0, 1);
+    fibSet.push(fibSet[fibSet.length - 1] + fibSet[fibSet.length - 2])
+    fibonacciSet(num-1);
+}
+
+fibonacciSet(5);
+console.log(fibSet);
+

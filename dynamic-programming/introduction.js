@@ -68,28 +68,6 @@ fibonacciSet(40);
 console.log(fibSet);
 
 /**
- * FIBONACCI WITH NO STACK OVERFLOW OR CALL STACK EXCEEDED.
- *  This implementation involves O(n). Max is 1476 due to next fib number in next iteration
- *  is infinity.
- *
- * @param num
- * @returns {number}
- */
-function fibonacciFast(num) {
-    let fibSet = [0, 1];
-    while(num !== 1) {
-        let temp = fibSet[0];
-        fibSet[0] = fibSet[1];
-        fibSet[1] = temp + fibSet[0];
-        --num;
-    }
-    return fibSet[1];
-}
-
-console.log("after 1476 fibonacci requested element, get infinity");
-console.log(fibonacciFast(1476));
-
-/**
  *          WHAT IS IT(DP)?(Continuation)
  *
  *              Fibonacci Sequence
@@ -145,18 +123,25 @@ console.log(fibonacciFast(1476));
  *              "A method for solving a complex problem by breaking it down into
  *              a collection of simpler subproblems, solving each of those subproblems
  *              JUST ONCE, and storing their solution."
+ *
+ *          BIG O NOTATION OF MEMOIZED DYNAMIC PROGRAMMING APPLIED
+ *
+ *              DP without memoization - O(n^2)
+ *              DP using memoization -  O(n) for array based memoziation
+ *                                      O(n) for hash table based memoization
  */
 
 console.log("-----WHAT IF WE COULD REMEMBER OLD VALUES----");
 /**
  * Memoization using an array or list
+ *  O(n)
  * @param num
  * @param memo
  * @returns {number|*}
  */
-function fiboMemo(num, memo = []) {
-    if(num <=  2) return 1;
+function fiboMemo(num, memo = [undefined, 1, 1]) {
     if(memo[num]) return memo[num];
+    //if(num <=  2) return 1;
     memo[num] = fiboMemo(num - 1, memo) + fiboMemo(num - 2, memo);
     return memo[num];
 }
@@ -165,11 +150,15 @@ console.log(fiboMemo(1476));
 
 /**
  * Memoization using a hash table
+ *
+ *  O(n) because hash table access is close to be constant time
+ *
  * @type {{}}
  */
 // answer memory structure
-function fibonacciRethink(num = 0, memoryTable = {}) {
-    if (num <= 2) return 1;
+function fibonacciRethink(num = 0,
+                          memoryTable = {0: undefined, 1: 1, 2: 1}) {
+    //if (num <= 2) return 1;
     // if exists reassing if not exist assign next fibo callback
     memoryTable[num-1] = memoryTable[num-1] || fibonacciRethink(num - 1, memoryTable);
     memoryTable[num-2] = memoryTable[num-2] || fibonacciRethink(num - 2, memoryTable);
@@ -178,3 +167,54 @@ function fibonacciRethink(num = 0, memoryTable = {}) {
 
 console.log("-----WHAT IF WE COULD REMEMBER OLD VALUES USING A TABLE----");
 console.log(fibonacciRethink(1476));
+
+
+/**
+ *      DYNAMIC PROGRAMMING USING MEMOIZATION AND TABULATION
+ *
+ *      Storing the result of a previous result in a table(usually an array)
+ *
+ *      Usually done using iteration
+ *      Better space complexity can e achieved using tabulation
+ * */
+console.log("------MEMOIZATION USING TABULATION---------");
+/**
+ * FIBONACCI WITH NO STACK OVERFLOW OR CALL STACK EXCEEDED.
+ *  This implementation involves O(n). Max is 1476 due to next fib number in next iteration
+ *  is infinity.
+ *
+ *  In this tabulation case we get a fibSet array of just 2 elements and not n elements of length
+ *
+ * @param num
+ * @returns {number}
+ */
+function fibonacciFast(num) {
+    let fibSet = [0, 1];
+    while(num !== 1) {
+        let temp = fibSet[0];
+        fibSet[0] = fibSet[1];
+        fibSet[1] = temp + fibSet[0];
+        --num;
+    }
+    return fibSet[1];
+}
+
+console.log("after 1476 fibonacci requested element, get infinity");
+console.log(fibonacciFast(1476));
+
+/**
+ * Tabulation but storing all the elements within an array of n elements
+ *  O(n)
+ *
+ * @param n
+ * @returns {number}
+ */
+function fiboTab(n) {
+    let memoTab = [0, 1, 1];
+    for(let i = 3; i <= n; i++) {
+        memoTab[i] = memoTab[i-1] + memoTab[i-2];
+    }
+    return memoTab[n];
+}
+
+console.log(fiboTab(1476));

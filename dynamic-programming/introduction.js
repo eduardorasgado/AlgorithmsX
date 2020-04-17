@@ -147,15 +147,34 @@ console.log(fibonacciFast(1476));
  *              JUST ONCE, and storing their solution."
  */
 
+console.log("-----WHAT IF WE COULD REMEMBER OLD VALUES----");
+/**
+ * Memoization using an array or list
+ * @param num
+ * @param memo
+ * @returns {number|*}
+ */
+function fiboMemo(num, memo = []) {
+    if(num <=  2) return 1;
+    if(memo[num]) return memo[num];
+    memo[num] = fiboMemo(num - 1, memo) + fiboMemo(num - 2, memo);
+    return memo[num];
+}
+
+console.log(fiboMemo(1476));
+
+/**
+ * Memoization using a hash table
+ * @type {{}}
+ */
 // answer memory structure
-let memoryTable = {};
-function fibonacciRethink(num = 0) {
+function fibonacciRethink(num = 0, memoryTable = {}) {
     if (num <= 2) return 1;
     // if exists reassing if not exist assign next fibo callback
-    memoryTable[num-1] = memoryTable[num-1] || fibonacciRethink(num - 1);
-    memoryTable[num-2] = memoryTable[num-2] || fibonacciRethink(num - 2);
+    memoryTable[num-1] = memoryTable[num-1] || fibonacciRethink(num - 1, memoryTable);
+    memoryTable[num-2] = memoryTable[num-2] || fibonacciRethink(num - 2, memoryTable);
     return memoryTable[num-1] + memoryTable[num-2];
 }
 
-console.log("-----WHAT IF WE COULD REMEMBER OLD VALUES----");
+console.log("-----WHAT IF WE COULD REMEMBER OLD VALUES USING A TABLE----");
 console.log(fibonacciRethink(1476));

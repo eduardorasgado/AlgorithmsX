@@ -23,11 +23,17 @@ function minimumBribes(q) {
         initialStateIndexes[i+1] = i;
     }
 
+    let chaoticMsg = false;
     let tempValue;
     let currentElementLocation= 0;
     for(let element in afterTable) {
         if(afterTable.hasOwnProperty(element)) {
-            if(afterTable[element] < -2) return 'Too chaotic';
+            if(afterTable[element] < -2) {
+                //console.log('Too chaotic'); // for hacker rank
+                return 'Too chaotic';// for local testing
+                chaoticMsg = true;
+                break;
+            }
             if(afterTable[element] < 0) {
                 // relocate until afterTable is 0
                 currentElementLocation = parseInt(element);
@@ -55,24 +61,26 @@ function minimumBribes(q) {
     //console.log('after, ap table    ', afterTable)
     //console.log('after: ', initialState)
     // swap last elements after last negative elements were swapped
-    for(let element in afterTable) {
-        if (afterTable.hasOwnProperty(element)) {
-            if (afterTable[element] < 0) {
-                let currentIndex = initialStateIndexes[element];
-                tempValue = initialState[currentIndex];
-                initialState[currentIndex] = initialState[currentIndex-1];
-                initialState[currentIndex-1] = tempValue;
+    if(!chaoticMsg) {
+        for(let element in afterTable) {
+            if (afterTable.hasOwnProperty(element)) {
+                if (afterTable[element] < 0) {
+                    let currentIndex = initialStateIndexes[element];
+                    tempValue = initialState[currentIndex];
+                    initialState[currentIndex] = initialState[currentIndex-1];
+                    initialState[currentIndex-1] = tempValue;
 
-                afterTable[element] += 1;
-                afterTable[initialState[currentIndex]] -=1;
-                ++steps;
+                    afterTable[element] += 1;
+                    afterTable[initialState[currentIndex]] -=1;
+                    ++steps;
+                }
             }
         }
+        //console.log(initialStateIndexes);
+        //console.log('after, ap table    ', afterTable)
+        //console.log('after: ', initialState)
+        return steps;
     }
-    //console.log(initialStateIndexes);
-    //console.log('after, ap table    ', afterTable)
-    //console.log('after: ', initialState)
-    return steps;
 }
 
 // correct: 3

@@ -13,6 +13,7 @@ function minimumBribes(q) {
     let steps = 0;
     let initialState = Array.from({length: maxPosition}, (_, i) => i+1);
     let afterTable = {};
+    const afterTableStatic = {};
     let initialStateIndexes = {};
 
     // getting all the elements with - after position and + after posiition
@@ -22,13 +23,19 @@ function minimumBribes(q) {
     let i;
     for(i = 0; i < maxPosition; i++) {
         afterTable[q[i]] = ((i+1) - q[i]);
+        afterTableStatic[q[i]] = i;
         initialStateIndexes[i+1] = i;
     }
 
     let chaoticMsg = false;
     let tempValue;
     let currentElementLocation= 0;
-    for(let element in afterTable) {
+    let element;
+    let elementMinusOne;
+    let elementMinusOneIndex
+    let elementMinusTwo;
+    let elementMinusTwoIndex;
+    for(element in afterTable) {
         if(afterTable.hasOwnProperty(element)) {
             if(afterTable[element] < -2) {
                 //console.log('Too chaotic'); // for hacker rank
@@ -37,8 +44,32 @@ function minimumBribes(q) {
                 break;
             }
             if(afterTable[element] < 0) {
-                // relocate until afterTable is 0
                 currentElementLocation = parseInt(element);
+                // look backwards last two elements in initial state
+                //second element
+                elementMinusOne = initialState[currentElementLocation-2];
+                // first element
+                elementMinusTwo = initialState[currentElementLocation-3];
+                console.log(elementMinusTwo, elementMinusOne, currentElementLocation);
+                // if element-2 is greater than element-1 then do nothin
+                // if this was false, that means both were swapped before
+                if(elementMinusOne > elementMinusTwo) {
+                    // search for its orders within q array, if they are in same order do nothin
+                    //second element
+                    elementMinusOneIndex = afterTableStatic[elementMinusOne]
+                    // first element
+                    elementMinusTwoIndex = afterTableStatic[elementMinusTwo]
+                    // if they are inverted, swap them before swap element
+                    if(elementMinusTwoIndex > elementMinusOneIndex) {
+                        console.log(
+                            elementMinusTwoIndex,
+                            elementMinusOneIndex
+                        );
+
+                    }
+                }
+
+                // relocate until afterTable is 0
                 while(afterTable[element] < 0) {
                     //console.log(initialState);
                     tempValue = initialState[currentElementLocation-1];
@@ -56,6 +87,21 @@ function minimumBribes(q) {
                     // because element change its location with left element in initialState
                     currentElementLocation -= 1;
                     ++steps;
+                    //-------------------------------------------------------
+                    //console.log("original: ");
+                    let original = '';
+                    for(let i = 0; i < maxPosition; i++){
+                        if(i >65 && i < 85) original += afterTable[i] + `(${i})` + '';
+                    }
+                    console.log(original);
+
+                    //console.log("resultant: ");
+                    let resultant = '';
+                    for(let i = 0; i < maxPosition; i++){
+                        if(i >60 && i < 90) resultant += initialState[i] + ' ';
+                    }
+                    console.log(resultant);
+                    //-------------------------------------------------------
                 }
             }
         }
@@ -64,8 +110,22 @@ function minimumBribes(q) {
     console.log('after: ', initialState)
     for(let i = 0; i < maxPosition; i++){
         if(initialState[i] !== q[i])
-            console.log("resultant: ", initialState[i], "original: ", q[i])
+            console.log("resultant: ", initialState[i], `left: ${afterTable[initialState[i]]}|`, "original: ", q[i])
     }
+
+    console.log("original: ");
+    let original = '';
+    for(let i = 0; i < maxPosition; i++){
+        if(i >60 && i < 90) original += q[i] + ' ';
+    }
+    console.log(original);
+
+    console.log("resultant: ");
+    let resultant = '';
+    for(let i = 0; i < maxPosition; i++){
+        if(i >60 && i < 90) resultant += initialState[i] + ' ';
+    }
+    console.log(resultant);
     console.log(steps);
     // swap last elements after last negative elements were swapped
     if(!chaoticMsg) {
@@ -95,7 +155,7 @@ function minimumBribes(q) {
         //console.log('after: ', initialState)
         for(let i = 0; i < maxPosition; i++){
             if(initialState[i] !== q[i])
-                console.log("resultant: ", initialState[i], "original: ", q[i])
+                console.log("resultant: ", initialState[i], `left: ${afterTable[initialState[i]]}|`, "original: ", q[i])
         }
         return steps;
     }

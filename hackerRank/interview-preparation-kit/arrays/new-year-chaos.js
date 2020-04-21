@@ -1,6 +1,6 @@
-const exOne = require('./test-long-data/examples1');
-const exTwo = require('./test-long-data/examples2');
-const exThree = require('./test-long-data/examples3');
+const exOne = require('./new-year-chaos-test-long-data/examples1');
+const exTwo = require('./new-year-chaos-test-long-data/examples2');
+const exThree = require('./new-year-chaos-test-long-data/examples3');
 /**
  * Print an integer denoting the minimum number of bribes needed to get the queue
  * into its final state. Print Too chaotic if the state is invalid,
@@ -12,9 +12,13 @@ const exThree = require('./test-long-data/examples3');
 function minimumBribes(q) {
     let maxPosition = q.length;
     let steps = 0;
+    // Used to mimic possible bribes until we get to final position
     let initialState = Array.from({length: maxPosition}, (_, i) => i+1);
+    // will store final position indexes difference with initial position for every element
     let afterTable = {};
+    // same as above, but will not change, for info request only
     const afterTableStatic = {};
+    // to avoid expensive cost of index searching in initial state
     let initialStateIndexes = {};
 
     // getting all the elements with - after position and + after posiition
@@ -28,7 +32,8 @@ function minimumBribes(q) {
         initialStateIndexes[i+1] = i;
     }
 
-    let chaoticMsg = false;
+    // hacker test purpose
+    //let chaoticMsg = false;
     let tempValue;
     let currentElementLocation= 0;
     let element;
@@ -39,10 +44,13 @@ function minimumBribes(q) {
     for(element in afterTable) {
         if(afterTable.hasOwnProperty(element)) {
             if(afterTable[element] < -2) {
+                // hacker test purpose
                 //chaoticMsg = true;
-                //console.log('Too chaotic'); // for hacker rank
+                //console.log('Too chaotic');
                 //break;
-                return 'Too chaotic';// for local testing
+
+                // for local testing
+                return 'Too chaotic';
 
             }
             if(afterTable[element] < 0) {
@@ -52,14 +60,11 @@ function minimumBribes(q) {
                 elementMinusOne = initialState[currentElementLocation-2];
                 // first element
                 elementMinusTwo = initialState[currentElementLocation-3];
-                //console.log(elementMinusTwo, elementMinusOne, currentElementLocation);
                 // if element-2 is greater than element-1 then do nothin
                 // if this was false, that means both were swapped before
                 if(elementMinusOne > elementMinusTwo) {
-                    // search for its orders within q array, if they are in same order do nothin
-                    //second element
+                    // search for its orders within q array, if they are in same order do nothing
                     elementMinusOneIndex = afterTableStatic[elementMinusOne]
-                    // first element
                     elementMinusTwoIndex = afterTableStatic[elementMinusTwo]
                     // if they are inverted, swap them before swap element
                     if(elementMinusTwoIndex > elementMinusOneIndex) {
@@ -107,7 +112,7 @@ function minimumBribes(q) {
         }
     }
     return steps;
-    // for hackerrank
+    // hacker test purpose
     //if(!chaoticMsg) console.log(steps);
 }
 

@@ -1,6 +1,6 @@
-const examplesTwo = require('./test-long-data/examples2');
-
-const examplesOne = require('./test-long-data/examples1');
+const exOne = require('./test-long-data/examples1');
+const exTwo = require('./test-long-data/examples2');
+const exThree = require('./test-long-data/examples3');
 /**
  * Print an integer denoting the minimum number of bribes needed to get the queue
  * into its final state. Print Too chaotic if the state is invalid,
@@ -39,10 +39,11 @@ function minimumBribes(q) {
     for(element in afterTable) {
         if(afterTable.hasOwnProperty(element)) {
             if(afterTable[element] < -2) {
+                //chaoticMsg = true;
                 //console.log('Too chaotic'); // for hacker rank
+                //break;
                 return 'Too chaotic';// for local testing
-                chaoticMsg = true;
-                break;
+
             }
             if(afterTable[element] < 0) {
                 currentElementLocation = parseInt(element);
@@ -62,10 +63,6 @@ function minimumBribes(q) {
                     elementMinusTwoIndex = afterTableStatic[elementMinusTwo]
                     // if they are inverted, swap them before swap element
                     if(elementMinusTwoIndex > elementMinusOneIndex) {
-                        //console.log(
-                        //    elementMinusTwoIndex,
-                        //    elementMinusOneIndex
-                        //);
                         // swap in initialState
                         [initialState[initialStateIndexes[elementMinusOne]],
                             initialState[initialStateIndexes[elementMinusTwo]]] =
@@ -73,13 +70,13 @@ function minimumBribes(q) {
                                 initialState[initialStateIndexes[elementMinusOne]]];
                         // change indexes in initialStateIndexes
                         [initialStateIndexes[elementMinusOne],
-                        initialStateIndexes[elementMinusTwo]] =
-                        [initialStateIndexes[elementMinusTwo],
-                            initialStateIndexes[elementMinusOne]];
+                            initialStateIndexes[elementMinusTwo]] =
+                            [initialStateIndexes[elementMinusTwo],
+                                initialStateIndexes[elementMinusOne]];
                         // update afterTable
                         afterTable[elementMinusOne] =
                             (afterTable[elementMinusOne] < 0) ? ++afterTable[elementMinusOne]
-                            : --afterTable[elementMinusOne];
+                                : --afterTable[elementMinusOne];
                         afterTable[elementMinusTwo] =
                             (afterTable[elementMinusTwo] < 0) ? ++afterTable[elementMinusTwo]
                                 : --afterTable[elementMinusTwo];
@@ -105,78 +102,13 @@ function minimumBribes(q) {
                     // because element change its location with left element in initialState
                     currentElementLocation -= 1;
                     ++steps;
-                    //-------------------------------------------------------
-                    //console.log("original: ");
-                    //let original = '';
-                    //for(let i = 0; i < maxPosition; i++){
-                    //    if(i >65 && i < 85) original += afterTable[i] + `(${i})` + '';
-                    //}
-                    //console.log(original);
-
-                    //console.log("resultant: ");
-                    //let resultant = '';
-                    //for(let i = 0; i < maxPosition; i++){
-                    //    if(i >60 && i < 90) resultant += initialState[i] + ' ';
-                    //}
-                    //console.log(resultant);
-                    //-------------------------------------------------------
                 }
             }
         }
-    }
-    //console.log('after, ap table    ', afterTable)
-    //console.log('after: ', initialState)
-    //for(let i = 0; i < maxPosition; i++){
-    //    if(initialState[i] !== q[i])
-    //        console.log("resultant: ", initialState[i], `left: ${afterTable[initialState[i]]}|`, "original: ", q[i])
-    //}
-
-    //console.log("original: ");
-    //let original = '';
-    //for(let i = 0; i < maxPosition; i++){
-    //    if(i >60 && i < 90) original += q[i] + ' ';
-    //}
-    //console.log(original);
-
-    //console.log("resultant: ");
-    //let resultant = '';
-    //for(let i = 0; i < maxPosition; i++){
-    //    if(i >60 && i < 90) resultant += initialState[i] + ' ';
-    //}
-    //console.log(resultant);
-    //console.log(steps);
-    // swap last elements after last negative elements were swapped
-    if(!chaoticMsg && false) {
-        for(let element in afterTable) {
-            if (afterTable.hasOwnProperty(element)) {
-                if (afterTable[element] < 0) {
-                    let currentIndex = initialStateIndexes[element];
-                    tempValue = initialState[currentIndex];
-                    initialState[currentIndex] = initialState[currentIndex-1];
-                    initialState[currentIndex-1] = tempValue;
-
-                    afterTable[element] += 1;
-                    afterTable[initialState[currentIndex]] -=1;
-                    ++steps;
-                }
-            }
-        }
-        //let k = 0
-        //for(let element in afterTable) {
-        //    if(afterTable.hasOwnProperty(element))
-        //        //if(afterTable[element] !== 0)
-        //            console.log(element, afterTable[element])
-        //    k++;
-        //}
-        //console.log(initialStateIndexes);
-        //console.log('after, ap table    ', afterTable)
-        //console.log('after: ', initialState)
-        //for(let i = 0; i < maxPosition; i++){
-        //    if(initialState[i] !== q[i])
-        //        console.log("resultant: ", initialState[i], `left: ${afterTable[initialState[i]]}|`, "original: ", q[i])
-        //}
     }
     return steps;
+    // for hackerrank
+    //if(!chaoticMsg) console.log(steps);
 }
 
 function stringToArray(string) {
@@ -192,7 +124,7 @@ const testSuiteLongData1 = () => {
     // 65
     //console.log(stringToArray(test1).length)
     // test2, test5
-    [examplesTwo.test1, examplesTwo.test2, examplesTwo.test5 ].forEach((test) => {
+    [exTwo.test1, exTwo.test2, exTwo.test5 ].forEach((test) => {
         console.log(minimumBribes(stringToArray(test)));
     })
 }
@@ -210,13 +142,23 @@ const testSuiteLongData2 = () => {
     // 733
     // Too chaotic
     // test2, test5
-    [ examplesOne.test1, examplesOne.test2,  examplesOne.test3, examplesOne.test4,
-        examplesOne.test5, examplesOne.test6, examplesOne.test7, examplesOne.test8,
-        examplesOne.test9,examplesOne.test10].forEach((test) => {
+    [ exOne.test1, exOne.test2,  exOne.test3, exOne.test4,
+        exOne.test5, exOne.test6, exOne.test7, exOne.test8,
+        exOne.test9,exOne.test10].forEach((test) => {
         console.log(minimumBribes(stringToArray(test)));
     })
 }
 
+const testSuiteLongData3 = () => {
+    console.log('---critique data test---');
+    // 115173
+    // Too chaotic
+    // 115013
+    // Too chaotic
+    [ exThree.test1, exThree.test2,  exThree.test3, exThree.test4,].forEach((test) => {
+        console.log(minimumBribes(stringToArray(test)));
+    })
+}
 const testSuite = () => {
     // correct: 3
     console.log(minimumBribes([2, 1, 5, 3, 4]));
@@ -283,6 +225,8 @@ const testSuite = () => {
     // queue    1,  2,  5,  3,  7,  8,  6,  4
 }
 
+testSuite();
 testSuiteLongData1();
 testSuiteLongData2()
-//testSuite();
+testSuiteLongData3()
+

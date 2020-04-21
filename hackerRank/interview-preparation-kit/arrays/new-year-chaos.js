@@ -1,4 +1,5 @@
-const { test1 } = require('./test-long-data/examples2');
+const { test1, test2, test3, test4, test5,
+    test6, test7, test8, test9, test10} = require('./test-long-data/examples2');
 /**
  * Print an integer denoting the minimum number of bribes needed to get the queue
  * into its final state. Print Too chaotic if the state is invalid,
@@ -60,7 +61,12 @@ function minimumBribes(q) {
         }
     }
     //console.log('after, ap table    ', afterTable)
-    //console.log('after: ', initialState)
+    console.log('after: ', initialState)
+    for(let i = 0; i < maxPosition; i++){
+        if(initialState[i] !== q[i])
+            console.log("resultant: ", initialState[i], "original: ", q[i])
+    }
+    console.log(steps);
     // swap last elements after last negative elements were swapped
     if(!chaoticMsg) {
         for(let element in afterTable) {
@@ -77,11 +83,40 @@ function minimumBribes(q) {
                 }
             }
         }
+        //let k = 0
+        //for(let element in afterTable) {
+        //    if(afterTable.hasOwnProperty(element))
+        //        //if(afterTable[element] !== 0)
+        //            console.log(element, afterTable[element])
+        //    k++;
+        //}
         //console.log(initialStateIndexes);
         //console.log('after, ap table    ', afterTable)
         //console.log('after: ', initialState)
+        for(let i = 0; i < maxPosition; i++){
+            if(initialState[i] !== q[i])
+                console.log("resultant: ", initialState[i], "original: ", q[i])
+        }
         return steps;
     }
+}
+
+function stringToArray(string) {
+    return string.split(' ').map((element) => parseInt(element));
+}
+
+const testSuiteLongData1 = () => {
+    console.log('---critique data test---');
+    //[test1, test2, test3, test4, test5,
+    //    test6, test7, test8, test9, test10]
+    // 67
+    // 66
+    // 65
+    //console.log(stringToArray(test1).length)
+    // test2, test5
+    [test1 ].forEach((test) => {
+        console.log(minimumBribes(stringToArray(test)));
+    })
 }
 
 const testSuite = () => {
@@ -148,8 +183,7 @@ const testSuite = () => {
 
     // result:
     // queue    1,  2,  5,  3,  7,  8,  6,  4
-    console.log(test1.length)
-    console.log(minimumBribes(test1));
 }
 
-testSuite();
+testSuiteLongData1();
+//testSuite();

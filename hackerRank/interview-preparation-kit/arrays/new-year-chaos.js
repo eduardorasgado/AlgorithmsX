@@ -1,5 +1,6 @@
-const { test1, test2, test3, test4, test5,
-    test6, test7, test8, test9, test10} = require('./test-long-data/examples2');
+const examplesTwo = require('./test-long-data/examples2');
+
+const examplesOne = require('./test-long-data/examples1');
 /**
  * Print an integer denoting the minimum number of bribes needed to get the queue
  * into its final state. Print Too chaotic if the state is invalid,
@@ -124,28 +125,27 @@ function minimumBribes(q) {
         }
     }
     //console.log('after, ap table    ', afterTable)
-    console.log('after: ', initialState)
-    for(let i = 0; i < maxPosition; i++){
-        if(initialState[i] !== q[i])
-            console.log("resultant: ", initialState[i], `left: ${afterTable[initialState[i]]}|`, "original: ", q[i])
-    }
+    //console.log('after: ', initialState)
+    //for(let i = 0; i < maxPosition; i++){
+    //    if(initialState[i] !== q[i])
+    //        console.log("resultant: ", initialState[i], `left: ${afterTable[initialState[i]]}|`, "original: ", q[i])
+    //}
 
-    console.log("original: ");
-    let original = '';
-    for(let i = 0; i < maxPosition; i++){
-        if(i >60 && i < 90) original += q[i] + ' ';
-    }
-    console.log(original);
+    //console.log("original: ");
+    //let original = '';
+    //for(let i = 0; i < maxPosition; i++){
+    //    if(i >60 && i < 90) original += q[i] + ' ';
+    //}
+    //console.log(original);
 
-    console.log("resultant: ");
-    let resultant = '';
-    for(let i = 0; i < maxPosition; i++){
-        if(i >60 && i < 90) resultant += initialState[i] + ' ';
-    }
-    console.log(resultant);
-    console.log(steps);
+    //console.log("resultant: ");
+    //let resultant = '';
+    //for(let i = 0; i < maxPosition; i++){
+    //    if(i >60 && i < 90) resultant += initialState[i] + ' ';
+    //}
+    //console.log(resultant);
+    //console.log(steps);
     // swap last elements after last negative elements were swapped
-    console.log('//////')
     if(!chaoticMsg && false) {
         for(let element in afterTable) {
             if (afterTable.hasOwnProperty(element)) {
@@ -176,7 +176,6 @@ function minimumBribes(q) {
         //        console.log("resultant: ", initialState[i], `left: ${afterTable[initialState[i]]}|`, "original: ", q[i])
         //}
     }
-    console.log('returning')
     return steps;
 }
 
@@ -193,7 +192,27 @@ const testSuiteLongData1 = () => {
     // 65
     //console.log(stringToArray(test1).length)
     // test2, test5
-    [test1, test2, test5 ].forEach((test) => {
+    [examplesTwo.test1, examplesTwo.test2, examplesTwo.test5 ].forEach((test) => {
+        console.log(minimumBribes(stringToArray(test)));
+    })
+}
+
+const testSuiteLongData2 = () => {
+    console.log('---critique data test---');
+    // 709
+    // Too chaotic
+    // 704
+    // Too chaotic
+    // Too chaotic
+    // Too chaotic
+    // 691
+    // 731
+    // 733
+    // Too chaotic
+    // test2, test5
+    [ examplesOne.test1, examplesOne.test2,  examplesOne.test3, examplesOne.test4,
+        examplesOne.test5, examplesOne.test6, examplesOne.test7, examplesOne.test8,
+        examplesOne.test9,examplesOne.test10].forEach((test) => {
         console.log(minimumBribes(stringToArray(test)));
     })
 }
@@ -265,4 +284,5 @@ const testSuite = () => {
 }
 
 testSuiteLongData1();
+testSuiteLongData2()
 //testSuite();

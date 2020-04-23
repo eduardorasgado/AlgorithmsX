@@ -11,6 +11,7 @@ function minimumSwaps(arr) {
         ++swaps;
     }
     let arrLen = arr.length;
+    // to avoid sum to sortCounter a already sorted element
     let sortedElements = {}
     let sortCounter = 0;
     let i = 0;
@@ -19,25 +20,29 @@ function minimumSwaps(arr) {
         // if are equal then element is already sorted
         currentNum = arr[i]
         if(currentNum-1 !== i) {
-            // [4, 2, 3, 1], 4 = arr[i] and 1 = arr[arr[i]-1]
+            // [4, 2, 3, 1], 4 = arr[i] and 1 = arr[arr[i]-1]  <- position corresponding
+            // if not pos corresponding
             if(i+1 !== arr[currentNum-1]){
-                // sorting the known
+                // swapping arr[i] element to i = arr[i] position
                 swap(arr, i, currentNum-1)
                 sortedElements[currentNum] = true;
                 ++sortCounter;
             } else {
+                // position corresponging elements
                 swap(arr, i, currentNum-1);
                 sortedElements[i+1] = true;
                 sortedElements[currentNum] = true;
                 sortCounter += 2;
             }
         } else {
+            // elements already sorted
             if(!sortedElements[i+1]) {
                 sortedElements[i+1] = true
                 ++sortCounter
             }
         }
         //console.log(sortCounter, arr)
+        // when got the end of the array, sort remainers
         i = (i===arrLen-1) ? 0 : ++i;
     }
     //console.log(sortedElements);

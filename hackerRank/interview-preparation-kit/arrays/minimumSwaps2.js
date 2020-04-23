@@ -21,7 +21,10 @@ function minimumSwaps(arr) {
         if(currentNum-1 !== i) {
             // [4, 2, 3, 1], 4 = arr[i] and 1 = arr[arr[i]-1]
             if(i+1 !== arr[currentNum-1]){
-                // do something
+                // sorting the known
+                swap(arr, i, currentNum-1)
+                sortedElements[currentNum] = true;
+                ++sortCounter;
             } else {
                 swap(arr, i, currentNum-1);
                 sortedElements[i+1] = true;
@@ -34,10 +37,11 @@ function minimumSwaps(arr) {
                 ++sortCounter
             }
         }
-        console.log(sortCounter, arr)
-        ++i;
+        //console.log(sortCounter, arr)
+        i = (i===arrLen-1) ? 0 : ++i;
     }
-    console.log(sortedElements);
+    //console.log(sortedElements);
+    //console.log(arr);
     return swaps;
 }
 
@@ -89,6 +93,22 @@ const longDataTestSuite = () => {
     console.log(baseTestSuit(ex3.test));
 }
 
-//basicTestSuite();
-//longDataTestSuite();
 console.log(minimumSwaps([4, 3, 2, 1]));
+console.log(minimumSwaps([6, 3, 4, 5, 2, 1]));
+
+// 6, 3, 4, 5, 2, 1 <- initial
+// 1  3  4  5  2  6
+// 1  4  3  5  2  6     / 1  4  3  5  2  6
+// 1  5  3  4  2  6
+// 1  2  3  4  5  6
+
+console.log(minimumSwaps([7, 1, 3, 2, 4, 5, 6]));
+// 7, 1, 3, 2, 4, 5, 6 <- initial
+// 6, 1, 3, 2, 4, 5, 7
+// 1, 6, 3, 2, 4, 5, 7
+// 1, 2, 3, 6, 4, 5, 7
+// 1, 2, 3, 4, 6, 5, 7
+// 1, 2, 3, 4, 5, 6, 7
+console.log("======================");
+basicTestSuite();
+longDataTestSuite();

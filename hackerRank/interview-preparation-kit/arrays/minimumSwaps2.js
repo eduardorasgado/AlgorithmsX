@@ -6,22 +6,38 @@ const ex3 = require('./minimum-swaps-long-test-data/examples3');
 // Complete the minimumSwaps function below.
 function minimumSwaps(arr) {
     let swaps = 0;
+    function swap(arr, xIdx, yIdx) {
+        [arr[xIdx], arr[yIdx]] = [arr[yIdx], arr[xIdx]];
+        ++swaps;
+    }
     let arrLen = arr.length;
-    let ordered = []
-
+    let sortedElements = {}
+    let sortCounter = 0;
     let i = 0;
     let currentNum;
-    while(ordered.length < arrLen) {
+    while(sortCounter < arrLen) {
         // if are equal then element is already sorted
         currentNum = arr[i]
-        if(currentNum-1 != i) {
-            // [4, 2, 3, 1] 4 = arr[i] and 1 = arr[arr[i]-1]
-            if(i+1 === arr[currentNum-1]){
+        if(currentNum-1 !== i) {
+            // [4, 2, 3, 1], 4 = arr[i] and 1 = arr[arr[i]-1]
+            if(i+1 !== arr[currentNum-1]){
                 // do something
+            } else {
+                swap(arr, i, currentNum-1);
+                sortedElements[i+1] = true;
+                sortedElements[currentNum] = true;
+                sortCounter += 2;
+            }
+        } else {
+            if(!sortedElements[i+1]) {
+                sortedElements[i+1] = true
+                ++sortCounter
             }
         }
+        console.log(sortCounter, arr)
+        ++i;
     }
-
+    console.log(sortedElements);
     return swaps;
 }
 
@@ -73,5 +89,6 @@ const longDataTestSuite = () => {
     console.log(baseTestSuit(ex3.test));
 }
 
-basicTestSuite();
+//basicTestSuite();
 //longDataTestSuite();
+console.log(minimumSwaps([4, 3, 2, 1]));

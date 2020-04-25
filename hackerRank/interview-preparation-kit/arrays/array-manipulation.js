@@ -18,26 +18,71 @@ function arrayManipulation(n, queries) {
         startIdx = queries[i][0]-1;
         finalIdx = queries[i][1]-1;
         value = queries[i][2];
+        // new range is out of current groups element's ranges
         if ((startIdx < groups[j][0] && finalIdx < groups[j][0]) ||
-            startIdx > groups[j][1] && finalIdx > groups[j][1]){
+            (startIdx > groups[j][1] && finalIdx > groups[j][1])){
             ++j;
             groups[j] = [startIdx, finalIdx];
             allAccumulated.push(0)
         }
-        maxAccumulated += value;
         allAccumulated[j] += value;
     }
     //console.log(groups)
     //console.log(allAccumulated)
-    maxAccumulated = Math.max(...allAccumulated);
-    //for(i = 0; i < n; i++) {
-    //}
+    let newMaxAccList = []
+    let maxIdx = 0;
+    let idxToDelete = [0];
+    let currentGroup = [groups[0][0], groups[0][1]];
+    let k;
+    let groupsLen = groups.length;
+    //console.log("acc", allAccumulated);
+    while(groupsLen > 0) {
+        newMaxAccList[maxIdx] = allAccumulated[0];
+        //console.log("max", maxIdx);
+        for(i = 1; i < groupsLen; i++) {
+            if (!((currentGroup[0] < groups[i][0] && currentGroup[1] < groups[i][0]) ||
+                (currentGroup[0] > groups[i][1] && currentGroup[1] > groups[i][1]))) {
+                newMaxAccList[maxIdx] += allAccumulated[i];
+                idxToDelete.push(i);
+            }
+        }
+        //console.log(groups);
+        //console.log("idx: ", idxToDelete, allAccumulated);
+        //console.log(groups.length);
+        // delete all in idx
+        k = 0;
+        let toDelete;
+        // filter elements already paired and accumulated
+        groups = groups.filter((element, index) => {
+            toDelete = index !== idxToDelete[k];
+            if(toDelete) k++;
+            return toDelete;
+        })
+        k = 0;
+        allAccumulated = allAccumulated.filter((element, index) => {
+            toDelete = index !== idxToDelete[k];
+            if(toDelete) k++;
+            return toDelete;
+        })
+        //
+        //break;
+        ++maxIdx;
+        groupsLen = groups.length;
+        if(groupsLen > 0) {
+            currentGroup = [groups[0][0], groups[0][1]];
+            idxToDelete = [0];
+        }
+    }
+    maxAccumulated = Math.max(...newMaxAccList);
+    //console.log("deleted: ", groups.length, allAccumulated.length)
+    //console.log("final max: ", newMaxAccList);
+    //return allAccumulated;
     return maxAccumulated;
 }
 
 function longDataTestSuite() {
     // 10 000 000, 100 000   the size of the array and the number of operations.
-    // r: 2497169732
+    // r: 2 497 169 732
     let queries1 = dataReader( "example1.txt");
     //console.log(queries1.slice(queries1.length-100, queries1.length));
     console.log("response: ", arrayManipulation(10000000, queries1))  ;
@@ -68,13 +113,17 @@ function basicTestSuite() {
             [1, 8, 1],
             [5, 9, 15]]));
 
+    // 33
     console.log("response: ", arrayManipulation(10,
-        [[2, 6, 8],
-            [3, 5, 7],
-            [1, 8, 1],
-            [5, 8, 15],
-            [9, 10, 15],
-            [10, 10, 17]]));
+        [[2,  6,  8],
+                [3,  5,  7],
+                [1,  8,  1],
+                [5,  8,  15],
+                [9,  10, 15],
+                [10, 10, 17],
+                [1,  2,  1],
+                [2,  4,  3],
+                [10, 10, 1]]));
 }
 
 basicTestSuite();

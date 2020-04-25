@@ -8,48 +8,31 @@ const { dataReader } = require('./array-manipulation-long-test-data/data-reader'
 function arrayManipulation(n, queries) {
     let arr = Array.from({length: n}, () => 0);
     let queriesLen = queries.length;
-    let maxAccumulate = 0;
-    let maxValue = 0;
-    let maxValueRange = [0, 0]
+    let maxAccumulated = 0;
     let startIdx, finalIdx, value;
-    let accumulativeForAll = 0;
-    let currentForAllValue = 0;
-    for(let i = 0; i < queriesLen; i++) {
+    let groups = [[queries[0][0]-1, queries[0][1]-1]];
+    let allAccumulated = [0];
+    let i;
+    let j = 0;
+    for(i = 0; i < queriesLen; i++) {
         startIdx = queries[i][0]-1;
         finalIdx = queries[i][1]-1;
         value = queries[i][2];
-        if(finalIdx === n-1 && startIdx === 0) {
-            console.log("Acc");
-            currentForAllValue = value
-            accumulativeForAll += currentForAllValue;
-            maxAccumulate += currentForAllValue;
-        } else {
-            if(value > maxValue) {
-                maxValue = value;
-                maxValueRange[0] = startIdx;
-                maxValueRange[1] = finalIdx;
-            }
-            if(value != 0) {
-                if(maxAccumulate < maxValue) {
-                    for(startIdx; startIdx <=  finalIdx; startIdx++) {
-                        arr[startIdx] += value;
-                        maxAccumulate = Math.max(maxAccumulate, arr[startIdx]+ accumulativeForAll);
-                    }
-                } else {
-                    // maxValue is now maxAccumulate
-                    startIdx = Math.max(startIdx, maxValueRange[0]);
-                    finalIdx = Math.min(finalIdx, maxValueRange[1]);
-                    for(startIdx; startIdx <=  finalIdx; startIdx++) {
-                        arr[startIdx] += value;
-                        maxAccumulate = Math.max(maxAccumulate, arr[startIdx]+ accumulativeForAll);
-                    }
-                }
-
-            }
+        if ((startIdx < groups[j][0] && finalIdx < groups[j][0]) ||
+            startIdx > groups[j][1] && finalIdx > groups[j][1]){
+            ++j;
+            groups[j] = [startIdx, finalIdx];
+            allAccumulated.push(0)
         }
+        maxAccumulated += value;
+        allAccumulated[j] += value;
     }
-    console.log(maxValue, maxValueRange[0],maxValueRange[1]);
-    return maxAccumulate;
+    //console.log(groups)
+    //console.log(allAccumulated)
+    maxAccumulated = Math.max(...allAccumulated);
+    //for(i = 0; i < n; i++) {
+    //}
+    return maxAccumulated;
 }
 
 function longDataTestSuite() {
@@ -64,7 +47,8 @@ function basicTestSuite() {
     // r: 200
     // 5 3
     console.log("basic suite here");
-    console.log("response: ", arrayManipulation(5,
+    console.log("response:" +
+        " ", arrayManipulation(5,
         [[1, 2, 100],
             [2, 5, 100],
             [3, 4, 100]]));
@@ -83,6 +67,14 @@ function basicTestSuite() {
             [3, 5, 7],
             [1, 8, 1],
             [5, 9, 15]]));
+
+    console.log("response: ", arrayManipulation(10,
+        [[2, 6, 8],
+            [3, 5, 7],
+            [1, 8, 1],
+            [5, 8, 15],
+            [9, 10, 15],
+            [10, 10, 17]]));
 }
 
 basicTestSuite();

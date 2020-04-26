@@ -5,6 +5,7 @@ const { dataReader } = require('./array-manipulation-long-test-data/data-reader'
 // 1 <= queries.length <= 200, 000
 // queries[a, b, k] (a, b ) = 1<= a <=b,
 // queries[a, b, k] 0<= k <= 1 billion = 1000 000 000
+// solution time complexity: O(n+m)
 function arrayManipulation(n, queries) {
     let maxAccumulated = 0;
     let cages = Array.from({length: n+2}, () => 0);

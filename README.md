@@ -60,3 +60,8 @@ Dijkstra's algorithm by hand before coding, I always undestand the problem befor
 difference is.
 
 ![Screenshot](.gitutils/dijkstras-problem-solved.png?raw=true "Dijkstra's Algorithm")
+
+## Coding competition
+For coding competition, most essential algorithms you should know:
+
+![Screenshot](.gitutils/most-important-algorithms.jpg?raw=true "Most useful Algorithms list")

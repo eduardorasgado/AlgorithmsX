@@ -6,77 +6,23 @@ const { dataReader } = require('./array-manipulation-long-test-data/data-reader'
 // queries[a, b, k] (a, b ) = 1<= a <=b,
 // queries[a, b, k] 0<= k <= 1 billion = 1000 000 000
 function arrayManipulation(n, queries) {
-    let arr = Array.from({length: n}, () => 0);
-    let queriesLen = queries.length;
     let maxAccumulated = 0;
-    let startIdx, finalIdx, value;
-    let groups = [[queries[0][0]-1, queries[0][1]-1]];
-    let allAccumulated = [0];
-    let i;
-    let j = 0;
-    for(i = 0; i < queriesLen; i++) {
-        startIdx = queries[i][0]-1;
-        finalIdx = queries[i][1]-1;
-        value = queries[i][2];
-        // new range is out of current groups element's ranges
-        if ((startIdx < groups[j][0] && finalIdx < groups[j][0]) ||
-            (startIdx > groups[j][1] && finalIdx > groups[j][1])){
-            ++j;
-            groups[j] = [startIdx, finalIdx];
-            allAccumulated.push(0)
-        }
-        allAccumulated[j] += value;
+    let cages = Array.from({length: n+2}, () => 0);
+    let additionMax = 0;
+    //let cagesValues = [];
+    let querie
+    for(querie of queries) {
+        // start adds
+        cages[querie[0]] += querie[2];
+        // end sust
+        cages[querie[1]+1] -= querie[2];
     }
-    //console.log(groups)
-    //console.log(allAccumulated)
-    let newMaxAccList = []
-    let maxIdx = 0;
-    let idxToDelete = [0];
-    let currentGroup = [groups[0][0], groups[0][1]];
-    let k;
-    let groupsLen = groups.length;
-    //console.log("acc", allAccumulated);
-    while(groupsLen > 0) {
-        newMaxAccList[maxIdx] = allAccumulated[0];
-        //console.log("max", maxIdx);
-        for(i = 1; i < groupsLen; i++) {
-            if (!((currentGroup[0] < groups[i][0] && currentGroup[1] < groups[i][0]) ||
-                (currentGroup[0] > groups[i][1] && currentGroup[1] > groups[i][1]))) {
-                newMaxAccList[maxIdx] += allAccumulated[i];
-                idxToDelete.push(i);
-            }
-        }
-        //console.log(groups);
-        //console.log("idx: ", idxToDelete, allAccumulated);
-        //console.log(groups.length);
-        // delete all in idx
-        k = 0;
-        let toDelete;
-        // filter elements already paired and accumulated
-        groups = groups.filter((element, index) => {
-            toDelete = index !== idxToDelete[k];
-            if(toDelete) k++;
-            return toDelete;
-        })
-        k = 0;
-        allAccumulated = allAccumulated.filter((element, index) => {
-            toDelete = index !== idxToDelete[k];
-            if(toDelete) k++;
-            return toDelete;
-        })
-        //
-        //break;
-        ++maxIdx;
-        groupsLen = groups.length;
-        if(groupsLen > 0) {
-            currentGroup = [groups[0][0], groups[0][1]];
-            idxToDelete = [0];
-        }
+    let boundary;
+    for(boundary of cages) {
+        additionMax += boundary;
+        maxAccumulated = Math.max(maxAccumulated, additionMax)
     }
-    maxAccumulated = Math.max(...newMaxAccList);
-    //console.log("deleted: ", groups.length, allAccumulated.length)
-    //console.log("final max: ", newMaxAccList);
-    //return allAccumulated;
+
     return maxAccumulated;
 }
 

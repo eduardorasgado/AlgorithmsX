@@ -1,25 +1,26 @@
 // https://www.hackerrank.com/challenges/two-strings/problem
 // Complete the twoStrings function below.
+// O(n+m)
 function twoStrings(s1, s2) {
     let s2Len = s2.length;
     let s1Len = s1.length;
     let s1Map = {};
     let i;
+    // O(n)
     for(i = 0;i < s1Len; i++) {
         if(!s1Map[s1[i]]) {
             s1Map[s1[i]] = true;
         }
     }
 
-    let flag = false;
+
+    // O(m)
     for(i = 0;i < s2Len; i++) {
         if(s1Map[s2[i]]) {
-            console.log('YES');
-            flag = true;
-            break;
+            return('YES');
         }
     }
-    if(!flag) console.log('NO');
+    return('NO');
 }
 
 function basicTestSuite() {
@@ -35,21 +36,21 @@ function basicTestSuite() {
     // YES
     // YES
     // NO
-    twoStrings("wouldyoulikefries",
-        "abcabcabcabcabcabc");
-    twoStrings("hackerrankcommunity",
-        "cdecdecdecde");
-    twoStrings("jackandjill",
-        "wentupthehill");
-    twoStrings("writetoyourparents",
-        "fghmqzldbc");
+    console.log(twoStrings("wouldyoulikefries",
+        "abcabcabcabcabcabc"));
+    console.log(twoStrings("hackerrankcommunity",
+        "cdecdecdecde"));
+    console.log(twoStrings("jackandjill",
+        "wentupthehill"));
+    console.log(twoStrings("writetoyourparents",
+        "fghmqzldbc"));
 
     // YES
     // NO
-    twoStrings('aardvark',
-    'apple');
-    twoStrings('beetroot',
-    'sandals');
+    console.log(twoStrings('aardvark',
+    'apple'));
+    console.log(twoStrings('beetroot',
+    'sandals'));
 }
 
 basicTestSuite();

@@ -1,0 +1,49 @@
+aaaa
+
+a0, a1
+a0, a2
+a0, a3
+a1, a2
+a1, a3
+a2, a3
+6
+
+a0a1, a1a2
+a0a1, a2,a3
+a1a2, a2a3
+3
+
+a0a1a2, a1a2a3
+---------------
+cdcd
+
+c0, c2
+d1, d3
+
+c0d1, d1c2
+c0d1, c2d3
+d1c2, c2d3
+---------------
+ifailuhkqq
+
+i0, i3
+q8, q9
+i0f1a2, f1a2i3 
+---------------
+abba
+
+a0, a3
+b1, b2
+a0b1, b2a3
+a0b1b2, b1b2a0
+
+---------
+abcd
+
+no anagrams
+
+
+
+
+
+

@@ -199,6 +199,7 @@ function getLPS(pattern) {
             i += 1;
         }
     }
+    console.log(lps);
     return lps;
 }
 
@@ -275,3 +276,4 @@ console.log(kmp("ABC ABCDAB ABCDABCDABDE", "ABCDABD")); // 1
 console.log(kmp("ABC ABCDAB ABCDABCDABDE", "ABC")); // 4
 console.log(kmp("elementalmetal", 'tal')); // 2
 console.log(kmp("aantimatteraan", "aan")); // 2
+console.log(kmp("ifailuhkqqifailuhkqq", "ifailuhkqq")); // 2

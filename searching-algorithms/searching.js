@@ -277,3 +277,4 @@ console.log(kmp("ABC ABCDAB ABCDABCDABDE", "ABC")); // 4
 console.log(kmp("elementalmetal", 'tal')); // 2
 console.log(kmp("aantimatteraan", "aan")); // 2
 console.log(kmp("ifailuhkqqifailuhkqq", "ifailuhkqq")); // 2
+console.log(kmp("abba", "abba")); // 2

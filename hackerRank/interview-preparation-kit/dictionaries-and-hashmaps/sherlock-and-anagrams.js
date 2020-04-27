@@ -62,7 +62,8 @@ function sherlockAndAnagrams(s) {
                             //delete repetitionMap[boundariesOwners[j]]
                         } else {
                             // boundaries owner will absorb repetition mape element
-                            repetitionMap[boundariesOwners[j]].push(repetitionMap[element].slice(-1)[0]);
+                            repetitionMap[boundariesOwners[j]]
+                                .push(repetitionMap[element].slice(-1)[0]);
                             // delete repetitionMap[element];
                         }
                         //console.log("bounds crossed----------")
@@ -85,6 +86,7 @@ function sherlockAndAnagrams(s) {
                 i = repetitionMap[element][0];
                 j = repetitionMap[element].slice(-1)[0];
                 if(!(reviewed[i] && reviewed[j])) {
+                    //console.log(element);
                     let windowLen = 1;
                     // get through the window and increment window len until len = (j-i)-1
 
@@ -100,7 +102,7 @@ function sherlockAndAnagrams(s) {
                                 //console.log(z);
                                 if(s[z]) {
                                     elements[0] += (s[z].codePointAt(0)-96) * 37;
-                                    reviewed[k] = true;
+                                    reviewed[z] = true;
                                 }
                             }
                             for(q= k+1; q < j+1; q++) {
@@ -108,7 +110,7 @@ function sherlockAndAnagrams(s) {
                                 for(z = q; z < q + windowLen; z++){
                                     if(z < sLen) {
                                         elements[1] += (s[z].codePointAt(0)-96) * 37;
-                                        reviewed[q] = true;
+                                        reviewed[z] = true;
                                     }
                                     //console.log("here: ",z);
                                 }

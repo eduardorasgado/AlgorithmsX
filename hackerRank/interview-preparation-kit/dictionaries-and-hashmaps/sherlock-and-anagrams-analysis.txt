@@ -24,7 +24,8 @@ c0d1, d1c2
 c0d1, c2d3
 d1c2, c2d3
 ---------------
-ifailuhkqq
+i f a i l u h k q q
+0 1 2 3 4 5 6 7 8 9
 
 i0, i3
 q8, q9
@@ -62,3 +63,16 @@ abba
 0004
 acabacacd
 001012320
+
+0 1 2 3
+a b b a
+[]    []   kMax = s.length
+[ ]
+
+a, a
+b, b
+ab, ba
+abb,bba
+
+2+1-1 = 2
+-------------

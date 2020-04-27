@@ -39,24 +39,29 @@ function sherlockAndAnagrams(s) {
                 while(i+windowLen < j+1) {
                     console.log("window len loop, ", s[i], i, windowLen);
                     let k, q, z;
-                    let elements = [0]
-                    for(z = i; z < i + windowLen; z++){
-                        //console.log(z);
-                        elements[0] += (s[z].codePointAt(0)-96) * 37;
-                    }
+                    let elements = [0, 0]
+
                     for(k= i; k < j+1; k++) {
-                        console.log("elements: ", elements);
+                        elements[0] = 0;
+                        for(z = k; z < k + windowLen; z++){
+                            //console.log(z);
+                            if(s[z]) elements[0] += (s[z].codePointAt(0)-96) * 37;
+                        }
                         for(q= k+1; q < j+1; q++) {
                             console.log(k, q);
-                            for(z = q; z < k + windowLen; z++){
-                                //s[z].codePointAt(0)-96) * 37
-                                //console.log(s[z], z);
+                            for(z = q; z < q + windowLen; z++){
+                                if(z < sLen) elements[1] += (s[z].codePointAt(0)-96) * 37;
+                                console.log("here: ",z);
                             }
                             //console.log("nested: ", s[k], k)
+                            if(elements[0] === elements[1]) {
+                                console.log("elements: ", elements);
+                                ++annPairs;
+                            }
+                            elements[1] = 0;
                         }
                     }
                     ++windowLen;
-
                 }
             }
         }
@@ -76,10 +81,10 @@ function basicTestSuite() {
     // 3
     // 10
     //console.log(sherlockAndAnagrams('ifailuhkqq'));
-    console.log(sherlockAndAnagrams('kkkk'));
+    //console.log(sherlockAndAnagrams('kkkk'));
 
     // 5
-    //console.log(sherlockAndAnagrams('cdcd'));
+    console.log(sherlockAndAnagrams('cdcd'));
 }
 
 basicTestSuite();

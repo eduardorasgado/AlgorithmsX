@@ -2,6 +2,7 @@
 // Complete the sherlockAndAnagrams function below.
 function sherlockAndAnagrams(s) {
     // anagrammatic pairs
+    let annPairs = 0;
     let sLen = s.length;
     let alpha = 'a b c d e f g h i j k m n o p q r s t u v w x y z';
     let alphaMap = {};
@@ -11,6 +12,7 @@ function sherlockAndAnagrams(s) {
             alphaMap[letter] = (letter.codePointAt(0)-96)*37;
         }
     })(alpha);
+    console.log(alphaMap);
 
     let repetitionMap = {};
     let element;
@@ -19,23 +21,48 @@ function sherlockAndAnagrams(s) {
         if(!repetitionMap[s[i]]) repetitionMap[s[i]] = [i];
         else repetitionMap[s[i]].push(i);
     }
-    //console.log(repetitionMap);
+    console.log(repetitionMap);
 
     let currentWindow, windowLen, j;
     for(element in repetitionMap) {
         if(repetitionMap.hasOwnProperty(element)) {
             if(repetitionMap[element].length > 1) {
+                console.log("--", repetitionMap[element]);
                 // to compare sums in window and determinate if there is a valid pair
-                let firstPairSum, secondPairSum;
+                let pairSum, lastPairSum;
                 i = repetitionMap[element][0];
                 let j = repetitionMap[element].slice(-1)[0];
-                let currentWindow = [];
-                let windowLen = 2;
+                let windowLen = 1;
                 // get through the window and increment window len until len = (j-i)-1
-                // if
+
+                // window length increments until reach
+                while(i+windowLen < j+1) {
+                    console.log("window len loop, ", s[i], i, windowLen);
+                    let k, q, z;
+                    let elements = [0]
+                    for(z = i; z < i + windowLen; z++){
+                        //console.log(z);
+                        elements[0] += (s[z].codePointAt(0)-96) * 37;
+                    }
+                    for(k= i; k < j+1; k++) {
+                        console.log("elements: ", elements);
+                        for(q= k+1; q < j+1; q++) {
+                            console.log(k, q);
+                            for(z = q; z < k + windowLen; z++){
+                                //s[z].codePointAt(0)-96) * 37
+                                //console.log(s[z], z);
+                            }
+                            //console.log("nested: ", s[k], k)
+                        }
+                    }
+                    ++windowLen;
+
+                }
             }
         }
     }
+
+    return annPairs;
 
 }
 
@@ -43,16 +70,16 @@ function basicTestSuite() {
     //
     // 4
     // 0
-    console.log(sherlockAndAnagrams('abba'));
-    console.log(sherlockAndAnagrams('abcd'));
+    //console.log(sherlockAndAnagrams('abba'));
+    //console.log(sherlockAndAnagrams('abcd'));
 
     // 3
     // 10
-    console.log(sherlockAndAnagrams('ifailuhkqq'));
+    //console.log(sherlockAndAnagrams('ifailuhkqq'));
     console.log(sherlockAndAnagrams('kkkk'));
 
     // 5
-    console.log(sherlockAndAnagrams('cdcd'));
+    //console.log(sherlockAndAnagrams('cdcd'));
 }
 
 basicTestSuite();

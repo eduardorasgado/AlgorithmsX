@@ -199,7 +199,6 @@ function getLPS(pattern) {
             i += 1;
         }
     }
-    console.log(lps);
     return lps;
 }
 

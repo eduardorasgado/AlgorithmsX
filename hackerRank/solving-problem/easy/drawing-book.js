@@ -7,11 +7,27 @@
  n pages, p : pageto go
  */
 function pageCount(n, p) {
-    let backwards = n / p;
-    console.log(backwards);
+    let backBase =Math.floor(n / 2);
+    let backwards = Math.floor(backBase /2);
+    let page = 0, pageRef = 0;
+    let pageMap = {};
+    let change = false;
     for(let i = 0;i < n+1; i++) {
-        console.log(i);
+        pageMap[i] = page;
+        if(change) {
+            // once the last page
+            // increase o decrease page
+            if(pageRef < backwards) ++page
+             else {
+                --page;
+                // twice the last page
+                if((backBase+1)% 2 === 0 && pageRef <= backwards) ++page;
+            }
+            ++pageRef;
+        }
+        change = !change;
     }
+    return pageMap[p];
 }
 
 function basicTestSuite() {
@@ -29,4 +45,17 @@ function basicTestSuite() {
 
     // 0
     console.log(pageCount(5, 4));
+    // 3
+    console.log(pageCount(17, 7));
+
+    // 1
+    console.log(pageCount(17, 15));
+
+    console.log("------easy-----");
+    // 1
+    console.log(pageCount(4, 3));
+    // 0
+    console.log(pageCount(7, 6));
 }
+
+basicTestSuite();

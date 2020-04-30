@@ -4,34 +4,18 @@ function sherlockAndAnagrams(s) {
     // anagrammatic pairs
     let annPairs;
     let sLen = s.length;
-    let alpha = 'a b c d e f g h i j k l m n o p q r s t u v w x y z';
-    let alphaMap = {};
-    (function(letters) {
-        let letter;
-        for(letter of letters.split(' ')) {
-            alphaMap[letter] = (letter.codePointAt(0)-96) * 37;
-        }
-    })(alpha);
-    //console.log(alphaMap);
-
     let repetitionMap = {};
     let i, j, stringValue, letterNumber, complexKey;
     for(i = 0; i< sLen; i++) {
-        stringValue = 0;
-        letterNumber = 0;
         for(j = i; j< sLen; j++) {
-            stringValue += alphaMap[s[j]];
-            ++letterNumber;
-            //stringList = string.split('')
+            stringValue = s.slice(i, j+1).split('').sort().join('')
             //console.log(string);
-            complexKey = stringValue + letterNumber;
-            if(repetitionMap[complexKey] !== undefined) {
-                ++repetitionMap[complexKey][0];
-                repetitionMap[complexKey].push(s.slice(i, j+1))
+            if(repetitionMap[stringValue] !== undefined) {
+                ++repetitionMap[stringValue][0];
+                repetitionMap[stringValue].push(s.slice(i, j+1))
             } else {
-                repetitionMap[complexKey] = [0, s.slice(i, j+1)];
+                repetitionMap[stringValue] = [0, s.slice(i, j+1)];
             }
-            //repetitionMap[string] = stringList
         }
     }
     let element;
@@ -41,9 +25,7 @@ function sherlockAndAnagrams(s) {
             annPairs += (repetitionMap[element][0] *(repetitionMap[element][0]+1)) / 2;
         }
     }
-
     return annPairs;
-
 }
 
 function extendedTestSuite() {
@@ -91,6 +73,10 @@ function basicTestSuite() {
     // 5
     console.log(sherlockAndAnagrams('kkkkk'));
     console.log(sherlockAndAnagrams('cdcd'));
+
+    console.log('------------')
+    // 399
+    console.log(sherlockAndAnagrams("ifailuhkqqhucpoltgtyovarjsnrbfpvmupwjjjfiwwhrlkpekxxnebfrwibylcvkfealgonjkzwlyfhhkefuvgndgdnbelgruel"));
 }
 
 basicTestSuite();

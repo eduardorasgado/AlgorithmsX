@@ -2,37 +2,45 @@
 // Complete the sherlockAndAnagrams function below.
 function sherlockAndAnagrams(s) {
     // anagrammatic pairs
-    let annPairs = 0;
+    let annPairs;
     let sLen = s.length;
     let alpha = 'a b c d e f g h i j k l m n o p q r s t u v w x y z';
     let alphaMap = {};
     (function(letters) {
         let letter;
         for(letter of letters.split(' ')) {
-            alphaMap[letter] = (letter.codePointAt(0)-96);
+            alphaMap[letter] = (letter.codePointAt(0)-96) * 37;
         }
     })(alpha);
-    console.log(alphaMap);
+    //console.log(alphaMap);
 
     let repetitionMap = {};
-    let element;
-    let i, j, stringValue, stringList;
+    let i, j, stringValue, letterNumber, complexKey;
     for(i = 0; i< sLen; i++) {
         stringValue = 0;
+        letterNumber = 0;
         for(j = i; j< sLen; j++) {
             stringValue += alphaMap[s[j]];
+            ++letterNumber;
             //stringList = string.split('')
             //console.log(string);
-            if(repetitionMap[stringValue] !== undefined) {
-                ++repetitionMap[stringValue][0];
-                repetitionMap[stringValue].push(s.slice(i, j+1))
+            complexKey = stringValue + letterNumber;
+            if(repetitionMap[complexKey] !== undefined) {
+                ++repetitionMap[complexKey][0];
+                repetitionMap[complexKey].push(s.slice(i, j+1))
             } else {
-                repetitionMap[stringValue] = [1, s.slice(i, j+1)];
+                repetitionMap[complexKey] = [0, s.slice(i, j+1)];
             }
             //repetitionMap[string] = stringList
         }
     }
-    console.log(repetitionMap);
+    let element;
+    annPairs = 0;
+    for(element in repetitionMap) {
+        if(repetitionMap.hasOwnProperty(element)){
+            annPairs += (repetitionMap[element][0] *(repetitionMap[element][0]+1)) / 2;
+        }
+    }
 
     return annPairs;
 
@@ -79,9 +87,11 @@ function basicTestSuite() {
     console.log(sherlockAndAnagrams('kkkk'));
 
     console.log('------------')
+    // 20
     // 5
+    console.log(sherlockAndAnagrams('kkkkk'));
     console.log(sherlockAndAnagrams('cdcd'));
 }
 
 basicTestSuite();
-//extendedTestSuite();
+extendedTestSuite();

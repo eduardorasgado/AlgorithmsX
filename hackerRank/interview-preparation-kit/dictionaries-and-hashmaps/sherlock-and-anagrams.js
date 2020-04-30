@@ -5,16 +5,22 @@ function sherlockAndAnagrams(s) {
     let annPairs;
     let sLen = s.length;
     let repetitionMap = {};
-    let i, j, stringValue, letterNumber, complexKey;
+    let memoizer = {}
+    let i, j, stringValue, letterNumber, complexKey, stringWindow;
     for(i = 0; i< sLen; i++) {
         for(j = i; j< sLen; j++) {
-            stringValue = s.slice(i, j+1).split('').sort().join('')
+            stringWindow = s.slice(i, j+1)
+            if(!memoizer[stringWindow]) {
+                stringValue = s.slice(i, j+1).split('').sort().join('');
+                memoizer[stringWindow] = stringValue;
+            } else {
+                stringValue = memoizer[stringWindow];
+            }
             //console.log(string);
             if(repetitionMap[stringValue] !== undefined) {
-                ++repetitionMap[stringValue][0];
-                repetitionMap[stringValue].push(s.slice(i, j+1))
+                ++repetitionMap[stringValue];
             } else {
-                repetitionMap[stringValue] = [0, s.slice(i, j+1)];
+                repetitionMap[stringValue] = 0;
             }
         }
     }
@@ -22,7 +28,7 @@ function sherlockAndAnagrams(s) {
     annPairs = 0;
     for(element in repetitionMap) {
         if(repetitionMap.hasOwnProperty(element)){
-            annPairs += (repetitionMap[element][0] *(repetitionMap[element][0]+1)) / 2;
+            annPairs += (repetitionMap[element] *(repetitionMap[element]+1)) / 2;
         }
     }
     return annPairs;

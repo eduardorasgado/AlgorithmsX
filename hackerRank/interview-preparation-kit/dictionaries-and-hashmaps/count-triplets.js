@@ -10,7 +10,11 @@ const ex6 = require('./long-data-test-count-triplets/example6');
 function countTriplets(arr, r) {
     let triplets = 0;
     let arrLen = arr.length;
-
+    let i;
+    let geoProg = [];
+    for(i = 0; i < arrLen; i++) {
+        arr[i]
+    }
     return triplets;
 }
 
@@ -32,6 +36,7 @@ function complexTestSuite() {
 
     // 2325652489
     console.log(baseTestSuite(ex4.testArray, ex4.testRatio));
+    console.log("example 3 length: ", ex4.testArray.length);
     // 0
     console.log(baseTestSuite(ex5.testArray, ex5.testRatio));
 
@@ -58,4 +63,4 @@ function basicTestSuite() {
 
 
 basicTestSuite();
-//complexTestSuite();
+complexTestSuite();

@@ -21,22 +21,34 @@ function countTriplets(arr, r) {
         } else locMap[arr[i]] = [i];
     }
 
-    let g1, g2, lm1, lm2;
+    let g1, g2, lm1, lm2, lm1Len, lm2Len, newG1Elements;
     for(i = 0; i < arrLen; i++) {
         g1 = geoMap[arr[i]][0];
         g2 = geoMap[arr[i]][1];
         if(geoMap[g1] && geoMap[g2]) {
-            for(lm1 of locMap[g1]) {
-                if(i < lm1) {
+            lm1 = locMap[g1];
+            lm1Len = lm1.length;
+            newG1Elements = [];
+            for(j = 0; j < lm1Len; j++) {
+                if(i < lm1[j]) {
+                    newG1Elements.push(lm1[j])
                     if(geoMap[g2]) {
-                        for(lm2 of locMap[g2]) {
-                            if(lm1 < lm2) {
-                                ++triplets;
+                        lm2 = locMap[g2];
+                        lm2Len = lm2.length;
+                        for(k = 0; k < lm2Len; k++) {
+                            if(lm1[j] < lm2[k]) {
+                                //++triplets;
+                                //console.log(lm1Len - j, lm2Len - k);
+                                triplets += (lm2Len - k);
+                                break;
                             }
                         }
                     }
+                    //triplets += (lm1Len - j) * (lm2Len - k)
+                    //break;
                 }
             }
+            locMap[g1] = newG1Elements;
         }
     }
     return triplets;
@@ -79,7 +91,7 @@ function basicTestSuite() {
     console.log(countTriplets(
         [1, 3, 9, 9, 27, 81], 3));
 
-    // 12
+    // 10
     console.log(countTriplets(
         [1, 3, 9, 9, 27, 27, 81], 3));
 

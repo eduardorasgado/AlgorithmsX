@@ -10,10 +10,34 @@ const ex6 = require('./long-data-test-count-triplets/example6');
 function countTriplets(arr, r) {
     let triplets = 0;
     let arrLen = arr.length;
-    let i;
+    let i, j, k;
     let geoProg = [];
+    let geoMap = {}
+    let locMap = {}
     for(i = 0; i < arrLen; i++) {
-        arr[i]
+        geoMap[arr[i]] = [arr[i]* Math.pow(r, 1), arr[i]* Math.pow(r, 2)]
+        if(locMap[arr[i]] !== undefined) {
+            locMap[arr[i]].push(i);
+        } else locMap[arr[i]] = [i];
+    }
+
+    let g1, g2, lm1, lm2;
+    for(i = 0; i < arrLen; i++) {
+        g1 = geoMap[arr[i]][0];
+        g2 = geoMap[arr[i]][1];
+        if(geoMap[g1] && geoMap[g2]) {
+            for(lm1 of locMap[g1]) {
+                if(i < lm1) {
+                    if(geoMap[g2]) {
+                        for(lm2 of locMap[g2]) {
+                            if(lm1 < lm2) {
+                                ++triplets;
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
     return triplets;
 }
@@ -26,21 +50,24 @@ function baseTestSuite(arr, r) {
 function complexTestSuite() {
     console.log("----------Complex Test Suite-------");
     // 161700
+    console.log("example 1 length: ",ex1.testArray.length);
     console.log(baseTestSuite(ex1.testArray, ex1.testRatio));
 
     // 0
-    console.log(baseTestSuite(ex2.teestArray, ex2.testRatio));
+    //console.log("example 2 length: ",ex2.testArray.length);
+    console.log(baseTestSuite(ex2.testArray, ex2.testRatio));
 
     // 0
     console.log(baseTestSuite(ex3.testArray, ex3.testRatio));
 
-    // 2325652489
+    // 2 325 652 489
+    console.log("example 4 length: ", ex4.testArray.length);
     console.log(baseTestSuite(ex4.testArray, ex4.testRatio));
-    console.log("example 3 length: ", ex4.testArray.length);
     // 0
     console.log(baseTestSuite(ex5.testArray, ex5.testRatio));
 
-    // 1667018988625
+    // 1 667 018 988 625
+    console.log("example 6 length: ", ex6.testArray.length);
     console.log(baseTestSuite(ex6.testArray, ex6.testRatio));
 }
 

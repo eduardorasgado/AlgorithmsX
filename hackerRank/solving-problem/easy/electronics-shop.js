@@ -4,6 +4,19 @@
  */
 function getMoneySpent(keyboards, drives, b) {
     //return [keyboards, drives, b]
+    let kLen = keyboards.length;
+    let dLen = drives.length
+    let max = -1;
+    let currentMax = 0;
+    for (let i = 0; i < kLen; i++) {
+        for(let j = 0; j < dLen; j++){
+            currentMax = keyboards[i] + drives[j]
+            if(currentMax <= b) {
+                max = Math.max(max, currentMax);
+            }
+        }
+    }
+    return max;
 }
 
 function baseTestSuite(k, d, b) {

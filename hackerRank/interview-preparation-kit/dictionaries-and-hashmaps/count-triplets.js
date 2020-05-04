@@ -38,7 +38,6 @@ function countTriplets(arr, r) {
                         for(k = 0; k < lm2Len; k++) {
                             if(lm1[j] < lm2[k]) {
                                 //++triplets;
-                                //console.log(lm1Len - j, lm2Len - k);
                                 triplets += (lm2Len - k);
                                 break;
                             }

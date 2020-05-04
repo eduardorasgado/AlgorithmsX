@@ -2,14 +2,11 @@ const fs = require('fs');
 // https://www.hackerrank.com/challenges/cats-and-a-mouse/problem
 // Complete the catAndMouse function below.
 function catAndMouse(x, y, z) {
-    let catAProb = [Math.abs(z- x), "Cat A"];
-    let catBProb = [Math.abs(z - y), "Cat B"] ;
-    if(catAProb[0] == catBProb[0]) return "Mouse C";
-    else if (Math.min(catAProb[0], catBProb[0]) == catAProb) {
-        return catAProb[1];
-    } else {
-        return catBProb[1];
-    }
+    // Cat A - Cat B
+    // 75   -  32 = 43(+) return b
+    // 32 - 75 = -43(-) return A
+    let result = Math.abs(z- x) - Math.abs(z - y);
+    return (!result) ? "Mouse C" : ((result > 0) ? "Cat B" : "Cat A");
 }
 
 function dataReaderBase(textName) {

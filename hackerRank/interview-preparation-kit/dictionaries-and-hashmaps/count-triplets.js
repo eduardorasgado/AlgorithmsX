@@ -7,6 +7,18 @@ const ex6 = require('./long-data-test-count-triplets/example6');
 // https://www.hackerrank.com/challenges/count-triplets-1/problem
 // Complete the countTriplets function below.
 // data array and radio
+function countTripletsOptimized(arr,r) {
+    let arrLen = arr.length;
+    let nFreq = {};
+    let n;
+    let i = 0;
+    while(i< arrLen) {
+        n = arr[i];
+        nFreq[n] = ++nFreq[n] || 1;
+        ++i;
+    }
+    console.log(nFreq);
+}
 function countTriplets(arr, r) {
     let triplets = 0;
     let arrLen = arr.length;
@@ -52,33 +64,38 @@ function countTriplets(arr, r) {
     return triplets;
 }
 
-function baseTestSuite(arr, r) {
+function baseTestSuite(arr, r, mod=false) {
     let arrList = arr.split(' ').map((e)=> parseInt(e));
+    if(mod)
+        return countTripletsOptimized(arrList, r);
     return countTriplets(arrList, r);
 }
 
 function complexTestSuite() {
     console.log("----------Complex Test Suite-------");
     // 161700
-    console.log("example 1 length: ",ex1.testArray.length);
-    console.log(baseTestSuite(ex1.testArray, ex1.testRatio));
+    //console.log("example 1 length: ",ex1.testArray.length);
+    //console.log(baseTestSuite(ex1.testArray, ex1.testRatio));
+    //console.log(baseTestSuite(ex1.testArray, ex1.testRatio, true));
 
     // 0
     //console.log("example 2 length: ",ex2.testArray.length);
-    console.log(baseTestSuite(ex2.testArray, ex2.testRatio));
+    //console.log(baseTestSuite(ex2.testArray, ex2.testRatio));
 
     // 0
-    console.log(baseTestSuite(ex3.testArray, ex3.testRatio));
+    //console.log(baseTestSuite(ex3.testArray, ex3.testRatio));
 
     // 2 325 652 489
     console.log("example 4 length: ", ex4.testArray.length);
-    console.log(baseTestSuite(ex4.testArray, ex4.testRatio));
+    //console.log(baseTestSuite(ex4.testArray, ex4.testRatio));
+    console.log(baseTestSuite(ex4.testArray, ex4.testRatio, true));
+
     // 0
-    console.log(baseTestSuite(ex5.testArray, ex5.testRatio));
+    //console.log(baseTestSuite(ex5.testArray, ex5.testRatio));
 
     // 1 667 018 988 625
-    console.log("example 6 length: ", ex6.testArray.length);
-    console.log(baseTestSuite(ex6.testArray, ex6.testRatio));
+    //console.log("example 6 length: ", ex6.testArray.length);
+    //console.log(baseTestSuite(ex6.testArray, ex6.testRatio));
 }
 
 function basicTestSuite() {

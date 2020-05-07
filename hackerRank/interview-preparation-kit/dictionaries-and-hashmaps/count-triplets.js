@@ -9,15 +9,35 @@ const ex6 = require('./long-data-test-count-triplets/example6');
 // data array and radio
 function countTripletsOptimized(arr,r) {
     let arrLen = arr.length;
-    let nFreq = {};
+    let nFreqRight = {};
+    let nFreqLeft = {};
+    let triplets = 0;
     let n;
-    let i = 0;
-    while(i< arrLen) {
+    let i = 0
+    while(i < arrLen) {
+        // accumulating repetitions
         n = arr[i];
-        nFreq[n] = ++nFreq[n] || 1;
+        nFreqRight[n] = ++nFreqRight[n] || 1;
+        i++;
+    }
+
+    i = 0;
+    let g1, g2; // to store geometric progression results
+    while(i < arrLen) {
+        n = arr[i]
+        // core ---
+        --nFreqRight[n]; // removing one
+        g1 = n / r;
+        g2 = n * r;
+        //console.log(g1, n, g2);
+        if(nFreqLeft[g1] && nFreqRight[g2]) {
+            triplets += nFreqLeft[g1] * nFreqRight[g2];
+        }
+        // end core ---
+        nFreqLeft[n] = ++nFreqLeft[n] || 1; // adding current n to left
         ++i;
     }
-    console.log(nFreq);
+    return triplets;
 }
 function countTriplets(arr, r) {
     let triplets = 0;
@@ -76,11 +96,11 @@ function complexTestSuite() {
     // 161700
     //console.log("example 1 length: ",ex1.testArray.length);
     //console.log(baseTestSuite(ex1.testArray, ex1.testRatio));
-    //console.log(baseTestSuite(ex1.testArray, ex1.testRatio, true));
+    console.log(baseTestSuite(ex1.testArray, ex1.testRatio, true));
 
     // 0
     //console.log("example 2 length: ",ex2.testArray.length);
-    //console.log(baseTestSuite(ex2.testArray, ex2.testRatio));
+    console.log(baseTestSuite(ex2.testArray, ex2.testRatio, true));
 
     // 0
     //console.log(baseTestSuite(ex3.testArray, ex3.testRatio));
@@ -88,14 +108,14 @@ function complexTestSuite() {
     // 2 325 652 489
     console.log("example 4 length: ", ex4.testArray.length);
     //console.log(baseTestSuite(ex4.testArray, ex4.testRatio));
-    console.log(baseTestSuite(ex4.testArray, ex4.testRatio, true));
+      console.log(baseTestSuite(ex4.testArray, ex4.testRatio, true));
 
     // 0
     //console.log(baseTestSuite(ex5.testArray, ex5.testRatio));
 
     // 1 667 018 988 625
-    //console.log("example 6 length: ", ex6.testArray.length);
-    //console.log(baseTestSuite(ex6.testArray, ex6.testRatio));
+    console.log("example 6 length: ", ex6.testArray.length);
+    console.log(baseTestSuite(ex6.testArray, ex6.testRatio, true));
 }
 
 function basicTestSuite() {
@@ -117,6 +137,14 @@ function basicTestSuite() {
     //
     console.log(baseTestSuite(
         "1 2 3 9 6 9 18 27 18 54 27 81", 3));
+
+    console.log(baseTestSuite(
+        "1 3 3 2 3 6 9 18 9 9 18 54 9 2 6 27 18 81", 3));
+    console.log("---");
+    console.log(baseTestSuite(
+        "1 3 3 2 3 6 9 18 9 9 18 54 9 2 6 27 18 81", 3, true));
+    console.log(baseTestSuite(
+        '1, 3, 9, 9, 27, 81', 3, true));
 }
 
 

@@ -7,25 +7,37 @@ function freqQuery(queries) {
     let opt;
     let dataElement = 0;
     let dataFreq = {};
+    let freqTable = {} // store the frequencies and how many elements has it
     for(let i = 0; i < qLen; i++) {
         opt = queries[i][0];
         dataElement = queries[i][1];
         // core ---
-        // naive implementation
-        if(opt === 1) dataFreq[dataElement] = ++dataFreq[dataElement] || 1;
-        else if(opt === 2) dataFreq[dataElement] && --dataFreq[dataElement]
-        else if(opt === 3) {
-            let e;
-            let presented = 0;
-            for(e in dataFreq) {
-                if(dataFreq.hasOwnProperty(e)) {
-                    if(dataElement === dataFreq[e]) {
-                        presented = 1;
-                        break;
-                    }
-                }
+        // adding element
+        if(opt === 1) {
+            if(dataFreq[dataElement]) {
+                // decrease the repetitions of current
+                --freqTable[dataFreq[dataElement]++];
+                // increase the repetitions of new freq
+                freqTable[dataFreq[dataElement]] =
+                    ++freqTable[dataFreq[dataElement]] || 1
+            } else {
+                // if does not exists, then just add to freqTable
+                dataFreq[dataElement] = 1;
+                freqTable[1] = ++freqTable[1] || 1;
             }
-            output.push(presented);
+        }
+        // removing element
+        else if(opt === 2) {
+            // remove only if exists
+            if(dataFreq[dataElement]) {
+                --freqTable[dataFreq[dataElement]--];
+                freqTable[dataFreq[dataElement]] =
+                    ++freqTable[dataFreq[dataElement]] || 1;
+            }
+        }
+        else if(opt === 3) {
+            if(freqTable[dataElement]) output.push(1);
+            else output.push(0);
         }
         // end core ----
     }

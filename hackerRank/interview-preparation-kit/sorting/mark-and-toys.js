@@ -30,7 +30,16 @@ function maximumToys(prices, k) {
 
     })();
 
-    return prices;
+    let nToys = 0
+    let total = 0
+    let price;
+    for(price of prices) {
+        if(total + price <= k) {
+            total += price;
+            ++nToys;
+        } else break;
+    }
+    return nToys;
 }
 
 function baseTestSuite(budget, toys) {

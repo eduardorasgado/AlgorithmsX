@@ -2,9 +2,36 @@
 // Complete the freqQuery function below.
 // Return an integer array consisting of all the outputs of queries of type 3
 function freqQuery(queries) {
+    let qLen = queries.length;
+    let output = [];
+    let opt;
+    let dataElement = 0;
+    let dataFreq = {};
+    for(let i = 0; i < qLen; i++) {
+        opt = queries[i][0];
+        dataElement = queries[i][1];
+        // core ---
+        // naive implementation
+        if(opt === 1) dataFreq[dataElement] = ++dataFreq[dataElement] || 1;
+        else if(opt === 2) dataFreq[dataElement] && --dataFreq[dataElement]
+        else if(opt === 3) {
+            let e;
+            let presented = 0;
+            for(e in dataFreq) {
+                if(dataFreq.hasOwnProperty(e)) {
+                    if(dataElement === dataFreq[e]) {
+                        presented = 1;
+                        break;
+                    }
+                }
+            }
+            output.push(presented);
+        }
+        // end core ----
+    }
 
     // return printings or array of the printings
-    return queries;
+    return output;
 }
 
 // convert the string with line break into an array
@@ -54,6 +81,7 @@ function basicTestSuite() {
         "3 1";
     console.log(baseTestSuite(ex2));
 
+    // 0 1 1
     let ex3 = "1 3\n" +
         "2 3\n" +
         "3 2\n" +

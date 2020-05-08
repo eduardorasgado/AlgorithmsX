@@ -8,35 +8,33 @@ class Player:
     def __repr__(self):
         pass
 
-    def helperPivot(self, listing, start, listLen):
-        pivot = listing[start]
-        pivotIdx = start
-        for i in range(start+1, listLen):
-            if listing[i] < pivot:
-                pivotIdx += 1
-                if i != pivotIdx:
-                    listing[i], listing[pivotIdx] = listing[pivotIdx], listing[i]
-        if pivot != listing[pivotIdx]:
-            listing[start], listing[pivotIdx] = listing[pivotIdx], listing[start]
-        return pivotIdx
-
-    def sorting(self, listing, start = 0, end = 0):
-        if end == 0:
-            end = len(listing)
-        if start < end-1:
-            pivotIdx = self.helperPivot(listing, start, end)
-            self.sorting(listing, start, pivotIdx)
-            self.sorting(listing, pivotIdx+1, end)
-        return listing
-
 
     # algorithm to sort based in comparing two Player objects
+    # based on quick sort to sort alphabets
     def comparator(self, a, b):
+        def sort(array, start, end):
+            if start >= end:
+                return;
+            else:
+                pivot = array[start]
+                pIdx = start
+                for i in range(start+1, end+1):
+                    if array[i] < pivot:
+                        pIdx += 1
+                        if(i != pIdx):
+                            array[i], array[pIdx] = array[pIdx], array[i]
+                if(pivot != array[pIdx]):
+                    array[start], array[pIdx] = array[pIdx], array[start]
+                p = pIdx
+                sort(array, start, p-1)
+                sort(array, p+1, end)
         # sort by num or if they have same score then sort alphabetically
         if a.score == b.score:
             # sort alphabetically
-            elements = self.sorting([a.name, b.name])
-            if a.name == elements[0]:
+            arr = [a.name, b.name]
+            sort(arr , 0, 1)
+        
+            if a.name == arr[0]:
                 return -1
             else:
                 return 1
@@ -55,7 +53,11 @@ p = Player("eduardo", 20)
 
 #p1 = Player("davis", 10)
 #p2 = Player("davis", 15)
-p1 = Player("davis", 20)
-p2 = Player("amanda", 20)
+p1 = Player("amanda", 20)
+p2 = Player("davis", 20)
+
+p11 = Player("davis", 20)
+p22 = Player("amanda", 20)
 
 print(p.comparator(p1, p2))
+print(p.comparator(p11, p22))

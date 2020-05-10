@@ -8,20 +8,23 @@ function activityNotifications(expenditure, d) {
     // first, order the elements
     // using insertion sort due to first all but first time, window is
     // partially sorted
-    function sortWindow(arr) {
+    function sortWindow(arr, expToDelete) {
         let arrLen = arr.length;
         let currentVal;
+        let idxToDelete = 0;
         for(let i = 1; i < arrLen; i++) {
             currentVal = arr[i];
             let j;
             let changed = false;
             for (j = i - 1; j >= 0 && arr[j] > currentVal ; j--) {
                 arr[j+1] = arr[j];
+                if(arr[j+1] === expToDelete) idxToDelete = j+1
             }
             arr[j+1] = currentVal;
+            if(arr[j+1] === expToDelete) idxToDelete = j+1
         }
         //console.log(arr, toDeleteIdx, toDeleteExp);
-        return arr;
+        return [arr, idxToDelete];
     }
     // get the window of d elements over the expeditures
     let i;
@@ -39,15 +42,19 @@ function activityNotifications(expenditure, d) {
     let median, median2;
     i = 0;
     let iDelete = 0;
-
+    let expToDelete = 0;
+    let manualIdx = false;
     while (i <= expLen - d - 1){
         // sorting the window
         // sortWindow return location of lastLocator[i] to be able to delete it at O(1)
         if(i === 0 || sortedWindow[sortedWindow.length-1] < max){
             //console.log(sortedWindow[sortedWindow.length - 1], max);
-            sortedWindow = sortWindow(sortedWindow);
+            [sortedWindow, iDelete] = sortWindow(sortedWindow, expToDelete);
             max = sortedWindow[sortedWindow.length-1];
+            manualIdx = false;
             //console.log(sortedWindow);
+        } else {
+            manualIdx = true;
         }
         //console.log(sortedWindow);
         //console.log(lastLocator[i], iDelete);
@@ -65,11 +72,17 @@ function activityNotifications(expenditure, d) {
         }
         // sliding the window
         lastLocator.push(expenditure[j]);
+        expToDelete = lastLocator[i];
         //remove from sortedWindow
         //[sortedWindow[iDelete], sortedWindow[d-1]] =
         //    [sortedWindow[d-1], sortedWindow[iDelete]];
         //sortedWindow.pop();
-        sortedWindow.splice(sortedWindow.indexOf(lastLocator[i]), 1);
+        if(manualIdx) {
+            sortedWindow.splice(sortedWindow.indexOf(lastLocator[i-1]), 1);
+        } else {
+            //console.log("to delete id: ", iDelete, "element: ", expToDelete);
+            sortedWindow.splice(iDelete, 1);
+        }
         sortedWindow.push(expenditure[j]);
         ++i;
         ++j; // j is the right number next to window
@@ -79,24 +92,7 @@ function activityNotifications(expenditure, d) {
 
 // another version
 function fan(expenditure, d) {
-    let expLen = expenditure.length;
-    // creating the sub elements
-    let exps = [];
-    let lastDays = [[]];
-    let i;
-    for(i = 0; i < d; i++) {
-        lastDays[0].push(expenditure[i])
-    }
-    let j = 0;
-    for(i = 1; i < expLen - d; i++) {
-        lastDays[i] = Object.assign([], lastDays[i-1]);
-        lastDays[i][d-1], lastDays[i][j % (d-1)] =
-            lastDays[i][j % (d-1)], lastDays[i][d-1];
-        lastDays[i].pop();
-        lastDays[i].push(expenditure[d-1]);
-        j++;
-    }
-    console.log(lastDays);
+    //
 }
 
 function baseTestSuite(exp, days, mod = false) {
@@ -122,16 +118,16 @@ function basicTestSuite() {
     console.log(baseTestSuite(
         "1 2 3 4 4", 4));
 
-    console.log("-------mod-----");
-    console.log(baseTestSuite(
-        "10 20 30 40 50", 3, true));
-    // 2
-    console.log(baseTestSuite(
-        "2 3 4 2 3 6 8 4 5", 5, true));
-    // 0
-    console.log(baseTestSuite(
-        "1 2 3 4 4", 4, true));
+    //console.log("-------mod-----");
+    //console.log(baseTestSuite(
+    //    "10 20 30 40 50", 3, true));
+    //// 2
+    //console.log(baseTestSuite(
+    //    "2 3 4 2 3 6 8 4 5", 5, true));
+    //// 0
+    //console.log(baseTestSuite(
+    //    "1 2 3 4 4", 4, true));
 }
 
 basicTestSuite();
-//longTestSuite();
+longTestSuite();

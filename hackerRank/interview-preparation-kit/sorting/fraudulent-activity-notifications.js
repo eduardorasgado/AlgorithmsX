@@ -77,8 +77,31 @@ function activityNotifications(expenditure, d) {
     return notificationCounter;
 }
 
-function baseTestSuite(exp, days) {
+// another version
+function fan(expenditure, d) {
+    let expLen = expenditure.length;
+    // creating the sub elements
+    let exps = [];
+    let lastDays = [[]];
+    let i;
+    for(i = 0; i < d; i++) {
+        lastDays[0].push(expenditure[i])
+    }
+    let j = 0;
+    for(i = 1; i < expLen - d; i++) {
+        lastDays[i] = Object.assign([], lastDays[i-1]);
+        lastDays[i][d-1], lastDays[i][j % (d-1)] =
+            lastDays[i][j % (d-1)], lastDays[i][d-1];
+        lastDays[i].pop();
+        lastDays[i].push(expenditure[d-1]);
+        j++;
+    }
+    console.log(lastDays);
+}
+
+function baseTestSuite(exp, days, mod = false) {
     exp = exp.split(" ").map(n => parseInt(n));
+    if(mod) return fan(exp, days);
     return activityNotifications(exp, days);
 }
 
@@ -98,7 +121,17 @@ function basicTestSuite() {
     // 0
     console.log(baseTestSuite(
         "1 2 3 4 4", 4));
+
+    console.log("-------mod-----");
+    console.log(baseTestSuite(
+        "10 20 30 40 50", 3, true));
+    // 2
+    console.log(baseTestSuite(
+        "2 3 4 2 3 6 8 4 5", 5, true));
+    // 0
+    console.log(baseTestSuite(
+        "1 2 3 4 4", 4, true));
 }
 
 basicTestSuite();
-longTestSuite();
+//longTestSuite();

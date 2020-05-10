@@ -90,9 +90,56 @@ function activityNotifications(expenditure, d) {
     return notificationCounter;
 }
 
-// another version
+// based on counting sort
+function getTheMedian(arr, medianPos, days) {
+    // accumulating all the elements
+    let arrLen = arr.length;
+    let acc = 0;
+    for (let i = 1; i < arrLen; i++) {
+        if(acc < medianPos) {
+            acc += arr[i]; // arr[i] is the position where median is located
+        }
+    }
+    console.log(acc);
+}
+
+// optimized version
 function fan(expenditure, d) {
-    //
+    // we know cuz of the constrains that
+    // 0 <= expenditure[i] <= 200
+    let min = 0;
+    let max = 200;
+    let endWindow = d;
+    let notificationCounter = 0;
+    let expLen = expenditure.length;
+    let current = 0;
+    // contructing the counting array for storing the elements rep
+    let countingArr = Array.from({length: max - min+1},  () => 0);
+
+    // get the reps from expeditures in 0 to end pos
+    for (let i = 0; i < endWindow; i++) {
+        ++countingArr[expenditure[i]];
+    }
+
+    // get the position of the median given if total trailing days are even or odd
+    let medianPos;
+    // if days length is even then we should considere median = (left + right) / 2
+    // then d.length is odd so consider median = d.length / 2
+    if(d % 2 === 0) medianPos = (d / 2) - 1; // for left val
+    else medianPos = Math.floor(d/2);
+
+    // we will iterate into our expeditures using a queue aka sliding window
+    let median = 0;
+    while(endWindow < expLen) {
+        median = getTheMedian(countingArr, medianPos, d);
+        if(median * 2 <= expenditure[endWindow+1]) {
+            ++notificationCounter;
+        }
+        --countingArr[expenditure[current]];
+        ++countingArr[expenditure[endWindow]];
+        ++current;
+        ++endWindow;
+    }
 }
 
 function baseTestSuite(exp, days, mod = false) {
@@ -104,7 +151,7 @@ function baseTestSuite(exp, days, mod = false) {
 function longTestSuite() {
     // r 492
     console.log(baseTestSuite(example1.expeditures,
-        example1.days));
+        example1.days, true));
 }
 
 function basicTestSuite() {
@@ -118,10 +165,10 @@ function basicTestSuite() {
     console.log(baseTestSuite(
         "1 2 3 4 4", 4));
 
-    //console.log("-------mod-----");
-    //console.log(baseTestSuite(
-    //    "10 20 30 40 50", 3, true));
-    //// 2
+    console.log("-------mod-----");
+    console.log(baseTestSuite(
+        "10 20 30 40 50", 3, true));
+    // 2
     //console.log(baseTestSuite(
     //    "2 3 4 2 3 6 8 4 5", 5, true));
     //// 0
@@ -130,4 +177,4 @@ function basicTestSuite() {
 }
 
 basicTestSuite();
-longTestSuite();
+//longTestSuite();

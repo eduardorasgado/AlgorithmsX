@@ -33,6 +33,7 @@ Enjoy it.
     * Merge Sort
     * Quick Sort
     * Radix Sort
+    * Counting Sort
     
     Shortest Path(Graphs)
     * Dijkstra's Algorithm

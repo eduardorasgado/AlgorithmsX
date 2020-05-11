@@ -1,6 +1,7 @@
 let example1 = require("./fraudulent-activity-long-data-test/example1");
 // https://www.hackerrank.com/challenges/fraudulent-activity-notifications/problem
 // Complete the activityNotifications function below.
+// NAIVE VERSION. OPTIMIZED IS BELLOW
 function activityNotifications(expenditure, d) {
     let expLen = expenditure.length;
     let notificationCounter = 0;
@@ -95,12 +96,32 @@ function getTheMedian(arr, medianPos, days) {
     // accumulating all the elements
     let arrLen = arr.length;
     let acc = 0;
-    for (let i = 1; i < arrLen; i++) {
+    let i; // i is the value in  arr[i] accumulated position
+    for (i = 0; i < arrLen; i++) {
+        // arr[i] accumulated stores the position of the element i
+        // give couting sort logic
         if(acc < medianPos) {
-            acc += arr[i]; // arr[i] is the position where median is located
+            acc += arr[i];
+        } else break;
+    }
+    let right = i;
+    let left = --i; // cuz in first basic example test with i stays 21 and 31
+                    // so we should decrease by one
+    // even
+    if(days % 2 === 0) {
+        // do this only if we have not same two nums in middle beeing
+        // left = right, e.g.: 1 2 (3 3) 5 8
+        if(acc <= medianPos) {
+            // search for next position in medianPos + 1 element
+            // where arr[i+n] is different from 0
+            for(i = right; i < arrLen; i++) {
+                if(arr[i] !== 0) break;
+            }
+            right = i;
+            left = (left + right) / 2;
         }
     }
-    console.log(acc);
+    return left;
 }
 
 // optimized version
@@ -125,14 +146,14 @@ function fan(expenditure, d) {
     let medianPos;
     // if days length is even then we should considere median = (left + right) / 2
     // then d.length is odd so consider median = d.length / 2
-    if(d % 2 === 0) medianPos = (d / 2) - 1; // for left val
-    else medianPos = Math.floor(d/2);
+    if(d % 2 === 0) medianPos = d / 2; // for right val
+    else medianPos = Math.floor(d / 2) + 1;
 
     // we will iterate into our expeditures using a queue aka sliding window
     let median = 0;
     while(endWindow < expLen) {
         median = getTheMedian(countingArr, medianPos, d);
-        if(median * 2 <= expenditure[endWindow+1]) {
+        if(median * 2 <= expenditure[endWindow]) {
             ++notificationCounter;
         }
         --countingArr[expenditure[current]];
@@ -140,6 +161,7 @@ function fan(expenditure, d) {
         ++current;
         ++endWindow;
     }
+    return notificationCounter;
 }
 
 function baseTestSuite(exp, days, mod = false) {
@@ -168,13 +190,14 @@ function basicTestSuite() {
     console.log("-------mod-----");
     console.log(baseTestSuite(
         "10 20 30 40 50", 3, true));
+    console.log("--------");
     // 2
-    //console.log(baseTestSuite(
-    //    "2 3 4 2 3 6 8 4 5", 5, true));
-    //// 0
-    //console.log(baseTestSuite(
-    //    "1 2 3 4 4", 4, true));
+    console.log(baseTestSuite(
+        "2 3 4 2 3 6 8 4 5", 5, true));
+    // 0
+    console.log(baseTestSuite(
+        "1 2 3 4 4", 4, true));
 }
 
 basicTestSuite();
-//longTestSuite();
+longTestSuite();

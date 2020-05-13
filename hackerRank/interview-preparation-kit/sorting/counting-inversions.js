@@ -1,7 +1,19 @@
 // https://www.hackerrank.com/challenges/ctci-merge-sort/problem
 // Complete the countInversions function below.
+// constaints
+//1 <= n <= 10^5
+// 1 <= arr[i] <= 10^7
 function countInversions(arr) {
-    return arr;
+    let arrLen = arr.length;
+    let inv = 0;
+    let i, k;
+    for(i = 0; i < arrLen-1; i++) {
+        for (k = i+1; k < arrLen; k++) {
+
+            if(arr[i] > arr[k]) ++inv;
+        }
+    }
+    return inv;
 }
 
 // merge sort
@@ -35,6 +47,11 @@ function baseTestSuite(arr) {
     return countInversions(arr);
 }
 
+function longTestSuite() {
+    let data = Array.apply(null, {length: 100000}).map(Function.call, Math.random);
+    console.log(countInversions(data));
+}
+
 function basicTestSuite() {
     // 2
     console.log(baseTestSuite("2 4 1"));
@@ -49,6 +66,7 @@ function basicTestSuite() {
     // 1 1 2 3 2
     // 1 1 2 2 3
     // we performed a total of 4 swaps to correct inversions
+    console.log(baseTestSuite("7 5 3 1"));
 }
 
 function sortingTestUnit() {
@@ -62,6 +80,8 @@ function sortingTestUnit() {
         .slice(-Math.floor(arrHuge.length / 8)));
 }
 
-basicTestSuite();
 console.log("----");
-sortingTestUnit();
+basicTestSuite();
+//sortingTestUnit();
+console.log("----");
+longTestSuite()

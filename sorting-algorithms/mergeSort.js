@@ -86,6 +86,18 @@ function mergeSort(array) {
     else return array
 }
 
+// do not use slice every recursion
+function mOptimized(arr, start, end) {
+    if(end - start === 1) {
+        return [arr[start]];
+    };
+    let mid = start + Math.floor((end - start) / 2);
+    return merge(
+        mOptimized(arr, start, mid),
+        mOptimized(arr, mid, end)
+    );
+}
+
 let data = Array.apply(null, {length: 100000}).map(Function.call, Math.random)
 console.log('data ready, go...')
 //console.log(bubbleSort(data))
@@ -93,3 +105,6 @@ console.log(mergeSort(data));
 console.log(mergeSort([5, 3, 7, 2, 9, 1, 6, 4, 9, 10, 8]));
 //console.log(mergeSort([5, 3, 4, 1, 2]));
 console.log(merge([1, 10, 50], [2, 14, 99, 100]));
+let arr = [5, 3, 7, 2, 9, 1, 6, 4, 9, 10, 8];
+console.log("opt: ", mOptimized(
+    arr, 0, arr.length));

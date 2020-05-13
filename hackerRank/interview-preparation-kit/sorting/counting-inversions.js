@@ -17,20 +17,16 @@ function merge(left, right) {
     }
     while (i < leftLen) temp.push(left[i]), ++i;
     while(j < rightLen) temp.push(right[j]), ++j;
-    //console.log(left, right, temp);
     return temp;
 }
-function sorting(arr) {
-    let arrLen = arr.length
-    if(arrLen === 1) {
-        return arr
+function sorting(arr, start, end) {
+    if(end - start === 1) {
+        return [arr[start]];
     };
-    let mid = Math.floor(arrLen / 2);
-    let first = arr.slice(0, mid);
-    let second = arr.slice(mid);
+    let mid = start + Math.floor((end - start) / 2);
     return merge(
-        sorting(first),
-        sorting(second)
+        sorting(arr, start, mid),
+        sorting(arr, mid, end)
     );
 }
 
@@ -60,6 +56,10 @@ function sortingTestUnit() {
     console.log(
         sorting(
             arr1, 0, arr1.length));
+
+    let arrHuge = Array.apply(null, {length: 100000}).map(Function.call, Math.random)
+    console.log(sorting(arrHuge, 0, arrHuge.length)
+        .slice(-Math.floor(arrHuge.length / 8)));
 }
 
 basicTestSuite();

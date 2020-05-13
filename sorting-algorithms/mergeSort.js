@@ -12,7 +12,7 @@
  *          - In order to implement merge sort, it is useful to first implement a function
  *          responsible for merging two sorted arrays
  *          - Give two arrays which are sorted, this helper function should create a new
- *          array which is a so sorted, and consists of all of the elements in the two
+ *          array which is also sorted, and consists of all of the elements in the two
  *          input arrays.
  *          - This function should run in O(n + m) time and O(n + m) space and should
  *          not modify the parameters passed to it.
